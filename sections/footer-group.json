@@ -28,7 +28,7 @@
         "link_list_yAXYbY": {
           "type": "link_list",
           "settings": {
-            "heading": "Menu",
+            "heading": "Shop and Explore",
             "menu": "main-menu",
             "collapsible": true
           }
@@ -36,7 +36,7 @@
         "link_list_3H8mTj": {
           "type": "link_list",
           "settings": {
-            "heading": "Menu",
+            "heading": "Customer Care",
             "menu": "customer-account-main-menu",
             "collapsible": true
           }
@@ -44,7 +44,7 @@
         "image_and_text_FFDePH": {
           "type": "image_and_text",
           "settings": {
-            "heading": "Expert help",
+            "heading": "Expert Help",
             "description": "<p>Need any advice before you buy? We're here to help.</p><p><a href=\"https://wa.me/15022658345\" target=\"_blank\" title=\"https://wa.me/15022658345\">Contact Us</a></p>",
             "collapsible": true,
             "wider": false,
