@@ -1,7 +1,7 @@
 class AnimatedList extends HTMLElement {
   constructor() {
     super();
-    this.autoplaySpeed = parseInt(getComputedStyle(this).getPropertyValue('--al-autoplay-speed'), 10) || 3000;
+    this.autoplaySpeed = parseInt(this.getCssTimeMs(this, '--al-autoplay-speed')) || 3000;
     this.currentIndex = 1;
     this.prevIndex = 0;
     this.interval = null;
@@ -72,6 +72,25 @@ class AnimatedList extends HTMLElement {
     this.style.width = `${widthElement.getBoundingClientRect().width}px`;
   }
 
+  getCssTimeMs(element, variableName) {
+    const value = getComputedStyle(element)
+      .getPropertyValue(variableName)
+      .trim();
+
+    if (!value) return 0;
+
+    if (value.endsWith('ms')) {
+      return parseFloat(value);
+    }
+
+    if (value.endsWith('s')) {
+      return parseFloat(value) * 1000;
+    }
+
+    // Fallback: assume milliseconds
+    return parseFloat(value) || 0;
+  }
+
   nextItem() {
     const prevElement = this.items[this.prevIndex];
     if (prevElement) {
@@ -81,7 +100,7 @@ class AnimatedList extends HTMLElement {
       setTimeout(() => {
         prevElement.classList.remove('animated-list__item--leaving');
         prevElement.style.width = '';
-      }, parseFloat(getComputedStyle(prevElement).getPropertyValue('--al-leave-speed')) * 1000);
+      }, this.getCssTimeMs(prevElement, '--al-leave-speed'));
     }
 
     const nextElement = this.items[this.currentIndex];

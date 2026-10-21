@@ -167,17 +167,17 @@ if (!customElements.get('product-info')) {
         return !!selectedVariant ? JSON.parse(selectedVariant) : null;
       }
 
-      buildRequestUrlWithParams(url, optionValues, shouldFetchFullPage = false) {
-        const params = [];
+buildRequestUrlWithParams(url, optionValues, shouldFetchFullPage = false) {
+  const params = [];
 
-        !shouldFetchFullPage && params.push(`section_id=${this.sectionId}`);
+  !shouldFetchFullPage && params.push(`section_id=${this.sectionId}`);
 
-        if (optionValues.length) {
-          params.push(`option_values=${optionValues.join(',')}`);
-        }
+  if (optionValues.length) {
+    params.push(`option_values=${optionValues.join(',')}`);
+  }
 
-        return `${url}?${params.join('&')}`;
-      }
+  return `${url}?${params.join('&')}`;
+}
 
       updateOptionValues(html) {
         const variantSelects = html.querySelector('variant-selects');
@@ -447,7 +447,7 @@ if (!customElements.get('product-info')) {
 
 
       get productForm() {
-        const productForm = this.querySelector(`product-form`);
+        const productForm = this.querySelector('.product-form--buy-buttons');
         if (productForm) {
           productForm.init();
         }

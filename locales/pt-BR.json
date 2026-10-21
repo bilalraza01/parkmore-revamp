@@ -430,7 +430,8 @@
     },
     "video": {
       "load_video": "Carregar vídeo: {{ description }}",
-      "toggle": "Alternar estado de reprodução do vídeo"
+      "toggle": "Alternar estado de reprodução do vídeo",
+      "volume": "Silenciar/dessilenciar vídeo"
     },
     "slideshow": {
       "load_slide": "Carregar slide",

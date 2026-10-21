@@ -225,7 +225,7 @@
         "success": "Thank you. We'll let you know when it's back in stock."
       },
       "product_enquiry": {
-        "email": "Email",
+        "email": "Your email",
         "enquiry": "Your enquiry",
         "send": "Send",
         "success": "Thank you. We'll get back to you soon."
@@ -244,6 +244,7 @@
       "shipping_policy_html": " <a href=\"{{ link }}\" class=\"link underlined-link\">Shipping</a> calculated at checkout.",
       "new": "New",
       "change_color": "Preview the color:",
+      "bulk_order": "Bulk order",
       "highlight_remainder": "+{{ count }} more",
       "barcode": "Barcode:",
       "change_product": "Change product",
@@ -371,7 +372,7 @@
       "remove_title": "Remove {{ title }}",
       "estimated_total": "Estimated total:",
       "new_estimated_total": "New estimated total",
-      "note": "Referral Name or special notes",
+      "note": "Order notes",
       "checkout": "Checkout",
       "view_cart": "View cart",
       "empty": "Your cart is empty :(",
@@ -434,7 +435,8 @@
     },
     "video": {
       "load_video": "Load video: {{ description }}",
-      "toggle": "Toggle playing state of video"
+      "toggle": "Toggle playing state of video",
+      "volume": "Mute/unmute video"
     },
     "slideshow": {
       "load_slide": "Load slide",

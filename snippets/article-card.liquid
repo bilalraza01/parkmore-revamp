@@ -123,7 +123,7 @@
         {%- if show_image == true and article.image -%}
           <div class="article-card__image-wrapper card__media">
             <div
-              class="article-card__image media media--hover-effect{% if image_cover %} media--hover-zoom{% endif %}{% if media_aspect_ratio == 'adapt' %} article-card__image-relative{% endif %}"
+              class="article-card__image media media--hover-effect{% if image_cover %} media--hover-zoom{% endif %}{% if media_aspect_ratio == 'adapt' and is_featured != true %} article-card__image-relative{% endif %}"
               {% if media_aspect_ratio == 'adapt' %}
                 style="padding-bottom: {{ 1 | divided_by: article.image.aspect_ratio | times: 100 }}%;"
               {% endif %}
@@ -187,9 +187,9 @@
           {%- endif -%}
 
           {%- if is_featured != true and read_estimate or first_tag -%}
-            <div class="flex justify-between{% unless is_featured or blog_card_style == "standard" %} grow{% endunless %} items-end{% if excerpt and excerpt.size > 0 %} mt-1{% else %} mt-2{% endif %}">
+            <div class="flex gap-1 justify-between{% unless is_featured or blog_card_style == "standard" %} grow{% endunless %} items-end{% if excerpt and excerpt.size > 0 %} mt-1{% else %} mt-2{% endif %}">
               {% if show_reading_estimate %}
-                <div class="t7 opacity-90 text-right lh-1">
+                <div class="t7 opacity-90 lh-1">
                   {% if read_estimate %}
                     {{ 'blogs.article.read_estimate' | t: minutes: read_estimate }}
                   {% endif %}
@@ -197,7 +197,7 @@
               {% endif %}
 
               {% if first_tag %}
-                <div class="t7 uppercase lh-1 font-medium color-foreground">
+                <div class="t7 uppercase{% if show_reading_estimate %} text-right{% endif %} lh-1 font-medium color-foreground">
                   {{ first_tag }}
                 </div>
               {% endif %}

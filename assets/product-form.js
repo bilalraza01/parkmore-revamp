@@ -159,12 +159,17 @@ if (!customElements.get('product-form')) {
                 },
                 { once: true }
               );
-              quickAddModal.hide(true);
+              if (!theme.settings.cartDrawer.muteNotification) {
+                quickAddModal.hide(true);
+              }
             } else {
               if (this.cartDrawer) this.cartDrawer.renderContents(response);
               if (this.cartItems) this.cartItems.renderContents(response);
               if (this.cartNotification) this.cartNotification.renderContents(response);
             }
+
+            this.ctaButton?.classList.add('added-to-cart');
+            this.submitButton.classList.add('added-to-cart');
           })
           .catch((e) => {
             console.error(e);
@@ -174,6 +179,11 @@ if (!customElements.get('product-form')) {
             if (this.cartDrawer && this.cartDrawer.classList.contains('is-empty')) this.cartDrawer.classList.remove('is-empty');
             if (this.cartNotification && this.cartNotification.classList.contains('is-empty')) this.cartNotification.classList.remove('is-empty');
             if (!this.error) this.submitButton.removeAttribute('aria-disabled');
+
+            setTimeout(() => {
+              this.ctaButton?.classList.remove('added-to-cart');
+              this.submitButton.classList.remove('added-to-cart');
+            }, 1000)
 
             if (this.ctaButton) {
               this.ctaButton.classList.remove('loading');

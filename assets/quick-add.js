@@ -138,20 +138,18 @@ if (!customElements.get('quick-add-modal')) {
       }
 
       prependProductTitle(productElement) {
-        if (!productElement.querySelector('.product__title')) {
-          const container = productElement.querySelector('section.product__info-container .product__info-container');
-          if (container) {
-            const productTitleHTML = `
-              <div class="product__title">
-                <a href="${productElement.dataset.url}" class="link un-underlined-link">
-                  <h2 class="h2 mt-0">
-                    ${productElement.dataset.productTitle}
-                    <span class="product__read-more block underlined-link t4">${window.strings.product.readMore}</span>
-                  </h2>
-                </a>
-              </div>`;
-            container.innerHTML = productTitleHTML + container.innerHTML;
-          }
+        const container = productElement.querySelector('section.product__info-container .product__info-container');
+        if (container) {
+          const productTitleHTML = `
+            <div class="product__title">
+              <a href="${productElement.dataset.url}" class="link un-underlined-link">
+                <h2 class="h2 mt-0">
+                  ${productElement.dataset.productTitle}
+                  <span class="product__read-more block underlined-link t4">${window.strings.product.readMore}</span>
+                </h2>
+              </a>
+            </div>`;
+          container.innerHTML = productTitleHTML + container.innerHTML;
         }
       }
     }

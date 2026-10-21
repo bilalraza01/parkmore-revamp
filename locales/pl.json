@@ -440,7 +440,8 @@
     },
     "video": {
       "load_video": "Załaduj film: {{ description }}",
-      "toggle": "Przełącz stan odtwarzania wideo"
+      "toggle": "Przełącz stan odtwarzania wideo",
+      "volume": "Wycisz/włącz dźwięk wideo"
     },
     "slideshow": {
       "load_slide": "Wczytaj slajd",

@@ -1,6 +1,6 @@
 <script src="{{ 'scroll-to-top.js' | asset_url }}" defer="defer"></script>
 
-<scroll-to-top-button tabindex="0" class="scroll-to-top-button button button--{{ section.settings.button_style }} tap-target {{ section.settings.visibility }} {{ section.settings.position }}">
+<scroll-to-top-button tabindex="0" class="scroll-to-top-button hidden-during-load button button--{{ section.settings.button_style }} tap-target {{ section.settings.visibility }} {{ section.settings.position }}">
   <span class="visually-hidden">{{ 'accessibility.scroll_to_top' | t }}</span>
   {% render 'icon-caret' %}
 </scroll-to-top-button>

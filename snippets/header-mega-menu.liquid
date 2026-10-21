@@ -19,7 +19,7 @@
   assign text_size = 't' | append: incremented_number
 
   assign total_cols = 6
-  assign link_title = link.title | downcase
+  assign link_title = link.title | downcase | strip
   assign left_total = 0
   assign right_total = 0
   assign above_total = 0

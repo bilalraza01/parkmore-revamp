@@ -9,16 +9,16 @@
   endif
 -%}
 <!doctype html>
-<html class="js" lang="en-US">
+<html class="no-js" lang="{{ request.locale.iso_code }}"{% if is_rtl %} dir="rtl"{% endif %}>
   <head>
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-<meta name="author" content="Parkmore Supplements">
-<meta name="publisher" content="Parkmore Supplements">
-<meta name="keywords" content="Equine vitamin and mineral supplement, Horse vitamin and mineral supplement, Best horse vitamin and mineral supplement, Vitamin mineral supplement for horses, Equine multivitamin, Equine mineral supplement, Immune support for horses, Equine immune support, Equine immune supplement, Horse adaptogens for immune support, Cellular health supplement, Cellular nutrition, Equine recovery, Senior horse supplement, Activated charcoal for horses, Equine charcoal, Charcoal for horses, Horse detox supplement, Equine detox supplement, Anhidrosis horse supplement, Horse digestion, Horse digestive system, Horse hoof supplement, Cracked horse hooves, Horse coat supplement, Breathe for horses, Horse heaves, Mare supplements, Foal supplements, Dog immune support, Canine immune support, Dog immune support supplement, K9 immune support, Dog detox, Gut health for dogs, Digestive supplement for dogs, Dog skin and coat supplement, Dog supplement for itchy skin, Dog dry skin, Canine skin care, Dog grooming spray, Sensitive skin moisturizer, Natural body moisturizer, Plant based moisturizer, Skin repair cream, No rinse cleanser, Moisturizing conditioner, Natural face refresh, Cellular nutrition, Cellular health supplement">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="theme-color" content="">
+
+    <meta name="author" content="Parkmore Supplements">
+    <meta name="publisher" content="Parkmore Supplements">
+    <meta name="google-site-verification" content="SQPW_pK_KF9zF15E9nh8xZ1pfPRu9UEjR-HyADi3hik" />
 
     {%- if canonical_url != blank -%}
       <link rel="canonical" href="{{ canonical_url }}">
@@ -31,7 +31,7 @@
     {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
       <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
     {%- endunless -%}
-<meta name="google-site-verification" content="SQPW_pK_KF9zF15E9nh8xZ1pfPRu9UEjR-HyADi3hik" />
+
     <title>
       {{ page_title }}
       {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
@@ -152,26 +152,26 @@
 
     {% style %}
       {% unless settings.type_body_font.system? -%}
-        {{ settings.type_body_font | font_face: font_display: 'fallback' }}
-        {{ body_font_bold | font_face: font_display: 'fallback' }}
-        {{ body_font_italic | font_face: font_display: 'fallback' }}
-        {{ body_font_bold_italic | font_face: font_display: 'fallback' }}
-        {{ body_font_medium | font_face: font_display: 'fallback' }}
+        {{ settings.type_body_font | font_face: font_display: settings.font_display }}
+        {{ body_font_bold | font_face: font_display: settings.font_display }}
+        {{ body_font_italic | font_face: font_display: settings.font_display }}
+        {{ body_font_bold_italic | font_face: font_display: settings.font_display }}
+        {{ body_font_medium | font_face: font_display: settings.font_display }}
       {%- endunless -%}
 
       {%- unless settings.type_header_font == settings.type_body_font or settings.type_header_font.system? -%}
-        {{ settings.type_header_font | font_face: font_display: 'fallback' }}
-        {{ header_font_bold | font_face: font_display: 'fallback' }}
-        {{ header_font_italic | font_face: font_display: 'fallback' }}
-        {{ header_font_bold_italic | font_face: font_display: 'fallback' }}
-        {{ header_font_medium | font_face: font_display: 'fallback' }}
+        {{ settings.type_header_font | font_face: font_display: settings.font_display }}
+        {{ header_font_bold | font_face: font_display: settings.font_display }}
+        {{ header_font_italic | font_face: font_display: settings.font_display }}
+        {{ header_font_bold_italic | font_face: font_display: settings.font_display }}
+        {{ header_font_medium | font_face: font_display: settings.font_display }}
       {%- endunless -%}
 
       {%- unless request.page_type != 'article' or settings.type_article_header_font.system? or settings.type_article_header_font == settings.type_body_font or settings.type_article_header_font == settings.type_header_font -%}
-        {{ settings.type_article_header_font | font_face: font_display: 'fallback' }}
-        {{ article_header_font_bold | font_face: font_display: 'fallback' }}
-        {{ article_header_font_italic | font_face: font_display: 'fallback' }}
-        {{ article_header_font_bold_italic | font_face: font_display: 'fallback' }}
+        {{ settings.type_article_header_font | font_face: font_display: settings.font_display }}
+        {{ article_header_font_bold | font_face: font_display: settings.font_display }}
+        {{ article_header_font_italic | font_face: font_display: settings.font_display }}
+        {{ article_header_font_bold_italic | font_face: font_display: settings.font_display }}
       {%- endunless -%}
 
       {%- assign color_schemes_with_heading_gradient = "" -%}
@@ -635,11 +635,7 @@
     {%- endif -%}
   </head>
 
-  <body class="{{ request.page_type | handleize }}-template page-{{ request.path | handleize | default: 'index' }}{% if template.suffix != blank %} {{ template.suffix | handleize }}-template-suffix{% endif %} gradient button--hover-{{ settings.animations_hover_buttons }}{% if settings.drawer_inset %} side-drawers-inset{% endif %} page-is-loading page-is-not-idle" data-lazy-load-js="{{ settings.lazy_load_js }}">
-        
-    {% if template == "index" %}
-<h1 class="visually-hidden" style="display:none;">Premium Natural Horse Supplements for Better Equine Health</h1>
-  {% endif %}
+  <body class="{{ request.page_type | handleize }}-template page-{{ request.path | handleize | default: 'index' }}{% if template.suffix != blank %} {{ template.suffix | handleize }}-template-suffix{% endif %} gradient button--hover-{{ settings.animations_hover_buttons }}{% if settings.drawer_inset %} side-drawers-inset{% endif %} page-is-loading page-is-not-idle">
 
     <a class="skip-to-content-link button visually-hidden no-scroll" href="#content">
       {{ 'accessibility.skip_to_text' | t }}
@@ -666,7 +662,7 @@
     </ul>
 
     {%- liquid
-      if settings.atc_action == "notification" or settings.atc_action == "drawer" and settings.cart_drawer_enabled == false
+      if settings.atc_action contains "notification" or settings.atc_action == "drawer" and settings.cart_drawer_enabled == false
         assign atc_action = "notification"
       else
         assign atc_action = settings.atc_action
@@ -750,8 +746,10 @@
           externalDomainLinks: {{ settings.new_tab_other_websites | json }},
           scrollType: {{ settings.paginationLoadType | json }},
           cartDrawer: {
-            atcAction: {{ atc_action | json }}
-          }
+            atcAction: {{ atc_action | json }},
+            muteNotification: {% if settings.atc_action == 'muted_notification' %}true{% else %}false{% endif %}
+          },
+          lazyLoadJs: {{ settings.lazy_load_js | json }}
         }
       }
 
@@ -785,8 +783,46 @@
       {{- settings.body_code -}}
     {%- endif -%}
 
-    {%- unless request.design_mode or settings.enable_instant_page == false -%}
-      <script src="{{ 'instant-page.js' | asset_url }}" defer="defer"></script>
-    {%- endunless -%}
-  </body>
+{%- unless request.design_mode or settings.enable_instant_page == false -%}
+  <script src="{{ 'instant-page.js' | asset_url }}" defer="defer"></script>
+{%- endunless -%}
+
+{% if customer.b2b? %}
+  <style>
+    .sealsubs-target-element {
+      display: none !important;
+    }
+  </style>
+
+  <script>
+    function parkmoreDisableSealForB2B(widget) {
+      if (!widget) return;
+
+      widget.dispatchEvent(
+        new CustomEvent('sealsubs:change_selected_selling_plan_id', {
+          detail: { selling_plan_id: '' }
+        })
+      );
+
+      widget.querySelectorAll('input[name="selling_plan"]').forEach(function(input) {
+        input.value = '';
+        input.disabled = true;
+      });
+
+      widget.style.display = 'none';
+    }
+
+    document.addEventListener('sealsubs:subscription_widget_created', function(event) {
+      parkmoreDisableSealForB2B(event.detail && event.detail.element);
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.sealsubs-target-element').forEach(function(widget) {
+        parkmoreDisableSealForB2B(widget);
+      });
+    });
+  </script>
+{% endif %}
+
+</body>
 </html>

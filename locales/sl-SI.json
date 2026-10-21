@@ -440,7 +440,8 @@
     },
     "video": {
       "load_video": "Naloži videoposnetek: {{ description }}",
-      "toggle": "Preklopi stanje predvajanja videa"
+      "toggle": "Preklopi stanje predvajanja videa",
+      "volume": "Utišaj/odzuti video"
     },
     "slideshow": {
       "load_slide": "Naloži diapozitiv",

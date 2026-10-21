@@ -93,8 +93,8 @@
       style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;{% if media_aspect_ratio == 'circle' %}--border-radius:50%;{% endif %}"
     >
       {%- if collection_image -%}
-        <div class="card__media">
-          <div class="media media--transparent media--hover-effect{% if image_cover %} media--hover-zoom{% endif %}{% if settings.collection_card_shadow %} card--shadow{% endif %}">
+        <div class="card__media{% if settings.collection_card_shadow %} card--shadow{% endif %}">
+          <div class="media media--transparent media--hover-effect{% if image_cover %} media--hover-zoom{% endif %}">
             <img
               srcset="
                 {%- if collection_image.width >= 165 -%}{{ collection_image | image_url: width: 165 }} 165w,{%- endif -%}
@@ -137,37 +137,11 @@
             {{ placeholder_image | placeholder_svg_tag: placeholder_class }}
           </div>
         </div>
-      {%- else -%}
-        <div class="card__content">
-          <div class="card__information">
-            <h3 class="card__heading text-body {% if text_size != blank %}{{ text_size }}{% else %}t1{% endif %} lh-13">
-              <a
-                {% if card_collection == blank %}
-                  role="link" aria-disabled="true"
-                {% else %}
-                  href="{{ card_collection.url }}"
-                {% endif %}
-                class="full-unstyled-link"
-              >
-                {%- if card_collection.title != blank -%}
-                  {{- card_collection.title | escape -}}
-                {%- else -%}
-                  {{ 'onboarding.collection_title' | t }}
-                {%- endif -%}
-              </a>
-            </h3>
-            {%- if card_collection.description != blank -%}
-              <p class="card__caption">
-                {{- card_collection.description | strip_html | truncatewords: 12 -}}
-              </p>
-            {%- endif -%}
-          </div>
-        </div>
       {%- endif -%}
     </div>
 
-    {%- if card_collection != blank and card_style == 'card' or collection_image -%}
-      <div class="card__content">
+    {%- if card_collection != blank or collection_image -%}
+      <div class="card__content{% unless collection_image %} flex items-center{% endunless %}">
         <div class="card__information">
           <h3 class="card__heading text-body {% if text_size != blank %}{{ text_size }}{% else %}t1{% endif %} lh-13">
             <a

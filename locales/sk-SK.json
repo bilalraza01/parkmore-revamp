@@ -440,7 +440,8 @@
     },
     "video": {
       "load_video": "Načítať video: {{ description }}",
-      "toggle": "Prepnúť stav prehrávania videa"
+      "toggle": "Prepnúť stav prehrávania videa",
+      "volume": "Ticho/povoliť zvuk videa"
     },
     "slideshow": {
       "load_slide": "Načítať snímku",

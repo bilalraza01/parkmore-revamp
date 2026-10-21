@@ -420,7 +420,8 @@
     },
     "video": {
       "load_video": "動画を読み込む: {{ description }}",
-      "toggle": "ビデオの再生状態を切り替える"
+      "toggle": "ビデオの再生状態を切り替える",
+      "volume": "ビデオをミュート/ミュート解除する"
     },
     "slideshow": {
       "load_slide": "スライドを読み込む",

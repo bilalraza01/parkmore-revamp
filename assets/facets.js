@@ -31,6 +31,35 @@ if (!customElements.get('facet-filters-form')) {
       window.addEventListener('popstate', onHistoryChange);
     }
 
+    static savedScrollY = 0;
+    static restoredFromBFCache = false;
+    static initBFCacheScrollHandling() {
+      // Capture scroll position before leaving
+      window.addEventListener('pagehide', () => {
+        FacetFiltersForm.savedScrollY = window.scrollY;
+      });
+
+      // Restore scroll after bfcache restore
+      window.addEventListener('pageshow', (event) => {
+        if (!event.persisted) return;
+
+        FacetFiltersForm.restoredFromBFCache = true;
+
+        // Disable smooth scrolling (important on iOS)
+        const root = document.documentElement;
+        const previousScrollBehavior = root.style.scrollBehavior;
+        root.style.scrollBehavior = 'auto';
+
+        // Wait for layout + async DOM mutations
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            window.scrollTo(0, FacetFiltersForm.savedScrollY);
+            root.style.scrollBehavior = previousScrollBehavior;
+          });
+        });
+      });
+    }
+
     static toggleActiveFacets(disable = true) {
       document.querySelectorAll('.js-facet-remove').forEach((element) => {
         element.classList.toggle('disabled', disable);
@@ -316,6 +345,7 @@ if (!customElements.get('facet-filters-form')) {
   FacetFiltersForm.searchParamsInitial = window.location.search.slice(1);
   FacetFiltersForm.searchParamsPrev = window.location.search.slice(1);
   customElements.define('facet-filters-form', FacetFiltersForm);
+  FacetFiltersForm.initBFCacheScrollHandling();
   FacetFiltersForm.setListeners();
 }
 

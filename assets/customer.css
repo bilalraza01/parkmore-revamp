@@ -415,9 +415,12 @@
   margin-bottom: 0;
 }
 
+.activate button[name='decline'] {
+  margin-top: 1rem;
+}
+
 @media only screen and (min-width: 750px) {
   .activate button[name='decline'] {
-    margin-top: inherit;
     margin-inline-start: 1rem;
   }
 

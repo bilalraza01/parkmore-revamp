@@ -2,37 +2,60 @@ if (!customElements.get('scroll-to-top-button')) {
   class ScrollToTopButton extends HTMLElement {
     constructor() {
       super();
+      this.isRevealed = false;
+      this.onScrollHandler = this.onScroll.bind(this);
+      this.onClickHandler = this.scrollToTop.bind(this);
+      this.onKeyDownHandler = this.onKeyDown.bind(this);
+    }
 
-      // Toggle the 'reveal' class based on scroll position
-      this.classList.toggle('reveal', window.scrollY > window.innerHeight);
+    connectedCallback() {
+      // Initial state
+      this.updateVisibility();
 
-      window.addEventListener('scroll', () => {
-        requestAnimationFrame(() => {
-          this.classList.toggle('reveal', window.scrollY > window.innerHeight);
-        });
-      }, {passive: true});
+      window.addEventListener('scroll', this.onScrollHandler, { passive: true });
+      this.addEventListener('click', this.onClickHandler);
+      this.addEventListener('keydown', this.onKeyDownHandler);
+    }
 
-      // Handle click event
-      this.addEventListener('click', () => {
-        this.scrollToTop();
-      });
+    disconnectedCallback() {
+      window.removeEventListener('scroll', this.onScrollHandler);
+      this.removeEventListener('click', this.onClickHandler);
+      this.removeEventListener('keydown', this.onKeyDownHandler);
+    }
 
-      // Handle Enter key event
-      this.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter') {
-          this.scrollToTop();
-        }
+    onScroll() {
+      // Schedule all DOM reads/writes in one animation frame
+      if (this._ticking) return;
+      this._ticking = true;
+
+      requestAnimationFrame(() => {
+        this._ticking = false;
+        this.updateVisibility();
       });
     }
 
-    // Generic scroll-to-top function
-    scrollToTop() {
-      window.scrollTo({top: 0, behavior: 'smooth'});
+    updateVisibility() {
+      // Read scroll position once per frame, not on every event
+      const shouldReveal = window.scrollY > window.innerHeight;
+      if (shouldReveal !== this.isRevealed) {
+        this.isRevealed = shouldReveal;
+        this.classList.toggle('reveal', shouldReveal);
+      }
+    }
 
-      // Set a timeout to wait for the scroll to finish before focusing
+    scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // Wait until scroll completes before focusing (simple heuristic)
       setTimeout(() => {
-        document.querySelector('.skip-to-content-link')?.focus()
+        document.querySelector('.skip-to-content-link')?.focus();
       }, 700);
+    }
+
+    onKeyDown(event) {
+      if (event.key === 'Enter') {
+        this.scrollToTop();
+      }
     }
   }
 

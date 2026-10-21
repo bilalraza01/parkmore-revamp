@@ -280,7 +280,7 @@
 
         {%- if show_price -%}
           {% assign price_class = card_price_size | append: ' mt-1 mb-0 text-' | append: card_text_alignment | append: ' ' | append: card_title_transform %}
-          {% render 'price', product: card_product, price_class: price_class, show_compare_at_price: true %}
+          {% render 'price', is_product_card: true, product: card_product, price_class: price_class, show_compare_at_price: true %}
         {%- endif -%}
 
         {%- if compare_enable_learn_more -%}
@@ -450,7 +450,7 @@
 
                         <div class="quick-add-modal__content-info--bulk-details">
                           <h3 class="h3">{{ card_product.title | escape }}</h3>
-                          {% render 'price', product: card_product, price_class: '', show_compare_at_price: true %}
+                          {% render 'price', is_product_card: true, product: card_product, price_class: '', show_compare_at_price: true %}
                           {%- if card_product.quantity_price_breaks_configured? -%}
                             <div class="card__information-volume-pricing-note">
                               <span class="caption">{{ 'products.product.volume_pricing.note' | t }}</span>

@@ -2,10 +2,6 @@
   max-width: 100%;
 }
 
-.contact .form__message {
-  align-items: center;
-}
-
 .contact .form__error .form__message {
   font-size: 1.3rem;
 }
@@ -14,10 +10,6 @@
   height: 2rem;
   margin-inline-end: .2rem;
   width: 2rem;
-}
-
-.contact .icon-success {
-  margin-top: 0.2rem;
 }
 
 .contact-form__heading,

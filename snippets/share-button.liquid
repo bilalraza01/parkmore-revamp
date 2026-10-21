@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="{{ 'component-share-button.css' | asset_url }}" media="print" onload="this.media='all'">
 {%- endunless -%}
 
-<lazy-script data-watch-element="share-button,variant-selects" src="{{ 'share.js' | asset_url }}" defer="defer"></lazy-script>
+<lazy-script data-watch-element="share-button,.product" src="{{ 'share.js' | asset_url }}" defer="defer"></lazy-script>
 
 {%- if block.settings.share_caption != blank -%}
   <div class="caption mb-1 {{ block.settings.share_caption_text_style }} {{ block.settings.share_caption_size }}">

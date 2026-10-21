@@ -167,36 +167,6 @@ body.drawer--open-header .drawer__header-overlay {
   }
 }
 
-/* TYPOGRAPHY */
-@keyframes pulsate {
-  100% {
-    /* Larger blur radius */
-    text-shadow:
-      0 0 1px rgb(var(--color-foreground)),
-      0 0 40px rgba(var(--color-accent),1),
-      0 0 80px rgba(var(--color-accent),0.8),
-      0 0 90px rgba(var(--color-accent),0.7),
-      0 0 100px rgba(var(--color-accent),0.5),
-      0 0 150px rgba(var(--color-accent),0.4);
-  }
-  0% {
-    /* Smaller blur radius */
-    text-shadow:
-      0 0 1px rgb(var(--color-foreground)),
-      0 0 38px rgba(var(--color-accent),1),
-      0 0 82px rgba(var(--color-accent),.5),
-      0 0 82px rgba(var(--color-accent),.5),
-      0 0 92px rgba(var(--color-accent),.3),
-      0 0 121px rgba(var(--color-accent),.2);
-  }
-}
-
-@media screen and (prefers-reduced-motion) {
-  .italics-glow_pulsating em {
-    animation: none !important;
-  }
-}
-
 /* BASE-FOCUS */
 *:focus {
   outline: 0;
@@ -428,10 +398,13 @@ body:has(.cart-notification.active) .scroll-to-top-button {
 .select__select:hover.select__select:after,
 .customer .field:hover.field:after,
 .customer select:hover.select:after {
-  box-shadow: 0 0 0 var(--inputs-border-width)
-  rgba(var(--color-foreground), 1);
+  box-shadow: 0 0 0 var(--inputs-border-width) rgba(var(--color-foreground), 1);
   outline: 0;
   border-radius: var(--inputs-radius);
+}
+
+.field:hover:has(.text-area)::after {
+  border-radius: min(var(--inputs-radius), 20px);
 }
 
 .select:hover .icon-caret {
@@ -469,8 +442,12 @@ body:has(.cart-notification.active) .scroll-to-top-button {
   display: inline-flex;
   font-size: 1.4rem;
   line-height: 1;
-  margin-top: -1rem;
+  margin-top: 1rem;
   margin-bottom: 3rem;
+}
+
+.form__message:has(.icon-success) {
+  line-height: 1.5em;
 }
 
 .form__message.items-center {
@@ -498,7 +475,7 @@ body:has(.cart-notification.active) .scroll-to-top-button {
 .customer .form__message svg {
   height: 1.8rem;
   width: 1.8rem;
-  margin-inline-end: 1rem;
+  margin-inline-end: 0.5rem;
   margin-top: -0.1rem;
 }
 
@@ -907,7 +884,6 @@ custom-accordion,
 .custom-accordion {
   --open-duration: var(--duration-medium);
   display: block;
-  user-select: none;
 }
 
 .custom-accordion .custom-accordion__panel,
@@ -1134,7 +1110,8 @@ details[open] .modal-overlay::after {
 }
 
 .notification-message:has(.rte > span:not(.hidden):empty),
-.notification-message:has(.rte > span):not(:has(.rte > span:not(.hidden):not(:empty))) {
+.notification-message:has(.rte > span):not(:has(.rte > span:not(.hidden):not(:empty))),
+.notification-message:has(.rte > *:only-child > *:only-child:empty) {
   display: none;
 }
 

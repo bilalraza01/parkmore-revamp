@@ -209,9 +209,11 @@
       style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
       data-product-handle="{{ card_product.handle }}"
       {% if card_product.vendor %}data-product-vendor="{{ card_product.vendor | handleize }}"{% endif %}
+      {% if card_product.template_suffix %}data-product-template="{{ card_product.template_suffix | handleize }}"{% endif %}
     >
       <div
         class="card__inner
+          {% if horizontal_mini %} self-start{% endif %}
           {% if card_style == 'standard' %}color-{{ color_scheme | default: settings.card_color_scheme }} gradient{% endif %}
           {% if media_aspect_ratio != 'adapt' %} ratio{% endif %}"
         style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
@@ -556,9 +558,33 @@
               {%- endif -%}
             {%- endif -%}
 
-            {% assign price_class = settings.card_price_size | append: ' ' | append: settings.card_title_transform %}
-            {% render 'price', product: card_product, price_class: price_class, show_compare_at_price: true %}
+{% assign price_class = settings.card_price_size | append: ' ' | append: settings.card_title_transform %}
 
+{%- if customer.b2b? and card_product.variants_count == 1 -%}
+  {%- assign b2b_variant = card_product.selected_or_first_available_variant -%}
+
+  <div class="parkmore-b2b-card-price {{ price_class }}">
+    <div>
+      <strong>Wholesale price:</strong>
+      {{ b2b_variant.price | money_with_currency }}
+    </div>
+
+    {%- if b2b_variant.compare_at_price and b2b_variant.compare_at_price > b2b_variant.price -%}
+      <div>
+        <strong>MSRP:</strong>
+        {{ b2b_variant.compare_at_price | money_with_currency }}
+      </div>
+    {%- endif -%}
+  </div>
+
+{%- else -%}
+  {% render 'price',
+    is_product_card: true,
+    product: card_product,
+    price_class: price_class,
+    show_compare_at_price: true
+  %}
+{%- endif -%}
             {%- if card_product.quantity_price_breaks_configured? -%}
               {% if card_product.variants_count == 1 and quick_add == 'bulk' %}
                 {% liquid
@@ -641,7 +667,7 @@
               {% endif %}
             {%- endif -%}
 
-            {% if settings.flash_sale_position == 'below_info' %}
+            {% if horizontal_mini != true and settings.flash_sale_position == 'below_info' and hide_flash_sale != true %}
               {%- render 'flash-sale', flash_sale_product: card_product, class: 'flash-sale--below' -%}
             {% endif %}
           </div>
@@ -653,9 +679,13 @@
               </div>
             </div>
           {%- endif -%}
+
+          {% if horizontal_mini and hide_flash_sale != true %}
+            {%- render 'flash-sale', flash_sale_product: card_product, class: 'flash-sale--bottom card__information' -%}
+          {% endif %}
         </div>
 
-        {% if settings.flash_sale_position == 'bottom' %}
+        {% if horizontal_mini != true and settings.flash_sale_position == 'bottom' and hide_flash_sale != true %}
           {%- render 'flash-sale', flash_sale_product: card_product, class: 'flash-sale--bottom card__information' -%}
         {% endif %}
 
@@ -915,7 +945,7 @@
 
                           <div class="quick-add-modal__content-info--bulk-details">
                             <h3 class="h3">{{ card_product.title | escape }}</h3>
-                            {% render 'price', product: card_product, price_class: '', show_compare_at_price: true %}
+                            {% render 'price', is_product_card: true, product: card_product, price_class: '', show_compare_at_price: true %}
                             {%- if card_product.quantity_price_breaks_configured? -%}
                               <div class="card__information-volume-pricing-note">
                                 <span class="caption">{{ 'products.product.volume_pricing.note' | t }}</span>
@@ -1007,7 +1037,7 @@
           </h3>
 
           <div class="card-information">
-            {% render 'price', show_compare_at_price: true %}
+            {% render 'price', is_product_card: true, show_compare_at_price: true %}
           </div>
         </div>
       </div>

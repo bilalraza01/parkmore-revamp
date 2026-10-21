@@ -42,10 +42,7 @@
             view_all: view_all
         %}
 
-        <div class="flex md:w-full
-            {% if section.settings.full_width %}page-width m-0{% endif %}"
-             dir="ltr"
-        >
+        <div class="flex md:w-full{% if section.settings.full_width %} m-0{% endif %}">
           <div class="scrolling-text__wrapper{% if section.settings.pause_on_hover %} scrolling-text__wrapper--pause-on-hover{% endif %} section-content p-0 flex whitespace-nowrap"
             style="--speed: {{ 31 | minus: section.settings.speed }}s;--direction: {{ section.settings.direction }};">
             {%- capture scrolling_text -%}
@@ -238,10 +235,6 @@
       {
         "value": "glow_outline",
         "label": "Glow with outline - Accent color"
-      },
-      {
-        "value": "glow_pulsating",
-        "label": "Glow - Pulsating accent color (desktop only)"
       }
     ],
     "info": "The colors above can be set in the color schemes. 'Outline' may not work with all fonts.",
@@ -567,10 +560,6 @@
       {
         "value": "glow_outline",
         "label": "Glow with outline - Accent color"
-      },
-      {
-        "value": "glow_pulsating",
-        "label": "Glow - Pulsating accent color (desktop only)"
       }
     ],
     "info": "The colors above can be set in the color schemes. 'Outline' may not work with all fonts.",

@@ -430,7 +430,8 @@
     },
     "video": {
       "load_video": "Učitaj videozapis: {{ description }}",
-      "toggle": "Prebacivanje stanja reprodukcije videa"
+      "toggle": "Prebacivanje stanja reprodukcije videa",
+      "volume": "Isključi/Uključi zvuk videa"
     },
     "slideshow": {
       "load_slide": "Učitaj slajd",

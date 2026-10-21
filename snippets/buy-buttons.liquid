@@ -38,7 +38,7 @@
     -%}
 
     <product-form
-      class="product-form"
+      class="product-form product-form--buy-buttons"
       data-hide-errors="{{ gift_card_recipient_feature_active }}"
       data-section-id="{{ section.id }}"
     >
@@ -70,6 +70,13 @@
         {%- if gift_card_recipient_feature_active -%}
           {%- render 'gift-card-recipient-form', product: product, form: form, section: section -%}
         {%- endif -%}
+
+        {%- unless customer.b2b? -%}
+        <div class="sealsubs-target-element"
+          data-product="{{ product | json | escape }}"
+          data-handle="{{ product.handle }}">
+        </div>
+        {%- endunless -%}
 
         <div class="product-form__buttons" style="--font-button-case: {{ block.settings.button_text_transform }};--font-button-font-weight: {{ block.settings.button_text_font_weight }};">
           {%- liquid

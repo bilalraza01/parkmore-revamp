@@ -278,9 +278,9 @@
       </details>
       {% if filter_type == 'vertical' %}</custom-accordion>{% endif %}
     {% when 'price_range' %}
-      {% if filter_type == 'vertical' %}<custom-accordion id="{{ id }}Details-{{ forloop.index }}-{{ section.id }}" class="js-filter">{% endif %}
+      {% if filter_type == 'vertical' %}<custom-accordion id="{{ id }}Details-{{ filter.param_name | escape }}-{{ section.id }}" class="js-filter">{% endif %}
       <details
-          {% if filter_type != 'vertical' %}id="{{ id }}Details-{{ forloop.index }}-{{ section.id }}"{% endif %}
+          {% if filter_type != 'vertical' %}id="{{ id }}Details-{{ filter.param_name | escape }}-{{ section.id }}"{% endif %}
           class="{% if filter_type == 'horizontal' %}disclosure-has-popup facets__disclosure{% else %} facets__disclosure-vertical{% endif %} {% if filter_type != 'vertical' %}js-filter{% endif %}"
           data-index="{{ id }}{{ forloop.index }}"
           {% if filter_type == 'vertical' and open_all_accordions %}

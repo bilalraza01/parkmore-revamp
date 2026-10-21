@@ -420,7 +420,8 @@
     },
     "video": {
       "load_video": "Videoyu yükle: {{ description }}",
-      "toggle": "Video oynatma durumunu değiştir"
+      "toggle": "Video oynatma durumunu değiştir",
+      "volume": "Videoyu sessize al/aç"
     },
     "slideshow": {
       "load_slide": "Slaytı yükle",
@@ -474,7 +475,7 @@
     "countdown": {
       "a11y_message": "{{ end_date }} tarihinde sona erer",
       "days": "Günler",
-      "hours": "Saatler",
+      "hours": "Saat",
       "minutes": "Dakika",
       "seconds": "Saniyeler",
       "days_short": "g",

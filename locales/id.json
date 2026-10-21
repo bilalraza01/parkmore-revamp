@@ -420,7 +420,8 @@
     },
     "video": {
       "load_video": "Muat video: {{ description }}",
-      "toggle": "Ubah status pemutaran video"
+      "toggle": "Ubah status pemutaran video",
+      "volume": "Nyamankan/bunyikan video"
     },
     "slideshow": {
       "load_slide": "Muat slide",

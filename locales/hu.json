@@ -420,7 +420,8 @@
     },
     "video": {
       "load_video": "Videó betöltése: {{ description }}",
-      "toggle": "Videó lejátszási állapotának váltása"
+      "toggle": "Videó lejátszási állapotának váltása",
+      "volume": "Némítás/hang bekapcsolása videón"
     },
     "slideshow": {
       "load_slide": "Dia betöltése",

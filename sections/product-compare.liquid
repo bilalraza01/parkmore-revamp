@@ -40,6 +40,89 @@
 
 {% unless section.index < 4 or request.design_mode %}</template>{% endunless %}
 
+
+{%- comment -%}
+LLM-friendly product comparison table
+{%- endcomment -%}
+{%- assign products = section.settings.products -%}
+{%- if products != blank -%}
+  <div class="visually-hidden" inert>
+    <table class="product-compare-table" role="table">
+      {%- if section.settings.title != blank or section.settings.ai_description != blank -%}
+        <caption class="rte">
+          {% if section.settings.title != blank %}{{ section.settings.title }}{% if section.settings.ai_description != blank %}.{% endif %}{% endif %}
+          {% if section.settings.ai_description != blank %}{{ section.settings.ai_description }}{% endif %}
+        </caption>
+      {%- endif -%}
+
+      <thead>
+        <tr>
+          <th scope="col">{{ 'sections.cart.headings.product' | t }}:</th>
+          {%- for product in products -%}
+            <th scope="col">
+              {{ product.title | escape }}
+            </th>
+          {%- endfor -%}
+        </tr>
+      </thead>
+
+      <tbody>
+        {%- for block in section.blocks -%}
+          {%- unless  block.type == 'product_switcher' -%}
+            {%- liquid
+              assign row_label = block.settings.compare_label
+
+              if row_label == blank and block.type contains 'metafield'
+                assign row_label = block.settings.title
+              endif
+
+              if row_label == blank
+                assign row_label = block.type | replace: '_', ' ' | capitalize
+              endif
+            -%}
+
+            <tr>
+              <th scope="row">
+                {{ row_label | escape }}
+              </th>
+
+              {%- for product in products -%}
+                {%- liquid
+                  assign cell = ""
+                  capture cell
+                    unless block.type == 'product_switcher'
+                      if block.type == 'product_summary'
+                        echo product.title
+                        render 'price', is_product_card: false, product: product
+                      else
+                        if block.type == 'title' or block.type == 'product_price' or block.type == 'description' or block.type == 'rating' or block.type == 'product_badges' or block.type == 'vendor' or block.type == 'type' or block.type == 'weight' or block.type == 'variants_text' or block.type == 'product_summary' or block.type == 'metafield' or block.type == 'metafield_scale' or block.type == 'metafield_boolean' or block.type == 'variant_option_text'
+                          render 'product-block', section: section, block: block, product: product, products: products, section_name: 'product-compare-product', is_featured: true
+                        else
+                          render 'standard-blocks', section_name: 'product-compare', block: block, default_url: product.url
+                        endif
+                      endif
+                    endunless
+                  endcapture
+
+                  assign cell = cell | strip
+                -%}
+
+                <td>
+                  {%- if cell != blank -%}
+                    {{ cell }}
+                  {%- else -%}
+                    {{ block.settings.text_when_empty | default: section.settings.text_when_empty | escape }}
+                  {%- endif -%}
+                </td>
+              {%- endfor -%}
+            </tr>
+          {%- endunless -%}
+        {%- endfor -%}
+      </tbody>
+    </table>
+  </div>
+{%- endif -%}
+
 {% schema %}
 {
   "name": "Product compare",
@@ -192,10 +275,31 @@
       ]
     },
     {
+      "type": "select",
+      "id": "carousel_width_desktop",
+      "options": [
+        {
+          "value": "narrow",
+          "label": "Page width"
+        },
+        {
+          "value": "normal",
+          "label": "Standard"
+        },
+        {
+          "value": "wide",
+          "label": "Wide"
+        }
+      ],
+      "default": "normal",
+      "label": "Width on desktop"
+    },
+    {
       "type": "checkbox",
-      "id": "full_width",
-      "label": "Set carousel/grid to full screen width",
-      "default": false
+      "visible_if": "{{ section.settings.carousel_width_desktop == 'narrow' and settings.carousel_arrows == true }}",
+      "id": "always_show_arrows",
+      "default": true,
+      "label": "Always show arrows"
     },
     {
       "type": "header",
@@ -291,10 +395,6 @@
       {
         "value": "glow_outline",
         "label": "Glow with outline - Accent color"
-      },
-      {
-        "value": "glow_pulsating",
-        "label": "Glow - Pulsating accent color (desktop only)"
       }
     ],
     "info": "The colors above can be set in the color schemes. 'Outline' may not work with all fonts.",
@@ -629,6 +729,12 @@
       "default": "h2",
       "info": "For SEO purposes, there should only be one H1 tag on the page.",
       "label": "Heading tag"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "ai_description",
+      "label": "Comparison table AI text",
+      "info": "Summarize the comparison table for LLMs/AI."
     }
   ],
   "blocks": [
@@ -3929,7 +4035,7 @@
           "type": "color",
           "id": "metafield_icon_color",
           "label": "Icon color",
-          "default": "#f5e121"
+          "default": "#FDB022"
         },
         {
           "type": "range",
@@ -4500,10 +4606,6 @@
       {
         "value": "glow_outline",
         "label": "Glow with outline - Accent color"
-      },
-      {
-        "value": "glow_pulsating",
-        "label": "Glow - Pulsating accent color (desktop only)"
       }
     ],
     "info": "The colors above can be set in the color schemes. 'Outline' may not work with all fonts.",

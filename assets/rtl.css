@@ -1,8 +1,13 @@
 [dir='rtl'] {
     .quick-add__submit.button--secondary .icon:not(.icon-plus),
     .button-with-icon--right .icon,
-    .newsletter-form__button .icon {
+    .newsletter-form__button .icon,
+    .password-form .field__button > svg {
         transform: scaleX(-1);
+    }
+
+    .customer .button-with-icon--left .icon-arrow {
+        transform: none;
     }
 
     .complementary-products__container {

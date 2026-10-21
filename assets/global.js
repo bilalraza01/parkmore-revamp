@@ -1,3 +1,25 @@
+/* DEVICE/BROWSER DETECTION */
+window.themeDevice = {
+  mobile: window.matchMedia('(max-width: 749.98px)'),
+  touchDevice: window.matchMedia('(hover: none) and (pointer: coarse)'),
+
+  get isMobile() {
+    return this.mobile.matches;
+  },
+
+  get isTouchDevice() {
+    return this.touchDevice.matches;
+  },
+
+  get isTablet() {
+    return !this.isMobile && this.isTouchDevice;
+  },
+
+  isRTL(element) {
+    return (element?.closest('[dir="rtl"]') || document.documentElement).dir === 'rtl';
+  },
+};
+
 /* EVENTS/SUBSCRIPTIONS */
 const ON_CHANGE_DEBOUNCE_TIMER = 300;
 
@@ -168,23 +190,33 @@ class HTMLUpdateUtility {
 window.sectionInstances = new WeakMap();
 
 window.initScriptOnDemand = function (element, callback, threshold = 300) {
-  if (document.body.dataset.lazyLoadJs === 'true' && 'IntersectionObserver' in window && window.self === window.top) {
-    const interSectionObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          if (typeof callback === 'function') {
-            callback();
-            observer.unobserve(entry.target);
-          }
+  if (window.theme?.settings.lazyLoadJs && 'IntersectionObserver' in window && window.self === window.top) {
+    const observer = new IntersectionObserver((entries, obs) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+
+        if (typeof callback === 'function') {
+          // Defer execution safely after paint, without forcing a layout
+          requestAnimationFrame(() => {
+            if ('requestIdleCallback' in window) {
+              // Let the browser truly decide when it’s idle
+              requestIdleCallback(() => callback(), { timeout: 300 });
+            } else {
+              // Fallback for browsers without requestIdleCallback
+              setTimeout(() => callback(), 0);
+            }
+          });
         }
-      });
+
+        obs.unobserve(entry.target);
+      }
     }, { rootMargin: `0px 0px ${threshold}px 0px` });
 
-    interSectionObserver.observe(element);
+    observer.observe(element);
   } else if (typeof callback === 'function') {
-    setTimeout(callback.bind(this), 0);
+    requestAnimationFrame(() => callback());
   }
-}
+};
 
 function getFocusableElements(container) {
   return Array.from(
@@ -318,11 +350,25 @@ function pauseAllMedia() {
   document.querySelectorAll('.js-vimeo:not(.js-video-background)').forEach((video) => {
     video.contentWindow.postMessage('{"method":"pause"}', '*');
   });
-  document.querySelectorAll('video:not(.js-video-background)').forEach((video) => video.pause());
+  document.querySelectorAll('video:not(.js-video-background)').forEach((video) => {
+    if (!video.paused) {
+      video.setAttribute('data-was-playing', 'true');
+    }
+
+    video.pause();
+  });
   document.querySelectorAll('product-model').forEach((model) => {
     if (model.modelViewerUI && typeof model.modelViewerUI.pause === "function") {
       try { model.modelViewerUI.pause(); } catch(err) {}
     }
+  });
+}
+
+function resumePreviouslyPlayingHTML5Video() {
+  document.querySelectorAll('video[data-was-playing="true"]').forEach((video) => {
+    video.muted = true;
+    video.play().catch(() => {});
+    video.removeAttribute('data-was-playing');
   });
 }
 
@@ -839,12 +885,13 @@ customElements.define('custom-nav', CustomNav);
 class ModalDialog extends HTMLElement {
   constructor() {
     super();
+    this.isSocialVideoPopup = this.classList.contains('popup-modal--social-video');
     // Handle close events
     this.addEventListener('click', this.handleComponentClick.bind(this));
 
     if (!this.dataset.preventClose) {
       this.addEventListener('keyup', (event) => {
-        if (event.code.toUpperCase() === 'ESCAPE') this.hide();
+        if (event.code?.toUpperCase() === 'ESCAPE') this.hide();
       });
 
       if (this.classList.contains('media-modal')) {
@@ -893,11 +940,43 @@ class ModalDialog extends HTMLElement {
   }
 
   show(opener, modalClass) {
+    // Load any dynamic content
+    if (this.dataset.contentSelector) {
+      const content = [...document.querySelectorAll(this.dataset.contentSelector)];
+      const sectionContent = this.querySelector('.section-content');
+
+      if (content.length && sectionContent) {
+        const clonedContent = content.map((item) => {
+          const clone = item.cloneNode(true);
+          const videos = clone.matches('video') ? [clone] : [...clone.querySelectorAll('video')];
+
+          videos.forEach((video) => {
+            video.muted = false;
+            video.removeAttribute('muted');
+
+            video.autoplay = false;
+            video.removeAttribute('autoplay');
+          });
+
+          return clone;
+        });
+
+        sectionContent.append(...clonedContent);
+      }
+
+      this.removeAttribute('data-content-selector');
+    }
+
     this.moveModal();
     window.loadTemplateContent(this);
 
     // Load all lazy scripts immediately
     this.querySelectorAll('lazy-script').forEach(script => script.loadScript());
+
+    // Load all deferred media immediately
+    this.querySelectorAll('deferred-media').forEach(deferredMedia => {
+      deferredMedia.loadContent?.();
+    });
 
     if (this.dataset.isAlert) {
       this.setAttribute('open', '');
@@ -918,6 +997,45 @@ class ModalDialog extends HTMLElement {
         if (modalClass) this.classList.add(modalClass);
 
         window.makeTablesResponsive();
+
+        if (this.isSocialVideoPopup) {
+          // Scroll to relevant element
+          const openerVideo = opener.querySelector('video') || opener.closest('video');
+          const sourceVideo = opener.querySelector('source')?.getAttribute('src');
+          const seekTime = openerVideo?.currentTime || 0;
+
+          if (sourceVideo) {
+            const matchingVideo = [...this.querySelectorAll('video')].find((video) => {
+              return [...video.querySelectorAll('source')].some((source) => {
+                return source.getAttribute('src') === sourceVideo;
+              });
+            });
+
+            if (matchingVideo) {
+              matchingVideo.scrollIntoView({
+                block: 'start',
+                behavior: 'instant',
+              });
+
+              const playMatchingVideo = () => {
+                matchingVideo.currentTime = seekTime;
+
+                const playPromise = matchingVideo.play();
+
+                if (playPromise !== undefined) {
+                  playPromise.catch(() => {});
+                }
+              };
+
+              if (matchingVideo.readyState >= 1) {
+                playMatchingVideo();
+              } else {
+                matchingVideo.addEventListener('loadedmetadata', playMatchingVideo, { once: true });
+                matchingVideo.load();
+              }
+            }
+          }
+        }
       }, 100);
     }
   }
@@ -934,6 +1052,7 @@ class ModalDialog extends HTMLElement {
       document.body.dispatchEvent(new CustomEvent('modalClosed'));
       this.removeAttribute('open');
       this.classList.remove('popup-modal--closing');
+      window.resumePreviouslyPlayingHTML5Video();
     }
 
     if (preventAnimation) {
@@ -1087,7 +1206,7 @@ class CustomPopup extends ModalDialog {
     this.delaySeconds = parseInt(this.dataset.delaySeconds);
     this.timeToShow = this.dataset.timeOfDayToShow;
 
-    if (Shopify.designMode) {
+    if (Shopify.designMode && !this.isSocialVideoPopup) {
       if (!this.dataset.teOnly) {
         document.addEventListener('shopify:section:select', (event) => {
           if (event.target === this.closest('.shopify-section')) {
@@ -1106,13 +1225,14 @@ class CustomPopup extends ModalDialog {
         });
 
         // Bind click triggered popups in the Theme Editor
-        if ((this.dataset.visibility === "mobile" && window.matchMedia('(max-width: 749.98px)').matches) ||
+        if (
+          (this.dataset.visibility === "mobile" && window.matchMedia('(max-width: 749.98px)').matches) ||
           (this.dataset.visibility === "desktop" && window.matchMedia('(min-width: 750px)').matches) ||
-          (this.dataset.visibility === "both")) {
+          (this.dataset.visibility === "both")
+        ) {
           if (this.dataset.trigger && this.dataset.trigger === 'click') {
             // Listen for clicks on any anchor links which end with this.dataset.popupTriggerId. Do a this.show() for those clicks.
-            this.clickTriggerHandler = this.clickTriggerHandler || this.handleClickTrigger.bind(this);
-            document.addEventListener('click', this.clickTriggerHandler);
+            this.bindGlobalClickTrigger();
           }
         }
       } else {
@@ -1137,18 +1257,22 @@ class CustomPopup extends ModalDialog {
       }
 
       if (
-          (
-              (this.dataset.visibility === "mobile" && window.matchMedia('(max-width: 749.98px)').matches) ||
-              (this.dataset.visibility === "desktop" && window.matchMedia('(min-width: 750px)').matches) ||
-              (this.dataset.visibility === "both")
-          ) &&
-          (
-              !this.timeToShow || this.timeToShow.split(',').map(s => s.trim()).includes(timeOfDay)
-          )
-      )  {
-
+        (
+          (this.dataset.visibility === "mobile" && window.matchMedia('(max-width: 749.98px)').matches) ||
+          (this.dataset.visibility === "desktop" && window.matchMedia('(min-width: 750px)').matches) ||
+          (this.dataset.visibility === "both")
+        ) &&
+        (
+          !this.timeToShow || this.timeToShow.split(',').map(s => s.trim()).includes(timeOfDay)
+        )
+      ) {
         const closedElements = JSON.parse(localStorage.getItem('theme-closed-elements')) || [];
-        if (this.dataset.mode === "test" || (this.dataset.trigger && this.dataset.trigger === 'click') || !closedElements.includes(this.dataset.popupId)) {
+
+        if (
+          this.dataset.mode === "test" ||
+          (this.dataset.trigger && this.dataset.trigger === 'click') ||
+          !closedElements.includes(this.dataset.popupId)
+        ) {
           if (!this.dataset.trigger || this.dataset.trigger.length === 0 || this.dataset.trigger === 'delay') {
             setTimeout(() => {
               this.show();
@@ -1172,9 +1296,7 @@ class CustomPopup extends ModalDialog {
 
           } else if (this.dataset.trigger === 'click') {
             // Listen for clicks on any anchor links which end with this.dataset.popupTriggerId. Do a this.show() for those clicks.
-            this.clickTriggerHandler = this.clickTriggerHandler || this.handleClickTrigger.bind(this);
-            document.addEventListener('click', this.clickTriggerHandler);
-
+            this.bindGlobalClickTrigger();
           }
         }
       }
@@ -1189,19 +1311,32 @@ class CustomPopup extends ModalDialog {
     }
   }
 
+  bindGlobalClickTrigger() {
+    if (window.themeCustomPopupClickTriggerHandler) return;
+
+    window.themeCustomPopupClickTriggerHandler = (event) => {
+      document.querySelectorAll('custom-popup').forEach((popup) => {
+        popup.handleClickTrigger(event);
+      });
+    };
+
+    document.addEventListener('click', window.themeCustomPopupClickTriggerHandler);
+  }
+
   handleClickTrigger(event) {
-    if (this.dataset.popupTriggerId && this.dataset.popupTriggerId.length > 0) {
-      const target = event.target.closest('a');
-      if (target && target.hash === `#${this.dataset.popupTriggerId}`) {
-        event.preventDefault();
-        this.show();
-      }
-    }
+    const id = this.dataset.popupTriggerId;
+    if (!id) return;
+
+    const trigger = event.target.closest(`a[href="#${id}"], button[data-open-popup="${id}"]`);
+    if (!trigger) return;
+
+    event.preventDefault();
+    this.show(trigger);
   }
 
   handleCopyToClipboard() {
     const closedElements = JSON.parse(localStorage.getItem('theme-closed-elements')) || [];
-    if(this.dataset.mode === "test" || !closedElements.includes(this.dataset.popupId)) this.show();
+    if (this.dataset.mode === "test" || !closedElements.includes(this.dataset.popupId)) this.show();
   }
 
   handleStoreLeave(event) {
@@ -1406,7 +1541,7 @@ class CustomVideo extends HTMLElement {
 
   bindHtmlVideoListeners() {
     setTimeout(this.playbackStarted.bind(this, true), 500);
-    this.video.addEventListener('play', this.playbackStarted.bind(this));
+    this.video.addEventListener('playing', this.playbackStarted.bind(this));
     this.video.addEventListener('pause', this.playbackPaused.bind(this));
     this.video.addEventListener('ended', this.playbackEnded.bind(this));
   }
@@ -1479,7 +1614,7 @@ class DeferredMedia extends HTMLElement {
         }, {once: true});
     }
 
-    if (!this.closest('.product') && !Shopify.designMode) {
+    if ((!this.closest('.product') || this.closest('.product__social-videos')) && !Shopify.designMode) {
       this.addIntersectionObserver();
     }
   }
@@ -1487,7 +1622,9 @@ class DeferredMedia extends HTMLElement {
   addIntersectionObserver() {
     if ('IntersectionObserver' in window === false) return;
 
-    const rootMarginValue = window.innerWidth < 750 ? '0px 0px 500px 0px' : '0px 0px 900px 0px';
+    const rootMargin = this.classList.contains('social-video-wrapper') ? 400 : 900;
+
+    const rootMarginValue = window.innerWidth < 750 ? '0px 0px 500px 0px' : `0px 0px ${rootMargin}px 0px`;
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -1536,6 +1673,8 @@ class DeferredMedia extends HTMLElement {
       // }, 0);
 
       window.makeTablesResponsive();
+    } else if (this.classList.contains('social-video-wrapper') && window.matchMedia('(max-width: 749.98px)').matches) {
+      this.querySelector('video')?.play();
     }
   }
 }
@@ -1549,56 +1688,128 @@ class SliderComponent extends HTMLElement {
   }
 
   init() {
+    // ----- Internal state -----
+    this._layoutMode = null;
+    this._layoutRAF = null;
+    this._suppressLayoutUpdate = false;
+    this._isResizing = false;
+    this._scrollRAF = null;
+    this._isFirstRun = true;
+
+    // Cache context checks (avoid closest() in hot paths)
+    this.isQuickBuy = !!this.closest('quick-add-modal');
+
+    // ----- Elements -----
     this.slider = this.querySelector('[id^="Slider-"]');
+    if (!this.slider) return;
+
     this.sliderItems = this.querySelectorAll('[id^="Slide-"]');
     this.enableSliderLooping = false;
+
     this.currentPageElement = this.querySelector('.slider-counter--current');
     this.pageTotalElement = this.querySelector('.slider-counter--total');
     this.prevButton = this.querySelector('button[name="previous"]');
     this.nextButton = this.querySelector('button[name="next"]');
+
     this.isStacked = this.slider.dataset.slideType === 'stacked';
     this.isRTL = (this.closest('[dir="rtl"]') || document.documentElement).dir === 'rtl';
-
-    // Detect RTL scroll semantics once
     if (this.isRTL) this._rtlScrollType = this.detectRtlScrollType();
-
-    this.debouncedInitPages = debounce(this.initPages.bind(this), Shopify.designMode ? 200 : 0);
 
     this.scrollTrack = this.querySelector('.slider-scrollbar__track');
     this.scrollIndicator = this.querySelector('.slider-scrollbar__indicator');
 
+    // ----- Debouncers -----
+    this.debouncedInitPages = debounce(this.initPages.bind(this), Shopify.designMode ? 200 : 0);
     this.debouncedUpdate = window.debounce(this.update.bind(this), this.DEBOUNCE_TIMEOUT);
 
-    if (!this.slider) return;
+    // ----- Bind handlers once (performance + removable) -----
+    this._onScroll = this.debouncedUpdate.bind(this);
+    this._onButtonClick = this.onButtonClick.bind(this);
 
+    this._onResize = () => {
+      this._isResizing = true;
+    };
+
+    this._onResizeEnd = () => {
+      this._isResizing = false;
+      // Recalculate measurements once after resize settles
+      this.initPages();
+      this.update();
+      // Also refresh indicator position once
+      if (this.sliderScrollHandler) this.sliderScrollHandler();
+    };
+
+    // Scrollbar / indicator update (RAF-throttled inside onSliderScroll)
+    this.sliderScrollHandler = this.onSliderScroll.bind(this);
+
+    // Mouse drag handlers (bound once)
+    this.sliderMousedownHandler = this.onSliderMouseDown.bind(this);
+    this.sliderMousemoveHandler = this.onSliderMouseMove.bind(this);
+    this.sliderMouseupHandler = this.onSliderMouseUp.bind(this);
+
+    // Scroll indicator drag handlers (bound once)
+    this.scrollIndicatorMousedownHandler = this.onScrollIndicatorMouseDown.bind(this);
+    this.scrollIndicatorMousemoveHandler = this.onScrollIndicatorMouseMove.bind(this);
+    this.scrollIndicatorMouseupHandler = this.onScrollIndicatorMouseUp.bind(this);
+
+    // Touch handlers (bound once)
+    this._onTouchStart = this.onTouchStart.bind(this);
+    this._onTouchMove = debounce(this.onTouchMove.bind(this), 200);
+
+    // ------------------------------
+    // Drag/click discrimination FIX
+    // ------------------------------
+    this.DRAG_THRESHOLD_PX = 6; // tweak 4–10 as desired
+    this._dragMoved = false;
+    this._downX = 0;
+    this._downY = 0;
+    this._suppressClick = false;
+
+    // Prevent native browser drag (anchors/images) from hijacking our drag-to-scroll
+    this._onDragStart = (e) => {
+      // Only relevant in fine pointer mode / our mouse-drag flow
+      e.preventDefault();
+    };
+
+    // Capture-phase click suppression (only when a drag happened)
+    this._onCaptureClick = (e) => {
+      if (!this._suppressClick) return;
+
+      // Only suppress clicks that happen inside the slider
+      if (this.slider && this.slider.contains(e.target)) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+      }
+    };
+
+    // ----- Init pages + observe -----
     this.initPages();
+
     this.resizeObserver = new ResizeObserver(() => this.debouncedInitPages());
     this.resizeObserver.observe(this.slider);
 
-    this.slider.addEventListener('scroll', this.debouncedUpdate.bind(this), { passive: true });
+    // ----- Events -----
+    this.slider.addEventListener('scroll', this._onScroll, { passive: true });
+
+    // Capture click listener (must be capture:true)
+    this.slider.addEventListener('click', this._onCaptureClick, true);
+    this.slider.addEventListener('dragstart', this._onDragStart);
 
     if (this.nextButton && this.prevButton) {
-      this.prevButton.addEventListener('click', this.onButtonClick.bind(this));
-      this.nextButton.addEventListener('click', this.onButtonClick.bind(this));
+      this.prevButton.addEventListener('click', this._onButtonClick);
+      this.nextButton.addEventListener('click', this._onButtonClick);
     }
 
     // Track scroll bar progress
     if (this.scrollTrack && this.scrollIndicator) {
-      this.sliderScrollHandler = this.onSliderScroll.bind(this);
       this.slider.addEventListener('scroll', this.sliderScrollHandler, { passive: true });
-      window.addEventListener('resize', this.sliderScrollHandler);
+      window.addEventListener('resizeend', this.sliderScrollHandler);
     }
 
-    // Scroll bits
+    // Scroll bits (mouse drag)
     if (this.scrollTrack && window.matchMedia('(pointer: fine)').matches) {
       this.sliderLeft = window.innerWidth - this.slider.getBoundingClientRect().right;
-      if (!this.sliderLeft) {
-        this.sliderLeft = (this.slider.clientWidth - this.slider.clientWidth) / 2;
-      }
-
-      this.sliderMousedownHandler = this.onSliderMouseDown.bind(this);
-      this.sliderMousemoveHandler = this.onSliderMouseMove.bind(this);
-      this.sliderMouseupHandler = this.onSliderMouseUp.bind(this);
+      if (!this.sliderLeft) this.sliderLeft = 0;
 
       this.slider.addEventListener('mousedown', this.sliderMousedownHandler);
       this.slider.addEventListener('mouseup', this.sliderMouseupHandler);
@@ -1607,14 +1818,14 @@ class SliderComponent extends HTMLElement {
 
       if (this.scrollIndicator && !this.isRTL) {
         this.scrollIndicatorLeft = window.innerWidth - this.scrollIndicator.getBoundingClientRect().right;
-        if (!this.scrollIndicatorLeft) {
-          this.scrollIndicatorLeft = (this.scrollIndicator.clientWidth - this.scrollIndicator.clientWidth) / 2;
-        }
+        if (!this.scrollIndicatorLeft) this.scrollIndicatorLeft = 0;
 
-        this.scrollMultiplier = 100 / (100 - (100 / parseInt(this.scrollTrack.dataset.numSlides)));
-        this.scrollIndicatorMousedownHandler = this.onScrollIndicatorMouseDown.bind(this);
-        this.scrollIndicatorMousemoveHandler = this.onScrollIndicatorMouseMove.bind(this);
-        this.scrollIndicatorMouseupHandler = this.onScrollIndicatorMouseUp.bind(this);
+        const numSlides = parseInt(this.scrollTrack.dataset.numSlides, 10);
+        if (Number.isFinite(numSlides) && numSlides > 0) {
+          this.scrollMultiplier = 100 / (100 - (100 / numSlides));
+        } else {
+          this.scrollMultiplier = 1;
+        }
 
         this.scrollIndicator.addEventListener('mousedown', this.scrollIndicatorMousedownHandler);
         document.addEventListener('mouseup', this.scrollIndicatorMouseupHandler);
@@ -1622,49 +1833,94 @@ class SliderComponent extends HTMLElement {
       }
     }
 
+    // Stacked swipe
     if (this.isStacked) {
-      // Bind touch listeners for swiping
-      this.addEventListener('touchstart', this.onTouchStart.bind(this), { passive: true} );
-      this.addEventListener('touchmove', debounce(this.onTouchMove.bind(this), 200), { passive: true });
+      this.addEventListener('touchstart', this._onTouchStart, { passive: true });
+      this.addEventListener('touchmove', this._onTouchMove, { passive: true });
 
       // Watch for size change
       if (this.slider.dataset.slideMobile === 'true') {
-        const _this = this;
-
-        const updateMobileSlideSettings = function () {
-          const isMobile = window.matchMedia('(max-width: 749.98px)').matches;
-          if (isMobile) {
-            if (_this.slider.dataset.slideType !== 'slide') {
-              _this.isStacked = false;
-              _this.oldSlideAnimation = _this.slider.dataset.slideAnimation;
-              _this.oldSlideType = _this.slider.dataset.slideType;
-              _this.slider.setAttribute('data-slide-animation', 'slide');
-              _this.slider.setAttribute('data-slide-type', 'slide');
-              _this.resetPages();
+        this._updateMobileSlideSettings = () => {
+          if (window.themeDevice.isMobile) {
+            if (this.slider.dataset.slideType !== 'slide') {
+              this.isStacked = false;
+              this.oldSlideAnimation = this.slider.dataset.slideAnimation;
+              this.oldSlideType = this.slider.dataset.slideType;
+              this.slider.setAttribute('data-slide-animation', 'slide');
+              this.slider.setAttribute('data-slide-type', 'slide');
+              this.resetPages();
             }
-          } else if (_this.slider.dataset.slideType === 'slide') {
-            _this.isStacked = true;
-            _this.slider.setAttribute('data-slide-animation', _this.oldSlideAnimation);
-            _this.slider.setAttribute('data-slide-type', _this.oldSlideType);
-            _this.resetPages();
+          } else if (this.slider.dataset.slideType === 'slide') {
+            this.isStacked = true;
+            this.slider.setAttribute('data-slide-animation', this.oldSlideAnimation);
+            this.slider.setAttribute('data-slide-type', this.oldSlideType);
+            this.resetPages();
           }
-        }
+        };
 
-        window.addEventListener('resizeend', updateMobileSlideSettings);
-        updateMobileSlideSettings();
+        window.addEventListener('resizeend', this._updateMobileSlideSettings);
+        this._updateMobileSlideSettings();
       }
     }
 
+    // Mark resizing as active immediately + settle on resizeend (hooks into your global resizeend)
+    window.addEventListener('resize', this._onResize, { passive: true });
+    window.addEventListener('resizeend', this._onResizeEnd);
+
     // Load all images after a few seconds
-    setTimeout(() => {
-      this.querySelectorAll('.slideshow__media.hidden').forEach(media => { media.classList.remove('hidden'); });
+    this._revealTimer = setTimeout(() => {
+      this.querySelectorAll('.slideshow__media.hidden').forEach((media) => media.classList.remove('hidden'));
     }, 4000);
+    this._isFirstRun = false;
   }
 
-  disconnectedCallback(){
+  disconnectedCallback() {
     if (this.resizeObserver) this.resizeObserver.disconnect();
+    if (this._layoutRAF) cancelAnimationFrame(this._layoutRAF);
+    if (this._scrollRAF) cancelAnimationFrame(this._scrollRAF);
+    if (this._revealTimer) clearTimeout(this._revealTimer);
 
-    if (this.sliderScrollHandler) window.removeEventListener('resize', this.sliderScrollHandler);
+    // Slider listeners
+    this.slider?.removeEventListener('scroll', this._onScroll);
+    if (this._onCaptureClick) this.slider?.removeEventListener('click', this._onCaptureClick, true);
+    if (this._onDragStart) this.slider?.removeEventListener('dragstart', this._onDragStart);
+
+    if (this.sliderScrollHandler) {
+      this.slider?.removeEventListener('scroll', this.sliderScrollHandler);
+      window.removeEventListener('resizeend', this.sliderScrollHandler);
+    }
+
+    // Buttons
+    if (this.prevButton) this.prevButton.removeEventListener('click', this._onButtonClick);
+    if (this.nextButton) this.nextButton.removeEventListener('click', this._onButtonClick);
+
+    // Resize flags
+    window.removeEventListener('resize', this._onResize);
+    window.removeEventListener('resizeend', this._onResizeEnd);
+
+    // Mouse drag
+    if (this.sliderMousedownHandler) this.slider?.removeEventListener('mousedown', this.sliderMousedownHandler);
+    if (this.sliderMouseupHandler) {
+      this.slider?.removeEventListener('mouseup', this.sliderMouseupHandler);
+      this.slider?.removeEventListener('mouseleave', this.sliderMouseupHandler);
+    }
+    if (this.sliderMousemoveHandler) this.slider?.removeEventListener('mousemove', this.sliderMousemoveHandler);
+
+    // Indicator drag
+    if (this.scrollIndicatorMousedownHandler)
+      this.scrollIndicator?.removeEventListener('mousedown', this.scrollIndicatorMousedownHandler);
+    if (this.scrollIndicatorMouseupHandler)
+      document.removeEventListener('mouseup', this.scrollIndicatorMouseupHandler);
+    if (this.scrollIndicatorMousemoveHandler)
+      document.removeEventListener('mousemove', this.scrollIndicatorMousemoveHandler);
+
+    // Touch
+    this.removeEventListener('touchstart', this._onTouchStart);
+    this.removeEventListener('touchmove', this._onTouchMove);
+
+    if (this._updateMobileSlideSettings) {
+      window.removeEventListener('resizeend', this._updateMobileSlideSettings);
+    }
   }
 
   detectRtlScrollType() {
@@ -1681,27 +1937,52 @@ class SliderComponent extends HTMLElement {
 
     let type;
     if (scroller.scrollLeft > 0) {
-      type = 'default'; // e.g., old IE
+      type = 'default';
     } else {
       scroller.scrollLeft = 1;
-      type = scroller.scrollLeft === 0 ? 'negative' : 'reverse'; // FF vs WebKit/Blink
+      type = scroller.scrollLeft === 0 ? 'negative' : 'reverse';
     }
+
     document.body.removeChild(scroller);
     return type;
   }
 
+  getEffectiveClientWidth() {
+    const baseWidth = this.slider.clientWidth;
+    const style = getComputedStyle(this);
+
+    const inlineStart = parseFloat(style.marginInlineStart) || 0;
+    const inlineEnd = parseFloat(style.marginInlineEnd) || 0;
+
+    // Only adjust if either logical margin is negative
+    if (inlineStart < 0 || inlineEnd < 0) {
+      const negStart = inlineStart < 0 ? inlineStart : 0;
+      const negEnd = inlineEnd < 0 ? inlineEnd : 0;
+
+      // Negative margins visually increase the viewport
+      return baseWidth - negStart - negEnd;
+    }
+
+    // Default behaviour (no negative margins)
+    return baseWidth;
+  }
+
   getScrollMax() {
-    return Math.max(0, this.slider.scrollWidth - this.slider.clientWidth);
+    const effectiveClientWidth = this.getEffectiveClientWidth();
+    return Math.max(0, this.slider.scrollWidth - effectiveClientWidth);
   }
 
   getNormalizedScrollLeft() {
     if (!this.isRTL) return this.slider.scrollLeft;
     const max = this.getScrollMax();
     switch (this._rtlScrollType) {
-      case 'negative': return -this.slider.scrollLeft;
-      case 'reverse':  return max - this.slider.scrollLeft;
+      case 'negative':
+        return -this.slider.scrollLeft;
+      case 'reverse':
+        return max - this.slider.scrollLeft;
       case 'default':
-      default:         return this.slider.scrollLeft;
+      default:
+        return this.slider.scrollLeft;
     }
   }
 
@@ -1717,105 +1998,119 @@ class SliderComponent extends HTMLElement {
     }
   }
 
-  /**
-   * Scroll slider scroll
-   */
   onSliderScroll() {
-    if (this.isRTL) {
-      if (!this.indicatorMousedown && this.scrollTrack && this.scrollIndicator) {
-        const maxScroll = this.getScrollMax();
-        const normLeft = this.getNormalizedScrollLeft();
-        const maxPx = this.scrollTrack.clientWidth - this.scrollIndicator.clientWidth;
-        const px = maxScroll > 0 ? (normLeft / maxScroll) * maxPx : 0;
-        this.applyIndicatorPos(px);
-      }
-    } else {
-      if (!this.indicatorMousedown) {
-        // Update the scroll indicator
-        const scrollableWidth = this.slider.scrollWidth - this.slider.clientWidth;
-        const scrollPosition = this.slider.scrollLeft;
-        const scrollPercentage = scrollableWidth > 0 ? (scrollPosition / scrollableWidth) * 100 : 0;
+    // RAF throttle: max once per frame
+    if (this._scrollRAF) return;
 
-        const maxLeft = this.scrollTrack.clientWidth -  this.scrollIndicator.clientWidth;
-        const leftPosition = (scrollPercentage * maxLeft) / 100;
-        this.scrollIndicator.style.left = `${leftPosition}px`;
+    this._scrollRAF = requestAnimationFrame(() => {
+      this._scrollRAF = null;
+
+      if (!this.scrollTrack || !this.scrollIndicator) return;
+
+      if (this.isRTL) {
+        if (!this.indicatorMousedown) {
+          const maxScroll = this.getScrollMax();
+          const normLeft = this.getNormalizedScrollLeft();
+          const maxPx = this.scrollTrack.clientWidth - this.scrollIndicator.clientWidth;
+          const px = maxScroll > 0 ? (normLeft / maxScroll) * maxPx : 0;
+          this.applyIndicatorPos(px);
+        }
+      } else {
+        if (!this.indicatorMousedown) {
+          const scrollableWidth = this.slider.scrollWidth - this.slider.clientWidth;
+          const scrollPosition = this.slider.scrollLeft;
+          const scrollPercentage = scrollableWidth > 0 ? (scrollPosition / scrollableWidth) * 100 : 0;
+
+          const maxLeft = this.scrollTrack.clientWidth - this.scrollIndicator.clientWidth;
+          const leftPosition = (scrollPercentage * maxLeft) / 100;
+          this.scrollIndicator.style.left = `${leftPosition}px`;
+        }
       }
-    }
+    });
   }
 
-  /**
-   * Mouse down dragging the slider
-   * @param event
-   */
+  // ------------------------------
+  // UPDATED mouse drag handlers
+  // ------------------------------
   onSliderMouseDown(event) {
+    // Only left click
+    if (event.button !== 0) return;
+
     this.mousedown = true;
+    this._dragMoved = false;
+    this._suppressClick = false;
+
+    this._downX = event.pageX;
+    this._downY = event.pageY;
+
     this.slider.classList.add('drag-active');
     this.sliderScrollLeft = this.slider.scrollLeft;
     this.sliderX = event.pageX - this.sliderLeft;
   }
 
-  /**
-   * Mouse up from dragging the slider
-   */
   onSliderMouseUp() {
     this.slider.classList.remove('is-dragging');
     this.mousedown = false;
+
+    // If we dragged, suppress the click that often follows mouseup
+    if (this._dragMoved) {
+      this._suppressClick = true;
+      setTimeout(() => {
+        this._suppressClick = false;
+      }, 0);
+    }
   }
 
-  /**
-   * The slider is being dragged
-   * @param event
-   */
   onSliderMouseMove(event) {
     if (!this.mousedown) return;
+
+    const dxFromDown = event.pageX - this._downX;
+    const dyFromDown = event.pageY - this._downY;
+
+    // Don’t start a drag until threshold exceeded
+    if (!this._dragMoved) {
+      const distance = Math.hypot(dxFromDown, dyFromDown);
+      if (distance < this.DRAG_THRESHOLD_PX) return;
+
+      this._dragMoved = true;
+      this.slider.classList.add('is-dragging');
+    }
+
+    // Only prevent default once we *are* dragging
     event.preventDefault();
-    this.slider.classList.add('is-dragging');
+
     this.slider.scrollLeft = this.sliderScrollLeft - (event.pageX - this.sliderLeft - this.sliderX);
   }
 
-  /**
-   * Mouse down dragging the scroll indicator
-   * @param event
-   */
   onScrollIndicatorMouseDown(event) {
     document.body.classList.add('body-drag-active');
     this.slider.classList.add('drag-active');
     this.indicatorMousedown = true;
-    this.scrollIndicatorScrollLeft = parseInt(this.scrollIndicator.style.left.replace('px', '')) || 0;
+    this.scrollIndicatorScrollLeft = parseInt(this.scrollIndicator.style.left.replace('px', ''), 10) || 0;
     this.scrollIndicatorX = event.pageX - this.scrollIndicatorLeft;
   }
 
-  /**
-   * Mouse up from dragging the  scroll indicator
-   */
   onScrollIndicatorMouseUp() {
     document.body.classList.remove('body-drag-active');
     this.indicatorMousedown = false;
   }
 
-  /**
-   * The scroll indicator is being dragged
-   * @param event
-   */
   onScrollIndicatorMouseMove(event) {
     if (!this.indicatorMousedown) return;
     event.preventDefault();
 
-    const left = this.scrollIndicatorScrollLeft +  (event.pageX - this.scrollIndicatorLeft - this.scrollIndicatorX);
+    const left = this.scrollIndicatorScrollLeft + (event.pageX - this.scrollIndicatorLeft - this.scrollIndicatorX);
+
     let actualLeft;
-    if (left <= 0) {
-      actualLeft = 0;
-    } else if (left > (this.scrollTrack.clientWidth - this.scrollIndicator.clientWidth)) {
-      actualLeft = this.scrollTrack.clientWidth - this.scrollIndicator.clientWidth;
-    } else {
-      actualLeft = left;
-    }
+    const maxLeft = this.scrollTrack.clientWidth - this.scrollIndicator.clientWidth;
+    if (left <= 0) actualLeft = 0;
+    else if (left > maxLeft) actualLeft = maxLeft;
+    else actualLeft = left;
 
     this.scrollIndicator.style.left = `${actualLeft}px`;
 
-    // Get the % scroll complete
     const scrollableWidth = this.scrollTrack.clientWidth;
-    const scrollPercentage = ((scrollableWidth > 0 ? (actualLeft / scrollableWidth) * 100 : 0) * this.scrollMultiplier);
+    const scrollPercentage = (scrollableWidth > 0 ? (actualLeft / scrollableWidth) * 100 : 0) * this.scrollMultiplier;
     const scrollableSliderWidth = this.slider.scrollWidth - this.slider.clientWidth;
     this.slider.scrollLeft = (scrollableSliderWidth * scrollPercentage) / 100;
   }
@@ -1829,11 +2124,12 @@ class SliderComponent extends HTMLElement {
       if (event.changedTouches[0].screenX < this.touchStart - 100) this.nextButton.click();
       if (event.changedTouches[0].screenX > this.touchStart + 100) this.prevButton.click();
     } else {
-      this.pause();
+      this.pause?.();
     }
   }
 
   initPages() {
+    // Recompute visible slides
     this.sliderItemsToShow = Array.from(this.sliderItems).filter((element) => element.clientWidth > 0);
     if (this.sliderItemsToShow.length < 2) return;
 
@@ -1855,13 +2151,87 @@ class SliderComponent extends HTMLElement {
     this.initPages();
   }
 
+  setLayoutMode(mode) {
+    if (this._layoutMode === mode) return;
+
+    if (this._layoutRAF) cancelAnimationFrame(this._layoutRAF);
+
+    this._layoutRAF = requestAnimationFrame(() => {
+      this._layoutMode = mode;
+      this._suppressLayoutUpdate = true;
+
+      const isCarousel = mode === 'carousel';
+
+      // IMPORTANT:
+      // Only replace classes if they already exist.
+      // Do NOT introduce desktop classes where they were never present.
+
+      if (isCarousel) {
+        if (this.classList.contains('slider-component-desktop_')) {
+          this.classList.replace('slider-component-desktop_', 'slider-component-desktop');
+        }
+
+        if (this.slider.classList.contains('slider--desktop_')) {
+          this.slider.classList.replace('slider--desktop_', 'slider--desktop');
+        }
+      } else {
+        if (this.classList.contains('slider-component-desktop')) {
+          this.classList.replace('slider-component-desktop', 'slider-component-desktop_');
+        }
+
+        if (this.slider.classList.contains('slider--desktop')) {
+          this.slider.classList.replace('slider--desktop', 'slider--desktop_');
+        }
+      }
+
+      // Allow layout decisions again once styles settle
+      requestAnimationFrame(() => {
+        this._suppressLayoutUpdate = false;
+      });
+    });
+  }
+
+  getCurrentPageFromCenteredSnap() {
+    const items = this.sliderItemsToShow;
+    if (!items?.length) return 1;
+
+    const EPSILON = 1;
+    const scrollPos = this.isRTL ? this.getNormalizedScrollLeft() : this.slider.scrollLeft;
+    const scrollMax = this.getScrollMax();
+
+    if (scrollPos <= EPSILON) return 1;
+    if (scrollMax > 0 && scrollPos >= scrollMax - EPSILON) return items.length;
+
+    const sliderRect = this.slider.getBoundingClientRect();
+    const sliderCenter = sliderRect.left + sliderRect.width / 2;
+
+    let closestIndex = 0;
+    let closestDistance = Infinity;
+
+    items.forEach((item, index) => {
+      const itemRect = item.getBoundingClientRect();
+      const itemCenter = itemRect.left + itemRect.width / 2;
+      const distance = Math.abs(itemCenter - sliderCenter);
+
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closestIndex = index;
+      }
+    });
+
+    return closestIndex + 1;
+  }
+
   update() {
-    if (!this.slider) return;
+    if (!this.slider || this._isResizing) return;
 
     const previousPage = this.currentPage;
 
     if (this.isStacked) {
-      this.currentPage = parseInt(this.querySelector('.slideshow__slide[aria-hidden="false"]').dataset.slideIndex);
+      const visible = this.querySelector('.slideshow__slide[aria-hidden="false"]');
+      if (visible) this.currentPage = parseInt(visible.dataset.slideIndex, 10);
+    } else if (this.sliderItemsToShow.some((item) => getComputedStyle(item).scrollSnapAlign.includes('center'))) {
+      this.currentPage = this.getCurrentPageFromCenteredSnap();
     } else {
       this.currentPage = Math.round(this.slider.scrollLeft / this.sliderItemOffset) + 1;
     }
@@ -1872,15 +2242,12 @@ class SliderComponent extends HTMLElement {
     }
 
     if (this.currentPage != previousPage) {
-      // Eager load the next set of images
       const currentSlideElem = this.sliderItemsToShow[this.currentPage - 1];
-      if (currentSlideElem && currentSlideElem.nextElementSibling) {
+
+      // Eager load the next set of images (one slide ahead)
+      if (currentSlideElem?.nextElementSibling) {
         const nextHiddenMedia = currentSlideElem.nextElementSibling.querySelector('.slideshow__media.hidden');
         if (nextHiddenMedia) nextHiddenMedia.classList.remove('hidden');
-
-        // currentSlideElem.nextElementSibling.querySelectorAll('img[loading="lazy"]').forEach(img => {
-        //   img.loading = 'eager';
-        // });
       }
 
       this.dispatchEvent(
@@ -1898,48 +2265,72 @@ class SliderComponent extends HTMLElement {
       return;
     }
 
-    const isQuickBuy = !!this.closest('quick-add-modal');
-    let isStillCarousel = isQuickBuy;
+    // Snapshot layout reads once (avoid repeated layout queries)
+    const { scrollWidth, clientWidth } = this.slider;
 
+    const items = this.sliderItemsToShow;
+    const firstItem = items[0];
+    const lastItem = items[items.length - 1];
+
+    const EPSILON = 1; // px guard against sub-pixel rounding
+    const hasHorizontalOverflow = scrollWidth - clientWidth > EPSILON;
+    const isWrapped = firstItem && lastItem && firstItem.offsetTop !== lastItem.offsetTop;
+
+    const isStillCarousel =
+      this.isQuickBuy || // hard override
+      hasHorizontalOverflow ||
+      isWrapped ||
+      this.isStacked;
+
+    // Button enable/disable (does NOT drive layout mode)
     if (this.prevButton && this.nextButton) {
-      if (this.isSlideVisible(this.sliderItemsToShow[0]) && this.slider.scrollLeft === 0) {
+      const scrollMax = this.getScrollMax();
+      const scrollPos = this.isRTL ? this.getNormalizedScrollLeft() : this.slider.scrollLeft;
+
+      const hasScrollRange = scrollMax > 0 || this.tagName !== 'SLIDESHOW-COMPONENT';
+      const atStart = scrollPos <= EPSILON;
+      const atEnd = hasScrollRange && scrollPos >= scrollMax - EPSILON;
+
+      if (atStart) {
         this.prevButton.setAttribute('disabled', 'disabled');
       } else {
         this.prevButton.removeAttribute('disabled');
-        isStillCarousel = true;
       }
 
-      if (this.isSlideVisible(this.sliderItemsToShow[this.sliderItemsToShow.length - 1]) && !isQuickBuy) {
+      if (atEnd && !this.isQuickBuy) {
         this.nextButton.setAttribute('disabled', 'disabled');
       } else {
         this.nextButton.removeAttribute('disabled');
-        isStillCarousel = true;
       }
     }
 
     this.slider.classList.toggle('slider--scroll-active', isStillCarousel);
 
-    if (isStillCarousel) {
-      this.classList.replace('slider-component-desktop_', 'slider-component-desktop');
-      this.slider.classList.replace('slider--desktop_', 'slider--desktop');
-    } else {
-      this.classList.replace('slider-component-desktop', 'slider-component-desktop_');
-      this.slider.classList.replace('slider--desktop', 'slider--desktop_');
+    if (this._suppressLayoutUpdate) return;
+
+    if (this.slider.classList.contains('grid--scaled') || this._isFirstRun) {
+      this.setLayoutMode(isStillCarousel ? 'carousel' : 'wrapped');
     }
   }
 
   isSlideVisible(element, offset = 0) {
+    if (!element) return false;
+
     if (this.isStacked) {
       return element.getAttribute('aria-hidden') === 'false';
-    } else {
-      if (this.slider.classList.contains('slider--desktop_')){
-        // Check if the passed element has wrapped by comparing it to the first carousel item
-        return this.sliderItemsToShow[0].offsetTop === element.offsetTop;
-      } else {
-        const lastVisibleSlide = this.slider.clientWidth + this.slider.scrollLeft - offset;
-        return element.offsetLeft + element.clientWidth <= lastVisibleSlide && element.offsetLeft >= this.slider.scrollLeft;
-      }
     }
+
+    if (this._layoutMode === 'wrapped') {
+      // Wrapped grid: slide is "visible" if it's on the first row
+      return this.sliderItemsToShow[0].offsetTop === element.offsetTop;
+    }
+
+    // Carousel: geometric visibility
+    const lastVisibleSlide = this.slider.clientWidth + this.slider.scrollLeft - offset;
+    return (
+      element.offsetLeft + element.clientWidth <= lastVisibleSlide &&
+      element.offsetLeft >= this.slider.scrollLeft
+    );
   }
 
   getClosestElementToLeft(position) {
@@ -1971,21 +2362,17 @@ class SliderComponent extends HTMLElement {
       }
 
       this.slider.classList.add('pause-transition');
+      requestAnimationFrame(() => this.slider.classList.remove('pause-transition'));
 
-      setTimeout(() => {
-        this.slider.classList.remove('pause-transition');
-      }, 1);
-
-      setTimeout(() => {
+      // Let styles apply, then switch slides
+      requestAnimationFrame(() => {
         previousPageElem?.classList.add('leaving');
         nextPageElem.classList.remove('leaving');
 
         previousPageElem?.setAttribute('aria-hidden', 'true');
         nextPageElem.setAttribute('aria-hidden', 'false');
 
-        setTimeout(() => {
-          previousPageElem?.classList.remove('leaving');
-        }, 700);
+        setTimeout(() => previousPageElem?.classList.remove('leaving'), 700);
 
         if (this.sliderItemsToShow.length === 2 && this.prevButton && this.nextButton) {
           setTimeout(() => {
@@ -1995,21 +2382,17 @@ class SliderComponent extends HTMLElement {
         }
 
         this.debouncedUpdate();
-      }, 2);
+      });
     } else {
       if (this.lastSlide) this.lastSlide.classList.remove('is-incoming');
       const nextSlide = this.getClosestElementToLeft(position);
-      nextSlide.classList.add('is-incoming');
+      nextSlide?.classList.add('is-incoming');
       this.lastSlide = nextSlide;
 
-      this.slider.scrollTo({
-        left: position,
-      });
+      this.slider.scrollTo({ left: position });
     }
 
-    this.dispatchEvent(
-      new CustomEvent('slideChange')
-    );
+    this.dispatchEvent(new CustomEvent('slideChange'));
   }
 
   onButtonClick(event) {
@@ -2018,25 +2401,29 @@ class SliderComponent extends HTMLElement {
   }
 
   setSlide(event, isNext) {
-    const step = event && event.currentTarget.dataset.step || 1;
+    const step = (event && event.currentTarget.dataset.step) || 1;
+
     if (this.isStacked) {
       let nextPage;
-      if (event && event.currentTarget.name === 'next' || isNext) {
+
+      if ((event && event.currentTarget.name === 'next') || isNext) {
         this.slider.setAttribute('data-slide-direction', 'forwards');
-        nextPage =  this.currentPage < this.sliderItemsToShow.length ? this.currentPage + 1 : 1;
+        nextPage = this.currentPage < this.sliderItemsToShow.length ? this.currentPage + 1 : 1;
       } else {
         this.slider.setAttribute('data-slide-direction', 'backwards');
-        nextPage =  this.currentPage > 1 ? this.currentPage - 1 : this.sliderItemsToShow.length;
+        nextPage = this.currentPage > 1 ? this.currentPage - 1 : this.sliderItemsToShow.length;
       }
+
       const nextPageElem = this.sliderItemsToShow[nextPage - 1];
       this.setSlidePosition(null, nextPageElem);
     } else {
       const isLastSlide = this.currentPage === this.sliderItemsToShow.length;
+
       if (isLastSlide && (!event || event.currentTarget.name === 'next')) {
         this.slideScrollPosition = 0;
       } else {
         this.slideScrollPosition =
-          event && event.currentTarget.name === 'next' || isNext
+          ((event && event.currentTarget.name === 'next') || isNext)
             ? this.slider.scrollLeft + step * this.sliderItemOffset
             : this.slider.scrollLeft - step * this.sliderItemOffset;
       }
@@ -2045,12 +2432,35 @@ class SliderComponent extends HTMLElement {
     }
   }
 }
+
 customElements.define('slider-component', SliderComponent);
 
 class SlideshowComponent extends SliderComponent {
   constructor() {
     super();
     this.debouncedSetSlideVisibility = window.debounce(this.setSlideVisibility.bind(this), this.DEBOUNCE_TIMEOUT);
+
+    if (Shopify.designMode) {
+      document.addEventListener('shopify:block:select', event => {
+        if (this.contains(event.target)) {
+          this.init();
+
+          // Attempt to not animate the slide
+          this.slider.classList.add('pause-transition');
+          this.pause();
+          this.slider.setAttribute('data-slide-direction', 'forwards');
+
+          setTimeout(() => {
+            super.setSlidePosition(event.target.offsetLeft, event.target);
+          }, 100);
+
+          // Attempt to reanimate the slide
+          setTimeout(() => {
+            this.slider.classList.remove('pause-transition');
+          }, 300);
+        }
+      });
+    }
   }
 
   init() {
@@ -2082,27 +2492,6 @@ class SlideshowComponent extends SliderComponent {
     }
 
     if (this.slider.getAttribute('data-autoplay') === 'true') this.setAutoPlay();
-
-    if (Shopify.designMode) {
-      document.addEventListener('shopify:block:select', event => {
-        if (this.contains(event.target)) {
-
-          // Attempt to not animate the slide
-          this.slider.classList.add('pause-transition');
-          this.pause();
-          this.slider.setAttribute('data-slide-direction', 'forwards');
-
-          setTimeout(() => {
-            super.setSlidePosition(event.target.offsetLeft, event.target);
-          }, 100);
-
-          // Attempt to reanimate the slide
-          setTimeout(() => {
-            this.slider.classList.remove('pause-transition');
-          }, 300);
-        }
-      });
-    }
   }
 
   setAutoPlay() {
@@ -2556,7 +2945,7 @@ class LazyScript extends HTMLElement {
   constructor() {
     super();
     this.scriptLoaded = false;
-    this.isEnabled = document.body.dataset.lazyLoadJs === 'true' && window.self === window.top;
+    this.isEnabled = window.theme?.settings.lazyLoadJs && window.self === window.top;
   }
 
   connectedCallback() {
@@ -2671,7 +3060,7 @@ class CustomAccordion extends HTMLElement {
   }
 
   init() {
-    if (window.getComputedStyle(this.container).transitionDuration !== '0s') {
+    if (!this.clickListener && window.getComputedStyle(this.container).transitionDuration !== '0s') {
       this.closeListener = this.handleDetailsClose.bind(this);
       this.clickListener = this.handleSummaryClick.bind(this)
       this.detailsElem.addEventListener('transitionend', this.closeListener);
@@ -2849,10 +3238,6 @@ customElements.define('accordion-search', AccordionSearch);
 class HeaderMenu extends DetailsDisclosure {
   constructor() {
     super();
-  }
-
-  init() {
-    this.header = document.querySelector('.header-wrapper');
 
     if (Shopify.designMode) {
       this.blockSelectHandler = this.blockSelectHandler || this.onBlockSelect.bind(this);
@@ -2860,6 +3245,10 @@ class HeaderMenu extends DetailsDisclosure {
       document.addEventListener('shopify:block:select', this.blockSelectHandler);
       document.addEventListener('shopify:block:deselect', this.blockDeselectHandler);
     }
+  }
+
+  init() {
+    this.header = document.querySelector('.header-wrapper');
 
     if (window.matchMedia('(hover: hover)').matches && this.header) {
       this.mouseEnterHandler = this.onMouseEnter.bind(this);
@@ -3023,14 +3412,36 @@ customElements.define('header-menu', HeaderMenu);
 
 // Attempt to maintain the height of the visible screen (including on-screen keyboard)
 if (window.visualViewport) {
-  (function () {
-    window.updateViewportSize = function () {
-      document.documentElement.style.setProperty('--bvh', `${window.visualViewport.height}px`);
-    }
+  (() => {
+    let resizeScheduled = false;
 
-    document.addEventListener('DOMContentLoaded', window.updateViewportSize);
-    window.addEventListener('orientationchange', window.updateViewportSize);
-    window.addEventListener('resizeend', window.updateViewportSize);
+    const updateViewportSize = () => {
+      resizeScheduled = false;
+      // Read visualViewport height safely after layout has settled
+      const height = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+      requestAnimationFrame(() => {
+        document.documentElement.style.setProperty('--bvh', `${height}px`);
+      });
+    };
+
+    const scheduleUpdate = () => {
+      if (!resizeScheduled) {
+        resizeScheduled = true;
+        requestAnimationFrame(updateViewportSize);
+      }
+    };
+
+    // Initial update
+    document.addEventListener('DOMContentLoaded', updateViewportSize);
+
+    // Schedule updates, not immediate recalcs
+    window.addEventListener('orientationchange', scheduleUpdate);
+    window.addEventListener('resizeend', scheduleUpdate);
+
+    // On some browsers (iOS Safari) visualViewport emits resize events more precisely
+    if ('visualViewport' in window) {
+      visualViewport.addEventListener('resize', scheduleUpdate);
+    }
   })();
 }
 
@@ -3198,7 +3609,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Wait a bit to let browser finish any native scrolling first
       setTimeout(() => {
         const target = document.querySelector(anchor);
-        if (target) {
+        if (target && !target.closest('.section-popup')) {
           const offset = 200;
           const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
 

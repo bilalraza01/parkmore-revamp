@@ -66,9 +66,7 @@
         "icon_33JU4B",
         "heading_QNj4VA"
       ],
-      "custom_css": [
-
-      ],
+      "custom_css": [],
       "settings": {
         "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
         "show_play_pause": false,
@@ -936,7 +934,6 @@
         "mobile_layout": "carousel",
         "columns_desktop": "3",
         "columns_desktop_scale": true,
-        "full_width": false,
         "image_overlay_opacity": 0,
         "content_max_width": "m",
         "desktop_heading_alignment": "left",

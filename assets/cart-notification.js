@@ -27,6 +27,8 @@ if (!customElements.get('cart-notification')) {
     }
 
     open() {
+      if (theme.settings.cartDrawer.muteNotification) return;
+
       if (this.cartDrawer) {
         customElements.whenDefined('cart-drawer').then(() => {
           this.cartDrawer.init();

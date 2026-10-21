@@ -430,7 +430,8 @@
     },
     "video": {
       "load_video": "Încarcă clipul video: {{ description }}",
-      "toggle": "Comutați starea de redare a videoclipului"
+      "toggle": "Comutați starea de redare a videoclipului",
+      "volume": "Dezactivare/activare sunet video"
     },
     "slideshow": {
       "load_slide": "Încarcă diapozitivul",

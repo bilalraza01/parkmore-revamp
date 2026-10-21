@@ -420,7 +420,8 @@
     },
     "video": {
       "load_video": "동영상 로드: {{ description }}",
-      "toggle": "비디오 재생 상태 전환"
+      "toggle": "비디오 재생 상태 전환",
+      "volume": "비디오 음소거/음소거 해제"
     },
     "slideshow": {
       "load_slide": "슬라이드 로드",

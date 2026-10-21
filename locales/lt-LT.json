@@ -440,7 +440,8 @@
     },
     "video": {
       "load_video": "Įkelti vaizdo įrašą „{{ description }}“",
-      "toggle": "Perjungti vaizdo įrašo grojimo būseną"
+      "toggle": "Perjungti vaizdo įrašo grojimo būseną",
+      "volume": "Nutildyti/atšaukti nutildymą vaizdo įrašui"
     },
     "slideshow": {
       "load_slide": "Įkelti skaidrę",

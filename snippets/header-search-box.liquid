@@ -66,7 +66,7 @@
       {%- if settings.show_search_types and shop.types -%}
         <label for="{{ input_id }}_header-product-type" class="visually-hidden">{{ 'general.search.product_type' | t }}</label>
         <div class="select flex items-center">
-          <select class="{% unless section.settings.search == 'icon' %}styled-select styled-select-xs {% endunless %}select__select caption-large js-product-types" id="{{ input_id }}_header-product-type" name="filter.p.product_type">
+          <select class="{% unless section.settings.search == 'icon' %}styled-select {% endunless %}{% if section.settings.search_mobile_open %}styled-select-xs {% endif %}select__select caption-large js-product-types" id="{{ input_id }}_header-product-type" name="filter.p.product_type">
             <option value=""{% if active_product_type == blank %} selected{% endif %}>{{ 'general.search.all_product_types' | t }}</option>
             {%- for type in shop.types -%}
               {% if type != blank %}

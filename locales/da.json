@@ -420,7 +420,8 @@
     },
     "video": {
       "load_video": "Indlæs video: {{ description }}",
-      "toggle": "Skift afspilningstilstand for video"
+      "toggle": "Skift afspilningstilstand for video",
+      "volume": "Slå lyden til/fra på video"
     },
     "slideshow": {
       "load_slide": "Indlæs dias",

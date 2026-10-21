@@ -430,7 +430,8 @@
     },
     "video": {
       "load_video": "Charger la vidéo : {{ description }}",
-      "toggle": "Basculer l'état de lecture de la vidéo"
+      "toggle": "Basculer l'état de lecture de la vidéo",
+      "volume": "Activer/désactiver le son de la vidéo"
     },
     "slideshow": {
       "load_slide": "Charger la diapositive",

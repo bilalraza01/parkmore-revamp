@@ -420,7 +420,8 @@
     },
     "video": {
       "load_video": "Ladda video: {{ description }}",
-      "toggle": "Växla videospelningstillstånd"
+      "toggle": "Växla videospelningstillstånd",
+      "volume": "Stäng av/ljud på video"
     },
     "slideshow": {
       "load_slide": "Ladda bild",

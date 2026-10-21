@@ -447,10 +447,12 @@
                   </button>
 
                   {% if section.settings.show_standard_success_message and form.posted_successfully? or preview_success %}
-                    <p class="form-status form-status-list form__message lh-15 mb-0" tabindex="-1" autofocus>
-                      {% render 'icon-success' %}
-                      {{ 'templates.contact.form.post_success' | t }}
-                    </p>
+                    <div>
+                      <p class="form-status form-status-list form__message lh-15 mb-0" tabindex="-1" autofocus>
+                        {% render 'icon-success' %}
+                        {{ 'templates.contact.form.post_success' | t }}
+                      </p>
+                    </div>
                   {% endif %}
                 </div>
               </div>
@@ -770,10 +772,6 @@
       {
         "value": "glow_outline",
         "label": "Glow with outline - Accent color"
-      },
-      {
-        "value": "glow_pulsating",
-        "label": "Glow - Pulsating accent color (desktop only)"
       }
     ],
     "info": "The colors above can be set in the color schemes. 'Outline' may not work with all fonts.",
@@ -1689,10 +1687,6 @@
       {
         "value": "glow_outline",
         "label": "Glow with outline - Accent color"
-      },
-      {
-        "value": "glow_pulsating",
-        "label": "Glow - Pulsating accent color (desktop only)"
       }
     ],
     "info": "The colors above can be set in the color schemes. 'Outline' may not work with all fonts.",

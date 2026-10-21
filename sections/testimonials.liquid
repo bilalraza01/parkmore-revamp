@@ -140,6 +140,12 @@
     },
     {
       "type": "checkbox",
+      "id": "text_grow",
+      "default": false,
+      "label": "Make text as tall as possible"
+    },
+    {
+      "type": "checkbox",
       "id": "author_line",
       "label": "Show line above author",
       "default": true
@@ -272,14 +278,35 @@
     {
       "type": "checkbox",
       "id": "columns_desktop_scale",
-      "label": "Reduce the number of columns as the screen gets narrower",
+      "label": "Reduce the number of cards shown as the screen gets narrower",
       "default": true
     },
     {
+      "type": "select",
+      "id": "carousel_width_desktop",
+      "options": [
+        {
+          "value": "narrow",
+          "label": "Page width"
+        },
+        {
+          "value": "normal",
+          "label": "Standard"
+        },
+        {
+          "value": "wide",
+          "label": "Wide"
+        }
+      ],
+      "default": "normal",
+      "label": "Width on desktop"
+    },
+    {
       "type": "checkbox",
-      "id": "full_width",
-      "label": "Set carousel/grid to full screen width",
-      "default": false
+      "visible_if": "{{ section.settings.carousel_width_desktop == 'narrow' and settings.carousel_arrows == true and section.settings.desktop_layout == 'carousel' }}",
+      "id": "always_show_arrows",
+      "default": true,
+      "label": "Always show arrows"
     },
     {
       "type": "header",
@@ -395,10 +422,6 @@
       {
         "value": "glow_outline",
         "label": "Glow with outline - Accent color"
-      },
-      {
-        "value": "glow_pulsating",
-        "label": "Glow - Pulsating accent color (desktop only)"
       }
     ],
     "info": "The colors above can be set in the color schemes. 'Outline' may not work with all fonts.",
@@ -548,7 +571,7 @@
       "type": "color",
       "id": "star_color",
       "label": "Stars/quotes",
-      "default": "#F5E121"
+      "default": "#FDB022"
     },
     {
       "type": "checkbox",

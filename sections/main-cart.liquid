@@ -101,7 +101,15 @@
                             <p class="caption-with-letter-spacing">{{ item.product.vendor }}</p>
                           {%- endif -%}
 
-                          <a href="{{ item.url }}" class="cart-item__name font-medium text-current break">{{ item.product.title | escape }}</a>
+                          <a href="{{ item.url }}" class="cart-item__name font-medium text-current break">
+                            {{ item.product.title | escape }}
+                          </a>
+
+                          {%- if settings.cart_show_subtitle and item.product.metafields.descriptors.subtitle != blank -%}
+                            <p class="t7 mt-0 light text-current break mb-1">
+                              {{- item.product.metafields.descriptors.subtitle | escape -}}
+                            </p>
+                          {%- endif -%}
 
                           {%- if item.original_price != item.final_price -%}
                             <div class="cart-item__discounted-prices">
@@ -118,7 +126,7 @@
                                 {{ item.final_price | money }}
                               </strong>
                             </div>
-                          {%- else -%}
+                          {%- elsif item.price > 0 or settings.card_show_zero_prices != false -%}
                             <div class="product-option product-option--price">
                               {{ item.original_price | money }}
                             </div>
@@ -128,6 +136,15 @@
                             <span class="badge badge--preorder badge--bottom-left badge--{{ settings.badge_shape }} mb-1">
                               {{- 'products.product.preorder' | t -}}
                             </span>
+                          {%- endif -%}
+
+                          {%- if settings.cart_show_sku and item.sku != blank -%}
+                            <dl class="opacity-80 cart-item__sku">
+                              <div class="product-option">
+                                <dt>{{ 'products.product.sku' | t }}</dt>
+                                <dd>{{ item.sku }}</dd>
+                              </div>
+                            </dl>
                           {%- endif -%}
 
                           {%- if item.product.has_only_default_variant == false
@@ -176,62 +193,64 @@
                           </ul>
                         </td>
 
-                        <td class="cart-item__totals right medium-hide large-up-hide">
-                          {%- render 'loading-spinner' -%}
-                          <div class="cart-item__price-wrapper">
-                            {%- if item.original_line_price != item.final_line_price -%}
-                              <dl class="cart-item__discounted-prices">
-                                <dt class="visually-hidden">
-                                  {{ 'products.product.price.regular_price' | t }}
-                                </dt>
-                                <dd>
-                                  <s class="cart-item__old-price price price--end whitespace-nowrap">
-                                    {{ item.original_line_price | money }}
-                                  </s>
-                                </dd>
-                                <dt class="visually-hidden">
-                                  {{ 'products.product.price.sale_price' | t }}
-                                </dt>
-                                <dd class="price price--end whitespace-nowrap">
-                                  {{ item.final_line_price | money }}
-                                </dd>
-                              </dl>
-                            {%- else -%}
-                              <span class="price price--end whitespace-nowrap">
-                                {{ item.original_line_price | money }}
-                              </span>
-                              {%- if item.variant.compare_at_price > item.variant.price or item.original_line_price != item.final_line_price -%}
-                                {%- if item.variant.compare_at_price > item.variant.price -%}
-                                  {%- assign compare_at_total_price = item.variant.compare_at_price | times: item.quantity -%}
-                                  <span class="visually-hidden">
+                        {% if item.price > 0 or settings.card_show_zero_prices != false %}
+                          <td class="cart-item__totals right medium-hide large-up-hide">
+                            {%- render 'loading-spinner' -%}
+                            <div class="cart-item__price-wrapper">
+                              {%- if item.original_line_price != item.final_line_price -%}
+                                <dl class="cart-item__discounted-prices">
+                                  <dt class="visually-hidden">
                                     {{ 'products.product.price.regular_price' | t }}
-                                  </span>
-                                  <s class="price-item price-item--regular t6 opacity-70 whitespace-nowrap">{{ compare_at_total_price | money }}</s>
-                                {%- elsif item.original_line_price != item.final_line_price -%}
-                                  <span class="visually-hidden">
-                                    {{ 'products.product.price.regular_price' | t }}
-                                  </span>
-                                  <s class="price-item price-item--regular t6 opacity-70 whitespace-nowrap">{{ item.original_line_price | money }}</s>
+                                  </dt>
+                                  <dd>
+                                    <s class="cart-item__old-price price price--end whitespace-nowrap">
+                                      {{ item.original_line_price | money }}
+                                    </s>
+                                  </dd>
+                                  <dt class="visually-hidden">
+                                    {{ 'products.product.price.sale_price' | t }}
+                                  </dt>
+                                  <dd class="price price--end whitespace-nowrap">
+                                    {{ item.final_line_price | money }}
+                                  </dd>
+                                </dl>
+                              {%- else -%}
+                                <span class="price price--end whitespace-nowrap">
+                                  {{ item.original_line_price | money }}
+                                </span>
+                                {%- if item.variant.compare_at_price > item.variant.price or item.original_line_price != item.final_line_price -%}
+                                  {%- if item.variant.compare_at_price > item.variant.price -%}
+                                    {%- assign compare_at_total_price = item.variant.compare_at_price | times: item.quantity -%}
+                                    <span class="visually-hidden">
+                                      {{ 'products.product.price.regular_price' | t }}
+                                    </span>
+                                    <s class="price-item price-item--regular t6 opacity-70 whitespace-nowrap">{{ compare_at_total_price | money }}</s>
+                                  {%- elsif item.original_line_price != item.final_line_price -%}
+                                    <span class="visually-hidden">
+                                      {{ 'products.product.price.regular_price' | t }}
+                                    </span>
+                                    <s class="price-item price-item--regular t6 opacity-70 whitespace-nowrap">{{ item.original_line_price | money }}</s>
+                                  {%- endif -%}
                                 {%- endif -%}
                               {%- endif -%}
-                            {%- endif -%}
 
-                            {%- if item.variant.available and item.unit_price_measurement -%}
-                              <div class="unit-price caption">
-                                <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
-                                {{ item.unit_price | money }}
-                                <span aria-hidden="true">/</span>
-                                <span class="visually-hidden"
-                                >&nbsp;{{ 'accessibility.unit_price_separator' | t }}&nbsp;</span
-                                >
-                                {%- if item.unit_price_measurement.reference_value != 1 -%}
-                                  {{- item.unit_price_measurement.reference_value -}}
-                                {%- endif -%}
-                                {{ item.unit_price_measurement.reference_unit }}
-                              </div>
-                            {%- endif -%}
-                          </div>
-                        </td>
+                              {%- if item.variant.available and item.unit_price_measurement -%}
+                                <div class="unit-price caption">
+                                  <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
+                                  {{ item.unit_price | money }}
+                                  <span aria-hidden="true">/</span>
+                                  <span class="visually-hidden"
+                                  >&nbsp;{{ 'accessibility.unit_price_separator' | t }}&nbsp;</span
+                                  >
+                                  {%- if item.unit_price_measurement.reference_value != 1 -%}
+                                    {{- item.unit_price_measurement.reference_value -}}
+                                  {%- endif -%}
+                                  {{ item.unit_price_measurement.reference_unit }}
+                                </div>
+                              {%- endif -%}
+                            </div>
+                          </td>
+                        {% endif %}
                         {%- liquid
                           assign has_qty_rules = false
                           if item.variant.quantity_rule.increment > 1 or item.variant.quantity_rule.min > 1 or item.variant.quantity_rule.max != null
@@ -405,62 +424,64 @@
                           </quantity-popover>
                         </td>
 
-                        <td class="cart-item__totals right small-hide">
-                          {%- render 'loading-spinner' -%}
-                          <div class="cart-item__price-wrapper">
-                            {%- if item.original_line_price != item.final_line_price -%}
-                              <dl class="cart-item__discounted-prices">
-                                <dt class="visually-hidden">
-                                  {{ 'products.product.price.regular_price' | t }}
-                                </dt>
-                                <dd>
-                                  <s class="cart-item__old-price price price--end">
-                                    {{ item.original_line_price | money }}
-                                  </s>
-                                </dd>
-                                <dt class="visually-hidden">
-                                  {{ 'products.product.price.sale_price' | t }}
-                                </dt>
-                                <dd class="price price--end">
-                                  {{ item.final_line_price | money }}
-                                </dd>
-                              </dl>
-                            {%- else -%}
-                              <span class="price price--end">
-                                {{ item.original_line_price | money }}
-                              </span>
-                              {%- if item.variant.compare_at_price > item.variant.price or item.original_line_price != item.final_line_price -%}
-                                {%- if item.variant.compare_at_price > item.variant.price -%}
-                                  {%- assign compare_at_total_price = item.variant.compare_at_price | times: item.quantity -%}
-                                  <span class="visually-hidden">
+                        {% if item.price > 0 or settings.card_show_zero_prices != false %}
+                          <td class="cart-item__totals right small-hide">
+                            {%- render 'loading-spinner' -%}
+                            <div class="cart-item__price-wrapper">
+                              {%- if item.original_line_price != item.final_line_price -%}
+                                <dl class="cart-item__discounted-prices">
+                                  <dt class="visually-hidden">
                                     {{ 'products.product.price.regular_price' | t }}
-                                  </span>
-                                  <s class="price-item price-item--regular t6 opacity-70">{{ compare_at_total_price | money }}</s>
-                                {%- elsif item.original_line_price != item.final_line_price -%}
-                                  <span class="visually-hidden">
-                                    {{ 'products.product.price.regular_price' | t }}
-                                  </span>
-                                  <s class="price-item price-item--regular t6 opacity-70">{{ item.original_line_price | money }}</s>
+                                  </dt>
+                                  <dd>
+                                    <s class="cart-item__old-price price price--end">
+                                      {{ item.original_line_price | money }}
+                                    </s>
+                                  </dd>
+                                  <dt class="visually-hidden">
+                                    {{ 'products.product.price.sale_price' | t }}
+                                  </dt>
+                                  <dd class="price price--end">
+                                    {{ item.final_line_price | money }}
+                                  </dd>
+                                </dl>
+                              {%- else -%}
+                                <span class="price price--end">
+                                  {{ item.original_line_price | money }}
+                                </span>
+                                {%- if item.variant.compare_at_price > item.variant.price or item.original_line_price != item.final_line_price -%}
+                                  {%- if item.variant.compare_at_price > item.variant.price -%}
+                                    {%- assign compare_at_total_price = item.variant.compare_at_price | times: item.quantity -%}
+                                    <span class="visually-hidden">
+                                      {{ 'products.product.price.regular_price' | t }}
+                                    </span>
+                                    <s class="price-item price-item--regular t6 opacity-70">{{ compare_at_total_price | money }}</s>
+                                  {%- elsif item.original_line_price != item.final_line_price -%}
+                                    <span class="visually-hidden">
+                                      {{ 'products.product.price.regular_price' | t }}
+                                    </span>
+                                    <s class="price-item price-item--regular t6 opacity-70">{{ item.original_line_price | money }}</s>
+                                  {%- endif -%}
                                 {%- endif -%}
                               {%- endif -%}
-                            {%- endif -%}
 
-                            {%- if item.variant.available and item.unit_price_measurement -%}
-                              <div class="unit-price caption">
-                                <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
-                                {{ item.unit_price | money }}
-                                <span aria-hidden="true">/</span>
-                                <span class="visually-hidden"
-                                >&nbsp;{{ 'accessibility.unit_price_separator' | t }}&nbsp;</span
-                                >
-                                {%- if item.unit_price_measurement.reference_value != 1 -%}
-                                  {{- item.unit_price_measurement.reference_value -}}
-                                {%- endif -%}
-                                {{ item.unit_price_measurement.reference_unit }}
-                              </div>
-                            {%- endif -%}
-                          </div>
-                        </td>
+                              {%- if item.variant.available and item.unit_price_measurement -%}
+                                <div class="unit-price caption">
+                                  <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
+                                  {{ item.unit_price | money }}
+                                  <span aria-hidden="true">/</span>
+                                  <span class="visually-hidden"
+                                  >&nbsp;{{ 'accessibility.unit_price_separator' | t }}&nbsp;</span
+                                  >
+                                  {%- if item.unit_price_measurement.reference_value != 1 -%}
+                                    {{- item.unit_price_measurement.reference_value -}}
+                                  {%- endif -%}
+                                  {{ item.unit_price_measurement.reference_unit }}
+                                </div>
+                              {%- endif -%}
+                            </div>
+                          </td>
+                        {% endif %}
                       </tr>
                     {%- endfor -%}
                     </tbody>

@@ -12,7 +12,7 @@
         </div>
       {%- endif -%}
 
-      {% comment %} <div class="flex justify-{{ section.settings.tab_alignment }}">
+      <div class="flex justify-{{ section.settings.tab_alignment }}">
         <div class="horizontal-scroll">
           <div class="block custom-tabs custom-tabs--{{ section.settings.tab_style }} custom-tabs--divided {{ section.settings.tab_text_size }}">
             <a href="{{ blog.url }}" class="custom-tab{% unless current_tags %} custom-tab--active{% endunless %}">
@@ -26,7 +26,7 @@
             {% endfor %}
           </div>
         </div>
-      </div> {% endcomment %}
+      </div>
     </div>
   {%- endif -%}
 

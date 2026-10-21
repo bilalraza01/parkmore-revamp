@@ -67,7 +67,11 @@
                   {% endif %}
                   <h2 class="h4 accordion__title">{{ block_heading }}</h2>
                 {%- else -%}
-                  <h2 class="{% if heading_class %}{{ heading_class }}{% else %}t2 text-body mb-0 mt-0 font-bold{% endif %}">{{ block_heading }}</h2>
+                  {%- if block_heading != blank -%}
+                    <h2 class="{% if heading_class %}{{ heading_class }}{% else %}t2 text-body mb-0 mt-0 font-bold{% endif %}">{{ block_heading }}</h2>
+                  {%- else -%}
+                    &nbsp;
+                  {%- endif -%}
                 {%- endif -%}
                 <div class="carousel-buttons"></div>
               </div>

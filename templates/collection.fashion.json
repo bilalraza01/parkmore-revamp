@@ -187,7 +187,6 @@
         "columns_desktop": "6",
         "columns_desktop_scale": false,
         "columns_mobile": "2",
-        "full_width": false,
         "content_max_width": "m",
         "desktop_heading_alignment": "center",
         "mobile_heading_alignment": "left",

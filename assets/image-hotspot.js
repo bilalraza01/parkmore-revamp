@@ -3,16 +3,6 @@ if (!customElements.get('image-hotspot')) {
     constructor() {
       super();
       window.initScriptOnDemand(this, this.init.bind(this));
-    }
-
-    init() {
-      this.hotspotMarker = this.querySelector('.hotspot__marker');
-      this.hotspotPopover = this.querySelector('.hotspot__popover');
-      this.markerClickHandler = this.handleMarkerClick.bind(this);
-      this.documentClickHandler = this.handleDocumentClick.bind(this);
-      this.keyUpHandler = this.handleKeyUp.bind(this);
-
-      this.hotspotMarker?.addEventListener('click', this.markerClickHandler);
 
       if (Shopify.designMode) {
         document.addEventListener('shopify:block:select', event => {
@@ -24,6 +14,16 @@ if (!customElements.get('image-hotspot')) {
           }
         });
       }
+    }
+
+    init() {
+      this.hotspotMarker = this.querySelector('.hotspot__marker');
+      this.hotspotPopover = this.querySelector('.hotspot__popover');
+      this.markerClickHandler = this.handleMarkerClick.bind(this);
+      this.documentClickHandler = this.handleDocumentClick.bind(this);
+      this.keyUpHandler = this.handleKeyUp.bind(this);
+
+      this.hotspotMarker?.addEventListener('click', this.markerClickHandler);
     }
 
     disconnectedCallback() {

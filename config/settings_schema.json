@@ -2,7 +2,7 @@
   {
     "name": "theme_info",
     "theme_name": "Ignite",
-    "theme_version": "2.3.0",
+    "theme_version": "2.6.1",
     "theme_author": "Benchmark Themes",
     "theme_documentation_url": "https://benchmarkthemes.com/help-center/ignite/getting-started/welcome/",
     "theme_support_url": "https://benchmarkthemes.com/help-center/ignite/getting-started/welcome/"
@@ -172,6 +172,22 @@
   {
     "name": "Typography",
     "settings": [
+      {
+        "type": "select",
+        "id": "font_display",
+        "default": "swap",
+        "label": "Optimize font loading for",
+        "options": [
+          {
+            "value": "fallback",
+            "label": "Visual stability"
+          },
+          {
+            "value": "swap",
+            "label": "Speed"
+          }
+        ]
+      },
       {
         "type": "header",
         "content": "Headings"
@@ -622,6 +638,10 @@
     "settings": [
       {
         "type": "paragraph",
+        "content": "Breadcrumbs help customers understand where they are in your store by showing the page hierarchy at a glance. [Learn more](https://benchmarkthemes.com/help-center/ignite/theme-settings/breadcrumbs)"
+      },
+      {
+        "type": "paragraph",
         "content": "Breadcrumbs can be enabled/disabled on various templates by showing or hiding the \"Breadcrumb\" section on those templates."
       },
       {
@@ -653,6 +673,17 @@
         ],
         "default": "99",
         "label": "Truncate the current page breadcrumb"
+      },
+      {
+        "type": "checkbox",
+        "id": "breadcrumb_show_custom_breadcrumbs",
+        "default": true,
+        "label": "Show custom product breadcrumbs",
+        "info": "Create a \"Collection\" List product metafield with namespace and key \"custom.breadcrumbs\" and add collections to act as breadcrumbs. [Learn more](https://benchmarkthemes.com/help-center/ignite/theme-settings/breadcrumbs)"
+      },
+      {
+        "type": "header",
+        "content": "Style"
       },
       {
         "type": "select",
@@ -877,6 +908,28 @@
         "id": "card_image_background",
         "label": "Image background",
         "info": "If this is replacing the image background (setting above), this should be a very light color."
+      },
+      {
+        "type": "header",
+        "content": "Pricing"
+      },
+      {
+        "type": "checkbox",
+        "id": "card_include_unavailable_variants_in_sale_price",
+        "default": true,
+        "label": "Include out of stock variants when calculating sale prices"
+      },
+      {
+        "type": "checkbox",
+        "id": "card_show_zero_prices",
+        "default": true,
+        "label": "Show prices when they're zero"
+      },
+      {
+        "type": "checkbox",
+        "id": "card_show_enquiry_prices",
+        "default": true,
+        "label": "Show prices for enquiry products"
       },
       {
         "type": "header",
@@ -1518,7 +1571,7 @@
         "type": "color",
         "id": "card_star_color",
         "label": "Product review star",
-        "default": "#F5E121"
+        "default": "#FDB022"
       },
       {
         "type": "color",
@@ -2697,6 +2750,14 @@
         "label": "Show product vendor"
       },
       {
+        "type": "checkbox",
+        "id": "predictive_search_show_product_badges",
+        "visible_if": "{{ settings.predictive_search_enabled }}",
+        "default": false,
+        "label": "Show product badges",
+        "info": "As set in Theme Settings > Product badges."
+      },
+      {
         "type": "textarea",
         "id": "predictive_search_suggested_searches",
         "visible_if": "{{ settings.predictive_search_enabled }}",
@@ -2795,6 +2856,10 @@
           {
             "value": "notification",
             "label": "Show popup notification"
+          },
+          {
+            "value": "muted_notification",
+            "label": "Do nothing"
           }
         ],
         "default": "drawer",
@@ -2879,6 +2944,18 @@
         "id": "cart_show_vendor",
         "label": "Show product vendor",
         "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_show_subtitle",
+        "label": "Show product subtitle",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "cart_show_sku",
+        "label": "Show SKU",
+        "default": true
       },
       {
         "type": "url",

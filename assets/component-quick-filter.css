@@ -5,6 +5,10 @@ quick-filter {
   z-index: 1;
 }
 
+quick-filter:has(.nice-select.open) {
+  z-index: 2;
+}
+
 quick-filter .nice-select,
 quick-filter select {
   height: calc(100% - (var(--inputs-border-width) * 2)) !important;
@@ -94,6 +98,33 @@ quick-filter .nice-select .current {
   max-width: 100%;
 }
 
+.quick-filter__select-container .select .icon-caret {
+  transition: opacity var(--duration-long) ease, transform var(--duration-long);
+}
+
+.quick-filter__select-container.loading .select .icon-caret {
+  opacity: 0;
+  transform: scale(0.6);
+}
+
+.quick-filter__select-container .loading__spinner {
+  position: absolute;
+  top: 50%;
+  height: 24px;
+  inset-inline-end: calc(var(--inputs-border-width) + 1.4rem);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-50%);
+  transition: opacity var(--duration-long), visibility var(--duration-long);
+}
+
+.quick-filter__select-container.loading .loading__spinner {
+  opacity: 0.6;
+  transform: translateY(-50%);
+  visibility: visible;
+}
+
 .quick-filter__inner {
   flex-direction: column;
 }
@@ -104,6 +135,12 @@ quick-filter .nice-select .current {
 
 .image-with-text .image-with-text__text-item > *:has(.nice-select.open) {
   overflow: visible;
+}
+
+.section:has(quick-filter .nice-select.open) + .section,
+.section:has(quick-filter .nice-select.open) + .section + .section {
+  position: relative;
+  z-index: 2;
 }
 
 @media screen and (max-width: 749.98px) {
@@ -143,6 +180,16 @@ quick-filter .nice-select .current {
     width: 25%;
   }
 
+  quick-filter[data-mode="filter"] .quick-filter__inner {
+    flex-wrap: wrap;
+  }
+
+  quick-filter[data-mode="filter"] .quick-filter__select-container {
+    flex: 1 0 0;
+    min-width: calc(var(--dropdown-width-medium) - 1rem);
+    width: auto;
+  }
+
   quick-filter .button-with-icon--label-hidden-stacked {
     padding: 1rem !important;
     width: 3.5em;
@@ -154,5 +201,13 @@ quick-filter .nice-select .current {
 
   quick-filter .button-with-icon--label-hidden-stacked > span {
     display: none;
+  }
+}
+
+@media (min-width: 990px) {
+  @container (min-width: 450px) {
+    quick-filter[data-mode="filter"] .quick-filter__select-container {
+      min-width: calc(var(--dropdown-width-large) - 1rem);
+    }
   }
 }

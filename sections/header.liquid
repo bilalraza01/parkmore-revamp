@@ -156,6 +156,38 @@
       padding: {{ section.settings.spacing }}rem 3rem;
     }
   }
+
+  {%- if section.settings.customer_account_login_style == 'popup' -%}
+    {%- assign shopify_account_color_scheme = section.settings.dropdown_menu_color_scheme -%}
+    shopify-account {
+      --shopify-account-font-heading: var(--font-heading-family);
+      --shopify-account-font-heading-weight: var(--font-heading-weight);
+      --shopify-account-font-body: var(--font-body-family);
+      --shopify-account-font-body-weight: var(--font-body-weight);
+      --shopify-account-radius-base: var(--inputs-radius);
+      --shopify-account-radius-dialog: var(--popup-corner-radius);
+      --shopify-account-radius-button: var(--buttons-radius);
+      --shopify-account-radius-button-small: var(--buttons-radius);
+      --shopify-account-radius-input: var(--inputs-radius);
+      --shopify-account-color-background: rgb({{ shopify_account_color_scheme.settings.background.red }},{{ shopify_account_color_scheme.settings.background.green }},{{ shopify_account_color_scheme.settings.background.blue }});
+      --shopify-account-color-text: rgb({{ shopify_account_color_scheme.settings.text.red }},{{ shopify_account_color_scheme.settings.text.green }},{{ shopify_account_color_scheme.settings.text.blue }});
+      --shopify-account-color-card-text: rgb({{ shopify_account_color_scheme.settings.text.red }},{{ shopify_account_color_scheme.settings.text.green }},{{ shopify_account_color_scheme.settings.text.blue }});
+      --shopify-account-color-accent: rgb({{ shopify_account_color_scheme.settings.accent.red }},{{ shopify_account_color_scheme.settings.accent.green }},{{ shopify_account_color_scheme.settings.accent.blue }});
+      --shopify-account-color-accent-text: rgb({{ shopify_account_color_scheme.settings.text.red }},{{ shopify_account_color_scheme.settings.text.green }},{{ shopify_account_color_scheme.settings.text.blue }});
+      --shopify-account-signed-in-avatar-color-background: rgb({{ section.settings.color_scheme.settings.text.red }},{{ section.settings.color_scheme.settings.text.green }},{{ section.settings.color_scheme.settings.text.blue }});
+      --shopify-account-signed-in-avatar-color-text: rgb({{ section.settings.color_scheme.settings.background.red }},{{ section.settings.color_scheme.settings.background.green }},{{ section.settings.color_scheme.settings.background.blue }});
+      --shopify-account-signed-in-avatar-size: 36px;
+
+      &:not(:defined) {
+        min-width: 44px;
+        height: 44px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        line-height: normal;
+      }
+    }
+  {%- endif -%}
 {% endstyle %}
 
 <lazy-script data-watch-element="details-modal" src="{{ 'details-modal.js' | asset_url }}" defer="defer"></lazy-script>
@@ -199,7 +231,7 @@
         -%}
         {%- for link in section.settings.menu.links -%}
           {%- liquid
-            assign link_title = link.title | downcase
+            assign link_title = link.title | downcase | strip
             assign is_mega_menu = false
             if mega_menu_labels contains link_title
               assign is_mega_menu = true
@@ -375,24 +407,35 @@
       {%- endif -%}
 
       {%- if shop.customer_accounts_enabled and section.settings.enable_accounts or section.settings.enable_accounts_mobile -%}
-        <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="header__icon header__icon--account link focus-inset{% if section.settings.enable_accounts and section.settings.enable_accounts_mobile == false %} small-hide{% elsif section.settings.enable_accounts == false and section.settings.enable_accounts_mobile %} visible-xs{% endif %}">
-          <account-icon>
-            {%- if customer and customer.has_avatar? -%}
-              {{ customer | avatar }}
-            {%- else -%}
-              {% render 'icon-account' %}
-            {%- endif -%}
-          </account-icon>
-          <span class="visually-hidden">
-            {%- liquid
-              if customer
-                echo 'customer.account_fallback' | t
-              else
-                echo 'customer.log_in' | t
-              endif
-            -%}
-          </span>
-        </a>
+        {%- if section.settings.customer_account_login_style == 'popup' -%}
+          <shopify-account menu="{{ section.settings.customer_account_menu }}">
+            <div slot="signed-out-avatar">
+              <div class="header__icon header__icon--account link focus-inset{% if section.settings.enable_accounts and section.settings.enable_accounts_mobile == false %} small-hide{% elsif section.settings.enable_accounts == false and section.settings.enable_accounts_mobile %} visible-xs{% endif %}">
+                {% render 'icon-account' %}
+                <span class="visually-hidden">{{ 'customer.log_in' | t }}</span>
+              </div>
+            </div>
+          </shopify-account>
+        {%- else -%}
+          <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="header__icon header__icon--account link focus-inset{% if section.settings.enable_accounts and section.settings.enable_accounts_mobile == false %} small-hide{% elsif section.settings.enable_accounts == false and section.settings.enable_accounts_mobile %} visible-xs{% endif %}">
+            <account-icon>
+              {%- if customer and customer.has_avatar? -%}
+                {{ customer | avatar }}
+              {%- else -%}
+                {% render 'icon-account' %}
+              {%- endif -%}
+            </account-icon>
+            <span class="visually-hidden">
+              {%- liquid
+                if customer
+                  echo 'customer.account_fallback' | t
+                else
+                  echo 'customer.log_in' | t
+                endif
+              -%}
+            </span>
+          </a>
+        {%- endif -%}
       {%- endif -%}
 
       {%- if section.settings.custom_icon != blank -%}
@@ -415,7 +458,7 @@
         -%}
         <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
         {%- if cart != empty -%}
-          <div class="cart-count-bubble font-bold">
+          <div class="cart-count-bubble z-1 font-bold">
             <span aria-hidden="true"{% if cart.item_count > 999 %} style="font-size: 8px; white-space: nowrap;"{% endif %}>{{ cart.item_count }}</span>
             <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
           </div>
@@ -433,7 +476,7 @@
   {%- endif -%}
 </{% if section.settings.sticky_header_type != 'none' %}sticky-header{% else %}div{% endif %}>
 
-{%- if settings.atc_action == "notification" or settings.atc_action == "drawer" and settings.cart_drawer_enabled == false -%}
+{%- if settings.atc_action contains "notification" or settings.atc_action == "drawer" and settings.cart_drawer_enabled == false -%}
   {%- render 'cart-notification', drawer_on_desktop: drawer_on_desktop -%}
 {%- endif -%}
 
@@ -448,25 +491,31 @@
       this.headerIsAlwaysSticky = this.getAttribute('data-sticky-type') === 'always';
       this.headerBounds = {};
 
-      this.setHeaderHeight();
-      this.setHeaderHeightLive();
+      this.headerHeight = this.header.offsetHeight;
+      document.documentElement.style.setProperty('--header-height', `${this.headerHeight}px`);
+      document.documentElement.style.setProperty('--header-height-live', `${this.headerHeight}px`);
 
-      window.addEventListener('resizeend', this.setHeaderHeight.bind(this));
-      window.addEventListener('resizeend', this.setHeaderHeightLive.bind(this));
+      window.addEventListener('resizeend', () => {
+        // Only update height once per resize cycle, off the main thread
+        requestAnimationFrame(() => {
+          this.headerHeight = this.header.offsetHeight;
+          document.documentElement.style.setProperty('--header-height', `${this.headerHeight}px`);
+          document.documentElement.style.setProperty('--header-height-live', `${this.headerHeight}px`);
+        });
+      });
 
       if (this.headerIsAlwaysSticky) {
         this.header.classList.add('shopify-section-header-sticky');
-      };
+      }
 
       this.currentScrollTop = 0;
       this.preventReveal = false;
       this.predictiveSearch = this.querySelector('predictive-search');
-
       this.lastScrollTrigger = 0;
       this.scrollThreshold = 50;
 
       this.onScrollHandler = this.onScroll.bind(this);
-      this.hideHeaderOnScrollUp = () => this.preventReveal = true;
+      this.hideHeaderOnScrollUp = () => (this.preventReveal = true);
 
       this.addEventListener('preventHeaderReveal', this.hideHeaderOnScrollUp);
       window.addEventListener('scroll', this.onScrollHandler, { passive: true });
@@ -481,15 +530,16 @@
 
     searchButtonClick() {
       this.preventHide = true;
-      requestAnimationFrame(() => { this.preventHide = false; });
+      requestAnimationFrame(() => (this.preventHide = false));
     }
 
-    setHeaderHeight() {
-      document.documentElement.style.setProperty('--header-height', `${this.header.offsetHeight}px`);
-    }
-
+    // Defer the DOM write to avoid synchronous reflow
     setHeaderHeightLive(event, zero) {
-      document.documentElement.style.setProperty('--header-height-live', `${zero ? 0 : this.header.offsetHeight}px`);
+      requestAnimationFrame(() => {
+        const isVisible = !this.header.classList.contains('shopify-section-header-hidden');
+        const height = (zero || !isVisible) ? 0 : this.header.offsetHeight;
+        document.documentElement.style.setProperty('--header-height-live', `${height}px`);
+      });
     }
 
     disconnectedCallback() {
@@ -740,6 +790,30 @@
       "id": "enable_accounts_mobile",
       "default": false,
       "label": "Show customer account icon on mobile"
+    },
+    {
+      "type": "select",
+      "id": "customer_account_login_style",
+      "options": [
+        {
+          "value": "popup",
+          "label": "Popup"
+        },
+        {
+          "value": "page",
+          "label": "Legacy"
+        }
+      ],
+      "default": "page",
+      "info": "Popup won't work when [legacy customer accounts](/admin/settings/customer_accounts) are enabled.",
+      "label": "Login style"
+    },
+    {
+      "type": "link_list",
+      "id": "customer_account_menu",
+      "visible_if": "{{ section.settings.customer_account_login_style == 'popup' }}",
+      "label": "Customer account menu",
+      "default": "customer-account-main-menu"
     },
     {
       "type": "header",

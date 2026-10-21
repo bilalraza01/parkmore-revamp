@@ -49,7 +49,34 @@
           style="--animation-order: {{ forloop.index | default: 1 }};"
         {% endif %}
       >
-        {%- render 'animated-text' with block.settings.heading -%}
+        {%- assign text = block.settings.heading -%}
+        {%- if text contains '[' and text contains ']' and text contains '|' -%}
+  <lazy-script src="{{ 'animated-list.js' | asset_url }}" defer="defer"></lazy-script>
+  {%- liquid
+    assign before_bracket = text | split: "[" | first
+    assign inside_bracket = text | split: "[" | last | split: "]" | first
+    assign after_bracket = text | split: "]" | last
+
+    assign inside_em = inside_bracket | split: "<em>" | last | split: "</em>" | first
+    assign inside_strong = inside_bracket | split: "<strong>" | last | split: "</strong>" | first
+
+    assign items = inside_bracket | split: "|"
+    assign first_item = items | first
+    assign remaining_items = items | slice: 1, items.size | join: "|"
+  -%}
+
+  {%- if inside_bracket contains '<em>' and inside_em contains '|' -%}
+    {{ text | replace: '++', '<br>' }}
+  {%- elsif inside_bracket contains '<strong>' and inside_strong contains '|' -%}
+    {{ text | replace: '++', '<br>' }}
+  {%- else -%}
+    {{- before_bracket | replace: '++', '<br>' -}}
+    <animated-list class="relative inline-flex" data-list="{{ remaining_items }}">{{ first_item }}</animated-list>
+    {%- unless after_bracket contains '[' -%}{{ after_bracket | replace: '++', '<br>' }}{%- endunless -%}
+  {%- endif -%}
+{%- else -%}
+  {{ text | replace: '++', '<br>' }}
+{%- endif -%}
       </{{ block.settings.heading_tag }}>
     {%- endif -%}
 
@@ -323,7 +350,7 @@
       </div>
     {%- else -%}
       {%- assign form_id = 'subscribe-' | append: section.id -%}
-      {%- form 'customer', id: form_id, return_to: 'back' -%}
+      {%- form 'customer', id: form_id, return_to: block.settings.return_to.url -%}
         <div class="section-content__email-form customer-form justify-{{ section.settings.mobile_content_alignment | default: block.settings.mobile_content_alignment | default: section.settings.compare_text_alignment }} md:justify-{{ section.settings.desktop_content_alignment | default: block.settings.desktop_content_alignment | default: section.settings.compare_text_alignment }}{% if animate %} scroll-trigger animate--fade-in{% endif %}{% if class %} {{ class }}{% endif %}"
              id="{{ form_id }}"
                 {{ block.shopify_attributes }}
@@ -436,7 +463,7 @@
         endunless
     -%}
     {%- if icon != blank -%}
-      <div class="last-child-inner:mb-0{% if animate %} scroll-trigger animate--fade-in{% endif %}"
+      <div class="{% unless section_name == 'gallery' %}last-child-inner:mb-0{% endunless %}{% if animate %} scroll-trigger animate--fade-in{% endif %}"
         {{ block.shopify_attributes }}
         {% if animate %}
           data-cascade
@@ -642,8 +669,18 @@
       </div>
     </div>
 
-  {%- when 'quick_filter' -%}
-    {%- if block.settings.filter_menu != blank -%}
+  {%- when 'quick_filter' or 'quick_filter_collection' -%}
+    {%- if block.settings.filter_menu != blank or block.type == 'quick_filter_collection' -%}
+
+      {%- liquid
+        if block.type == 'quick_filter_collection'
+          assign filter_collection = block.settings.filter_collection
+          if filter_collection == blank and collection
+            assign filter_collection = collection
+          endif
+        endif
+      -%}
+
       {%- if block.settings.max_width > 0 -%}
         {%- style -%}
           .section-content-{{ section.id }} {
@@ -652,48 +689,82 @@
         {%- endstyle -%}
       {%- endif -%}
 
-      {%# Level 1 %}
-      {%- capture level_1_options -%}
-        {%- for level_1_link in block.settings.filter_menu.links -%}
-          <option data-url="{{ level_1_link.url }}" id="{{ section.id }}_{{ block.id }}_{{ level_1_link.handle }}" value="{{ section.id }}_{{ block.id }}_{{ level_1_link.handle }}">
-            {{ level_1_link.title | escape }}
-          </option>
-        {%- endfor -%}
-      {%- endcapture -%}
-
-      {%# Level 2 %}
-      {%- capture level_2_options -%}
-        {%- for level_1_link in block.settings.filter_menu.links -%}
-          {%- for level_2_link in level_1_link.links -%}
-            <option data-url="{{ level_2_link.url }}" id="{{ section.id }}_{{ block.id }}_{{ level_1_link.handle }}_{{ level_2_link.handle }}" value="{{ section.id }}_{{ block.id }}_{{ level_1_link.handle }}_{{ level_2_link.handle }}" data-parent-id="{{ section.id }}_{{ block.id }}_{{ level_1_link.handle }}">
-              {{ level_2_link.title | escape }}
+      {%- unless block.type == 'quick_filter_collection' -%}
+        {%# Level 1 %}
+        {%- capture level_1_options -%}
+          {%- for level_1_link in block.settings.filter_menu.links -%}
+            <option data-url="{{ level_1_link.url }}" id="{{ section.id }}_{{ block.id }}_{{ level_1_link.handle }}" value="{{ section.id }}_{{ block.id }}_{{ level_1_link.handle }}">
+              {{ level_1_link.title | escape }}
             </option>
           {%- endfor -%}
-        {%- endfor -%}
-      {%- endcapture -%}
+        {%- endcapture -%}
 
-      {%# Level 3 %}
-      {%- capture level_3_options -%}
-        {%- for level_1_link in block.settings.filter_menu.links -%}
-          {%- for level_2_link in level_1_link.links -%}
-            {%- for level_3_link in level_2_link.links -%}
-              <option data-url="{{ level_3_link.url }}" id="{{ section.id }}_{{ block.id }}_{{ level_1_link.handle }}_{{ level_2_link.handle }}_{{ level_3_link.handle }}" value="{{ section.id }}_{{ block.id }}_{{ level_1_link.handle }}_{{ level_2_link.handle }}_{{ level_3_link.handle }}" data-parent-id="{{ section.id }}_{{ block.id }}_{{ level_1_link.handle }}_{{ level_2_link.handle }}">
-                {{ level_3_link.title | escape }}
+        {%# Level 2 %}
+        {%- capture level_2_options -%}
+          {%- for level_1_link in block.settings.filter_menu.links -%}
+            {%- for level_2_link in level_1_link.links -%}
+              <option data-url="{{ level_2_link.url }}" id="{{ section.id }}_{{ block.id }}_{{ level_1_link.handle }}_{{ level_2_link.handle }}" value="{{ section.id }}_{{ block.id }}_{{ level_1_link.handle }}_{{ level_2_link.handle }}" data-parent-id="{{ section.id }}_{{ block.id }}_{{ level_1_link.handle }}">
+                {{ level_2_link.title | escape }}
               </option>
             {%- endfor -%}
           {%- endfor -%}
-        {%- endfor -%}
-      {%- endcapture -%}
+        {%- endcapture -%}
+
+        {%# Level 3 %}
+        {%- capture level_3_options -%}
+          {%- for level_1_link in block.settings.filter_menu.links -%}
+            {%- for level_2_link in level_1_link.links -%}
+              {%- for level_3_link in level_2_link.links -%}
+                <option data-url="{{ level_3_link.url }}" id="{{ section.id }}_{{ block.id }}_{{ level_1_link.handle }}_{{ level_2_link.handle }}_{{ level_3_link.handle }}" value="{{ section.id }}_{{ block.id }}_{{ level_1_link.handle }}_{{ level_2_link.handle }}_{{ level_3_link.handle }}" data-parent-id="{{ section.id }}_{{ block.id }}_{{ level_1_link.handle }}_{{ level_2_link.handle }}">
+                  {{ level_3_link.title | escape }}
+                </option>
+              {%- endfor -%}
+            {%- endfor -%}
+          {%- endfor -%}
+        {%- endcapture -%}
+      {%- endunless -%}
 
       {% unless section.index < 4 or section.location == 'header' or request.design_mode %}<template class="deferred block lazy-template" data-observe-margin="600px">{% endunless %}
+
       <quick-filter class="hidden-during-load inline-block mt-0 md:w-full justify-{{ section.settings.mobile_content_alignment | default: block.settings.mobile_content_alignment | default: section.settings.content_alignment }} md:justify-{{ section.settings.desktop_content_alignment | default: block.settings.desktop_content_alignment | default: section.settings.content_alignment }}"
+          data-mode="{% if block.type == 'quick_filter_collection' %}filter{% else %}menu{% endif %}"
           data-search-min-items="{{ block.settings.min_items_for_search }}"
           {% if block.settings.auto_open_next_dropdown %} data-auto-open-next-dropdown="true"{% endif %}
-          {% if block.settings.preselect %} data-preselect="{{ request.path }}"{% endif %}
-          {{ block.shopify_attributes }}>
+          {% if block.settings.show_product_count == false %} data-hide-product-count="true"{% endif %}
+          {% if block.settings.preselect and block.type != 'quick_filter_collection' %} data-preselect="{{ request.path }}"{% endif %}
+          {% if block.settings.preselect and block.type == 'quick_filter_collection' %} data-preselect-setting-enabled="true"{% endif %}
+          {% if block.type == 'quick_filter_collection' %}
+            style="--dropdown-width-medium: {{ block.settings.dropdown_width_medium }}%;--dropdown-width-large: {{ block.settings.dropdown_width_large }}%;"
+            data-collection-url="{{ shop.url }}{% if filter_collection != blank %}{{ filter_collection.url }}{% else %}{{ routes.all_products_collection_url }}{% endif %}"
+
+
+            {%- if block.settings.preselect -%}
+              {%- liquid
+                assign is_filter_preselect = false
+                assign has_active_filters = false
+                for filter in collection.filters
+                  if filter.active_values.size > 0
+                    assign has_active_filters = true
+                    break
+                  endif
+                endfor
+
+                if has_active_filters and filter_collection != blank and filter_collection.handle == collection.handle
+                  assign is_filter_preselect = true
+                elsif has_active_filters and filter_collection == blank and collection.handle == 'all'
+                  assign is_filter_preselect = true
+                endif
+              -%}
+              {%- if is_filter_preselect -%}
+                data-preselect="true"
+              {%- endif -%}
+            {%- endif -%}
+          {% endif %}
+          {{ block.shopify_attributes }}
+      >
         <div class="quick-filter__inner {{ block.settings.text_size }} inline-flex w-full gap-1 justify-{{ section.settings.mobile_content_alignment | default: block.settings.mobile_content_alignment | default: section.settings.content_alignment }} md:justify-{{ section.settings.desktop_content_alignment | default: block.settings.desktop_content_alignment | default: section.settings.content_alignment }}">
-          {%- if level_1_options != blank -%}
-            <div class="quick-filter__select-container {% if animate %} scroll-trigger animate--fade-in{% endif %}"
+          {%- if level_1_options != blank or block.settings.select1_filter_name != blank or block.settings.select1_label != blank -%}
+            <div class="quick-filter__select-container{% if block.settings.preselect and block.type == 'quick_filter_collection' %} loading{% endif %} {% if animate %} scroll-trigger animate--fade-in{% endif %}"
               {% if animate %}
                 data-cascade
                 style="--animation-order: {{ forloop.index | default: 1 }};"
@@ -701,17 +772,20 @@
             >
               <div class="select text-left">
                 <label class="visually-hidden" for="{{ section.id }}_{{ block.id }}_1">{{ block.settings.select1_label }}</label>
-                <select id="{{ section.id }}_{{ block.id }}_1" class="js-filter-select-1 select__select {{ block.settings.text_size }}" placeholder="{{ block.settings.select1_label }}">
-                  <option>{{ block.settings.select1_label }}</option>
+                <select id="{{ section.id }}_{{ block.id }}_1" data-index="1" class="js-filter-select-1 select__select {{ block.settings.text_size }}" placeholder="{{ block.settings.select1_label }}"
+                  {% if block.type == 'quick_filter_collection' %}data-filter-label="{{ block.settings.select1_filter_name | downcase | strip }}"{% if request.design_mode %} data-filter-label-original="{{ block.settings.select1_filter_name }}"{% endif %}{% endif %}
+                >
+                  <option class="quick-filter__select-label" value="">{{ block.settings.select1_label }}</option>
                   {{ level_1_options }}
                 </select>
                 {% render 'icon-caret' %}
+                {% if block.settings.preselect and block.type == 'quick_filter_collection' %}{%- render 'loading-spinner', class: 'loading__spinner' -%}{% endif %}
               </div>
             </div>
           {%- endif -%}
 
-          {%- if level_2_options != blank -%}
-            <div class="quick-filter__select-container {% if animate %} scroll-trigger animate--fade-in{% endif %}"
+          {%- if level_2_options != blank or block.settings.select2_filter_name != blank or block.settings.select2_label != blank -%}
+            <div class="quick-filter__select-container{% if block.settings.preselect and block.type == 'quick_filter_collection' %} loading{% endif %} {% if animate %} scroll-trigger animate--fade-in{% endif %}"
               {% if animate %}
                 data-cascade
                 style="--animation-order: {{ forloop.index | default: 1 }};"
@@ -719,17 +793,20 @@
             >
               <div class="select text-left">
                 <label class="visually-hidden" for="{{ section.id }}_{{ block.id }}_2">{{ block.settings.select2_label }}</label>
-                <select id="{{ section.id }}_{{ block.id }}_2" class="js-filter-select-2 select__select {{ block.settings.text_size }}" disabled placeholder="{{ block.settings.select2_label }}">
-                  <option>{{ block.settings.select2_label }}</option>
+                <select id="{{ section.id }}_{{ block.id }}_2" data-index="2" class="js-filter-select-2 select__select {{ block.settings.text_size }}" disabled placeholder="{{ block.settings.select2_label }}"
+                 {% if block.type == 'quick_filter_collection' %}data-filter-label="{{ block.settings.select2_filter_name | downcase | strip }}"{% endif %}
+                >
+                  <option class="quick-filter__select-label" value="">{{ block.settings.select2_label }}</option>
                   {{ level_2_options }}
                 </select>
                 {% render 'icon-caret' %}
+                {% if block.settings.preselect and block.type == 'quick_filter_collection' %}{%- render 'loading-spinner', class: 'loading__spinner' -%}{% endif %}
               </div>
             </div>
           {%- endif -%}
 
-          {%- if level_3_options != blank -%}
-            <div class="quick-filter__select-container {% if animate %} scroll-trigger animate--fade-in{% endif %}"
+          {%- if level_3_options != blank or block.settings.select3_filter_name != blank or block.settings.select3_label != blank -%}
+            <div class="quick-filter__select-container{% if block.settings.preselect and block.type == 'quick_filter_collection' %} loading{% endif %} {% if animate %} scroll-trigger animate--fade-in{% endif %}"
               {% if animate %}
                 data-cascade
                 style="--animation-order: {{ forloop.index | default: 1 }};"
@@ -737,17 +814,80 @@
             >
               <div class="select text-left">
                 <label class="visually-hidden" for="{{ section.id }}_{{ block.id }}_3">{{ block.settings.select3_label }}</label>
-                <select id="{{ section.id }}_{{ block.id }}_3" class="js-filter-select-3 select__select {{ block.settings.text_size }}" disabled placeholder="{{ block.settings.select3_label }}">
-                  <option>{{ block.settings.select3_label }}</option>
+                <select id="{{ section.id }}_{{ block.id }}_3" data-index="3" class="js-filter-select-3 select__select {{ block.settings.text_size }}" disabled placeholder="{{ block.settings.select3_label }}"
+                  {% if block.type == 'quick_filter_collection' %}data-filter-label="{{ block.settings.select3_filter_name | downcase | strip }}"{% endif %}
+                >
+                  <option class="quick-filter__select-label" value="">{{ block.settings.select3_label }}</option>
                   {{ level_3_options }}
                 </select>
                 {% render 'icon-caret' %}
+                {% if block.settings.preselect and block.type == 'quick_filter_collection' %}{%- render 'loading-spinner', class: 'loading__spinner' -%}{% endif %}
+              </div>
+            </div>
+          {%- endif -%}
+
+          {%- if block.type == 'quick_filter_collection' and block.settings.select4_filter_name != blank or block.settings.select4_label != blank -%}
+            <div class="quick-filter__select-container{% if block.settings.preselect and block.type == 'quick_filter_collection' %} loading{% endif %} {% if animate %} scroll-trigger animate--fade-in{% endif %}"
+              {% if animate %}
+                data-cascade
+                style="--animation-order: {{ forloop.index | default: 1 }};"
+              {% endif %}
+            >
+              <div class="select text-left">
+                <label class="visually-hidden" for="{{ section.id }}_{{ block.id }}_4">{{ block.settings.select4_label }}</label>
+                <select id="{{ section.id }}_{{ block.id }}_4" data-index="4" class="js-filter-select-4 select__select {{ block.settings.text_size }}" disabled placeholder="{{ block.settings.select4_label }}"
+                  {% if block.type == 'quick_filter_collection' %}data-filter-label="{{ block.settings.select4_filter_name | downcase | strip }}"{% endif %}
+                >
+                  <option class="quick-filter__select-label" value="">{{ block.settings.select4_label }}</option>
+                </select>
+                {% render 'icon-caret' %}
+                {% if block.settings.preselect and block.type == 'quick_filter_collection' %}{%- render 'loading-spinner', class: 'loading__spinner' -%}{% endif %}
+              </div>
+            </div>
+          {%- endif -%}
+
+          {%- if block.settings.select5_filter_name != blank or block.settings.select5_label != blank -%}
+            <div class="quick-filter__select-container{% if block.settings.preselect and block.type == 'quick_filter_collection' %} loading{% endif %} {% if animate %} scroll-trigger animate--fade-in{% endif %}"
+              {% if animate %}
+                data-cascade
+                style="--animation-order: {{ forloop.index | default: 1 }};"
+              {% endif %}
+            >
+              <div class="select text-left">
+                <label class="visually-hidden" for="{{ section.id }}_{{ block.id }}_5">{{ block.settings.select5_label }}</label>
+                <select id="{{ section.id }}_{{ block.id }}_5" data-index="5" class="js-filter-select-5 select__select {{ block.settings.text_size }}" disabled placeholder="{{ block.settings.select5_label }}"
+                 {% if block.type == 'quick_filter_collection' %}data-filter-label="{{ block.settings.select5_filter_name | downcase | strip }}"{% endif %}
+                >
+                  <option class="quick-filter__select-label" value="">{{ block.settings.select5_label }}</option>
+                </select>
+                {% render 'icon-caret' %}
+                {% if block.settings.preselect and block.type == 'quick_filter_collection' %}{%- render 'loading-spinner', class: 'loading__spinner' -%}{% endif %}
+              </div>
+            </div>
+          {%- endif -%}
+
+          {%- if block.settings.select6_filter_name != blank or block.settings.select6_label != blank -%}
+            <div class="quick-filter__select-container{% if block.settings.preselect and block.type == 'quick_filter_collection' %} loading{% endif %} {% if animate %} scroll-trigger animate--fade-in{% endif %}"
+              {% if animate %}
+                data-cascade
+                style="--animation-order: {{ forloop.index | default: 1 }};"
+              {% endif %}
+            >
+              <div class="select text-left">
+                <label class="visually-hidden" for="{{ section.id }}_{{ block.id }}_6">{{ block.settings.select6_label }}</label>
+                <select id="{{ section.id }}_{{ block.id }}_6" data-index="6" class="js-filter-select-6 select__select {{ block.settings.text_size }}" disabled placeholder="{{ block.settings.select6_label }}"
+                  {% if block.type == 'quick_filter_collection' %}data-filter-label="{{ block.settings.select6_filter_name | downcase | strip }}"{% endif %}
+                >
+                  <option class="quick-filter__select-label" value="">{{ block.settings.select6_label }}</option>
+                </select>
+                {% render 'icon-caret' %}
+                {% if block.settings.preselect and block.type == 'quick_filter_collection' %}{%- render 'loading-spinner', class: 'loading__spinner' -%}{% endif %}
               </div>
             </div>
           {%- endif -%}
 
           <div
-              class="{% if animate %} scroll-trigger animate--fade-in{% endif %}"
+              class="{% if block.settings.button_orphan %}w-full{% endif %}{% if animate %} scroll-trigger animate--fade-in{% endif %}"
               {% if animate %}
                 data-cascade
                 style="--animation-order: {{ forloop.index | default: 1 }};"
@@ -803,10 +943,10 @@
           style="max-width: {{ block.settings.max_width }}px;"
         >
           {%- if block.settings.image != blank -%}
-            {%- assign widths = '535, 750, 1070, 1500' -%}
+            {%- assign widths = '535, 750, 1070, 1500, 2000, 2400, 3000' -%}
             {%- capture sizes -%}
-              (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px,
-              (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)
+              (min-width: {{ settings.page_width }}px) {{ block.settings.max_width | default: settings.page_width }}px,
+              calc(100vw - 50px)
             {%- endcapture -%}
             {{
             block.settings.image
@@ -872,7 +1012,34 @@
                 class="{{ section_name }}__heading text-left {% if block.settings.text == blank %}m-0{% else %}mt-0 mb-1{% endif %} inline-richtext section-content__heading color-heading{% if block.settings.heading_italic_convert != blank %} italics-convert italics-{{ block.settings.heading_italic_convert }}{% endif %}{% if block.settings.heading_size == "custom" %} text-size-custom{% else %} {{ block.settings.heading_size }}{% endif %}{% if animate %} scroll-trigger animate--fade-in{% endif %}{% if class %} {{ class }}{% endif %}"
                 style="max-width:{{ block.settings.text_max_width }}px;{% if block.settings.heading_size == "custom" %}--custom-font-size:{{ block.settings.heading_size_custom }}em;{% if block.settings.heading_line_height_custom != blank %}line-height: {{ block.settings.heading_line_height_custom }}em;{% endif %}{% endif %}"
               >
-                {%- render 'animated-text' with block.settings.heading -%}
+                {%- assign text = block.settings.heading -%}
+                {%- if text contains '[' and text contains ']' and text contains '|' -%}
+  <lazy-script src="{{ 'animated-list.js' | asset_url }}" defer="defer"></lazy-script>
+  {%- liquid
+    assign before_bracket = text | split: "[" | first
+    assign inside_bracket = text | split: "[" | last | split: "]" | first
+    assign after_bracket = text | split: "]" | last
+
+    assign inside_em = inside_bracket | split: "<em>" | last | split: "</em>" | first
+    assign inside_strong = inside_bracket | split: "<strong>" | last | split: "</strong>" | first
+
+    assign items = inside_bracket | split: "|"
+    assign first_item = items | first
+    assign remaining_items = items | slice: 1, items.size | join: "|"
+  -%}
+
+  {%- if inside_bracket contains '<em>' and inside_em contains '|' -%}
+    {{ text | replace: '++', '<br>' }}
+  {%- elsif inside_bracket contains '<strong>' and inside_strong contains '|' -%}
+    {{ text | replace: '++', '<br>' }}
+  {%- else -%}
+    {{- before_bracket | replace: '++', '<br>' -}}
+    <animated-list class="relative inline-flex" data-list="{{ remaining_items }}">{{ first_item }}</animated-list>
+    {%- unless after_bracket contains '[' -%}{{ after_bracket | replace: '++', '<br>' }}{%- endunless -%}
+  {%- endif -%}
+{%- else -%}
+  {{ text | replace: '++', '<br>' }}
+{%- endif -%}
               </{{ block.settings.heading_tag }}>
 
               {%- if block.settings.text -%}

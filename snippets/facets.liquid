@@ -22,7 +22,7 @@
 
 {{ 'component-swatch-input.css' | asset_url | stylesheet_tag }}
 {{ 'component-swatch.css' | asset_url | stylesheet_tag }}
-<lazy-script src="{{ 'show-more.js' | asset_url }}" defer="defer"></lazy-script>
+<lazy-script data-watch-element="show-more-button" src="{{ 'show-more.js' | asset_url }}" defer="defer"></lazy-script>
 
 {%- liquid
   assign sort_by = results.sort_by | default: results.default_sort_by
@@ -88,7 +88,7 @@
 
                 {%- if enable_sorting -%}
                   <div
-                      class="js-filter{% if filter_type == 'drawer' %} medium-hide large-up-hide{% endif %}"
+                      class="js-filter{% if filter_type == 'drawer' %} medium-hide large-up-hide{% endif %} js-mobile-sort"
                       id="mobile-sort"
                       data-index="mobile-sort"
                   >

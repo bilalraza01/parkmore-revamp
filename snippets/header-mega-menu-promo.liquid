@@ -5,6 +5,7 @@
   Accepts:
   - promo: {Object} The block object of the promo to render (Required)
   - columns: {Number} The number of columns that the column should occupy (Required)
+  - is_drawer: {Boolean} Whether the promos are being rendered in the drawer
 
   Usage:
   {%- render 'header-mega-menu-promo',
@@ -28,7 +29,7 @@
       promo.settings.promo_7_text == blank and promo.settings.promo_7_image == blank and promo.settings.promo_7_heading == blank and
       promo.settings.promo_8_text == blank and promo.settings.promo_8_image == blank and promo.settings.promo_8_heading == blank
 -%}
-  <div class="mega-promos mega-promos--{{ promo.type | replace: "mega_", "" }}{% if promo.settings.show_line_separator %} mega_promos--separator mega_promos--separator-{{ promo.settings.position }}{% endif %} flex flex-col" {{ promo.shopify_attributes }}>
+  <div class="mega-promos mega-promos--{{ promo.type | replace: "mega_", "" }}{% if promo.settings.show_line_separator %} mega_promos--separator mega_promos--separator-{{ promo.settings.position }}{% endif %} flex flex-col"{% unless is_drawer %} {{ promo.shopify_attributes }}{% endunless %}>
     {%- if promo.settings.promo_header_text != blank -%}
       <div class="mega-promo-header rte {{ promo.settings.promo_header_text_style }} {{ promo.settings.promo_header_text_size }}">
         {{ promo.settings.promo_header_text }}

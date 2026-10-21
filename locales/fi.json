@@ -420,7 +420,8 @@
     },
     "video": {
       "load_video": "Lataa video: {{ description }}",
-      "toggle": "Vaihda videon toistotilaa"
+      "toggle": "Vaihda videon toistotilaa",
+      "volume": "Vaimenna/poista video ääni käytöstä"
     },
     "slideshow": {
       "load_slide": "Lataa dia",

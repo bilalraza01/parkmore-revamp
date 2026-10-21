@@ -365,4 +365,8 @@ header-drawer custom-accordion:has([open]) .custom-accordion__panel {
     filter: none !important;
     transition: none !important;
   }
+
+  .header--keep-mobile-search:has(.country-selector-open) .header__search-bar {
+    z-index: 2;
+  }
 }

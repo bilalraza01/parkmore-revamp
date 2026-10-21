@@ -1,5 +1,5 @@
 /*Puts the overlay under the header*/
-body:has(.cart-notification.active) .drawer__overlay {
+body:has(.cart-notification.active) .drawer__overlay:not(.drawer__header-overlay) {
   z-index: 4;
   opacity: 1;
   visibility: visible;
@@ -129,7 +129,7 @@ body:has(.cart-notification.active) .drawer__overlay {
 }
 
 @media screen and (min-width: 750px) and (max-width: 989.98px) {
-  body:has(.cart-notification.active) .drawer__overlay {
+  body:has(.cart-notification.active) .drawer__overlay:not(.drawer__header-overlay) {
     z-index: -1;
   }
 }
@@ -157,7 +157,7 @@ body:has(.cart-notification.active) .drawer__overlay {
     inset-inline-end: 2.2rem;
   }
 
-  body:has(.cart-notification.active) .drawer__overlay {
+  body:has(.cart-notification.active) .drawer__overlay:not(.drawer__header-overlay) {
     top: var(--header-start-live);
   }
 }

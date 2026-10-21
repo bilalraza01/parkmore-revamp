@@ -63,7 +63,7 @@
       {%- endif -%}
 
       {%- if picker_type == 'swatch' -%}
-        <fieldset class="js product-form__input{% if block.settings.swatch_box %} product-form__input--pill product-form__input--box product-form__input--swatch-box{% else %} product-form__input--swatch{% endif %}" style="{% if block.settings.swatch_box %}--max-boxes:3;{% endif %}--swatch-size: {{ block.settings.swatch_size }}em">
+        <fieldset class="js product-form__input{% if block.settings.swatch_box %} product-form__input--pill{% else %} product-form__input--swatch{% endif %}" style="{% if block.settings.swatch_box %}--max-boxes:3;{% endif %}--swatch-size: {{ block.settings.swatch_size }}em">
           <legend class="variant-form__label flex{% if size_chart %} gap-2{% endif %} w-full items-center m-0 justify-between font-{{ block.settings.variant_label_text_weight }} {{ block.settings.variant_label_text_size }} {{ block.settings.variant_label_text_transform }}">
             <span>
               {% if block.settings.prefix != blank %}{{ block.settings.prefix | escape }} {{ option.name | downcase }}{% else %}{{ option.name }}{% endif %}:
@@ -73,12 +73,21 @@
             </span>
             {{ size_chart }}
           </legend>
+
+          {% if block.settings.swatch_box %}
+            <div class="product-form__input--box product-form__input--swatch-box">
+          {% endif %}
+
           {% render 'product-variant-options',
             product: product,
             option: option,
             block: block,
             picker_type: picker_type
           %}
+
+          {% if block.settings.swatch_box %}
+            </div>
+          {% endif %}
         </fieldset>
       {%- elsif picker_type == 'button' or picker_type == 'box' -%}
         {%- liquid
@@ -129,18 +138,27 @@
             endif
           endif
         -%}
-        <fieldset class="js {{ block.settings.pill_text_size }} product-form__input product-form__input--pill{% if picker_type == 'box' %} product-form__input--box{% else %} flex flex-wrap gap-1{% endif %}"
+        <fieldset class="js {{ block.settings.pill_text_size }} product-form__input product-form__input--pill{% if picker_type != 'box' %} flex flex-wrap gap-1{% endif %}"
           style="--variant-pill-font-weight: {{ block.settings.pill_text_weight }};--variant-pill-text-transform: {{ block.settings.pill_text_transform }};{% if picker_type == 'box' %}--max-boxes: {{ max_boxes }};{% endif %}">
           <legend class="variant-form__label flex{% if size_chart %} gap-2{% endif %} w-full items-center m-0 justify-between font-{{ block.settings.variant_label_text_weight }} {{ block.settings.variant_label_text_size }} {{ block.settings.variant_label_text_transform }}">
             <span class="grow basis-1/2">{% if block.settings.prefix != blank %}{{ block.settings.prefix | escape }} {{ option.name | downcase }}:{% else %}{{ option.name }}{% endif %}</span>
             {{ size_chart }}
           </legend>
+
+          {% if picker_type == 'box' %}
+            <div class="product-form__input--box">
+          {% endif %}
+
           {% render 'product-variant-options',
             product: product,
             option: option,
             block: block,
             picker_type: 'button'
           %}
+
+          {% if picker_type == 'box' %}
+            </div>
+          {% endif %}
         </fieldset>
       {%- else -%}
         <div class="product-form__input product-form__input--dropdown">

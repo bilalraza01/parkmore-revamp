@@ -420,7 +420,8 @@
     },
     "video": {
       "load_video": "Video laden: {{ description }}",
-      "toggle": "Videowiedergabestatus wechseln"
+      "toggle": "Videowiedergabestatus wechseln",
+      "volume": "Video stummschalten/ton einschalten"
     },
     "slideshow": {
       "load_slide": "Folie laden",

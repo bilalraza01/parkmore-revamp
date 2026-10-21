@@ -420,7 +420,8 @@
     },
     "video": {
       "load_video": "Last inn video: {{ description }}",
-      "toggle": "Veksle avspillingsstatus for video"
+      "toggle": "Veksle avspillingsstatus for video",
+      "volume": "Skru av/ på lyden på video"
     },
     "slideshow": {
       "load_slide": "Last inn lysbilde",

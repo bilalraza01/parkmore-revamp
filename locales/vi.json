@@ -420,7 +420,8 @@
     },
     "video": {
       "load_video": "Tải video: {{ description }}",
-      "toggle": "Chuyển đổi trạng thái phát của video"
+      "toggle": "Chuyển đổi trạng thái phát của video",
+      "volume": "Tắt/Mở tiếng video"
     },
     "slideshow": {
       "load_slide": "Tải trang chiếu",

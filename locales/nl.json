@@ -420,7 +420,8 @@
     },
     "video": {
       "load_video": "Video laden: {{ description }}",
-      "toggle": "Schakel de afspeelstatus van de video om"
+      "toggle": "Schakel de afspeelstatus van de video om",
+      "volume": "Geluid aan/uit video"
     },
     "slideshow": {
       "load_slide": "Dia laden",

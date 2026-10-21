@@ -54,11 +54,11 @@
 }
 
 .article-template__pagination--next svg {
-  transform: rotate(-90deg);
+  transform: rotate(calc(-90deg * var(--direction-multiplier)));
 }
 
 .article-template__pagination--previous svg {
-  transform: rotate(90deg);
+  transform: rotate(calc(90deg * var(--direction-multiplier)));
 }
 
 .article-template__pagination--next,
