@@ -40,18 +40,14 @@
               {%- liquid
                 assign v = p.selected_or_first_available_variant
                 assign display_name = item.name.value | default: p.title
-                capture price
-                  if p.price_varies
-                    echo 'From '
-                  endif
-                  echo p.price_min | money_without_trailing_zeros
-                endcapture
+                assign price = p.price_min | money_without_trailing_zeros
                 assign pair = item.pair.value
               -%}
               {"name": {{ display_name | json }},
                "url": {{ p.url | json }},
                "img": {% if p.featured_image %}{{ p.featured_image | image_url: width: 400 | json }}{% else %}null{% endif %},
-               "price": {{ price | strip | json }},
+               "price": {{ price | json }},
+               "from": {% if p.price_varies %}true{% else %}false{% endif %},
                "why": {{ item.why.value | json }},
                "variant": {% if p.available %}{{ v.id }}{% else %}null{% endif %},
                "item": {{ item.admin_label.value | json }}

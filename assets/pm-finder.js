@@ -39,7 +39,7 @@
         '<span class="pm-finder__rk">' + esc(recLabel) + (n > 1 ? ' <span>· ' + (k + 1) + ' of ' + n + '</span>' : '') + '</span>' +
         '<h3>' + esc(p.name) + '</h3>' + (p.why ? '<p>' + esc(p.why) + '</p>' : '') +
         (p.also ? '<p class="pm-finder__also">Pair it with <a href="' + esc(p.also.url) + '">' + esc(p.also.name) + '</a></p>' : '') +
-        '<div class="pm-finder__acts"><span class="pm-finder__rp">' + esc(p.price) + '</span>' + add +
+        '<div class="pm-finder__acts"><span class="pm-finder__rp">' + (p.from ? '<small>From</small>' : '') + esc(p.price) + '</span>' + add +
         '<a class="pm-btn pm-btn-line" href="' + esc(p.url) + '">Details</a></div></div></div>';
     }
 
