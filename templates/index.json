@@ -446,10 +446,15 @@
       "settings": {
         "photo": "shopify://shop_images/Pudge_02_39.jpg"
       }
+    },
+    "pm_finder": {
+      "type": "pm-finder",
+      "settings": {}
     }
   },
   "order": [
     "pm_hero",
+    "pm_finder",
     "pm_story",
     "pm_horses",
     "pm_dogs",
