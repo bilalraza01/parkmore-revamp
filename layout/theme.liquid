@@ -635,6 +635,8 @@
   </head>
 
   <body class="{{ request.page_type | handleize }}-template page-{{ request.path | handleize | default: 'index' }}{% if template.suffix != blank %} {{ template.suffix | handleize }}-template-suffix{% endif %} gradient button--hover-{{ settings.animations_hover_buttons }}{% if settings.drawer_inset %} side-drawers-inset{% endif %} page-is-loading page-is-not-idle" data-lazy-load-js="{{ settings.lazy_load_js }}">
+    {%- comment -%} TEMP: GitHub sync test banner, revert after checking {%- endcomment -%}
+    <div style="background:#e00;color:#fff;text-align:center;padding:12px;font:bold 18px/1.2 sans-serif;position:relative;z-index:9999;">GitHub sync test: this banner came from a git push</div>
         
     {% if template == "index" %}
 <h1 class="visually-hidden" style="display:none;">Premium Natural Horse Supplements for Better Equine Health</h1>
