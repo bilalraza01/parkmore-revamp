@@ -23,7 +23,7 @@
       <div class="pm-dogs__photos" data-pm-reveal>
         <div class="p1">
           {%- if photo_1 != blank -%}
-            {{ photo_1 | image_url: width: 1200 | image_tag: widths: '400, 600, 900, 1200', sizes: '(min-width: 901px) 40vw, 74vw', loading: 'lazy', alt: ss.photo_1_alt }}
+            {{ photo_1 | image_url: width: 1200 | image_tag: widths: '400, 600, 900, 1200', sizes: '(min-width: 901px) 40vw, 74vw', loading: 'lazy', alt: ss.photo_1_alt, style: ss.photo_1_position }}
           {%- else -%}
             <div class="pm-img-fallback">[{{ ss.photo_1_alt | default: 'Large dog photo' | escape }}: choose an image]</div>
           {%- endif -%}
@@ -105,6 +105,7 @@
     { "type": "image_picker", "id": "photo_1", "label": "Large arch photo" },
     { "type": "article", "id": "photo_1_article", "label": "Or use a blog post’s image" },
     { "type": "text", "id": "photo_1_alt", "label": "Large photo description", "default": "Vickie Weber’s two Great Danes" },
+    { "type": "text", "id": "photo_1_position", "label": "Large photo focal point (CSS)", "default": "object-position:50% 50%" },
     { "type": "image_picker", "id": "photo_2", "label": "Small photo" },
     { "type": "article", "id": "photo_2_article", "label": "Or use a blog post’s image" },
     { "type": "text", "id": "photo_2_alt", "label": "Small photo description", "default": "Fred, Fleur’s dog" },

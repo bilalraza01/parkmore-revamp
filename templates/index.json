@@ -220,7 +220,10 @@
       "settings": {
         "photo_1_article": "news/two-great-danes-one-parkmore-story",
         "photo_2": "shopify://shop_images/FredInField.jpg",
-        "cst_link": "/blogs/news/parkmore-supplements-partners-with-canine-support-teams"
+        "cst_link": "/blogs/news/parkmore-supplements-partners-with-canine-support-teams",
+        "photo_1": "shopify://shop_images/IMG_20260820_180433.heic",
+        "photo_1_alt": "A basset hound in a hot dog costume and sunglasses",
+        "photo_1_position": "object-position:68% 50%"
       }
     },
     "pm_reviews": {
