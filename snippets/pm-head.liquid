@@ -1,0 +1,8 @@
+{%- comment -%}
+  Parkmore head assets. Rendered once from layout/theme.liquid, right after Ignite's base.css,
+  so pm-base.css can override Ignite's variables.
+{%- endcomment -%}
+{{ 'pm-dmsans-400.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+{{ 'pm-lora-400.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+{{ 'pm-base.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'pm-base.js' | asset_url }}" defer="defer"></script>
