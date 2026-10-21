@@ -1,0 +1,67 @@
+{%- comment -%}
+  Parkmore reviews marquee (Mockup 3, section #proof). Two rows scrolling in opposite directions,
+  paused on hover. Each row is rendered twice (second copy hidden from screen readers) for a seamless loop.
+{%- endcomment -%}
+{{ 'pm-reviews.css' | asset_url | stylesheet_tag }}
+{%- assign ss = section.settings -%}
+
+{%- capture row_1 -%}
+  {%- for block in section.blocks -%}
+    {%- if block.settings.row == '1' -%}{%- render 'pm-review-card', block: block -%}{%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- capture row_2 -%}
+  {%- for block in section.blocks -%}
+    {%- if block.settings.row == '2' -%}{%- render 'pm-review-card', block: block -%}{%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+
+<section class="pm pm-section pm-proof" id="{{ ss.anchor_id | default: 'proof' | handleize }}" aria-label="{{ ss.aria_label | escape }}">
+  <div class="pm-wrap pm-proof__head" data-pm-reveal>
+    {%- render 'pm-heading', chap_num: ss.chap_num, chap_label: ss.chap_label, line: ss.heading, em: ss.heading_emphasis, em_break: false -%}
+    {%- if ss.score != blank -%}
+      <div class="pm-proof__score"><b>{{ ss.score | escape }}</b><span><span class="pm-rstars" style="--r:{{ ss.score_percent }}%" role="img" aria-label="Rated {{ ss.score | escape }} out of 5"></span><br>{{ ss.count_text | escape }}</span></div>
+    {%- endif -%}
+  </div>
+  {%- if row_1 != blank -%}
+    <div class="pm-marquee"><div class="pm-mrow">{{ row_1 }}</div><div class="pm-mrow" aria-hidden="true">{{ row_1 }}</div></div>
+  {%- endif -%}
+  {%- if row_2 != blank -%}
+    <div class="pm-marquee pm-marquee--rev"><div class="pm-mrow">{{ row_2 }}</div><div class="pm-mrow" aria-hidden="true">{{ row_2 }}</div></div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "PM reviews marquee",
+  "tag": "div",
+  "class": "pm-section-reviews",
+  "max_blocks": 16,
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor id", "default": "proof" },
+    { "type": "text", "id": "aria_label", "label": "Accessible label", "default": "Reviews" },
+    { "type": "text", "id": "chap_num", "label": "Chapter number", "default": "05" },
+    { "type": "text", "id": "chap_label", "label": "Chapter label", "default": "The proof" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Loved in barns" },
+    { "type": "text", "id": "heading_emphasis", "label": "Heading gold ending", "default": "and on couches." },
+    { "type": "text", "id": "score", "label": "Average rating", "default": "4.9" },
+    { "type": "range", "id": "score_percent", "label": "Stars filled (%)", "min": 0, "max": 100, "step": 1, "default": 98 },
+    { "type": "text", "id": "count_text", "label": "Review count text", "default": "80+ verified reviews" }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "select", "id": "row", "label": "Row", "default": "1", "options": [ { "value": "1", "label": "Top (scrolls left)" }, { "value": "2", "label": "Bottom (scrolls right)" } ] },
+        { "type": "select", "id": "animal", "label": "Tag", "default": "horse", "options": [ { "value": "horse", "label": "Horse" }, { "value": "dog", "label": "Dog" } ] },
+        { "type": "checkbox", "id": "stars", "label": "Show five stars", "default": true, "info": "Turn off for stories that are not star reviews." },
+        { "type": "textarea", "id": "quote", "label": "Quote" },
+        { "type": "text", "id": "name", "label": "Name" },
+        { "type": "text", "id": "detail", "label": "Detail", "info": "e.g. GLF Immune Support, or Horse trainer" }
+      ]
+    }
+  ],
+  "presets": [ { "name": "PM reviews marquee" } ]
+}
+{% endschema %}

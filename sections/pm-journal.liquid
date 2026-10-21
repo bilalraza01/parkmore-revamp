@@ -1,0 +1,90 @@
+{%- comment -%}
+  Parkmore Journal (Mockup 3, section #journal). Three hand-picked blog posts with a tag pill,
+  a meta line (date by default) and "Read the story".
+{%- endcomment -%}
+{%- assign ss = section.settings -%}
+
+<section class="pm pm-section pm-journal" id="{{ ss.anchor_id | default: 'journal' | handleize }}" aria-label="{{ ss.aria_label | escape }}">
+  <div class="pm-wrap">
+    <div class="pm-shop-head">
+      <div data-pm-reveal>
+        {%- render 'pm-heading', chap_num: ss.chap_num, chap_label: ss.chap_label, line: ss.heading, em: ss.heading_emphasis, em_break: false -%}
+      </div>
+      {%- if ss.button_label != blank -%}
+        <a class="pm-btn pm-btn-line" data-pm-reveal="2" href="{{ ss.button_link | default: '/blogs/news' }}">{{ ss.button_label | escape }} <span class="pm-ar" aria-hidden="true">&rarr;</span></a>
+      {%- endif -%}
+    </div>
+    <div class="pm-posts">
+      {%- for block in section.blocks -%}
+        {%- assign a = block.settings.article -%}
+        {%- if a != blank -%}
+          <a class="pm-post" data-pm-reveal="{{ forloop.index }}" href="{{ a.url }}" {{ block.shopify_attributes }}>
+            <span class="pm-post__img">
+              {%- if block.settings.tag != blank -%}<span class="pm-post__tag">{{ block.settings.tag | escape }}</span>{%- endif -%}
+              {%- if a.image != blank -%}
+                {{ a.image | image_url: width: 900 | image_tag: widths: '300, 500, 700, 900', sizes: '(min-width: 1101px) 370px, (min-width: 901px) 31vw, (min-width: 561px) 45vw, 90vw', loading: 'lazy', alt: a.image.alt | default: a.title }}
+              {%- else -%}
+                <span class="pm-img-fallback">[{{ a.title | escape }}]</span>
+              {%- endif -%}
+            </span>
+            {%- assign meta = block.settings.meta -%}
+            {%- if meta == blank -%}{%- assign meta = a.published_at | date: '%b %-d, %Y' -%}{%- endif -%}
+            <div class="pm-post__meta">{{ meta | escape }}</div>
+            <h3>{{ block.settings.title | default: a.title | escape }}</h3>
+            <span class="pm-post__rm">{{ ss.read_more | escape }} <span aria-hidden="true">&rarr;</span></span>
+          </a>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% style %}
+  .pm-posts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+  .pm-post{display:block}
+  .pm-post__img{display:block;aspect-ratio:4/3;overflow:hidden;border-radius:20px;background:var(--sand);margin-bottom:16px;position:relative}
+  .pm-post__img img,.pm-post__img .pm-img-fallback{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+  .pm-post:hover .pm-post__img img{transform:scale(1.05)}
+  .pm-post__tag{position:absolute;left:14px;top:14px;z-index:1;font-size:11.5px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;background:var(--ivory);padding:5px 10px;border-radius:999px}
+  .pm-post__meta{font-size:13px;color:var(--stone);margin-bottom:6px}
+  .pm .pm-post h3{font-family:var(--serif);font-weight:400;font-size:24px;line-height:1.2;margin-bottom:10px;transition:color .3s ease}
+  .pm-post:hover h3{color:var(--gold-text)}
+  .pm-post__rm{font-weight:700;font-size:14.5px;display:inline-flex;gap:8px}
+  .pm-post__rm span{transition:transform .3s ease}
+  .pm-post:hover .pm-post__rm span{transform:translateX(4px)}
+  @media (max-width:900px){.pm-posts{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+  @media (max-width:560px){.pm-posts{grid-template-columns:minmax(0,1fr)}}
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "PM journal",
+  "tag": "div",
+  "class": "pm-section-journal",
+  "max_blocks": 3,
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor id", "default": "journal" },
+    { "type": "text", "id": "aria_label", "label": "Accessible label", "default": "The Parkmore Journal" },
+    { "type": "text", "id": "chap_num", "label": "Chapter number", "default": "08" },
+    { "type": "text", "id": "chap_label", "label": "Chapter label", "default": "The Parkmore Journal" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Stories from" },
+    { "type": "text", "id": "heading_emphasis", "label": "Heading gold ending", "default": "the barn." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "All posts" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "text", "id": "read_more", "label": "Read more label", "default": "Read the story" }
+  ],
+  "blocks": [
+    {
+      "type": "post",
+      "name": "Post",
+      "settings": [
+        { "type": "article", "id": "article", "label": "Blog post" },
+        { "type": "text", "id": "tag", "label": "Tag pill", "info": "e.g. Dogs, Horses, Our story" },
+        { "type": "text", "id": "meta", "label": "Meta line", "info": "Leave blank to show the post date." },
+        { "type": "text", "id": "title", "label": "Title override" }
+      ]
+    }
+  ],
+  "presets": [ { "name": "PM journal", "blocks": [ { "type": "post" }, { "type": "post" }, { "type": "post" } ] } ]
+}
+{% endschema %}

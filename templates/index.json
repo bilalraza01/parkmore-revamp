@@ -9,94 +9,6 @@
  */
 {
   "sections": {
-    "icons_with_text_A8P3h4": {
-      "type": "icons-with-text",
-      "blocks": {
-        "icon_with_text_Qi374n": {
-          "type": "icon_with_text",
-          "settings": {
-            "icon": "shield_checkmark",
-            "icon_container": "none",
-            "icon_color": "",
-            "icon_background_color": "#ededed",
-            "background_gradient": "",
-            "image_width": 40,
-            "title": "<strong>WELL TRUSTED</strong>",
-            "text": "Over 100k customers",
-            "card_link": ""
-          }
-        },
-        "icon_with_text_PtjAX6": {
-          "type": "icon_with_text",
-          "settings": {
-            "icon": "truck",
-            "icon_container": "none",
-            "icon_color": "",
-            "icon_background_color": "#ededed",
-            "background_gradient": "",
-            "image_width": 40,
-            "title": "<strong>SUPER FAST</strong>",
-            "text": "With Express delivery",
-            "card_link": ""
-          }
-        },
-        "icon_with_text_BPQ4eh": {
-          "type": "icon_with_text",
-          "settings": {
-            "icon": "chat_bubbles",
-            "icon_container": "none",
-            "icon_color": "",
-            "icon_background_color": "#ededed",
-            "background_gradient": "",
-            "image_width": 40,
-            "title": "<strong>EXPERT HELP</strong>",
-            "text": "Seven days a week",
-            "card_link": ""
-          }
-        },
-        "icon_with_text_VMaqgr": {
-          "type": "icon_with_text",
-          "settings": {
-            "icon": "price_tags",
-            "icon_container": "none",
-            "icon_color": "",
-            "icon_background_color": "#ededed",
-            "background_gradient": "",
-            "image_width": 40,
-            "title": "<strong>BEST PRICES</strong>",
-            "text": "Unbeatable value",
-            "card_link": ""
-          }
-        }
-      },
-      "block_order": [
-        "icon_with_text_Qi374n",
-        "icon_with_text_PtjAX6",
-        "icon_with_text_BPQ4eh",
-        "icon_with_text_VMaqgr"
-      ],
-      "disabled": true,
-      "settings": {
-        "placement": "beside",
-        "content_vertical_alignment": "items-start",
-        "column_alignment": "left",
-        "vertical_padding": 1,
-        "icon_size": 2.8,
-        "heading_size": "t6",
-        "text_size": "t6",
-        "mobile_layout": "carousel",
-        "columns_mobile": "2",
-        "color_scheme": "scheme-1",
-        "line_separator": "border-bottom",
-        "visibility": "",
-        "hide_when_empty": false,
-        "show_at_specific_time_of_day": false,
-        "show_time_morning": true,
-        "show_time_afternoon": true,
-        "show_time_evening": true,
-        "show_time_night": true
-      }
-    },
     "rich_text_EeaxFY": {
       "type": "rich-text",
       "blocks": {
@@ -360,284 +272,6 @@
         "show_time_night": true
       }
     },
-    "featured_collection_GQEYiP": {
-      "type": "featured-collection",
-      "disabled": true,
-      "settings": {
-        "collection": "",
-        "products_to_show": 6,
-        "desktop_layout": "carousel",
-        "mobile_layout": "carousel",
-        "columns_desktop": "5",
-        "columns_mobile": "1",
-        "full_width": false,
-        "content_max_width": "s",
-        "desktop_heading_alignment": "left",
-        "mobile_heading_alignment": "left",
-        "title": "Anhidrosis Relief Kit",
-        "italic_convert": "",
-        "heading_size": "h2",
-        "text": "<p><strong>$324.00.  </strong>Subscription: $307.80. / month</p><p><strong>Products Included:</strong><br/>1 x 10lb Vitamin Mineral Supplement<br/>1 x Devil’s Own Detox<br/>1 x GLF Immune Booster<br/>1 x H.I. Oil infusion</p>",
-        "text_size": "t1",
-        "show_view_all_link": false,
-        "view_all_text": "View more",
-        "view_all_text_size": "t5",
-        "view_all_card_visibility": "",
-        "view_all_card_text": "There's plenty more",
-        "color_scheme": "scheme-1",
-        "view_all_color_scheme": "scheme-3",
-        "line_separator": "",
-        "top_padding": "pt-s15",
-        "bottom_padding": "pb-s",
-        "visibility": "",
-        "hide_when_empty": false,
-        "show_at_specific_time_of_day": false,
-        "show_time_morning": true,
-        "show_time_afternoon": true,
-        "show_time_evening": true,
-        "show_time_night": true,
-        "heading_tag": "h2"
-      }
-    },
-    "gallery_PUjdjX": {
-      "type": "gallery",
-      "blocks": {
-        "gallery_item_trPCNX": {
-          "type": "gallery_item",
-          "settings": {
-            "tall": true,
-            "wide": true,
-            "column_alignment": "left",
-            "text_vertical_alignment": "justify-end",
-            "content_max_width": "l",
-            "image": "shopify://shop_images/EQ9Collection.jpg",
-            "image_overlay_opacity": 46,
-            "icon": "",
-            "icon_container": "none",
-            "icon_size": 3.4,
-            "icon_color": "",
-            "icon_background_color": "#ededed",
-            "background_gradient": "",
-            "title": "Anhidrosis Bundle",
-            "heading_size": "h3",
-            "heading_size_custom": 2.4,
-            "text": "<p>Anhidrosis is a real threat to animals worldwide and can have significant negative effects on a horse's health and well-being. This collection is proven in the field to have a very positive effect on non-sweaters.</p>",
-            "text_size": "t3",
-            "button_text_size": "t5",
-            "button_label": "Give me MORE Information",
-            "button_link": "shopify://collections/anhidrosis",
-            "button_style": "secondary",
-            "button_style_show_arrow": true,
-            "button_style_show_gradient_border": false,
-            "button_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)",
-            "card_link": "shopify://collections/anhidrosis",
-            "card_color_scheme": "scheme-9"
-          }
-        },
-        "gallery_item_EA3baz": {
-          "type": "gallery_item",
-          "settings": {
-            "tall": false,
-            "wide": true,
-            "column_alignment": "left",
-            "text_vertical_alignment": "justify-end",
-            "content_max_width": "l",
-            "image": "shopify://shop_images/K9Products2_957b2ce4-377c-4eea-8c4f-18ef504c6ac0.jpg",
-            "image_overlay_opacity": 0,
-            "icon": "",
-            "icon_container": "none",
-            "icon_size": 4,
-            "icon_color": "",
-            "icon_background_color": "#ededed",
-            "background_gradient": "",
-            "title": "K9 Products",
-            "heading_size": "h4",
-            "heading_size_custom": 2.4,
-            "text": "<p>My canine companion means as much to me as my horse!</p>",
-            "text_size": "t3",
-            "button_text_size": "t3",
-            "button_label": "Me Too!",
-            "button_link": "shopify://collections/dog-immune-support",
-            "button_style": "secondary",
-            "button_style_show_arrow": true,
-            "button_style_show_gradient_border": false,
-            "button_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)",
-            "card_link": "shopify://collections/dog-immune-support",
-            "card_color_scheme": "scheme-9"
-          }
-        },
-        "gallery_item_RUQmDr": {
-          "type": "gallery_item",
-          "settings": {
-            "tall": false,
-            "wide": false,
-            "column_alignment": "left",
-            "text_vertical_alignment": "justify-end",
-            "content_max_width": "l",
-            "image": "shopify://shop_images/EQ9HoofGrowth_374858ae-9271-45d9-9dbc-38b417ac517b.jpg",
-            "image_overlay_opacity": 0,
-            "icon": "",
-            "icon_container": "none",
-            "icon_size": 3.4,
-            "icon_color": "",
-            "icon_background_color": "#ededed",
-            "background_gradient": "",
-            "title": "Hoof Bundle",
-            "heading_size": "h4",
-            "heading_size_custom": 2.4,
-            "text": "<p>Improve hoof quality and growth</p>",
-            "text_size": "t4",
-            "button_text_size": "t3",
-            "button_label": "Yes Please",
-            "button_link": "shopify://collections/horse-hoof-supplement",
-            "button_style": "secondary",
-            "button_style_show_arrow": true,
-            "button_style_show_gradient_border": false,
-            "button_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)",
-            "card_link": "shopify://collections/horse-hoof-supplement",
-            "card_color_scheme": "scheme-9"
-          }
-        },
-        "gallery_item_UT8HCJ": {
-          "type": "gallery_item",
-          "settings": {
-            "tall": true,
-            "wide": false,
-            "column_alignment": "left",
-            "text_vertical_alignment": "justify-end",
-            "content_max_width": "l",
-            "image": "shopify://shop_images/EQ9Stuff_517b84f1-0f5c-452f-b540-0c0fccb22806.jpg",
-            "image_overlay_opacity": 0,
-            "icon": "",
-            "icon_container": "none",
-            "icon_size": 3.4,
-            "icon_color": "",
-            "icon_background_color": "#ededed",
-            "background_gradient": "",
-            "title": "Calm & Focus Bundle",
-            "heading_size": "h4",
-            "heading_size_custom": 2.4,
-            "text": "<p>Release those Endorphins</p>",
-            "text_size": "t3",
-            "button_text_size": "t3",
-            "button_label": "Show Me",
-            "button_link": "shopify://collections/calming",
-            "button_style": "secondary",
-            "button_style_show_arrow": true,
-            "button_style_show_gradient_border": false,
-            "button_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)",
-            "card_link": "shopify://collections/equine-vitamin-mineral-supplements",
-            "card_color_scheme": "scheme-9"
-          }
-        },
-        "gallery_item_nBMnbk": {
-          "type": "gallery_item",
-          "settings": {
-            "tall": false,
-            "wide": false,
-            "column_alignment": "left",
-            "text_vertical_alignment": "justify-end",
-            "content_max_width": "l",
-            "image": "shopify://shop_images/Peeps.jpg",
-            "image_overlay_opacity": 0,
-            "icon": "",
-            "icon_container": "none",
-            "icon_size": 4,
-            "icon_color": "",
-            "icon_background_color": "#ededed",
-            "background_gradient": "",
-            "title": "For People",
-            "heading_size": "h3",
-            "heading_size_custom": 2.4,
-            "text": "<p>Like our product results?</p>",
-            "text_size": "t3",
-            "button_text_size": "t3",
-            "button_label": "People Product(s)",
-            "button_link": "shopify://collections/4-people",
-            "button_style": "secondary",
-            "button_style_show_arrow": true,
-            "button_style_show_gradient_border": false,
-            "button_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)",
-            "card_link": "shopify://collections/4-people",
-            "card_color_scheme": "scheme-9"
-          }
-        },
-        "gallery_item_grGyKg": {
-          "type": "gallery_item",
-          "settings": {
-            "tall": false,
-            "wide": true,
-            "column_alignment": "left",
-            "text_vertical_alignment": "justify-end",
-            "content_max_width": "l",
-            "image": "shopify://shop_images/EQ9Stuff3_844d17ce-6a96-4e1c-871c-96ed2f719064.jpg",
-            "image_overlay_opacity": 54,
-            "icon": "heart",
-            "icon_container": "none",
-            "icon_size": 4,
-            "icon_color": "",
-            "icon_background_color": "#ffffff",
-            "background_gradient": "",
-            "title": "Subscribe",
-            "heading_size": "h3",
-            "heading_size_custom": 2.4,
-            "text": "<p>Find a product or products and subscribe for 5% off.</p>",
-            "text_size": "t3",
-            "button_text_size": "t3",
-            "button_label": "",
-            "button_link": "",
-            "button_style": "primary",
-            "button_style_show_arrow": true,
-            "button_style_show_gradient_border": false,
-            "button_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)",
-            "card_link": "",
-            "card_color_scheme": "scheme-9"
-          }
-        }
-      },
-      "block_order": [
-        "gallery_item_trPCNX",
-        "gallery_item_EA3baz",
-        "gallery_item_RUQmDr",
-        "gallery_item_UT8HCJ",
-        "gallery_item_nBMnbk",
-        "gallery_item_grGyKg"
-      ],
-      "disabled": true,
-      "settings": {
-        "columns_desktop": 4,
-        "spacing_grid": 8,
-        "spacing_grid_mobile": 16,
-        "corner_rounding": "outer",
-        "content_padding": 3.4,
-        "desktop_section_height": 220,
-        "mobile_section_height": 220,
-        "mobile_layout": "carousel",
-        "full_width": false,
-        "content_max_width": "m",
-        "desktop_heading_alignment": "left",
-        "mobile_heading_alignment": "left",
-        "title": "Featured Products & Ways to Save",
-        "italic_convert": "",
-        "heading_size": "h2",
-        "text": "<p>Learn about bundled products, top sellers, and subscription savings.</p>",
-        "text_size": "t2",
-        "view_all_link": "",
-        "view_all_text": "",
-        "view_all_text_size": "t3",
-        "section_color_scheme": "",
-        "line_separator": "border-top",
-        "top_padding": "pt-s",
-        "bottom_padding": "pb-s",
-        "visibility": "",
-        "hide_when_empty": false,
-        "show_at_specific_time_of_day": false,
-        "show_time_morning": true,
-        "show_time_afternoon": true,
-        "show_time_evening": true,
-        "show_time_night": true
-      }
-    },
     "testimonials_UCrJ6F": {
       "type": "testimonials",
       "blocks": {
@@ -767,339 +401,6 @@
         "bottom_padding": "pb-s",
         "visibility": "",
         "hide_when_empty": false,
-        "show_at_specific_time_of_day": false,
-        "show_time_morning": true,
-        "show_time_afternoon": true,
-        "show_time_evening": true,
-        "show_time_night": true,
-        "heading_tag": "h2"
-      }
-    },
-    "newsletter_JjUqmd": {
-      "type": "newsletter",
-      "blocks": {
-        "heading_bJWyQN": {
-          "type": "heading",
-          "settings": {
-            "visibility": "before",
-            "heading": "Email signup",
-            "heading_italic_convert": "",
-            "heading_size": "h3",
-            "heading_size_custom": 2.4,
-            "heading_line_height_custom": 1.2,
-            "heading_tag": "h2"
-          }
-        },
-        "text_MR9izT": {
-          "type": "text",
-          "settings": {
-            "visibility": "before",
-            "text": "<p>Featuring completely customizable success messages. Check the <strong>Preview successful sign up</strong> setting to see what we mean.</p>",
-            "text_size": "t2"
-          }
-        },
-        "email_form_xrzb7Q": {
-          "type": "email_form",
-          "settings": {
-            "visibility": "before"
-          }
-        },
-        "icon_FmTbWh": {
-          "type": "icon",
-          "settings": {
-            "visibility": "success",
-            "icon": "heart",
-            "icon_container": "none",
-            "icon_size": 3,
-            "icon_color": "#dd1d1d",
-            "icon_background_color": "#ededed",
-            "background_gradient": ""
-          }
-        },
-        "heading_ebQqNg": {
-          "type": "heading",
-          "settings": {
-            "visibility": "success",
-            "heading": "Thank you!",
-            "heading_italic_convert": "",
-            "heading_size": "h3",
-            "heading_size_custom": 2.4,
-            "heading_line_height_custom": 1.2,
-            "heading_tag": "h2"
-          }
-        },
-        "text_rtKjNL": {
-          "type": "text",
-          "settings": {
-            "visibility": "success",
-            "text": "<p>You're signed up to get the all the latest deals from us.</p>",
-            "text_size": "t1"
-          }
-        },
-        "spacer_tjQycK": {
-          "type": "spacer",
-          "settings": {
-            "visibility": "success",
-            "show_line_separator": true,
-            "spacing_top": 0.2,
-            "spacing_bottom": 0.2,
-            "spacer_visibility": "both",
-            "line_color": ""
-          }
-        },
-        "text_3VCjtt": {
-          "type": "text",
-          "settings": {
-            "visibility": "success",
-            "text": "<p>In the meantime, here's a 10% off code for your first purchase.</p>",
-            "text_size": "t3"
-          }
-        },
-        "discount_z7AqD8": {
-          "type": "discount",
-          "settings": {
-            "visibility": "success",
-            "discount_code": "GET10OFF",
-            "text_size": "t3",
-            "discount_gated": false,
-            "color_peel_background": "#f57309",
-            "color_peel_foreground": "#ffffff"
-          }
-        }
-      },
-      "block_order": [
-        "heading_bJWyQN",
-        "text_MR9izT",
-        "email_form_xrzb7Q",
-        "icon_FmTbWh",
-        "heading_ebQqNg",
-        "text_rtKjNL",
-        "spacer_tjQycK",
-        "text_3VCjtt",
-        "discount_z7AqD8"
-      ],
-      "disabled": true,
-      "settings": {
-        "preview_success": false,
-        "show_image": true,
-        "image_overlay_opacity": 14,
-        "fix_image": false,
-        "image_ratio": "landscape_wide",
-        "desktop_section_height": 500,
-        "mobile_section_height": 400,
-        "full_width": false,
-        "desktop_content_position": "md:justify-center md:items-center",
-        "mobile_content_position": "justify-center items-center",
-        "content_max_width": "m",
-        "desktop_content_alignment": "center",
-        "mobile_content_alignment": "center",
-        "show_text_box": "desktop",
-        "show_text_below": true,
-        "color_scheme": "scheme-2",
-        "container_color_scheme": "scheme-1",
-        "line_separator": "",
-        "top_padding": "pt-0",
-        "bottom_padding": "pb-s",
-        "visibility": "",
-        "hide_when_empty": false,
-        "show_at_specific_time_of_day": false,
-        "show_time_morning": true,
-        "show_time_afternoon": true,
-        "show_time_evening": true,
-        "show_time_night": true
-      }
-    },
-    "product_compare_aKxFYH": {
-      "type": "product-compare",
-      "blocks": {
-        "product_switcher_fYRxg8": {
-          "type": "product_switcher",
-          "settings": {
-            "candidate_products": [],
-            "compare_label": "",
-            "line_separator": "",
-            "top_padding": "pt-0",
-            "bottom_padding": "pb-2",
-            "cell_visibility": ""
-          }
-        },
-        "product_summary_kDJNwt": {
-          "type": "product_summary",
-          "settings": {
-            "card_image_ratio": "square",
-            "card_image_cover": false,
-            "card_image_secondary_image": true,
-            "show_product_labels": true,
-            "card_image_scale": 100,
-            "card_image_replace_background": false,
-            "card_image_background": "",
-            "swatch_enabled": true,
-            "swatch_alignment": "center",
-            "swatch_size": 1.6,
-            "swatch_limit": 6,
-            "swatch_hide_singles": false,
-            "show_title": true,
-            "show_price": true,
-            "card_title_size": "t0",
-            "card_title_weight": "bold",
-            "card_price_size": "t2",
-            "card_title_transform": "none",
-            "compare_enable_quick_add": true,
-            "compare_enable_learn_more": true,
-            "line_separator": "border-bottom",
-            "top_padding": "pt-0",
-            "bottom_padding": "pb-2",
-            "cell_visibility": ""
-          }
-        },
-        "variants_text_jyaHAL": {
-          "type": "variants_text",
-          "settings": {
-            "text_style": "body",
-            "text_size": "t4",
-            "compare_label": "Available in",
-            "text_when_empty": "",
-            "line_separator": "border-bottom",
-            "top_padding": "pt-2",
-            "bottom_padding": "pb-2",
-            "cell_visibility": ""
-          }
-        },
-        "type_pgepw3": {
-          "type": "type",
-          "settings": {
-            "text_style": "body",
-            "text_size": "t4",
-            "compare_label": "Type",
-            "text_when_empty": "",
-            "line_separator": "border-bottom",
-            "top_padding": "pt-2",
-            "bottom_padding": "pb-2",
-            "cell_visibility": ""
-          }
-        },
-        "vendor_gBXfA7": {
-          "type": "vendor",
-          "settings": {
-            "text_style": "uppercase",
-            "use_link_color": false,
-            "text_size": "t7",
-            "compare_label": "Vendor",
-            "text_when_empty": "",
-            "line_separator": "border-bottom",
-            "top_padding": "pt-2",
-            "bottom_padding": "pb-2",
-            "cell_visibility": ""
-          }
-        },
-        "description_iGjNwd": {
-          "type": "description",
-          "settings": {
-            "max_words": 0,
-            "text_style": "body",
-            "text_size": "t4",
-            "compare_label": "Description",
-            "text_when_empty": "",
-            "line_separator": "border-bottom",
-            "top_padding": "pt-2",
-            "bottom_padding": "pb-2",
-            "cell_visibility": ""
-          }
-        },
-        "icon_QyWCHF": {
-          "type": "icon",
-          "settings": {
-            "icon": "price_tags",
-            "icon_container": "none",
-            "icon_size": 3.4,
-            "icon_color": "",
-            "icon_background_color": "#ededed",
-            "background_gradient": "",
-            "compare_label": "",
-            "line_separator": "",
-            "top_padding": "pt-2",
-            "bottom_padding": "pb-1",
-            "cell_visibility": ""
-          }
-        },
-        "product_price_i7LtmY": {
-          "type": "product_price",
-          "settings": {
-            "price_color": "#ea0707",
-            "text_size": "t3",
-            "compare_label": "",
-            "text_when_empty": "",
-            "line_separator": "border-bottom",
-            "top_padding": "pt-0",
-            "bottom_padding": "pb-2",
-            "cell_visibility": ""
-          }
-        },
-        "buttons_nKa3za": {
-          "type": "buttons",
-          "settings": {
-            "button_text_size": "t3",
-            "button_label_1": "Learn more",
-            "button_link_1": "",
-            "button_style_1": "link",
-            "button_style_1_show_arrow": true,
-            "button_style_1_show_gradient_border": false,
-            "button_1_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)",
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_2": "secondary",
-            "button_style_2_show_arrow": false,
-            "button_style_2_show_gradient_border": false,
-            "button_2_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)",
-            "compare_label": "",
-            "line_separator": "",
-            "top_padding": "pt-2",
-            "bottom_padding": "pb-0",
-            "cell_visibility": ""
-          }
-        }
-      },
-      "block_order": [
-        "product_switcher_fYRxg8",
-        "product_summary_kDJNwt",
-        "variants_text_jyaHAL",
-        "type_pgepw3",
-        "vendor_gBXfA7",
-        "description_iGjNwd",
-        "icon_QyWCHF",
-        "product_price_i7LtmY",
-        "buttons_nKa3za"
-      ],
-      "disabled": true,
-      "settings": {
-        "products": [],
-        "text_when_empty": "-",
-        "compare_text_alignment": "center",
-        "label_text_size": "t3",
-        "label_text_weight": "bold",
-        "label_text_transform": "uppercase",
-        "columns_desktop": "3",
-        "columns_mobile": "1",
-        "full_width": false,
-        "content_max_width": "m",
-        "desktop_heading_alignment": "center",
-        "mobile_heading_alignment": "center",
-        "title": "Super flexible Product Compare.",
-        "italic_convert": "",
-        "heading_size": "h2",
-        "text": "<p>Pick a few products to get started.</p>",
-        "text_size": "t3",
-        "show_view_all_link": false,
-        "view_all_link": "",
-        "view_all_text": "View more",
-        "view_all_text_size": "t3",
-        "color_scheme": "scheme-1",
-        "card_color_scheme": "scheme-2",
-        "card_shadow": true,
-        "line_separator": "border-bottom",
-        "top_padding": "pt-s05",
-        "bottom_padding": "pb-s",
-        "visibility": "",
         "show_at_specific_time_of_day": false,
         "show_time_morning": true,
         "show_time_afternoon": true,
@@ -1289,971 +590,6 @@
         "bottom_padding": "pb-s05",
         "hide_when_empty": false,
         "visibility": "",
-        "show_at_specific_time_of_day": false,
-        "show_time_morning": true,
-        "show_time_afternoon": true,
-        "show_time_evening": true,
-        "show_time_night": true
-      }
-    },
-    "video_banner_T6UejR": {
-      "type": "video-banner",
-      "blocks": {
-        "heading_h7MLge": {
-          "type": "heading",
-          "settings": {
-            "heading": "Video banner",
-            "heading_italic_convert": "",
-            "heading_size": "h2",
-            "heading_size_custom": 2.4,
-            "heading_line_height_custom": 1.2,
-            "heading_tag": "h2"
-          }
-        },
-        "text_wfhNMd": {
-          "type": "text",
-          "settings": {
-            "text": "<p>With text that can fade in after a few seconds into the video.</p>",
-            "text_size": "t1"
-          }
-        },
-        "spacer_B9jHiQ": {
-          "type": "spacer",
-          "settings": {
-            "show_line_separator": true,
-            "spacing_top": 2.4,
-            "spacing_bottom": 2.4,
-            "spacer_visibility": "both",
-            "line_color": ""
-          }
-        },
-        "countdown_Kkik4J": {
-          "type": "countdown",
-          "settings": {
-            "end_date": "",
-            "end_time": "",
-            "end_action": "hide",
-            "end_message": "You just missed it!",
-            "abbreviate_units": false,
-            "countdown_size": 26,
-            "separator": ":",
-            "countdown_font_weight": "bold",
-            "text_alignment": "center",
-            "countdown_container": "none",
-            "countdown_color": "",
-            "countdown_background_color": "#ededed",
-            "countdown_background_gradient": ""
-          }
-        }
-      },
-      "block_order": [
-        "heading_h7MLge",
-        "text_wfhNMd",
-        "spacer_B9jHiQ",
-        "countdown_Kkik4J"
-      ],
-      "disabled": true,
-      "settings": {
-        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-        "show_play_pause": true,
-        "reveal_content_timer": 2,
-        "playback_end": "loop",
-        "section_ratio": "landscape_wide",
-        "desktop_section_height": 500,
-        "mobile_section_height": 400,
-        "full_width": false,
-        "full_width_animate": false,
-        "desktop_content_position": "md:justify-center md:items-center",
-        "mobile_content_position": "justify-center items-center",
-        "content_max_width": "xs",
-        "desktop_content_alignment": "center",
-        "mobile_content_alignment": "center",
-        "show_text_box": "off",
-        "show_text_below": true,
-        "color_scheme": "scheme-2",
-        "container_color_scheme": "scheme-3",
-        "color_overlay": "#000000",
-        "video_overlay_opacity": 56,
-        "line_separator": "",
-        "top_padding": "pt-0",
-        "bottom_padding": "pb-s",
-        "visibility": "",
-        "hide_when_empty": false,
-        "show_at_specific_time_of_day": false,
-        "show_time_morning": true,
-        "show_time_afternoon": true,
-        "show_time_evening": true,
-        "show_time_night": true,
-        "lazy_load": true,
-        "heading_tag": "h2",
-        "description": "",
-        "video_aspect_ratio": "1.77"
-      }
-    },
-    "image_banner_jeAanh": {
-      "type": "image-banner",
-      "blocks": {
-        "heading_f4Kq4R": {
-          "type": "heading",
-          "settings": {
-            "heading": "Image banner",
-            "heading_italic_convert": "",
-            "heading_size": "h3",
-            "heading_size_custom": 2.4,
-            "heading_line_height_custom": 1.2,
-            "heading_tag": "h2"
-          }
-        },
-        "text_DFTMYN": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Like other sections, the Image banner can contain special blocks like <strong>Countdown timers</strong>, <strong>Animated stats</strong>, <strong>Discount codes</strong>, <strong>Icons</strong> and much more.</p>",
-            "text_size": "t2"
-          }
-        },
-        "buttons_PBfwG3": {
-          "type": "buttons",
-          "settings": {
-            "button_text_size": "t3",
-            "button_label_1": "Button label",
-            "button_link_1": "/",
-            "button_style_1": "secondary",
-            "button_style_1_show_arrow": true,
-            "button_style_1_show_gradient_border": false,
-            "button_1_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)",
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_2": "secondary",
-            "button_style_2_show_arrow": false,
-            "button_style_2_show_gradient_border": false,
-            "button_2_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)"
-          }
-        }
-      },
-      "block_order": [
-        "heading_f4Kq4R",
-        "text_DFTMYN",
-        "buttons_PBfwG3"
-      ],
-      "disabled": true,
-      "settings": {
-        "image_overlay_opacity": 0,
-        "image_link": "",
-        "fix_image": false,
-        "skew_images": false,
-        "stack_images_on_mobile": true,
-        "image_ratio": "landscape_wide",
-        "desktop_section_height": 500,
-        "mobile_section_height": 400,
-        "full_width": false,
-        "full_width_animate": false,
-        "desktop_content_position": "md:justify-center md:items-center",
-        "mobile_content_position": "justify-center items-center",
-        "content_max_width": "m",
-        "desktop_content_alignment": "center",
-        "mobile_content_alignment": "center",
-        "show_text_box": "desktop",
-        "show_text_below": true,
-        "color_scheme": "scheme-2",
-        "container_color_scheme": "",
-        "line_separator": "",
-        "top_padding": "pt-0",
-        "bottom_padding": "pb-s",
-        "visibility": "",
-        "hide_when_empty": false,
-        "show_at_specific_time_of_day": false,
-        "show_time_morning": true,
-        "show_time_afternoon": true,
-        "show_time_evening": true,
-        "show_time_night": true
-      }
-    },
-    "image_hotspots_JWwfEt": {
-      "type": "image-hotspots",
-      "blocks": {
-        "heading_wXCpag": {
-          "type": "heading",
-          "settings": {
-            "heading": "Image hotspots",
-            "heading_italic_convert": "",
-            "heading_size": "h4",
-            "heading_size_custom": 2.4,
-            "heading_line_height_custom": 1.2,
-            "heading_tag": "h2"
-          }
-        },
-        "text_G8pgQy": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Create engaging, interactive visuals by highlighting key areas on an image. Perfect for storytelling, product features, or showcasing details.</p>",
-            "text_size": "t2"
-          }
-        },
-        "hotspot_r67Lxy": {
-          "type": "hotspot",
-          "settings": {
-            "hotspot_horizontal_position_desktop": 18,
-            "hotspot_vertical_position_desktop": 16,
-            "hotspot_horizontal_position_override_desktop": "",
-            "hotspot_vertical_position_override_desktop": "",
-            "hotspot_position_mobile": false,
-            "hotspot_horizontal_position_mobile": 50,
-            "hotspot_vertical_position_mobile": 50,
-            "hotspot_horizontal_position_override_mobile": "",
-            "hotspot_vertical_position_override_mobile": "",
-            "popover_product": "",
-            "title": "Hotspot 1",
-            "popover_content": "<p>Hotspots can be shown on mobile, desktop or both - so you can have different content for different devices.</p>",
-            "popover_button_label": "",
-            "popover_button_link": "",
-            "popover_button_style": "link",
-            "popover_button_show_arrow": true,
-            "hotspot_style": "plus",
-            "hotspot_size_desktop": 36,
-            "hotspot_size_mobile": 24,
-            "hotspot_pulse": true,
-            "popover_width_desktop": 335,
-            "popover_title_size": "t2",
-            "popover_content_size": "t4",
-            "popover_button_text_size": "t6",
-            "popover_color_scheme": "",
-            "hotspot_background_color": "#ffffff",
-            "hotspot_foreground_color": "#222222",
-            "hotspot_opacity": 95,
-            "hotspot_visibility": ""
-          }
-        },
-        "hotspot_jyMJtT": {
-          "type": "hotspot",
-          "settings": {
-            "hotspot_horizontal_position_desktop": 79,
-            "hotspot_vertical_position_desktop": 33,
-            "hotspot_horizontal_position_override_desktop": "",
-            "hotspot_vertical_position_override_desktop": "",
-            "hotspot_position_mobile": false,
-            "hotspot_horizontal_position_mobile": 50,
-            "hotspot_vertical_position_mobile": 50,
-            "hotspot_horizontal_position_override_mobile": "",
-            "hotspot_vertical_position_override_mobile": "",
-            "popover_product": "",
-            "title": "Hotspot 2",
-            "popover_content": "<p>Each hotspot can have a different icon, color or size.</p>",
-            "popover_button_label": "",
-            "popover_button_link": "",
-            "popover_button_style": "link",
-            "popover_button_show_arrow": true,
-            "hotspot_style": "price",
-            "hotspot_size_desktop": 60,
-            "hotspot_size_mobile": 24,
-            "hotspot_pulse": true,
-            "popover_width_desktop": 250,
-            "popover_title_size": "t2",
-            "popover_content_size": "t4",
-            "popover_button_text_size": "t6",
-            "popover_color_scheme": "",
-            "hotspot_background_color": "#ffffff",
-            "hotspot_foreground_color": "#222222",
-            "hotspot_opacity": 95,
-            "hotspot_visibility": ""
-          }
-        },
-        "hotspot_aLiQBc": {
-          "type": "hotspot",
-          "settings": {
-            "hotspot_horizontal_position_desktop": 63,
-            "hotspot_vertical_position_desktop": 65,
-            "hotspot_horizontal_position_override_desktop": "",
-            "hotspot_vertical_position_override_desktop": "",
-            "hotspot_position_mobile": false,
-            "hotspot_horizontal_position_mobile": 50,
-            "hotspot_vertical_position_mobile": 50,
-            "hotspot_horizontal_position_override_mobile": "",
-            "hotspot_vertical_position_override_mobile": "",
-            "popover_product": "",
-            "title": "Hotspot 3",
-            "popover_content": "<p>If you're showcasing products, you can quickly set this section up by selecting a specific product for each hotspot and the theme will fill in the rest.</p>",
-            "popover_button_label": "View product",
-            "popover_button_link": "",
-            "popover_button_style": "secondary",
-            "popover_button_show_arrow": true,
-            "hotspot_style": "camera",
-            "hotspot_size_desktop": 36,
-            "hotspot_size_mobile": 24,
-            "hotspot_pulse": true,
-            "popover_width_desktop": 355,
-            "popover_title_size": "t2",
-            "popover_content_size": "t4",
-            "popover_button_text_size": "t6",
-            "popover_color_scheme": "",
-            "hotspot_background_color": "#ffffff",
-            "hotspot_foreground_color": "#222222",
-            "hotspot_opacity": 95,
-            "hotspot_visibility": ""
-          }
-        }
-      },
-      "block_order": [
-        "heading_wXCpag",
-        "text_G8pgQy",
-        "hotspot_r67Lxy",
-        "hotspot_jyMJtT",
-        "hotspot_aLiQBc"
-      ],
-      "disabled": true,
-      "settings": {
-        "image_overlay_opacity": 8,
-        "skew_images": false,
-        "image_ratio": "landscape_wider",
-        "full_width": true,
-        "desktop_content_position": "md:justify-start md:items-end",
-        "content_max_width": "xs",
-        "desktop_content_alignment": "left",
-        "mobile_content_alignment": "left",
-        "show_text_box": "always",
-        "color_scheme": "",
-        "container_color_scheme": "",
-        "line_separator": "",
-        "top_padding": "pt-s",
-        "bottom_padding": "pb-s",
-        "visibility": "",
-        "hide_when_empty": false,
-        "show_at_specific_time_of_day": false,
-        "show_time_morning": true,
-        "show_time_afternoon": true,
-        "show_time_evening": true,
-        "show_time_night": true
-      }
-    },
-    "stats_AhFJcf": {
-      "type": "stats",
-      "blocks": {
-        "column_standard_4BXcEh": {
-          "type": "column_standard",
-          "settings": {
-            "stat_caption": "Over",
-            "stat_number": "142k",
-            "title": "products sold",
-            "heading_size": "h4",
-            "stat_color": "#f1b726",
-            "stat_text_gradient": "linear-gradient(276deg, rgba(255, 228, 49, 1), rgba(249, 149, 32, 1) 59%)",
-            "icon": "",
-            "icon_container": "none",
-            "icon_size": 3.4,
-            "icon_color": "",
-            "icon_background_color": "#ededed",
-            "background_gradient": "",
-            "text": "",
-            "text_size": "t3",
-            "image_ratio": "adapt",
-            "image_width": 100,
-            "image_position": "below_text",
-            "button_text_size": "t3",
-            "button_label": "",
-            "button_link": "",
-            "button_style": "primary",
-            "button_style_show_arrow": false,
-            "button_style_show_gradient_border": false,
-            "button_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)",
-            "card_link": "",
-            "card_color_scheme": "scheme-2",
-            "color_scheme_bg_fix": false
-          }
-        },
-        "column_standard_Y8eq4t": {
-          "type": "column_standard",
-          "settings": {
-            "stat_caption": "With",
-            "stat_number": "95%",
-            "title": "positive reviews",
-            "heading_size": "h4",
-            "stat_color": "#e937d6",
-            "stat_text_gradient": "linear-gradient(238deg, rgba(249, 119, 255, 1) 8%, rgba(186, 54, 255, 1) 69%)",
-            "icon": "",
-            "icon_container": "none",
-            "icon_size": 3.4,
-            "icon_color": "",
-            "icon_background_color": "#ededed",
-            "background_gradient": "",
-            "text": "",
-            "text_size": "t3",
-            "image_ratio": "adapt",
-            "image_width": 100,
-            "image_position": "below_text",
-            "button_text_size": "t3",
-            "button_label": "",
-            "button_link": "",
-            "button_style": "primary",
-            "button_style_show_arrow": false,
-            "button_style_show_gradient_border": false,
-            "button_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)",
-            "card_link": "",
-            "card_color_scheme": "scheme-2",
-            "color_scheme_bg_fix": false
-          }
-        },
-        "column_standard_yVfiA3": {
-          "type": "column_standard",
-          "settings": {
-            "stat_caption": "Selling in",
-            "stat_number": "12",
-            "title": "territories",
-            "heading_size": "h4",
-            "stat_color": "#00ffff",
-            "stat_text_gradient": "linear-gradient(106deg, rgba(87, 247, 255, 1) 6%, rgba(33, 249, 239, 1) 68%)",
-            "icon": "",
-            "icon_container": "none",
-            "icon_size": 3.4,
-            "icon_color": "",
-            "icon_background_color": "#ededed",
-            "background_gradient": "",
-            "text": "",
-            "text_size": "t3",
-            "image_ratio": "adapt",
-            "image_width": 100,
-            "image_position": "below_text",
-            "button_text_size": "t3",
-            "button_label": "",
-            "button_link": "",
-            "button_style": "primary",
-            "button_style_show_arrow": false,
-            "button_style_show_gradient_border": false,
-            "button_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)",
-            "card_link": "",
-            "card_color_scheme": "scheme-2",
-            "color_scheme_bg_fix": false
-          }
-        }
-      },
-      "block_order": [
-        "column_standard_4BXcEh",
-        "column_standard_Y8eq4t",
-        "column_standard_yVfiA3"
-      ],
-      "disabled": true,
-      "settings": {
-        "stat_animate": true,
-        "stat_caption_style": "caption-with-letter-spacing",
-        "stat_style": "text-body",
-        "heading_style": "text-body",
-        "stat_size": "custom",
-        "stat_size_custom": 5,
-        "desktop_section_height": 210,
-        "mobile_section_height": 0,
-        "column_alignment": "center",
-        "text_vertical_alignment": "justify-center",
-        "spacing_grid": 28,
-        "content_padding": 2,
-        "columns_desktop": 3,
-        "columns_desktop_scale": true,
-        "full_width_section": true,
-        "image_overlay_opacity": 0,
-        "content_max_width": "m",
-        "desktop_heading_alignment": "center",
-        "mobile_heading_alignment": "center",
-        "title": "Animated stats",
-        "italic_convert": "",
-        "heading_size": "h2",
-        "text": "<p>For building trust and providing reassurance.</p>",
-        "text_size": "t1",
-        "view_all_link": "",
-        "view_all_text": "",
-        "view_all_text_size": "t3",
-        "color_scheme": "scheme-2",
-        "card_shadow": false,
-        "line_separator": "border-top border-bottom",
-        "top_padding": "pt-s",
-        "bottom_padding": "pb-s",
-        "visibility": "",
-        "hide_when_empty": false,
-        "show_at_specific_time_of_day": false,
-        "show_time_morning": true,
-        "show_time_afternoon": true,
-        "show_time_evening": true,
-        "show_time_night": true,
-        "heading_tag": "h2"
-      }
-    },
-    "featured_blog_8M4F9h": {
-      "type": "featured-blog",
-      "disabled": true,
-      "settings": {
-        "blog": "",
-        "posts_to_show": 8,
-        "show_image": true,
-        "show_date": true,
-        "show_author": false,
-        "show_reading_estimate": true,
-        "show_first_tag": true,
-        "excerpt_mode": "short",
-        "blog_card_featured": "",
-        "featured_excerpt_mode": "short",
-        "desktop_layout": "carousel",
-        "mobile_layout": "carousel",
-        "columns_desktop": "4",
-        "full_width": false,
-        "content_max_width": "xs",
-        "desktop_heading_alignment": "left",
-        "mobile_heading_alignment": "left",
-        "title": "Blog",
-        "italic_convert": "",
-        "heading_size": "h2",
-        "text": "<p>Insightful articles, get tips and read the latest news related to our industry.</p>",
-        "text_size": "t1",
-        "show_view_all_link": true,
-        "view_all_text": "View more",
-        "view_all_text_size": "t3",
-        "view_all_card_visibility": "",
-        "view_all_card_text": "Keep reading",
-        "color_scheme": "",
-        "view_all_color_scheme": "",
-        "line_separator": "border-top",
-        "top_padding": "pt-s",
-        "bottom_padding": "pb-s",
-        "visibility": "",
-        "hide_when_empty": false,
-        "show_at_specific_time_of_day": false,
-        "show_time_morning": true,
-        "show_time_afternoon": true,
-        "show_time_evening": true,
-        "show_time_night": true,
-        "heading_tag": "h2"
-      }
-    },
-    "image_banner_xVnDAJ": {
-      "type": "image-banner",
-      "blocks": {
-        "heading_U3nTdn": {
-          "type": "heading",
-          "settings": {
-            "heading": "Image banner",
-            "heading_italic_convert": "",
-            "heading_size": "h3",
-            "heading_size_custom": 2.4,
-            "heading_line_height_custom": 1.2,
-            "heading_tag": "h2"
-          }
-        },
-        "text_zmMcrX": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
-            "text_size": "t3"
-          }
-        },
-        "spacer_jGEFpM": {
-          "type": "spacer",
-          "settings": {
-            "show_line_separator": true,
-            "spacing_top": 2.4,
-            "spacing_bottom": 2.4,
-            "spacer_visibility": "both",
-            "line_color": ""
-          }
-        },
-        "stat_czzjJA": {
-          "type": "stat",
-          "settings": {
-            "stat_caption": "Over",
-            "stat_number": "123k",
-            "stat_subheading": "<p>products sold</p>",
-            "stat_animate": true,
-            "stat_caption_style": "caption-with-letter-spacing",
-            "stat_style": "text-body",
-            "stat_size": "h0",
-            "stat_size_custom": 2.4,
-            "stat_color": "",
-            "stat_text_gradient": ""
-          }
-        }
-      },
-      "block_order": [
-        "heading_U3nTdn",
-        "text_zmMcrX",
-        "spacer_jGEFpM",
-        "stat_czzjJA"
-      ],
-      "disabled": true,
-      "settings": {
-        "image_overlay_opacity": 0,
-        "image_link": "",
-        "fix_image": false,
-        "skew_images": true,
-        "stack_images_on_mobile": true,
-        "image_ratio": "landscape_wide",
-        "desktop_section_height": 500,
-        "mobile_section_height": 400,
-        "full_width": true,
-        "full_width_animate": true,
-        "desktop_content_position": "md:justify-center md:items-center",
-        "mobile_content_position": "justify-center items-center",
-        "content_max_width": "s",
-        "desktop_content_alignment": "center",
-        "mobile_content_alignment": "center",
-        "show_text_box": "desktop",
-        "show_text_below": true,
-        "color_scheme": "",
-        "container_color_scheme": "",
-        "line_separator": "",
-        "top_padding": "pt-s05",
-        "bottom_padding": "pb-s",
-        "visibility": "",
-        "hide_when_empty": false,
-        "show_at_specific_time_of_day": false,
-        "show_time_morning": true,
-        "show_time_afternoon": true,
-        "show_time_evening": true,
-        "show_time_night": true
-      }
-    },
-    "image_with_collapsible_content_4CbFNG": {
-      "type": "image-with-collapsible-content",
-      "blocks": {
-        "collapsible_row_XyMXTq": {
-          "type": "collapsible_row",
-          "settings": {
-            "heading": "First image",
-            "icon": "shirt2",
-            "image_width": 20,
-            "row_heading_tag": "h3",
-            "row_content": "<p>This section can be great to showcase products, individual product features, collections, promotions and just about anything else. If it's set to open one row at a time, consider keeping the content in each row about the same length.</p>",
-            "page": "",
-            "button_text_size": "t3",
-            "button_label_1": "",
-            "button_link_1": "/",
-            "button_style_1": "primary",
-            "button_style_1_show_arrow": false,
-            "button_style_1_show_gradient_border": false,
-            "button_1_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)"
-          }
-        },
-        "collapsible_row_bFqqpU": {
-          "type": "collapsible_row",
-          "settings": {
-            "heading": "Second image",
-            "icon": "washing",
-            "image_width": 20,
-            "row_heading_tag": "h3",
-            "row_content": "<p>This section can be great to showcase products, individual product features, collections, promotions and just about anything else. If it's set to open one row at a time, consider keeping the content in each row about the same length.</p>",
-            "page": "",
-            "button_text_size": "t3",
-            "button_label_1": "",
-            "button_link_1": "/",
-            "button_style_1": "primary",
-            "button_style_1_show_arrow": false,
-            "button_style_1_show_gradient_border": false,
-            "button_1_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)"
-          }
-        },
-        "collapsible_row_ARzqkA": {
-          "type": "collapsible_row",
-          "settings": {
-            "heading": "Third image",
-            "icon": "pants",
-            "image_width": 20,
-            "row_heading_tag": "h3",
-            "row_content": "<p>This section can be great to showcase products, individual product features, collections, promotions and just about anything else. If it's set to open one row at a time, consider keeping the content in each row about the same length.</p>",
-            "page": "",
-            "button_text_size": "t3",
-            "button_label_1": "",
-            "button_link_1": "/",
-            "button_style_1": "primary",
-            "button_style_1_show_arrow": false,
-            "button_style_1_show_gradient_border": false,
-            "button_1_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)"
-          }
-        },
-        "collapsible_row_zt9YaE": {
-          "type": "collapsible_row",
-          "settings": {
-            "heading": "Fourth image",
-            "icon": "recycle",
-            "image_width": 20,
-            "row_heading_tag": "h3",
-            "row_content": "<p>This section can be great to showcase products, individual product features, collections, promotions and just about anything else. If it's set to open one row at a time, consider keeping the content in each row about the same length.</p>",
-            "page": "",
-            "button_text_size": "t3",
-            "button_label_1": "",
-            "button_link_1": "/",
-            "button_style_1": "primary",
-            "button_style_1_show_arrow": false,
-            "button_style_1_show_gradient_border": false,
-            "button_1_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)"
-          }
-        }
-      },
-      "block_order": [
-        "collapsible_row_XyMXTq",
-        "collapsible_row_bFqqpU",
-        "collapsible_row_ARzqkA",
-        "collapsible_row_zt9YaE"
-      ],
-      "disabled": true,
-      "settings": {
-        "show_line_separator": true,
-        "row_heading_size": "t1",
-        "row_text_size": "t3",
-        "image_overlay_opacity": 0,
-        "desktop_section_height": 500,
-        "mobile_section_height": 280,
-        "desktop_media_width": 40,
-        "layout": "text_first",
-        "content_layout": "no-overlap-separate",
-        "show_header_beside": false,
-        "content_max_width": "m",
-        "desktop_heading_alignment": "left",
-        "mobile_heading_alignment": "left",
-        "desktop_content_position": "md:justify-start md:items-end",
-        "mobile_content_position": "justify-center items-center",
-        "title": "Image with <em>collapsed</em> rows",
-        "italic_convert": "light",
-        "heading_size": "h2",
-        "text": "<p>A great way to showcase images one at a time for added impact.</p>",
-        "text_size": "t1",
-        "button_label": "",
-        "button_link": "",
-        "button_style": "link",
-        "button_text_size": "t3",
-        "button_style_show_arrow": true,
-        "button_style_show_gradient_border": false,
-        "button_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)",
-        "section_color_scheme": "",
-        "color_scheme": "",
-        "image_overlay_color_scheme": "",
-        "show_content_shadow": true,
-        "line_separator": "",
-        "top_padding": "pt-s05",
-        "bottom_padding": "pb-s",
-        "heading_tag": "h3",
-        "visibility": "",
-        "hide_when_empty": false,
-        "show_at_specific_time_of_day": false,
-        "show_time_morning": true,
-        "show_time_afternoon": true,
-        "show_time_evening": true,
-        "show_time_night": true
-      }
-    },
-    "collapsible_content_zUAt9h": {
-      "type": "collapsible-content",
-      "blocks": {
-        "collapsible_row_eaamgk": {
-          "type": "collapsible_row",
-          "settings": {
-            "row_open": true,
-            "heading": "Collapsible row",
-            "icon": "heart",
-            "image_width": 20,
-            "row_heading_tag": "h3",
-            "row_content": "<p>Add your collapsible row content here. If it's set to open one row at a time, consider keeping the content in each row about the same length.</p>",
-            "page": "",
-            "content_embed": "",
-            "button_text_size": "t3",
-            "button_label_1": "",
-            "button_link_1": "/",
-            "button_style_1": "primary",
-            "button_style_1_show_arrow": false,
-            "button_style_1_show_gradient_border": false,
-            "button_1_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)"
-          }
-        },
-        "collapsible_row_DckphP": {
-          "type": "collapsible_row",
-          "settings": {
-            "row_open": false,
-            "heading": "Collapsible row",
-            "icon": "leaf",
-            "image_width": 20,
-            "row_heading_tag": "h3",
-            "row_content": "<p>Add your collapsible row content here. If it's set to open one row at a time, consider keeping the content in each row about the same length.</p>",
-            "page": "",
-            "content_embed": "",
-            "button_text_size": "t3",
-            "button_label_1": "",
-            "button_link_1": "/",
-            "button_style_1": "primary",
-            "button_style_1_show_arrow": false,
-            "button_style_1_show_gradient_border": false,
-            "button_1_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)"
-          }
-        },
-        "collapsible_row_CXFFzd": {
-          "type": "collapsible_row",
-          "settings": {
-            "row_open": false,
-            "heading": "Collapsible row",
-            "icon": "pants",
-            "image_width": 20,
-            "row_heading_tag": "h3",
-            "row_content": "<p>Add your collapsible row content here. If it's set to open one row at a time, consider keeping the content in each row about the same length.</p>",
-            "page": "",
-            "content_embed": "",
-            "button_text_size": "t3",
-            "button_label_1": "",
-            "button_link_1": "/",
-            "button_style_1": "primary",
-            "button_style_1_show_arrow": false,
-            "button_style_1_show_gradient_border": false,
-            "button_1_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)"
-          }
-        },
-        "collapsible_row_H79iKg": {
-          "type": "collapsible_row",
-          "settings": {
-            "row_open": false,
-            "heading": "Collapsible row",
-            "icon": "recycle",
-            "image_width": 20,
-            "row_heading_tag": "h3",
-            "row_content": "<p>Add your collapsible row content here. If it's set to open one row at a time, consider keeping the content in each row about the same length.</p>",
-            "page": "",
-            "content_embed": "",
-            "button_text_size": "t3",
-            "button_label_1": "",
-            "button_link_1": "/",
-            "button_style_1": "primary",
-            "button_style_1_show_arrow": false,
-            "button_style_1_show_gradient_border": false,
-            "button_1_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)"
-          }
-        },
-        "text_aTk8RT": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Still got a question? <a href=\"#\" title=\"#\">Get in touch</a></p>",
-            "text_size": "t5"
-          }
-        }
-      },
-      "block_order": [
-        "collapsible_row_eaamgk",
-        "collapsible_row_DckphP",
-        "collapsible_row_CXFFzd",
-        "collapsible_row_H79iKg",
-        "text_aTk8RT"
-      ],
-      "disabled": true,
-      "settings": {
-        "one_row_at_a_time": true,
-        "show_line_separator": true,
-        "row_heading_size": "t2",
-        "row_text_size": "t4",
-        "show_header_beside": true,
-        "desktop_media_width": 40,
-        "layout": "media_first",
-        "show_search_box": true,
-        "content_max_width": "l",
-        "desktop_heading_alignment": "left",
-        "mobile_heading_alignment": "left",
-        "title": "Got a question?",
-        "italic_convert": "",
-        "heading_size": "h3",
-        "text": "<p>Answer common questions with the collapsible content section.</p>",
-        "text_size": "t3",
-        "button_label": "",
-        "button_link": "",
-        "button_style": "secondary",
-        "button_text_size": "t5",
-        "button_style_show_arrow": true,
-        "button_style_show_gradient_border": false,
-        "button_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)",
-        "section_color_scheme": "",
-        "color_scheme": "",
-        "show_content_shadow": true,
-        "line_separator": "",
-        "top_padding": "pt-0",
-        "bottom_padding": "pb-s",
-        "heading_tag": "h3",
-        "render_schema": false,
-        "visibility": "",
-        "hide_when_empty": false,
-        "show_at_specific_time_of_day": false,
-        "show_time_morning": true,
-        "show_time_afternoon": true,
-        "show_time_evening": true,
-        "show_time_night": true
-      }
-    },
-    "icons_with_text_ELUgNB": {
-      "type": "icons-with-text",
-      "blocks": {
-        "icon_with_text_AhRy9e": {
-          "type": "icon_with_text",
-          "settings": {
-            "icon": "shield_checkmark",
-            "icon_container": "none",
-            "icon_color": "",
-            "icon_background_color": "#ededed",
-            "background_gradient": "",
-            "image_width": 40,
-            "title": "<strong>WELL TRUSTED</strong>",
-            "text": "Over 10k customers",
-            "card_link": ""
-          }
-        },
-        "icon_with_text_WKrJVC": {
-          "type": "icon_with_text",
-          "settings": {
-            "icon": "truck",
-            "icon_container": "none",
-            "icon_color": "",
-            "icon_background_color": "#ededed",
-            "background_gradient": "",
-            "image_width": 40,
-            "title": "<strong>RELIABLE DELIVERY</strong>",
-            "text": "With UPS",
-            "card_link": ""
-          }
-        },
-        "icon_with_text_d6Bpr6": {
-          "type": "icon_with_text",
-          "settings": {
-            "icon": "chat_bubbles",
-            "icon_container": "none",
-            "icon_color": "",
-            "icon_background_color": "#ededed",
-            "background_gradient": "",
-            "image_width": 40,
-            "title": "<strong>EXPERT HELP</strong>",
-            "text": "Seven days a week",
-            "card_link": "https://wa.me/15022658345"
-          }
-        },
-        "icon_with_text_E3URNx": {
-          "type": "icon_with_text",
-          "settings": {
-            "icon": "price_tags",
-            "icon_container": "none",
-            "icon_color": "",
-            "icon_background_color": "#ededed",
-            "background_gradient": "",
-            "image_width": 40,
-            "title": "<strong>BEST PRICES</strong>",
-            "text": "Unbeatable value",
-            "card_link": ""
-          }
-        }
-      },
-      "block_order": [
-        "icon_with_text_AhRy9e",
-        "icon_with_text_WKrJVC",
-        "icon_with_text_d6Bpr6",
-        "icon_with_text_E3URNx"
-      ],
-      "disabled": true,
-      "settings": {
-        "placement": "beside",
-        "content_vertical_alignment": "items-center",
-        "column_alignment": "left",
-        "vertical_padding": 2.4,
-        "icon_size": 3.2,
-        "heading_size": "t4",
-        "text_size": "t5",
-        "mobile_layout": "carousel",
-        "columns_mobile": "2",
-        "color_scheme": "scheme-3",
-        "line_separator": "border-bottom",
-        "visibility": "",
-        "hide_when_empty": false,
         "show_at_specific_time_of_day": false,
         "show_time_morning": true,
         "show_time_afternoon": true,
@@ -2471,6 +807,225 @@
         "photo_2": "shopify://shop_images/FredInField.jpg",
         "cst_link": "/blogs/news/parkmore-supplements-partners-with-canine-support-teams"
       }
+    },
+    "pm_reviews": {
+      "type": "pm-reviews",
+      "blocks": {
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "row": "1",
+            "animal": "horse",
+            "stars": true,
+            "quote": "“Our entire barn has been on the Parkmore vitamin for over a year now. Anyone that visits the farm comments on the dapples, shiny coats and overall health of the entire herd.”",
+            "name": "Cathy",
+            "detail": "Performance and breeding barn"
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "row": "1",
+            "animal": "dog",
+            "stars": true,
+            "quote": "“After one month of my boy being on Parkmore, his shedding was down by half!”",
+            "name": "Vickie Weber",
+            "detail": "Great Dane owner"
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "row": "1",
+            "animal": "horse",
+            "stars": true,
+            "quote": "“Recently found out this horse is 31 years young. He gets immune booster periodically through the year. He is sound and happy and a good weight for an old guy.”",
+            "name": "Deanna Craychee",
+            "detail": "GLF Immune Support"
+          }
+        },
+        "review_4": {
+          "type": "review",
+          "settings": {
+            "row": "1",
+            "animal": "horse",
+            "stars": true,
+            "quote": "“Fabulous products, see results in a short time. Highly recommend.”",
+            "name": "Nea Stevens",
+            "detail": "H.I. Gut Herbs"
+          }
+        },
+        "review_5": {
+          "type": "review",
+          "settings": {
+            "row": "2",
+            "animal": "horse",
+            "stars": false,
+            "quote": "“Since making those changes, he’s brighter, less tense, and his coat is becoming glossy again. I take a whole-horse approach, and nutrition is a huge part of that.”",
+            "name": "CJ Schmenk",
+            "detail": "Horse trainer"
+          }
+        },
+        "review_6": {
+          "type": "review",
+          "settings": {
+            "row": "2",
+            "animal": "dog",
+            "stars": false,
+            "quote": "“I was very hesitant, as everything we had tried seemed to only make things worse.”",
+            "name": "Vickie Weber",
+            "detail": "Before Parkmore"
+          }
+        },
+        "review_7": {
+          "type": "review",
+          "settings": {
+            "row": "2",
+            "animal": "horse",
+            "stars": false,
+            "quote": "“These products made it so much easier for me to consistently give him that extra level of care throughout his recovery.”",
+            "name": "Erika Collins",
+            "detail": "Apollo’s owner"
+          }
+        },
+        "review_8": {
+          "type": "review",
+          "settings": {
+            "row": "2",
+            "animal": "dog",
+            "stars": false,
+            "quote": "“After eight months, my female has shown huge improvement.”",
+            "name": "Vickie Weber",
+            "detail": "Great Dane owner"
+          }
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4",
+        "review_5",
+        "review_6",
+        "review_7",
+        "review_8"
+      ],
+      "settings": {}
+    },
+    "pm_how": {
+      "type": "pm-how",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "Tell us what’s going on",
+            "text": "Use the formula finder, or text Fleur’s team about your horse or dog."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "Get a clear recommendation",
+            "text": "One formula or a simple protocol, with how and when to feed it."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "Same-day dispatch",
+            "text": "Orders placed before 12pm ET usually ship the same day."
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "title": "Never run out",
+            "text": "Set up a subscription so the next bag arrives before the last one empties."
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4"
+      ],
+      "settings": {}
+    },
+    "pm_network": {
+      "type": "pm-network",
+      "blocks": {
+        "legend_1": {
+          "type": "legend",
+          "settings": {
+            "bold": "KY",
+            "text": "Smithfield, home of Parkmore"
+          }
+        },
+        "legend_2": {
+          "type": "legend",
+          "settings": {
+            "bold": "MI",
+            "text": "Ginger Wright, Howell"
+          }
+        },
+        "legend_3": {
+          "type": "legend",
+          "settings": {
+            "bold": "FL · NC",
+            "text": "Affiliate trainers"
+          }
+        }
+      },
+      "block_order": [
+        "legend_1",
+        "legend_2",
+        "legend_3"
+      ],
+      "settings": {
+        "button_link": "/blogs/news/jennifer-ginger-wright-parkmore-affiliate-howell-mi",
+        "photo_article": "news/jennifer-ginger-wright-parkmore-affiliate-howell-mi"
+      }
+    },
+    "pm_journal": {
+      "type": "pm-journal",
+      "blocks": {
+        "post_1": {
+          "type": "post",
+          "settings": {
+            "article": "news/two-great-danes-one-parkmore-story",
+            "tag": "Dogs",
+            "meta": "Customer story",
+            "title": "Two Great Danes, One Parkmore Story"
+          }
+        },
+        "post_2": {
+          "type": "post",
+          "settings": {
+            "article": "news/how-erika-supported-apollo-through-a-difficult-hoof-recovery",
+            "tag": "Horses"
+          }
+        },
+        "post_3": {
+          "type": "post",
+          "settings": {
+            "article": "news/the-mad-scientist-behind-parkmore",
+            "tag": "Our story"
+          }
+        }
+      },
+      "block_order": [
+        "post_1",
+        "post_2",
+        "post_3"
+      ],
+      "settings": {
+        "button_link": "/blogs/news"
+      }
+    },
+    "pm_final": {
+      "type": "pm-final",
+      "settings": {}
     }
   },
   "order": [
@@ -2478,26 +1033,17 @@
     "pm_story",
     "pm_horses",
     "pm_dogs",
-    "icons_with_text_A8P3h4",
+    "pm_reviews",
+    "pm_how",
+    "pm_network",
+    "pm_journal",
+    "pm_final",
     "rich_text_EeaxFY",
     "product_list_VYxM8a",
     "collection_list_FgVky4",
     "rich_text_7ym8gL",
-    "featured_collection_GQEYiP",
-    "gallery_PUjdjX",
     "testimonials_UCrJ6F",
-    "newsletter_JjUqmd",
-    "product_compare_aKxFYH",
     "section_tabs_nQBfRX",
-    "slideshow",
-    "video_banner_T6UejR",
-    "image_banner_jeAanh",
-    "image_hotspots_JWwfEt",
-    "stats_AhFJcf",
-    "featured_blog_8M4F9h",
-    "image_banner_xVnDAJ",
-    "image_with_collapsible_content_4CbFNG",
-    "collapsible_content_zUAt9h",
-    "icons_with_text_ELUgNB"
+    "slideshow"
   ]
 }

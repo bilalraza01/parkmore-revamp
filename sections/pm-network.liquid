@@ -1,0 +1,105 @@
+{%- comment -%}
+  Parkmore "Riders, trainers & barns" (Mockup 3, section #network). Dotted US map with pins,
+  a gold line from Michigan to the affiliate photo, legend and button.
+{%- endcomment -%}
+{%- liquid
+  assign ss = section.settings
+  assign photo = ss.photo
+  if photo == blank and ss.photo_article != blank
+    assign photo = ss.photo_article.image
+  endif
+-%}
+
+<section class="pm pm-section pm-network" id="{{ ss.anchor_id | default: 'network' | handleize }}" aria-label="{{ ss.aria_label | escape }}">
+  <div class="pm-wrap pm-net">
+    <div data-pm-reveal>
+      {%- render 'pm-heading', chap_num: ss.chap_num, chap_label: ss.chap_label, line: ss.heading, em: ss.heading_emphasis, em_break: false -%}
+      {%- if ss.sub != blank -%}<p class="pm-net__sub">{{ ss.sub | escape }}</p>{%- endif -%}
+      {%- if ss.text != blank -%}<p class="pm-lead pm-net__lead">{{ ss.text | escape }}</p>{%- endif -%}
+      {%- if ss.button_label != blank -%}
+        <a class="pm-btn pm-btn-dark" href="{{ ss.button_link | default: '/blogs/news' }}">{{ ss.button_label | escape }} <span class="pm-ar" aria-hidden="true">&rarr;</span></a>
+      {%- endif -%}
+    </div>
+    <div class="pm-net__map" data-pm-reveal="2">
+      {%- render 'pm-us-map', label: ss.map_label -%}
+      <div class="pm-net__photo">
+        {%- if photo != blank -%}
+          {{ photo | image_url: width: 500 | image_tag: widths: '200, 350, 500', sizes: '(min-width: 901px) 160px, 28vw', loading: 'lazy', alt: ss.photo_alt }}
+        {%- else -%}
+          <div class="pm-img-fallback">[Affiliate photo]</div>
+        {%- endif -%}
+      </div>
+      {%- assign legend = section.blocks | where: 'type', 'legend' -%}
+      {%- if legend.size > 0 -%}
+        <div class="pm-net__legend">
+          {%- for block in legend -%}
+            <span {{ block.shopify_attributes }}><b>{{ block.settings.bold | escape }}</b> {{ block.settings.text | escape }}</span>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% style %}
+  .pm-network{background:var(--white)}
+  .pm-net{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:64px;align-items:center}
+  .pm-network h2{margin-bottom:16px}
+  .pm-net__sub{font-size:19px;font-weight:700;line-height:1.35;margin-bottom:10px}
+  .pm .pm-net__lead{font-size:17px;margin-bottom:26px}
+  .pm-net__map{position:relative;padding-top:24px;padding-right:22%}
+  .pm-map{width:100%;height:auto;color:#C7AE5A;display:block}
+  .pm-map .pin{fill:var(--charcoal)}
+  .pm-map .pin-hl{fill:var(--gold)}
+  .pm-net__photo{position:absolute;right:0;top:0;width:28%;aspect-ratio:1/1;overflow:hidden;border:4px solid var(--white);border-radius:6px;box-shadow:0 12px 26px rgba(28,29,29,.16)}
+  .pm-net__photo img,.pm-net__photo .pm-img-fallback{width:100%;height:100%;object-fit:cover;min-height:0}
+  .pm-net__legend{display:flex;gap:8px 18px;flex-wrap:wrap;font-size:13.5px;color:var(--stone);margin-top:12px}
+  .pm-net__legend b{color:var(--ink)}
+  @media (max-width:900px){.pm-net{grid-template-columns:minmax(0,1fr)}}
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "PM network map",
+  "tag": "div",
+  "class": "pm-section-network",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor id", "default": "network" },
+    { "type": "text", "id": "aria_label", "label": "Accessible label", "default": "Riders, trainers and barns" },
+    { "type": "text", "id": "chap_num", "label": "Chapter number", "default": "07" },
+    { "type": "text", "id": "chap_label", "label": "Chapter label", "default": "Our community" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Riders, trainers" },
+    { "type": "text", "id": "heading_emphasis", "label": "Heading gold ending", "default": "& barns." },
+    { "type": "text", "id": "sub", "label": "Bold line", "default": "A network of horse people who use Parkmore and share it." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Our affiliates are trainers, eventers and farm owners in Kentucky, Michigan, Florida and North Carolina. They feed Parkmore in their own barns and help owners near them get started." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Meet our affiliates" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "header", "content": "Map" },
+    { "type": "text", "id": "map_label", "label": "Map description (screen readers)", "default": "Map of the United States with Parkmore affiliates in Kentucky, Michigan, Florida and North Carolina" },
+    { "type": "image_picker", "id": "photo", "label": "Photo next to the map" },
+    { "type": "article", "id": "photo_article", "label": "Or use a blog post’s image" },
+    { "type": "text", "id": "photo_alt", "label": "Photo description", "default": "Jennifer Ginger Wright, Parkmore affiliate in Howell, Michigan" }
+  ],
+  "blocks": [
+    {
+      "type": "legend",
+      "name": "Legend item",
+      "settings": [
+        { "type": "text", "id": "bold", "label": "State" },
+        { "type": "text", "id": "text", "label": "Text" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PM network map",
+      "blocks": [
+        { "type": "legend", "settings": { "bold": "KY", "text": "Smithfield, home of Parkmore" } },
+        { "type": "legend", "settings": { "bold": "MI", "text": "Ginger Wright, Howell" } },
+        { "type": "legend", "settings": { "bold": "FL · NC", "text": "Affiliate trainers" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

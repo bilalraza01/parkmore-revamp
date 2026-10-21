@@ -1,0 +1,26 @@
+/* PM reviews marquee. Values from .context/parkmore-mockup-3.html (REVIEWS). */
+.pm-proof{overflow:hidden;background:var(--ivory)}
+.pm-proof__head{text-align:center;margin-bottom:46px}
+.pm-proof__score{display:inline-flex;align-items:center;gap:12px;margin-top:16px;font-size:16px;color:var(--stone);text-align:left}
+.pm-proof__score b{font-family:var(--serif);font-weight:400;font-size:40px;color:var(--ink)}
+.pm-marquee{display:flex;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.pm-marquee+.pm-marquee{margin-top:20px}
+.pm-mrow{display:flex;gap:20px;padding-right:20px;flex-shrink:0;animation:pm-marq 60s linear infinite}
+.pm-marquee--rev .pm-mrow{animation-direction:reverse;animation-duration:70s}
+.pm-marquee:hover .pm-mrow{animation-play-state:paused}
+@keyframes pm-marq{to{transform:translateX(-100%)}}
+.pm-rc{width:380px;flex-shrink:0;background:var(--white);border:1px solid var(--line);border-radius:20px;padding:22px 24px;display:flex;flex-direction:column}
+.pm-rc__top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;min-height:26px}
+.pm-rc__st{color:var(--gold);letter-spacing:2px}
+.pm-rc__who{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--gold-text);background:var(--sand);padding:4px 10px;border-radius:999px}
+.pm-rc__who svg{width:16px;height:16px}
+.pm-rc p{font-family:var(--serif);font-size:18px;line-height:1.45;margin-bottom:14px;flex:1}
+.pm-rc small{font-weight:700;font-size:14px}
+.pm-rc small span{font-weight:500;color:var(--stone)}
+
+@media (max-width:560px){.pm-rc{width:300px}.pm-rc p{font-size:16.5px}}
+@media (prefers-reduced-motion:reduce){
+  .pm-mrow{animation:none!important}
+  .pm-mrow[aria-hidden="true"]{display:none}
+  .pm-marquee{overflow-x:auto;-webkit-mask-image:none;mask-image:none}
+}

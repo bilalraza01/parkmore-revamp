@@ -1,0 +1,74 @@
+{%- comment -%}
+  Parkmore "How it works" (Mockup 3, section #how). Numbered steps on a dashed line.
+{%- endcomment -%}
+{%- assign ss = section.settings -%}
+
+<section class="pm pm-section pm-how" id="{{ ss.anchor_id | default: 'how' | handleize }}" aria-label="{{ ss.aria_label | escape }}">
+  <div class="pm-wrap">
+    <div class="pm-how__head" data-pm-reveal>
+      {%- render 'pm-heading', chap_num: ss.chap_num, chap_label: ss.chap_label, line: ss.heading, em: ss.heading_emphasis, em_break: false -%}
+    </div>
+    <div class="pm-steps">
+      {%- for block in section.blocks -%}
+        {%- assign reveal = forloop.index | modulo: 4 -%}{%- if reveal == 0 -%}{%- assign reveal = 4 -%}{%- endif -%}
+        <div class="pm-stp" data-pm-reveal="{{ reveal }}" {{ block.shopify_attributes }}>
+          <div class="pm-stp__n">{{ forloop.index }}</div>
+          <h3>{{ block.settings.title | escape }}</h3>
+          <p>{{ block.settings.text | escape }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% style %}
+  .pm-how{background:var(--sand)}
+  .pm-how__head{text-align:center;margin-bottom:56px}
+  .pm-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;position:relative}
+  .pm-steps::before{content:"";position:absolute;left:12%;right:12%;top:38px;border-top:2px dashed rgba(122,101,20,.35)}
+  .pm-stp{text-align:center;position:relative}
+  .pm-stp__n{width:76px;height:76px;margin:0 auto 18px;border-radius:50%;background:var(--white);border:1.5px solid var(--gold);display:grid;place-items:center;font-family:var(--serif);font-size:28px;color:var(--gold-text);box-shadow:0 10px 24px rgba(28,29,29,.08);transition:transform .4s var(--ease),background-color .4s ease,color .4s ease}
+  .pm-stp:hover .pm-stp__n{transform:translateY(-4px) scale(1.06);background:var(--charcoal);color:var(--gold-hi)}
+  .pm .pm-stp h3{font-family:var(--sans);font-size:19px;font-weight:700;letter-spacing:0;margin-bottom:6px}
+  .pm-stp p{font-size:15px;color:#45463F;max-width:250px;margin:0 auto}
+  @media (max-width:900px){.pm-steps{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:36px}.pm-steps::before{display:none}}
+  @media (max-width:560px){.pm-steps{grid-template-columns:minmax(0,1fr)}}
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "PM how it works",
+  "tag": "div",
+  "class": "pm-section-how",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor id", "default": "how" },
+    { "type": "text", "id": "aria_label", "label": "Accessible label", "default": "How it works" },
+    { "type": "text", "id": "chap_num", "label": "Chapter number", "default": "06" },
+    { "type": "text", "id": "chap_label", "label": "Chapter label", "default": "How it works" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "From question to" },
+    { "type": "text", "id": "heading_emphasis", "label": "Heading gold ending", "default": "feed bucket." }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "text", "label": "Text" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PM how it works",
+      "blocks": [
+        { "type": "step", "settings": { "title": "Tell us what’s going on", "text": "Use the formula finder, or text Fleur’s team about your horse or dog." } },
+        { "type": "step", "settings": { "title": "Get a clear recommendation", "text": "One formula or a simple protocol, with how and when to feed it." } },
+        { "type": "step", "settings": { "title": "Same-day dispatch", "text": "Orders placed before 12pm ET usually ship the same day." } },
+        { "type": "step", "settings": { "title": "Never run out", "text": "Set up a subscription so the next bag arrives before the last one empties." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

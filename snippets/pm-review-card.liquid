@@ -1,0 +1,10 @@
+{%- comment -%} One review card for pm-reviews. Param: block {%- endcomment -%}
+{%- assign bs = block.settings -%}
+<article class="pm-rc" {{ block.shopify_attributes }}>
+  <div class="pm-rc__top">
+    <span class="pm-rc__st"{% if bs.stars %} role="img" aria-label="5 out of 5 stars"{% else %} aria-hidden="true"{% endif %}>{%- if bs.stars -%}★★★★★{%- endif -%}</span>
+    <span class="pm-rc__who">{%- render 'pm-icon', icon: bs.animal, weight: 'bold' -%}{{ bs.animal | capitalize }}</span>
+  </div>
+  <p>{{ bs.quote | escape }}</p>
+  <small>{{ bs.name | escape }}{%- if bs.detail != blank -%} <span>· {{ bs.detail | escape }}</span>{%- endif -%}</small>
+</article>
