@@ -1,0 +1,246 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "settings": {
+        "spacing": 0,
+        "color_scheme": "scheme-2",
+        "line_separator": "",
+        "visibility": ""
+      }
+    },
+    "header": {
+      "type": "page-header",
+      "settings": {
+        "page_width": "narrow",
+        "content_max_width": "l",
+        "desktop_heading_alignment": "center",
+        "mobile_heading_alignment": "center",
+        "custom_page_header": true,
+        "title": "The Parkmore Journal",
+        "italic_convert": "",
+        "heading_size": "h2",
+        "custom_page_text": true,
+        "text": "<p>Stories, practical insight, customer experiences, and life behind Parkmore—for people who care deeply about their horses and dogs.</p>",
+        "text_size": "t3",
+        "show_view_all_link": false,
+        "view_all_link": "",
+        "view_all_text": "Learn more",
+        "view_all_text_size": "t3",
+        "color_scheme": "scheme-1",
+        "enable_top_padding": false,
+        "enable_bottom_padding": false,
+        "heading_tag": "h1"
+      }
+    },
+    "rich_text_aD7fRK": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_rD6kCf": {
+          "type": "heading",
+          "settings": {
+            "heading": "Browse by Category",
+            "heading_italic_convert": "",
+            "heading_size": "h5",
+            "heading_size_custom": 2.4,
+            "heading_line_height_custom": 1.2,
+            "heading_tag": "h3"
+          }
+        },
+        "text_KCKiJX": {
+          "type": "text",
+          "settings": {
+            "text": "<p><a href=\"/blogs/news\" title=\"News\"><strong>ALL</strong></a>  |  <a href=\"/blogs/news/tagged/equine-health-nutrition\" title=\"/blogs/news/tagged/equine-health-nutrition\"><strong>Equine Health & Nutrition</strong></a><strong>  |  </strong><a href=\"/blogs/news/tagged/canine-health-nutrition\" title=\"/blogs/news/tagged/canine-health-nutrition\"><strong>Canine Health & Nutrition</strong></a><strong>  |  </strong><a href=\"/blogs/news/tagged/customer-stories\" title=\"/blogs/news/tagged/customer-stories\"><strong>Customer Stories</strong></a><strong>  |  </strong><a href=\"/blogs/news/tagged/horsemanship-horse-life\" title=\"/blogs/news/tagged/horsemanship-horse-life\"><strong>Horsemanship & Horse Life</strong></a><strong>  |  </strong><a href=\"/blogs/news/tagged/inside-parkmore\" title=\"/blogs/news/tagged/inside-parkmore\"><strong>Inside Parkmore</strong></a><strong>  |  </strong><a href=\"/blogs/news/tagged/community-partners\" title=\"/blogs/news/tagged/community-partners\"><strong>Community & Partners</strong></a></p>",
+            "text_size": "t5"
+          }
+        }
+      },
+      "block_order": [
+        "heading_rD6kCf",
+        "text_KCKiJX"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "desktop_content_position": "center",
+        "content_max_width": "m",
+        "desktop_content_alignment": "center",
+        "mobile_content_alignment": "center",
+        "section_color_scheme": "",
+        "container_color_scheme": "",
+        "show_content_shadow": false,
+        "line_separator": "",
+        "top_padding": "pt-0",
+        "bottom_padding": "pb-0",
+        "visibility": "",
+        "hide_when_empty": true,
+        "show_at_specific_time_of_day": false,
+        "show_time_morning": true,
+        "show_time_afternoon": true,
+        "show_time_evening": true,
+        "show_time_night": true
+      }
+    },
+    "main": {
+      "type": "main-blog",
+      "settings": {
+        "items_per_page": 12,
+        "columns_desktop": "3",
+        "show_tag_filter": false,
+        "tab_alignment": "center",
+        "tab_style": "simple",
+        "tab_text_size": "t4",
+        "show_socials": false,
+        "show_image": true,
+        "show_date": true,
+        "show_author": false,
+        "show_reading_estimate": false,
+        "show_first_tag": false,
+        "excerpt_mode": "medium",
+        "blog_card_omit": "",
+        "blog_card_featured_1": "",
+        "blog_card_featured_2": "",
+        "blog_card_featured_3": "",
+        "featured_excerpt_mode": "short",
+        "top_padding": "pt-0",
+        "bottom_padding": "pb-s05"
+      }
+    },
+    "image_with_text_kyN8Hz": {
+      "type": "image-with-text",
+      "blocks": {
+        "caption_ryxUna": {
+          "type": "caption",
+          "settings": {
+            "caption": "Featured Article",
+            "caption_text_style": "caption-with-letter-spacing",
+            "caption_text_size": "t6"
+          }
+        },
+        "heading_xXeLXJ": {
+          "type": "heading",
+          "settings": {
+            "heading": "This could be the title of a featured article",
+            "heading_italic_convert": "",
+            "heading_size": "h4",
+            "heading_size_custom": 2.4,
+            "heading_line_height_custom": 1.2,
+            "heading_tag": "h2"
+          }
+        },
+        "text_4jK38C": {
+          "type": "text",
+          "settings": {
+            "text": "<p>If using this section as a featured article, be sure to exclude this article from the blog posts above, using the <strong>Don't show this article</strong> setting.</p>",
+            "text_size": "t4"
+          }
+        },
+        "buttons_6xx6eQ": {
+          "type": "buttons",
+          "settings": {
+            "button_text_size": "t2",
+            "button_label_1": "Read more",
+            "button_link_1": "/",
+            "button_style_1": "link",
+            "button_style_1_show_arrow": true,
+            "button_style_1_show_gradient_border": false,
+            "button_1_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)",
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_2": "secondary",
+            "button_style_2_show_arrow": false,
+            "button_style_2_show_gradient_border": false,
+            "button_2_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)"
+          }
+        }
+      },
+      "block_order": [
+        "caption_ryxUna",
+        "heading_xXeLXJ",
+        "text_4jK38C",
+        "buttons_6xx6eQ"
+      ],
+      "disabled": true,
+      "settings": {
+        "desktop_section_height": 500,
+        "mobile_section_height": 400,
+        "desktop_media_width": 55,
+        "desktop_media_scale": 100,
+        "layout": "media_first",
+        "image_cover": true,
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "text_max_width": "xs",
+        "content_layout": "overlap",
+        "section_color_scheme": "scheme-5",
+        "color_scheme": "",
+        "show_content_shadow": false,
+        "line_separator": "",
+        "top_padding": "pt-s",
+        "bottom_padding": "pb-s",
+        "visibility": "",
+        "hide_when_empty": false,
+        "show_at_specific_time_of_day": false,
+        "show_time_morning": true,
+        "show_time_afternoon": true,
+        "show_time_evening": true,
+        "show_time_night": true
+      }
+    },
+    "featured_collection_K9TAd7": {
+      "type": "featured-collection",
+      "disabled": true,
+      "settings": {
+        "collection": "",
+        "products_to_show": 6,
+        "desktop_layout": "carousel",
+        "mobile_layout": "carousel",
+        "columns_desktop": "4",
+        "columns_mobile": "2",
+        "full_width": false,
+        "content_max_width": "m",
+        "desktop_heading_alignment": "left",
+        "mobile_heading_alignment": "left",
+        "title": "Featured collection",
+        "italic_convert": "",
+        "heading_size": "h2",
+        "text": "",
+        "text_size": "t3",
+        "show_view_all_link": false,
+        "view_all_text": "View more",
+        "view_all_text_size": "t3",
+        "view_all_card_visibility": "off",
+        "view_all_card_text": "There's plenty more",
+        "color_scheme": "",
+        "view_all_color_scheme": "",
+        "line_separator": "",
+        "top_padding": "pt-s",
+        "bottom_padding": "pb-s",
+        "visibility": "",
+        "hide_when_empty": false,
+        "show_at_specific_time_of_day": false,
+        "show_time_morning": true,
+        "show_time_afternoon": true,
+        "show_time_evening": true,
+        "show_time_night": true,
+        "heading_tag": "h2"
+      }
+    }
+  },
+  "order": [
+    "breadcrumbs",
+    "header",
+    "rich_text_aD7fRK",
+    "main",
+    "image_with_text_kyN8Hz",
+    "featured_collection_K9TAd7"
+  ]
+}

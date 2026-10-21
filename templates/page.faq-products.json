@@ -1,0 +1,607 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "breadcrumbs": {
+      "type": "breadcrumbs",
+      "disabled": true,
+      "settings": {
+        "spacing": 0,
+        "color_scheme": "scheme-2",
+        "line_separator": "",
+        "visibility": ""
+      }
+    },
+    "image_banner_jp6nVT": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_XexDPK": {
+          "type": "heading",
+          "settings": {
+            "heading": "FAQs",
+            "heading_italic_convert": "",
+            "heading_size": "h0",
+            "heading_size_custom": 5.2,
+            "heading_line_height_custom": 0.7,
+            "heading_tag": "h1"
+          }
+        },
+        "text_ztDFB9": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Got a question? We've got the answer.</p>",
+            "text_size": "t0"
+          }
+        }
+      },
+      "block_order": [
+        "heading_XexDPK",
+        "text_ztDFB9"
+      ],
+      "disabled": true,
+      "settings": {
+        "image_overlay_opacity": 40,
+        "image_link": "",
+        "fix_image": false,
+        "skew_images": true,
+        "stack_images_on_mobile": true,
+        "image_ratio": "custom",
+        "desktop_section_height": 440,
+        "mobile_section_height": 300,
+        "full_width": true,
+        "full_width_animate": false,
+        "desktop_content_position": "md:justify-start md:items-center",
+        "mobile_content_position": "justify-start items-center",
+        "content_max_width": "m",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "show_text_box": "off",
+        "show_text_below": false,
+        "color_scheme": "scheme-6",
+        "container_color_scheme": "scheme-3",
+        "line_separator": "",
+        "top_padding": "pt-s",
+        "bottom_padding": "pb-s",
+        "visibility": "",
+        "hide_when_empty": false,
+        "show_at_specific_time_of_day": false,
+        "show_time_morning": true,
+        "show_time_afternoon": true,
+        "show_time_evening": true,
+        "show_time_night": true
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "page_width": "narrow",
+        "content_max_width": "xl",
+        "custom_page_header": false,
+        "title": "Section heading",
+        "italic_convert": "",
+        "heading_size": "h1",
+        "show_view_all_link": true,
+        "view_all_link": "",
+        "view_all_text": "",
+        "view_all_text_size": "t3",
+        "color_scheme": "",
+        "heading_tag": "h1"
+      }
+    },
+    "collapsible_content_t3C4Tq": {
+      "type": "collapsible-content",
+      "blocks": {
+        "heading_BjrQWD": {
+          "type": "heading",
+          "settings": {
+            "heading": "General",
+            "heading_italic_convert": "",
+            "heading_size": "h4",
+            "heading_size_custom": 2.4,
+            "heading_line_height_custom": 1.2,
+            "heading_tag": "h3"
+          }
+        },
+        "collapsible_row_hk9DHw": {
+          "type": "collapsible_row",
+          "settings": {
+            "row_open": false,
+            "heading": "Are your products vet approved?",
+            "icon": "key",
+            "image_width": 20,
+            "row_heading_tag": "h3",
+            "row_content": "<p>Many of our customers are vets, trainers, and rehab professionals—but our supplements are not prescription drugs. </p><p>They’re formulated with proven natural ingredients to support overall health.</p>",
+            "page": "",
+            "content_embed": "",
+            "button_text_size": "t3",
+            "button_label_1": "",
+            "button_link_1": "/",
+            "button_style_1": "primary",
+            "button_style_1_show_arrow": false,
+            "button_style_1_show_gradient_border": false,
+            "button_1_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)"
+          }
+        },
+        "collapsible_row_cFC4qJ": {
+          "type": "collapsible_row",
+          "settings": {
+            "row_open": false,
+            "heading": "Do you offer samples?",
+            "icon": "key",
+            "image_width": 20,
+            "row_heading_tag": "h3",
+            "row_content": "<p>No—and here’s why.</p><p>Our program is designed to be a <strong>marathon, not a sprint</strong>. Real change takes time. A one-day sample won’t show you what Detox, SVMS, or Immune Support can do when used consistently and correctly. So rather than handing out false hope in tiny sachets, we’d rather get you set up with a proper protocol that actually works.</p><p>We do, however, offer <strong>kits and bundles</strong> at great value so you can try the full combination that gets results.</p>",
+            "page": "",
+            "content_embed": "",
+            "button_text_size": "t3",
+            "button_label_1": "",
+            "button_link_1": "/",
+            "button_style_1": "primary",
+            "button_style_1_show_arrow": false,
+            "button_style_1_show_gradient_border": false,
+            "button_1_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)"
+          }
+        },
+        "collapsible_row_KyRx3K": {
+          "type": "collapsible_row",
+          "settings": {
+            "row_open": false,
+            "heading": "Can your products help with anhidrosis (non-sweating)?",
+            "icon": "key",
+            "image_width": 20,
+            "row_heading_tag": "h3",
+            "row_content": "<p>Yes—<strong>and not just a little bit.</strong> We’ve seen horses go from bone dry to dripping wet in a matter of weeks using our <strong>Parkmore Anhidrosis Protocol</strong>, which includes all <strong>four</strong> key products:</p><ul><li> <strong>Detox</strong> – to bind and flush out toxins and heavy metals that may be blocking the sweat response.</li><li> <strong>SVMS (Vitamin & Mineral Supplement)</strong> – a powerful micronutrient blend to reset the system and restore balance.</li><li> <strong>Herbal Infusion (HI)</strong> – herbs soaked in oil or made into a paste, these target the glands and kickstart the body's sweat response.</li><li> <strong>Immune Support</strong> – critical for rebuilding the immune system, which is often burnt out in non-sweaters.</li></ul><p>This isn’t a quick fix—it’s a <strong>total system reset</strong>. And yes, all four are essential. Cutting corners gets you half a result.</p><p>If your horse is struggling, don’t wait. Reach out—we’ll walk you through exactly how to use it.</p>",
+            "page": "",
+            "content_embed": "",
+            "button_text_size": "t3",
+            "button_label_1": "",
+            "button_link_1": "/",
+            "button_style_1": "primary",
+            "button_style_1_show_arrow": false,
+            "button_style_1_show_gradient_border": false,
+            "button_1_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)"
+          }
+        },
+        "collapsible_row_3zyzVG": {
+          "type": "collapsible_row",
+          "settings": {
+            "row_open": false,
+            "heading": "Can Parkmore products help with Cushing’s (PPID) in horses?",
+            "icon": "storefront",
+            "image_width": 20,
+            "row_heading_tag": "h3",
+            "row_content": "<p>Yes—while we don’t claim to “cure” Cushing’s, we’ve had excellent results helping horses <strong>manage the symptoms</strong> and stay more comfortable using our natural support system.</p><p>For horses with Cushing’s, we recommend the <strong>Parkmore Cushing’s Support Kit</strong>, which includes:</p><ul><li> <strong>Detox</strong> – to clear toxins and support the liver and gut, making the body more receptive to healing.</li><li> <strong>SVMS (Special Vitamin Mineral Supplement)</strong> – to restore nutritional balance, especially when absorption is impaired.</li><li> <strong>Immune Support</strong> – critical for horses whose immune systems are weakened by PPID.</li><li> <strong>Herbal Infusion (HI)</strong> – especially useful for supporting the endocrine system and metabolic health.</li></ul><p>Together, these products help improve coat condition, energy levels, digestion, and overall resilience. Many customers also report better hoof health, reduced seasonal flare-ups, and more manageable weight.</p><p><strong>Important:</strong> Always work alongside your vet when managing Cushing’s, especially if your horse is on medications like Pergolide.</p>",
+            "page": "",
+            "content_embed": "",
+            "button_text_size": "t3",
+            "button_label_1": "",
+            "button_link_1": "/",
+            "button_style_1": "primary",
+            "button_style_1_show_arrow": false,
+            "button_style_1_show_gradient_border": false,
+            "button_1_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)"
+          }
+        },
+        "collapsible_row_UVzCqe": {
+          "type": "collapsible_row",
+          "settings": {
+            "row_open": false,
+            "heading": "Can Parkmore products help with EPM?",
+            "icon": "storefront",
+            "image_width": 20,
+            "row_heading_tag": "h3",
+            "row_content": "<p>Yes—<strong>as part of a post-treatment recovery plan</strong>, Parkmore products can be incredibly helpful.</p><p>EPM drains the horse’s system. Even after medication clears the protozoa, you’re often left with a weak, depleted horse—poor coordination, low energy, muscle loss, and a compromised immune system.</p><p>Our <strong>Parkmore EPM Recovery Protocol</strong> supports the nervous system, rebuilds strength, and helps reduce the risk of relapse. It includes:</p><ul><li> <strong>Detox</strong> – to flush lingering toxins and support gut health, especially after heavy medication.</li><li> <strong>SVMS (Special Vitamin Mineral Supplement)</strong> – for cellular repair, nervous system support, and muscle rebuilding.</li><li> <strong>Immune Support</strong> – yeast-based nucleotides to repair immune function and promote regeneration.</li><li> <strong>Herbal Infusion (HI)</strong> – targeted herbs to support blood flow, circulation, and nerve tissue.</li></ul><p><strong>No topical products are needed</strong> unless the horse has developed <strong>skin problems, pressure sores, or secondary infections</strong>—in which case, the <strong>Botanica Herbal Cream and Wash</strong> can be used as needed.</p><p><strong>IMPORTANT:</strong> EPM treatment should always be led by your vet. Our products are best used as part of a <strong>rehab and long-term recovery</strong> plan.</p>",
+            "page": "",
+            "content_embed": "",
+            "button_text_size": "t3",
+            "button_label_1": "",
+            "button_link_1": "/",
+            "button_style_1": "primary",
+            "button_style_1_show_arrow": false,
+            "button_style_1_show_gradient_border": false,
+            "button_1_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)"
+          }
+        },
+        "collapsible_row_Cyd9nk": {
+          "type": "collapsible_row",
+          "settings": {
+            "row_open": false,
+            "heading": "What Parkmore Products do you recommend for Heaves (COPD, RAO)?",
+            "icon": "storefront",
+            "image_width": 20,
+            "row_heading_tag": "h3",
+            "row_content": "<p><strong>1.  Immune Support</strong></p><ul><li>Core product to <strong>reduce inflammation</strong>, support <strong>mucosal immunity</strong>, and help the lungs <strong>heal on a cellular level</strong>.</li><li>Improves <strong>resilience</strong> to dust, mold, and pollen triggers.</li></ul><p><strong>2.  Detox</strong></p><ul><li>Cleans out <strong>gut toxins</strong> and reduces overall inflammatory load.</li><li>Many respiratory flare-ups are <strong>immune-triggered</strong>—Detox helps reduce those overreactions from the inside out.</li></ul><p><strong>3.  SVMS (Vitamin & Mineral Supplement)</strong></p><ul><li>Supplies essential <strong>micronutrients for tissue repair</strong>, especially in the lungs and airway lining.</li><li>Heaves horses often have <strong>underlying deficiencies</strong> from years of stress or poor absorption.</li></ul><p><strong>4.  Herbal Infusion (HI)</strong></p><ul><li>Contains herbs that support the <strong>respiratory tract</strong>, boost <strong>circulation</strong>, and help <strong>expel mucus</strong>.</li><li>Also calms the system and helps break the cycle of tight breathing.</li></ul>",
+            "page": "",
+            "content_embed": "",
+            "button_text_size": "t3",
+            "button_label_1": "",
+            "button_link_1": "/",
+            "button_style_1": "primary",
+            "button_style_1_show_arrow": false,
+            "button_style_1_show_gradient_border": false,
+            "button_1_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)"
+          }
+        },
+        "heading_WEpLJf": {
+          "type": "heading",
+          "settings": {
+            "heading": "GLF Immune Support",
+            "heading_italic_convert": "",
+            "heading_size": "h4",
+            "heading_size_custom": 2.4,
+            "heading_line_height_custom": 1.2,
+            "heading_tag": "h3"
+          }
+        },
+        "collapsible_row_a4VqMj": {
+          "type": "collapsible_row",
+          "settings": {
+            "row_open": false,
+            "heading": "What is the Parkmore Immune Support product?",
+            "icon": "storefront",
+            "image_width": 20,
+            "row_heading_tag": "h3",
+            "row_content": "<p>The <strong>Parkmore Immune Support</strong> is a <strong>yeast-based nucleotide supplement</strong> designed to <strong>boost immune function, speed up recovery, and support cell regeneration</strong>—from the inside out.</p><p>Nucleotides are the <strong>building blocks of DNA and RNA</strong>. Every time your horse’s body needs to repair tissue, fight infection, or generate new cells—it needs nucleotides. The problem is, horses under stress, in recovery, or dealing with chronic conditions like allergies, ulcers, or infections often can’t produce enough of them fast enough.</p><p><em>That’s where Parkmore’s Immune Support steps in.</em></p><h3> What It Does:</h3><ul><li><strong>Rebuilds damaged cells</strong> faster</li><li><strong>Supports immune resilience</strong> during stress, illness, or recovery</li><li><strong>Enhances absorption and responsiveness</strong> to medications and supplements</li><li>Helps the gut, skin, lungs, and immune system <strong>repair and reset</strong></li></ul><h3>Why It Works:</h3><p>We use a <strong>premium yeast-derived nucleotide base</strong>, meaning it’s <strong>easily absorbed and fast-acting</strong>—no fillers, no fluff. This is a serious support tool for horses who are struggling with:</p><ul><li>Allergies</li><li>Chronic infections</li><li>Ulcers</li><li>Immune suppression (e.g. Cushing’s, long-term meds)</li><li>Recovery from illness, surgery, or transport stress</li></ul>",
+            "page": "",
+            "content_embed": "",
+            "button_text_size": "t3",
+            "button_label_1": "",
+            "button_link_1": "/",
+            "button_style_1": "primary",
+            "button_style_1_show_arrow": false,
+            "button_style_1_show_gradient_border": false,
+            "button_1_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)"
+          }
+        },
+        "collapsible_row_qQc8pV": {
+          "type": "collapsible_row",
+          "settings": {
+            "row_open": false,
+            "heading": "Why does Parkmore Immune Support accelerate the absorption of medications or other supplements?",
+            "icon": "storefront",
+            "image_width": 20,
+            "row_heading_tag": "h3",
+            "row_content": "<p>Because it helps the body work <strong>more efficiently—at the cellular level.</strong></p><p>Parkmore Immune Support is made from <strong>yeast-based nucleotides</strong>, which are the building blocks of RNA and DNA. In other words: it gives your horse the raw materials needed for <strong>cell replication, repair, and regeneration</strong>.</p><p>When cells are healthy and functioning properly, they:</p><ul><li>Absorb nutrients more efficiently</li><li>Repair damaged tissue faster</li><li>Transport compounds (like medications) more effectively</li><li>Boost the body’s own natural response system</li></ul><p>So if your horse is on medication, you may notice those meds <strong>“kick in” quicker or work better</strong>. It’s not that Immune Support makes the meds stronger—it’s that your horse’s system becomes <strong>more receptive and responsive</strong>.</p><p><strong>Think of it like this:</strong> <em>It’s the difference between pouring fuel into a clogged-up engine vs. a clean, well-tuned one. Same fuel. Different results.</em></p>",
+            "page": "",
+            "content_embed": "",
+            "button_text_size": "t3",
+            "button_label_1": "",
+            "button_link_1": "/",
+            "button_style_1": "primary",
+            "button_style_1_show_arrow": false,
+            "button_style_1_show_gradient_border": false,
+            "button_1_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)"
+          }
+        },
+        "collapsible_row_h64wyh": {
+          "type": "collapsible_row",
+          "settings": {
+            "row_open": false,
+            "heading": "Can Parkmore Immune Support help my horse breathe better during cross-country?",
+            "icon": "storefront",
+            "image_width": 20,
+            "row_heading_tag": "h3",
+            "row_content": "<p>Yes—especially if your horse struggles with <strong>inflammation, seasonal allergies, or respiratory fatigue</strong> during intense work like galloping, jumping, or hauling across country.</p><p>Parkmore Immune Support isn’t a “breathe-easy” powder or bronchodilator—but it works at a <strong>deeper level</strong> by supporting the <strong>body’s ability to heal, repair, and stay resilient under pressure.</strong></p><p>Here’s how it helps your horse breathe better:</p><ul><li> <strong>Reduces inflammation</strong> at the cellular level—especially in the lungs and upper airway</li><li> <strong>Improves immune resilience</strong>, so the horse is less reactive to pollen, dust, or mold</li><li> <strong>Accelerates cellular repair</strong>, which is critical after heavy work or travel</li><li> <strong>Supports recovery</strong>, helping prevent post-run fatigue, sore lungs, or delayed bounce-back</li></ul><p>In other words, it keeps the <strong>engine running clean</strong>—so the lungs don’t get bogged down by immune overreaction or cellular stress.</p><p>It’s brilliant for:</p><ul><li>Horses with mild heaves or exercise-induced coughing</li><li>Horses recovering from respiratory infections</li><li>Competition horses prone to fatigue, tight breathing, or slower recovery</li></ul>",
+            "page": "",
+            "content_embed": "",
+            "button_text_size": "t3",
+            "button_label_1": "",
+            "button_link_1": "/",
+            "button_style_1": "primary",
+            "button_style_1_show_arrow": false,
+            "button_style_1_show_gradient_border": false,
+            "button_1_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)"
+          }
+        },
+        "heading_CnTP3J": {
+          "type": "heading",
+          "settings": {
+            "heading": "Herbal Infusion (HI)",
+            "heading_italic_convert": "",
+            "heading_size": "h4",
+            "heading_size_custom": 2.4,
+            "heading_line_height_custom": 1.2,
+            "heading_tag": "h3"
+          }
+        },
+        "collapsible_row_8wcxPa": {
+          "type": "collapsible_row",
+          "settings": {
+            "row_open": false,
+            "heading": "What’s in Parkmore Herbal Infusion—and Why",
+            "icon": "storefront",
+            "image_width": 20,
+            "row_heading_tag": "h3",
+            "row_content": "<p><strong> Fenugreek</strong></p><ul><li>Stimulates appetite</li><li>Soothes the gut</li><li>Supports blood sugar balance—ideal for metabolic horses</li></ul><p><strong> Fennel Seed</strong></p><ul><li>Reduces gas and bloating</li><li>Supports digestive and respiratory health</li><li>Gentle antioxidant and anti-inflammatory</li></ul><p><strong> Oregano & Thyme</strong></p><ul><li>Natural antimicrobials</li><li>Support healthy lungs and reduce congestion</li></ul><p><strong> Turmeric</strong></p><ul><li>Powerful anti-inflammatory</li><li>Supports joints, gut lining, and skin health</li></ul><p><strong> Black Cumin Seed</strong></p><ul><li>Regulates immune response</li><li>Supports lungs, digestion, and skin</li></ul><p><strong> Salt & Bicarbonate of Soda</strong></p><ul><li>Promote hydration and pH balance</li><li>Aid gut health and metabolic recovery</li></ul><p><strong>Yeast Sacc 1026</strong> <em>(NOT the same as the Immune Support yeast)</em></p><ul><li>A <strong>live probiotic yeast</strong> that supports <strong>gut flora, feed efficiency, and digestion</strong></li><li>Helps stabilise the hindgut, especially in horses recovering from stress, meds, or feed changes</li><li>Improves <strong>nutrient absorption</strong>—great when paired with Detox and SVMS</li></ul><h3> In short:</h3><p>The <strong>Herbal Infusion</strong> is a multi-tasking blend that supports the <strong>lungs, gut, immune system, and appetite</strong>—while laying the groundwork for long-term health.</p>",
+            "page": "",
+            "content_embed": "",
+            "button_text_size": "t3",
+            "button_label_1": "",
+            "button_link_1": "/",
+            "button_style_1": "primary",
+            "button_style_1_show_arrow": false,
+            "button_style_1_show_gradient_border": false,
+            "button_1_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)"
+          }
+        },
+        "heading_bQJ4xh": {
+          "type": "heading",
+          "settings": {
+            "heading": "Detox",
+            "heading_italic_convert": "",
+            "heading_size": "h4",
+            "heading_size_custom": 2.4,
+            "heading_line_height_custom": 1.2,
+            "heading_tag": "h3"
+          }
+        },
+        "collapsible_row_atEQfc": {
+          "type": "collapsible_row",
+          "settings": {
+            "row_open": false,
+            "heading": "What makes Parkmore's Steam Activated Charcoal so Special?",
+            "icon": "airplane",
+            "image_width": 20,
+            "row_heading_tag": "h3",
+            "row_content": "<p>Most people think charcoal is just burnt wood. But <strong>steam-activated hardwood charcoal</strong> is on another level entirely.</p><p>Here’s why:</p><h5> <strong>1. It’s Steam-Activated, Not Just Burned</strong></h5><ul><li>The steam activation process <strong>superheats the charcoal in the presence of water vapor</strong>, creating a massive <strong>network of microscopic pores</strong>.</li><li>This gives it an <strong>incredible surface area</strong>—just 1 gram can have over <strong>3,000 m² of surface area</strong>.</li><li>That means more places to <strong>bind toxins, gases, pathogens, heavy metals</strong>, and allergens inside the gut.</li></ul><h5> <strong>2. It’s Made from a Specific Blend of Four Hardwoods</strong></h5><ul><li>Not all wood is equal—hardwood charcoal is <strong>cleaner, more consistent</strong>, and burns longer without impurities.</li><li>The Parkmore blend ensures <strong>reliable binding strength</strong> with <strong>no chemical residues</strong>—just pure detox power.</li></ul><h5> <strong>3. It Binds Without Stripping</strong></h5><ul><li>Steam-activated charcoal doesn’t just grab <em>everything</em> like some cheap binders do.</li><li>It has a <strong>high affinity for toxins and unwanted substances</strong>, while <strong>leaving nutrients alone</strong>—which is critical when you're pairing it with SVMS or HI.</li></ul>",
+            "page": "",
+            "content_embed": "",
+            "button_text_size": "t3",
+            "button_label_1": "",
+            "button_link_1": "/",
+            "button_style_1": "primary",
+            "button_style_1_show_arrow": false,
+            "button_style_1_show_gradient_border": false,
+            "button_1_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)"
+          }
+        },
+        "spacer_zGqL4c": {
+          "type": "spacer",
+          "settings": {
+            "show_line_separator": false,
+            "spacing_top": 3,
+            "spacing_bottom": 0.2,
+            "spacer_visibility": "both",
+            "line_color": "#dfdfdf"
+          }
+        },
+        "text_PCJRbe": {
+          "type": "text",
+          "settings": {
+            "text": "<p><em>Have a different question? </em><a href=\"mailto:parkmoresupplements@gmail.com\" target=\"_blank\" title=\"mailto:parkmoresupplements@gmail.com\"><em>Get in touch.</em></a></p>",
+            "text_size": "t4"
+          }
+        }
+      },
+      "block_order": [
+        "heading_BjrQWD",
+        "collapsible_row_hk9DHw",
+        "collapsible_row_cFC4qJ",
+        "collapsible_row_KyRx3K",
+        "collapsible_row_3zyzVG",
+        "collapsible_row_UVzCqe",
+        "collapsible_row_Cyd9nk",
+        "heading_WEpLJf",
+        "collapsible_row_a4VqMj",
+        "collapsible_row_qQc8pV",
+        "collapsible_row_h64wyh",
+        "heading_CnTP3J",
+        "collapsible_row_8wcxPa",
+        "heading_bQJ4xh",
+        "collapsible_row_atEQfc",
+        "spacer_zGqL4c",
+        "text_PCJRbe"
+      ],
+      "settings": {
+        "one_row_at_a_time": true,
+        "show_line_separator": true,
+        "row_heading_size": "t2",
+        "row_text_size": "t5",
+        "show_header_beside": true,
+        "desktop_media_width": 35,
+        "layout": "media_first",
+        "show_search_box": true,
+        "content_max_width": "xl",
+        "desktop_heading_alignment": "left",
+        "mobile_heading_alignment": "left",
+        "title": "Search",
+        "italic_convert": "",
+        "heading_size": "h2",
+        "text": "<p>Can't see it? Try searching.</p>",
+        "text_size": "t3",
+        "button_label": "",
+        "button_link": "",
+        "button_style": "link",
+        "button_text_size": "t5",
+        "button_style_show_arrow": true,
+        "button_style_show_gradient_border": false,
+        "button_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)",
+        "section_color_scheme": "",
+        "color_scheme": "",
+        "show_content_shadow": true,
+        "line_separator": "border-top",
+        "top_padding": "pt-0",
+        "bottom_padding": "pb-s",
+        "heading_tag": "h2",
+        "render_schema": false,
+        "visibility": "",
+        "hide_when_empty": false,
+        "show_at_specific_time_of_day": false,
+        "show_time_morning": true,
+        "show_time_afternoon": true,
+        "show_time_evening": true,
+        "show_time_night": true
+      }
+    },
+    "spacer_jCKFkK": {
+      "type": "spacer",
+      "settings": {
+        "full_width": false,
+        "show_line_separator": true,
+        "line_width": 100,
+        "spacing_top": 0,
+        "spacing_bottom": 0,
+        "color_scheme": "",
+        "line_color": "",
+        "visibility": "",
+        "show_at_specific_time_of_day": false,
+        "show_time_morning": true,
+        "show_time_afternoon": true,
+        "show_time_evening": true,
+        "show_time_night": true
+      }
+    },
+    "image_banner_w6Hndw": {
+      "type": "image-banner",
+      "blocks": {
+        "heading_Rt3FFB": {
+          "type": "heading",
+          "settings": {
+            "heading": "About us",
+            "heading_italic_convert": "",
+            "heading_size": "h3",
+            "heading_size_custom": 2.4,
+            "heading_line_height_custom": 1.2,
+            "heading_tag": "h2"
+          }
+        },
+        "text_texUmh": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Want to know more about us? Hear our story.</p>",
+            "text_size": "t3"
+          }
+        },
+        "buttons_iac9TH": {
+          "type": "buttons",
+          "settings": {
+            "button_text_size": "t3",
+            "button_label_1": "About us",
+            "button_link_1": "/",
+            "button_style_1": "primary",
+            "button_style_1_show_arrow": false,
+            "button_style_1_show_gradient_border": false,
+            "button_1_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)",
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_2": "secondary",
+            "button_style_2_show_arrow": false,
+            "button_style_2_show_gradient_border": false,
+            "button_2_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)"
+          }
+        }
+      },
+      "block_order": [
+        "heading_Rt3FFB",
+        "text_texUmh",
+        "buttons_iac9TH"
+      ],
+      "disabled": true,
+      "settings": {
+        "image_overlay_opacity": 0,
+        "image_link": "",
+        "fix_image": false,
+        "skew_images": false,
+        "stack_images_on_mobile": true,
+        "image_ratio": "landscape_wide",
+        "desktop_section_height": 500,
+        "mobile_section_height": 400,
+        "full_width": false,
+        "full_width_animate": false,
+        "desktop_content_position": "md:justify-center md:items-center",
+        "mobile_content_position": "justify-center items-center",
+        "content_max_width": "m",
+        "desktop_content_alignment": "center",
+        "mobile_content_alignment": "center",
+        "show_text_box": "desktop",
+        "show_text_below": true,
+        "color_scheme": "",
+        "container_color_scheme": "scheme-3",
+        "line_separator": "",
+        "top_padding": "pt-s",
+        "bottom_padding": "pb-s",
+        "visibility": "",
+        "hide_when_empty": false,
+        "show_at_specific_time_of_day": false,
+        "show_time_morning": true,
+        "show_time_afternoon": true,
+        "show_time_evening": true,
+        "show_time_night": true
+      }
+    },
+    "ribbon_banner_CzhgQT": {
+      "type": "ribbon-banner",
+      "blocks": {
+        "heading_86zr4g": {
+          "type": "heading",
+          "settings": {
+            "heading": "Still got questions? Don't be a stranger.",
+            "heading_italic_convert": "",
+            "heading_size": "h3",
+            "heading_size_custom": 2,
+            "heading_line_height_custom": 1.3,
+            "heading_tag": "h3"
+          }
+        },
+        "buttons_FCB4dg": {
+          "type": "buttons",
+          "settings": {
+            "button_text_size": "t3",
+            "button_label_1": "Get in touch",
+            "button_link_1": "mailto:parkmoresupplements@gmail.com",
+            "button_style_1": "secondary",
+            "button_style_1_show_arrow": true,
+            "button_style_1_show_gradient_border": false,
+            "button_1_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)",
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_2": "secondary",
+            "button_style_2_show_arrow": false,
+            "button_style_2_show_gradient_border": false,
+            "button_2_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)"
+          }
+        }
+      },
+      "block_order": [
+        "heading_86zr4g",
+        "buttons_FCB4dg"
+      ],
+      "settings": {
+        "full_width": true,
+        "closable": false,
+        "content_alignment": "justify-center",
+        "vertical_padding": 10,
+        "horizontal_padding": 3.5,
+        "spacing_grid": 8.8,
+        "image_overlay_opacity": 0,
+        "color_scheme": "scheme-4",
+        "line_separator": "",
+        "top_padding": "pt-s",
+        "bottom_padding": "pb-s",
+        "visibility": "both",
+        "hide_when_empty": false,
+        "show_at_specific_time_of_day": false,
+        "show_time_morning": true,
+        "show_time_afternoon": true,
+        "show_time_evening": true,
+        "show_time_night": true
+      }
+    }
+  },
+  "order": [
+    "breadcrumbs",
+    "image_banner_jp6nVT",
+    "main",
+    "collapsible_content_t3C4Tq",
+    "spacer_jCKFkK",
+    "image_banner_w6Hndw",
+    "ribbon_banner_CzhgQT"
+  ]
+}

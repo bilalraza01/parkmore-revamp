@@ -1,0 +1,410 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "Header",
+  "type": "header",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement-bar-0": {
+          "type": "announcement",
+          "settings": {
+            "text": "Welcome to our Site. We hope you enjoy the experience.",
+            "mobile_text": "Welcome to our New Site",
+            "announcement_pages": "main-menu",
+            "color_scheme": "scheme-3"
+          }
+        },
+        "01f1744f-4bdc-4966-8eb5-a7fdf375e9a5": {
+          "type": "announcement",
+          "settings": {
+            "text": "",
+            "mobile_text": "",
+            "announcement_pages": "",
+            "color_scheme": "scheme-5"
+          }
+        },
+        "announcement_y3zxxD": {
+          "type": "announcement",
+          "settings": {
+            "text": "Welcome to our store",
+            "mobile_text": "",
+            "announcement_pages": "",
+            "color_scheme": "scheme-4"
+          }
+        }
+      },
+      "block_order": [
+        "announcement-bar-0",
+        "01f1744f-4bdc-4966-8eb5-a7fdf375e9a5",
+        "announcement_y3zxxD"
+      ],
+      "settings": {
+        "text_size": "t5",
+        "change_slides_speed": 6,
+        "enable_accounts": true,
+        "link_1_icon": "question_mark",
+        "link_1_label": "Help",
+        "link_1_url": "shopify://pages/help",
+        "link_2_icon": "",
+        "link_2_label": "K9 Page",
+        "link_2_url": "shopify://collections/dog-immune-support",
+        "enable_country_selector": true,
+        "show_country_filter": false,
+        "enable_language_selector": true,
+        "text_padding": 0.8,
+        "show_line_separator": true
+      }
+    },
+    "header": {
+      "type": "header",
+      "blocks": {
+        "mega_text_promo_AehRTT": {
+          "type": "mega_text_promo",
+          "settings": {
+            "title": "",
+            "visibility": "both",
+            "burger_menu_replace": false,
+            "position": "left",
+            "columns_wide": "3",
+            "promos_per_row": 2,
+            "show_line_separator": true,
+            "promo_header_text": "",
+            "promo_header_text_size": "h4-size",
+            "promo_header_text_style": "text-heading",
+            "promo_footer_button_label": "",
+            "promo_footer_button_link": "",
+            "promo_footer_button_style": "secondary",
+            "promo_footer_show_arrow": true,
+            "promo_footer_button_style_show_gradient_border": false,
+            "promo_footer_button_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)",
+            "promo_image_position": "above_heading",
+            "promo_image_ratio": "landscape",
+            "promo_1_show": true,
+            "promo_1_heading": "75% OFF at Checkout",
+            "promo_1_text": "Keep promotional content relevant to this menu.",
+            "promo_1_url": "",
+            "promo_1_accent": "",
+            "promo_2_show": true,
+            "promo_2_heading": "Promo text here",
+            "promo_2_text": "Did you know these promos could go above your links?",
+            "promo_2_url": "",
+            "promo_2_accent": "",
+            "promo_3_show": true,
+            "promo_3_heading": "Promo text here",
+            "promo_3_text": "You could even choose this area to promote blog articles.",
+            "promo_3_url": "",
+            "promo_3_accent": "",
+            "promo_4_show": true,
+            "promo_4_heading": "Promo text here",
+            "promo_4_text": "These promos can show on desktop and/or mobile.",
+            "promo_4_url": "",
+            "promo_4_accent": "",
+            "promo_5_show": false,
+            "promo_5_heading": "Promo text here",
+            "promo_5_text": "Include longer promotional text here.",
+            "promo_5_url": "",
+            "promo_5_accent": "",
+            "promo_6_show": false,
+            "promo_6_heading": "Promo text here",
+            "promo_6_text": "Include longer promotional text here.",
+            "promo_6_url": "",
+            "promo_6_accent": "",
+            "promo_7_show": false,
+            "promo_7_heading": "Promo text here",
+            "promo_7_text": "Include longer promotional text here.",
+            "promo_7_url": "",
+            "promo_7_accent": "",
+            "promo_8_show": false,
+            "promo_8_heading": "Promo text here",
+            "promo_8_text": "Include longer promotional text here.",
+            "promo_8_url": "",
+            "promo_8_accent": ""
+          }
+        },
+        "mega_image_promo_P3fiYc": {
+          "type": "mega_image_promo",
+          "settings": {
+            "title": "",
+            "visibility": "both",
+            "burger_menu_replace": false,
+            "position": "right",
+            "columns_wide": "3",
+            "promos_per_row": 1,
+            "show_line_separator": false,
+            "promo_header_text": "",
+            "promo_header_text_size": "h4-size",
+            "promo_header_text_style": "",
+            "promo_footer_button_label": "",
+            "promo_footer_button_link": "",
+            "promo_footer_button_style": "secondary",
+            "promo_footer_show_arrow": true,
+            "promo_footer_button_style_show_gradient_border": false,
+            "promo_footer_button_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)",
+            "promo_text_size": "h4-size",
+            "promo_text_style": "text-heading",
+            "promo_aspect_ratio": "landscape",
+            "promo_image_overlay_opacity": 6,
+            "promo_1_show": true,
+            "promo_1_text": "<p>Promo text here</p>",
+            "promo_1_url": "",
+            "promo_1_text_position": "justify-start items-end",
+            "promo_1_text_alignment": "center",
+            "promo_1_text_padding": 1,
+            "promo_1_text_color": "#000000",
+            "promo_2_show": true,
+            "promo_2_text": "<p>Promo text here</p>",
+            "promo_2_url": "",
+            "promo_2_text_position": "justify-start items-end",
+            "promo_2_text_alignment": "center",
+            "promo_2_text_padding": 1,
+            "promo_2_text_color": "#000000",
+            "promo_3_show": false,
+            "promo_3_text": "<p>Promo text here</p>",
+            "promo_3_url": "",
+            "promo_3_text_position": "justify-start items-end",
+            "promo_3_text_alignment": "center",
+            "promo_3_text_padding": 1,
+            "promo_3_text_color": "#000000",
+            "promo_4_show": false,
+            "promo_4_text": "<p>Promo text here</p>",
+            "promo_4_url": "",
+            "promo_4_text_position": "justify-start items-end",
+            "promo_4_text_alignment": "center",
+            "promo_4_text_padding": 1,
+            "promo_4_text_color": "#000000",
+            "promo_5_show": false,
+            "promo_5_text": "<p>Promo text here</p>",
+            "promo_5_url": "",
+            "promo_5_text_position": "justify-start items-end",
+            "promo_5_text_alignment": "center",
+            "promo_5_text_padding": 1,
+            "promo_5_text_color": "#000000",
+            "promo_6_show": false,
+            "promo_6_text": "<p>Promo text here</p>",
+            "promo_6_url": "",
+            "promo_6_text_position": "justify-start items-end",
+            "promo_6_text_alignment": "center",
+            "promo_6_text_padding": 1,
+            "promo_6_text_color": "#000000",
+            "promo_7_show": false,
+            "promo_7_text": "<p>Promo text here</p>",
+            "promo_7_url": "",
+            "promo_7_text_position": "justify-start items-end",
+            "promo_7_text_alignment": "center",
+            "promo_7_text_padding": 1,
+            "promo_7_text_color": "#000000",
+            "promo_8_show": false,
+            "promo_8_text": "<p>Promo text here</p>",
+            "promo_8_url": "",
+            "promo_8_text_position": "justify-start items-end",
+            "promo_8_text_alignment": "center",
+            "promo_8_text_padding": 1,
+            "promo_8_text_color": "#000000"
+          }
+        }
+      },
+      "block_order": [
+        "mega_text_promo_AehRTT",
+        "mega_image_promo_P3fiYc"
+      ],
+      "settings": {
+        "sticky_header_type": "always",
+        "drawer_on_desktop": "replace_on_scroll",
+        "logo_position": "top-left",
+        "center_menu_links": true,
+        "enable_accounts": false,
+        "enable_accounts_mobile": false,
+        "search": "bar",
+        "search_size": "large",
+        "search_mobile_open": false,
+        "search_placeholder": "",
+        "search_placeholder_2": "",
+        "search_placeholder_3": "",
+        "search_placeholder_4": "",
+        "logo": "shopify://shop_images/Parkmore_WebGOLD-P.png",
+        "logo_width": 200,
+        "mobile_logo_width": 200,
+        "mobile_logo_position": "left",
+        "logo_strap": "",
+        "logo_strap_text_size": "t6",
+        "menu": "main-menu",
+        "text_size": "t3",
+        "text_weight": "medium",
+        "link_headers_third_level": true,
+        "line_separator": "border-top border-bottom",
+        "mega_menu_link_label": "",
+        "mega_menu_link_enabled": true,
+        "menu_burger": "main-menu",
+        "link_headers_second_level": true,
+        "drawer_show_login": true,
+        "secondary_links_threshold": 5,
+        "drawer_text_size": "1.6",
+        "drawer_icon_1": "leaf",
+        "drawer_icon_2": "beer",
+        "drawer_icon_3": "banana",
+        "drawer_icon_4": "paw_print",
+        "drawer_icon_5": "speedometer",
+        "drawer_icon_6": "",
+        "drawer_icon_7": "",
+        "drawer_icon_8": "",
+        "drawer_icon_9": "",
+        "drawer_icon_10": "",
+        "cta_enable": true,
+        "cta_icon": "headset",
+        "cta_icon_size": 3.4,
+        "cta_heading": "HOW CAN WE HELP?",
+        "cta_label": "+1 (502) 265-8345",
+        "cta_url": "",
+        "cta_text_size": "t7",
+        "custom_icon": "",
+        "custom_icon_url": "",
+        "custom_icon_label": "Get in touch",
+        "color_scheme": "scheme-3",
+        "menu_color_scheme": "scheme-9",
+        "dropdown_menu_color_scheme": "scheme-8",
+        "cta_color_scheme": "scheme-8",
+        "search_bar_color_scheme": "",
+        "enable_country_selector": true,
+        "show_country_filter": false,
+        "enable_language_selector": true,
+        "spacing": 1.6,
+        "let_it_snow": false
+      }
+    },
+    "scrolling_text_eQKHpq": {
+      "type": "scrolling-text",
+      "blocks": {
+        "heading_phVgy8": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "heading": "<strong>LOYALTY MEANS EVERYTHING!</strong><em> BUY 10 of a Parkmore supplement or bundle, GET 1 FREE (just pay shipping). ONLINE ONLY.</em>",
+            "heading_italic_convert": "",
+            "heading_size": "h2",
+            "heading_size_custom": 2.6,
+            "heading_line_height_custom": 0.7,
+            "heading_tag": "h3"
+          }
+        }
+      },
+      "block_order": [
+        "heading_phVgy8"
+      ],
+      "name": "Scrolling text",
+      "settings": {
+        "full_width": true,
+        "spacing": 1,
+        "gap": 3,
+        "speed": 8,
+        "direction": "normal",
+        "pause_on_hover": true,
+        "content_max_width": "m",
+        "desktop_heading_alignment": "left",
+        "mobile_heading_alignment": "left",
+        "title": "",
+        "italic_convert": "",
+        "heading_size": "h4",
+        "text": "",
+        "text_size": "t3",
+        "view_all_link": "",
+        "view_all_text": "",
+        "view_all_text_size": "t3",
+        "color_scheme": "scheme-3aa37783-b56c-439b-b9ac-b865e15d189c",
+        "top_padding": "pt-0",
+        "bottom_padding": "pb-0",
+        "visibility": "",
+        "hide_when_empty": false,
+        "show_at_specific_time_of_day": false,
+        "show_time_morning": true,
+        "show_time_afternoon": true,
+        "show_time_evening": true,
+        "show_time_night": true
+      }
+    },
+    "ribbon_banner_QaeMiC": {
+      "type": "ribbon-banner",
+      "blocks": {
+        "text_FQKVJ8": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "<p><strong>BUY A K9 BUNDLE:  $5 Off for YOU </strong><em>(in cart) </em><strong>+ One Donated to a Service Dog!</strong><br/></p>",
+            "text_size": "t4",
+            "content_max_width": "m"
+          }
+        },
+        "discount_JjUM9c": {
+          "type": "discount",
+          "disabled": true,
+          "settings": {
+            "discount_code": "Peel to Play",
+            "text_size": "t6",
+            "discount_gated": true,
+            "color_peel_background": "#f57309",
+            "color_peel_foreground": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "text_FQKVJ8",
+        "discount_JjUM9c"
+      ],
+      "disabled": true,
+      "name": "Ribbon banner",
+      "settings": {
+        "full_width": true,
+        "closable": false,
+        "content_alignment": "justify-center",
+        "vertical_padding": 1.2,
+        "horizontal_padding": 3.5,
+        "spacing_grid": 3,
+        "image_overlay_opacity": 0,
+        "color_scheme": "",
+        "line_separator": "",
+        "top_padding": "pt-s",
+        "bottom_padding": "pb-s",
+        "visibility": "both",
+        "hide_when_empty": false,
+        "show_at_specific_time_of_day": false,
+        "show_time_morning": true,
+        "show_time_afternoon": true,
+        "show_time_evening": true,
+        "show_time_night": true
+      }
+    },
+    "custom_liquid_hGNQzg": {
+      "type": "custom-liquid",
+      "name": "Custom Liquid",
+      "settings": {
+        "custom_liquid": "{% if product.handle == 'k9-smart-bundle' %}\n  <div class=\"product-announcement\" style=\"background:#ffe; padding:1em; border:1px solid #fcc; margin-bottom:1em; text-align:center;\">\n    🎆 <strong>Special Offer:</strong> Use code <strong>K9SERVICE5</strong> at checkout for $4 off this bundle, free shipping, AND we donate one to a service dog!\n    <br>\n    <a href=\"https://parkmoresupplements.com/cart/46283096457428:1?discount=K9SERVICE5\" style=\"display:inline-block; margin-top:0.5em; padding:0.5em 1em; background:#fdd; color:#000; text-decoration:none; border-radius:4px;\">\n      👉 Click here to add to cart and go straight to checkout with your discount!\n    </a>\n  </div>\n{% endif %}",
+        "full_width": true,
+        "color_scheme": "",
+        "line_separator": "",
+        "top_padding": "pt-0",
+        "bottom_padding": "pb-0",
+        "visibility": "",
+        "show_at_specific_time_of_day": false,
+        "show_time_morning": true,
+        "show_time_afternoon": true,
+        "show_time_evening": true,
+        "show_time_night": true
+      }
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "header",
+    "scrolling_text_eQKHpq",
+    "ribbon_banner_QaeMiC",
+    "custom_liquid_hGNQzg"
+  ]
+}

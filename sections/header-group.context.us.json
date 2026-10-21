@@ -1,0 +1,35 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "parent": "header-group.json",
+  "context": {
+    "market": "us"
+  },
+  "sections": {
+    "header": {
+      "settings": {
+        "logo": "shopify://shop_images/Parkmore_WebGOLD-P_c06ab471-73a3-403f-93d7-fcd20602dccb.png"
+      },
+      "blocks": {}
+    },
+    "announcement-bar": {
+      "settings": {},
+      "blocks": {
+        "01f1744f-4bdc-4966-8eb5-a7fdf375e9a5": {
+          "settings": {
+            "text": "Welcome to Parkmore Supplements New Look",
+            "mobile_text": "Parkmore Supplements New Look",
+            "announcement_pages": "main-menu"
+          }
+        }
+      }
+    }
+  }
+}

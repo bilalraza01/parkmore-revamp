@@ -1,0 +1,99 @@
+# we use Shopify as our ecommerce platform
+
+{%- comment -%}
+Load Shopify's default robots.txt groups
+{% endcomment %}
+{% for group in robots.default_groups %}
+  {{- group.user_agent -}}
+
+  {% for rule in group.rules %}
+    {{- rule -}}
+  {% endfor %}
+
+  {%- if group.sitemap != blank -%}
+    {{ group.sitemap }}
+  {%- endif -%}
+{% endfor %}
+
+{%- comment -%}
+✅ Whitelist reputable AI crawlers
+{% endcomment %}
+User-agent: GPTBot
+Allow: /
+Crawl-delay: 10
+
+User-agent: ChatGPT-User
+Allow: /
+Crawl-delay: 10
+
+User-agent: OpenAI
+Allow: /
+Crawl-delay: 10
+
+User-agent: PerplexityBot
+Allow: /
+Crawl-delay: 10
+
+User-agent: CCBot
+Allow: /
+Crawl-delay: 10
+
+{%- comment -%}
+🛡️ Block known aggressive scrapers
+{% endcomment %}
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: AhrefsSiteAudit
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: spbot
+Disallow: /
+
+User-agent: Sogou web spider
+Disallow: /
+
+User-agent: Exabot
+Disallow: /
+
+User-agent: Yandex
+Disallow: /
+
+User-agent: archive.org_bot
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: MauiBot
+Disallow: /
+
+User-agent: SEOkicks-Robot
+Disallow: /
+
+User-agent: rogerbot
+Disallow: /
+
+User-agent: ZoominfoBot
+Disallow: /
+
+User-agent: Nutch
+Disallow: /
+
+{%- comment -%}
+✅ Pinterest crawl delay
+{% endcomment %}
+User-agent: Pinterest
+Crawl-delay: 1

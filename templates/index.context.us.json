@@ -1,0 +1,51 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "parent": "index.json",
+  "context": {
+    "market": "us"
+  },
+  "sections": {
+    "icons_with_text_A8P3h4": {
+      "settings": {},
+      "blocks": {
+        "icon_with_text_Qi374n": {
+          "settings": {
+            "text": "We Solve Problems"
+          }
+        },
+        "icon_with_text_PtjAX6": {
+          "settings": {
+            "title": "<strong>PROMPT</strong>",
+            "text": "Package Delivery"
+          }
+        },
+        "icon_with_text_BPQ4eh": {
+          "settings": {
+            "text": "Six Days a Week"
+          }
+        },
+        "icon_with_text_VMaqgr": {
+          "settings": {
+            "text": "Superb Value"
+          }
+        }
+      }
+    },
+    "slideshow": {
+      "settings": {
+        "mobile_section_height": 280,
+        "full_width": "mobile",
+        "hide_when_empty": false
+      },
+      "blocks": {}
+    }
+  }
+}
