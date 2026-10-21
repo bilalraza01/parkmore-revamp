@@ -57,8 +57,11 @@
 /* Large screens: move the pane copy in from the screen edges as the screen widens */
 @media (min-width:1600px){
   /* Grows smoothly from 64px at 1600px, so there is no jump at the breakpoint */
+  .pm-hero__copy{transition:padding .8s var(--ease)}
   .pm-hero__pane--horse .pm-hero__copy{padding-left:calc((100vw - 1600px) / 4 + 64px)}
   .pm-hero__pane--dog .pm-hero__copy{padding-right:calc((100vw - 1600px) / 4 + 64px)}
+  /* The pane that shrinks while the other is hovered goes back to the mockup padding, so its heading stays on one line */
+  .pm-hero__panes:hover .pm-hero__pane:not(:hover) .pm-hero__copy{padding-left:clamp(24px,4vw,64px);padding-right:clamp(24px,4vw,64px)}
 }
 /* Very large screens: scale the type up a little so it holds the bigger canvas */
 @media (min-width:2200px){
