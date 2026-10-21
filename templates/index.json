@@ -651,7 +651,9 @@
             "year": "50+ yrs",
             "title": "Fleur Bryan",
             "image_alt": "Fleur Bryan riding at Waredaca",
-            "text": "A lifetime of breeding, foaling, starting, training and competing horses, and coaching the riders on them."
+            "text": "A lifetime of breeding, foaling, starting, training and competing horses, and coaching the riders on them.",
+            "image": "shopify://shop_images/fleur-on-horse.jpg",
+            "image_position": "object-position:50% 35%"
           }
         },
         "card_2": {
@@ -660,7 +662,8 @@
             "year": "2002",
             "title": "Parkmore Pride arrives",
             "image_alt": "Parkmore Pride with his rider holding the Irish flag",
-            "text": "Fleur brings her Irish Draught stallion from Ireland to America. The company carries his name."
+            "text": "Fleur brings her Irish Draught stallion from Ireland to America. The company carries his name.",
+            "image": "shopify://shop_images/parkmore-with-irish-flag.jpg"
           }
         },
         "card_3": {
