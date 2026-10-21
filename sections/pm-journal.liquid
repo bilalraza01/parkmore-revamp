@@ -22,7 +22,8 @@
             <span class="pm-post__img">
               {%- if block.settings.tag != blank -%}<span class="pm-post__tag">{{ block.settings.tag | escape }}</span>{%- endif -%}
               {%- if a.image != blank -%}
-                {{ a.image | image_url: width: 900 | image_tag: widths: '300, 500, 700, 900', sizes: '(min-width: 1101px) 370px, (min-width: 901px) 31vw, (min-width: 561px) 45vw, 90vw', loading: 'lazy', alt: a.image.alt | default: a.title }}
+                {%- assign img_alt = a.image.alt | default: a.title -%}
+                {{ a.image | image_url: width: 900 | image_tag: widths: '300, 500, 700, 900', sizes: '(min-width: 1101px) 370px, (min-width: 901px) 31vw, (min-width: 561px) 45vw, 90vw', loading: 'lazy', alt: img_alt }}
               {%- else -%}
                 <span class="pm-img-fallback">[{{ a.title | escape }}]</span>
               {%- endif -%}

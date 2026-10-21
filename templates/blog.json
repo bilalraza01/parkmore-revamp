@@ -40,7 +40,8 @@
         "enable_top_padding": false,
         "enable_bottom_padding": false,
         "heading_tag": "h1"
-      }
+      },
+      "disabled": true
     },
     "rich_text_aD7fRK": {
       "type": "rich-text",
@@ -87,7 +88,8 @@
         "show_time_afternoon": true,
         "show_time_evening": true,
         "show_time_night": true
-      }
+      },
+      "disabled": true
     },
     "main": {
       "type": "main-blog",
@@ -112,7 +114,8 @@
         "featured_excerpt_mode": "short",
         "top_padding": "pt-0",
         "bottom_padding": "pb-s05"
-      }
+      },
+      "disabled": true
     },
     "image_with_text_kyN8Hz": {
       "type": "image-with-text",
@@ -233,10 +236,74 @@
         "show_time_night": true,
         "heading_tag": "h2"
       }
+    },
+    "pm_blog": {
+      "type": "pm-blog",
+      "blocks": {
+        "cat_1": {
+          "type": "category",
+          "settings": {
+            "label": "Equine Health & Nutrition",
+            "tag": "equine-health-nutrition"
+          }
+        },
+        "cat_2": {
+          "type": "category",
+          "settings": {
+            "label": "Canine Health & Nutrition",
+            "tag": "canine-health-nutrition"
+          }
+        },
+        "cat_3": {
+          "type": "category",
+          "settings": {
+            "label": "Customer Stories",
+            "tag": "customer-stories"
+          }
+        },
+        "cat_4": {
+          "type": "category",
+          "settings": {
+            "label": "Horsemanship & Horse Life",
+            "tag": "horsemanship-horse-life"
+          }
+        },
+        "cat_5": {
+          "type": "category",
+          "settings": {
+            "label": "Inside Parkmore",
+            "tag": "inside-parkmore"
+          }
+        },
+        "cat_6": {
+          "type": "category",
+          "settings": {
+            "label": "Community & Partners",
+            "tag": "community-partners"
+          }
+        }
+      },
+      "block_order": [
+        "cat_1",
+        "cat_2",
+        "cat_3",
+        "cat_4",
+        "cat_5",
+        "cat_6"
+      ],
+      "settings": {
+        "intro": "<p>Stories, practical insight, customer experiences, and life behind Parkmore—for people who care deeply about their horses and dogs.</p>",
+        "per_page": 12,
+        "excerpt_words": 20,
+        "show_date": true,
+        "feature_first": true,
+        "all_label": "ALL"
+      }
     }
   },
   "order": [
     "breadcrumbs",
+    "pm_blog",
     "header",
     "rich_text_aD7fRK",
     "main",

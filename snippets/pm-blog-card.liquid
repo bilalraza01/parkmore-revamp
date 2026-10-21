@@ -1,0 +1,81 @@
+{%- comment -%}
+  One post for pm-blog. Params: article, categories (category blocks), ss (section settings),
+  feature (true = large dark card), reveal (1 to 3, grid cards).
+{%- endcomment -%}
+{%- liquid
+  assign excerpt = article.excerpt | default: article.content | strip_html | truncatewords: ss.excerpt_words
+  assign tag_label = ''
+  for t in article.tags
+    assign t_handle = t | handleize
+    for c in categories
+      assign c_handle = c.settings.tag | handleize
+      if t_handle == c_handle and tag_label == blank
+        assign tag_label = c.settings.label
+      endif
+    endfor
+  endfor
+  assign img = article.image
+  if img != blank
+    assign ratio = img.aspect_ratio
+    assign img_alt = img.alt | default: article.title
+  endif
+-%}
+
+{%- if feature -%}
+  <a class="pm-blog__feature pm-dark" href="{{ article.url }}" data-pm-reveal>
+    <span class="pm-blog__feature-img">
+      {%- if img != blank -%}
+        {%- liquid
+          # Image area is about 1.1fr of the card at roughly 16:11; wider images are cropped
+          assign cover = ratio | divided_by: 1.45
+          if cover < 1
+            assign cover = 1
+          endif
+          assign s_desk = 640 | times: cover | ceil
+          assign s_mob = 100 | times: cover | ceil
+          capture f_sizes
+            echo '(min-width: 901px) ' | append: s_desk | append: 'px, ' | append: s_mob | append: 'vw'
+          endcapture
+        -%}
+        {{ img | image_url: width: 2000 | image_tag: widths: '500, 800, 1100, 1400, 1700, 2000', sizes: f_sizes, loading: 'eager', fetchpriority: 'high', alt: img_alt }}
+      {%- else -%}
+        <span class="pm-img-fallback">[{{ article.title | escape }}]</span>
+      {%- endif -%}
+      {%- if tag_label != blank -%}<span class="pm-blog__tag">{{ tag_label | escape }}</span>{%- endif -%}
+    </span>
+    <span class="pm-blog__feature-tx">
+      {%- if ss.show_date -%}<span class="pm-blog__meta">{{ article.published_at | time_tag: format: 'date' }}</span>{%- endif -%}
+      <h2>{{ article.title | escape }}</h2>
+      {%- if excerpt != blank -%}<p>{{ excerpt }}</p>{%- endif -%}
+      {%- if ss.read_more != blank -%}<span class="pm-btn pm-btn-gold">{{ ss.read_more | escape }} <span class="pm-ar" aria-hidden="true">&rarr;</span></span>{%- endif -%}
+    </span>
+  </a>
+{%- else -%}
+<a class="pm-blog__post" href="{{ article.url }}" data-pm-reveal="{{ reveal }}">
+  <span class="pm-blog__img">
+    {%- if img != blank -%}
+      {%- liquid
+        # Card image is 4:3 with object-fit:cover; wider images are shown wider than the card
+        assign cover = ratio | divided_by: 1.3333
+        if cover < 1
+          assign cover = 1
+        endif
+        assign s_desk = 370 | times: cover | ceil
+        assign s_tab = 45 | times: cover | ceil
+        assign s_mob = 90 | times: cover | ceil
+        capture c_sizes
+          echo '(min-width: 1101px) ' | append: s_desk | append: 'px, (min-width: 561px) ' | append: s_tab | append: 'vw, ' | append: s_mob | append: 'vw'
+        endcapture
+      -%}
+      {{ img | image_url: width: 1600 | image_tag: widths: '300, 450, 600, 800, 1100, 1600', sizes: c_sizes, loading: 'lazy', alt: img_alt }}
+    {%- else -%}
+      <span class="pm-img-fallback">[{{ article.title | escape }}]</span>
+    {%- endif -%}
+    {%- if tag_label != blank -%}<span class="pm-blog__tag">{{ tag_label | escape }}</span>{%- endif -%}
+  </span>
+  {%- if ss.show_date -%}<span class="pm-blog__meta">{{ article.published_at | time_tag: format: 'date' }}</span>{%- endif -%}
+  <h3>{{ article.title | escape }}</h3>
+  {%- if excerpt != blank -%}<p class="pm-blog__excerpt">{{ excerpt }}</p>{%- endif -%}
+  {%- if ss.read_more != blank -%}<span class="pm-blog__rm">{{ ss.read_more | escape }} <span aria-hidden="true">&rarr;</span></span>{%- endif -%}
+</a>
+{%- endif -%}

@@ -1,0 +1,120 @@
+{%- comment -%}
+  Parkmore blog index (/blogs/news). Same content as the Ignite blog page it replaces
+  (title, intro, "Browse by Category" links, posts with image, date and a 20-word excerpt),
+  styled like the homepage: Lora headings with a gold ending, pill chips, rounded cards,
+  and the newest post as a dark feature card on page one.
+{%- endcomment -%}
+{{ 'pm-blog.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign ss = section.settings
+  assign active_tag = current_tags.first | handleize
+  assign categories = section.blocks | where: 'type', 'category'
+-%}
+
+<section class="pm pm-section pm-blog" aria-label="{{ ss.heading | append: ' ' | append: ss.heading_emphasis | strip | escape }}">
+  <div class="pm-wrap">
+    <header class="pm-blog__head" data-pm-reveal>
+      <h1 class="pm-blog__title">
+        {{- ss.heading | escape -}}
+        {%- if ss.heading_emphasis != blank -%}{%- if ss.heading != blank -%}{{ ' ' }}{%- endif -%}<em>{{ ss.heading_emphasis | escape }}</em>{%- endif -%}
+      </h1>
+      {%- if ss.intro != blank -%}<div class="pm-lead pm-blog__intro">{{ ss.intro }}</div>{%- endif -%}
+    </header>
+
+    {%- if categories.size > 0 -%}
+      <nav class="pm-blog__cats" aria-label="{{ ss.categories_label | default: 'Blog categories' | escape }}" data-pm-reveal="2">
+        {%- if ss.categories_label != blank -%}<span class="pm-blog__cats-lbl">{{ ss.categories_label | escape }}</span>{%- endif -%}
+        <div class="pm-blog__chips">
+          <a class="pm-blog__chip" href="{{ blog.url }}"{% if active_tag == blank %} aria-current="page"{% endif %}>{{ ss.all_label | escape }}</a>
+          {%- for block in categories -%}
+            {%- assign handle = block.settings.tag | handleize -%}
+            <a class="pm-blog__chip" href="{{ blog.url }}/tagged/{{ handle }}"{% if active_tag == handle %} aria-current="page"{% endif %} {{ block.shopify_attributes }}>{{ block.settings.label | escape }}</a>
+          {%- endfor -%}
+        </div>
+      </nav>
+    {%- endif -%}
+
+    {%- paginate blog.articles by ss.per_page -%}
+      {%- liquid
+        assign show_feature = false
+        if ss.feature_first and paginate.current_page == 1 and active_tag == blank and blog.articles.size > 1
+          assign show_feature = true
+        endif
+      -%}
+
+      {%- if blog.articles.size == 0 -%}
+        <p class="pm-blog__empty">No posts here yet.</p>
+      {%- endif -%}
+
+      {%- if show_feature -%}
+        {%- render 'pm-blog-card', article: blog.articles.first, categories: categories, ss: ss, feature: true -%}
+        {%- assign skip = 1 -%}
+      {%- else -%}
+        {%- assign skip = 0 -%}
+      {%- endif -%}
+
+      {%- if blog.articles.size > skip -%}
+        <div class="pm-blog__grid">
+          {%- for article in blog.articles offset: skip -%}
+            {%- assign reveal = forloop.index | modulo: 3 -%}{%- if reveal == 0 -%}{%- assign reveal = 3 -%}{%- endif -%}
+            {%- render 'pm-blog-card', article: article, categories: categories, ss: ss, feature: false, reveal: reveal -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      {%- if paginate.pages > 1 -%}
+        <nav class="pm-blog__pages" aria-label="Pagination">
+          {%- if paginate.previous -%}
+            <a class="pm-blog__page pm-blog__page--step" href="{{ paginate.previous.url }}" aria-label="Previous page"><span aria-hidden="true">&larr;</span></a>
+          {%- endif -%}
+          {%- for part in paginate.parts -%}
+            {%- if part.is_link -%}
+              <a class="pm-blog__page" href="{{ part.url }}" aria-label="Page {{ part.title }}">{{ part.title }}</a>
+            {%- elsif part.title == paginate.current_page -%}
+              <span class="pm-blog__page" aria-current="page">{{ part.title }}</span>
+            {%- else -%}
+              <span class="pm-blog__page pm-blog__page--gap">{{ part.title }}</span>
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if paginate.next -%}
+            <a class="pm-blog__page pm-blog__page--step" href="{{ paginate.next.url }}" aria-label="Next page"><span aria-hidden="true">&rarr;</span></a>
+          {%- endif -%}
+        </nav>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "PM blog",
+  "tag": "div",
+  "class": "pm-section-blog",
+  "enabled_on": { "templates": ["blog"] },
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The Parkmore" },
+    { "type": "text", "id": "heading_emphasis", "label": "Heading gold ending", "default": "Journal" },
+    { "type": "richtext", "id": "intro", "label": "Intro" },
+    { "type": "header", "content": "Categories" },
+    { "type": "text", "id": "categories_label", "label": "Label", "default": "Browse by Category" },
+    { "type": "text", "id": "all_label", "label": "All posts chip", "default": "All" },
+    { "type": "header", "content": "Posts" },
+    { "type": "range", "id": "per_page", "label": "Posts per page", "min": 3, "max": 24, "step": 1, "default": 12 },
+    { "type": "checkbox", "id": "feature_first", "label": "Show the newest post as a large card", "info": "Page one of All posts only.", "default": true },
+    { "type": "checkbox", "id": "show_date", "label": "Show date", "default": true },
+    { "type": "range", "id": "excerpt_words", "label": "Excerpt length (words)", "min": 0, "max": 60, "step": 5, "default": 20 },
+    { "type": "text", "id": "read_more", "label": "Read more label", "info": "Leave blank to hide." }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "info": "e.g. Customer Stories" },
+        { "type": "text", "id": "tag", "label": "Article tag", "info": "The tag used on the posts, e.g. customer-stories" }
+      ]
+    }
+  ],
+  "presets": [ { "name": "PM blog" } ]
+}
+{% endschema %}
