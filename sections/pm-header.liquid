@@ -5,7 +5,22 @@
 {%- endcomment -%}
 {%- assign ss = section.settings -%}
 
-{%- comment -%} Cart drawer assets: Ignite loads these from its own header, which this section replaces. {%- endcomment -%}
+{%- comment -%}
+  Assets Ignite's own header (sections/header.liquid) loads for the whole site. This section replaces
+  that header, so it loads the same files the same way: cart drawer, cart line items, cart notification,
+  search and menu drawer styles, and cart-drawer.js.
+{%- endcomment -%}
+{%- if request.design_mode -%}
+  {{ 'component-search.css' | asset_url | stylesheet_tag }}
+  {{ 'component-menu-drawer.css' | asset_url | stylesheet_tag }}
+  {{ 'component-cart-notification.css' | asset_url | stylesheet_tag }}
+  {{ 'component-cart-items.css' | asset_url | stylesheet_tag }}
+{%- else -%}
+  <link rel="stylesheet" href="{{ 'component-search.css' | asset_url }}" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="{{ 'component-menu-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="{{ 'component-cart-notification.css' | asset_url }}" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
+{%- endif -%}
 {%- if settings.cart_drawer_enabled -%}
   {%- if request.design_mode -%}
     {{ 'component-cart-drawer.css' | asset_url | stylesheet_tag }}
@@ -89,6 +104,51 @@
     window.addEventListener('resize', publishHeight);
   })();
 </script>
+
+{%- comment -%} Structured data Ignite's header outputs on the homepage (Organization + site search). {%- endcomment -%}
+{%- if request.page_type == 'index' and settings.seo_schema_organization -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "OnlineStore",
+      "name": {{ shop.name | json }},
+      "url": {{ request.origin | append: page.url | json }},
+      {% if ss.logo %}
+        "logo": {{ ss.logo | image_url: width: 500 | prepend: "https:" | json }},
+      {% endif %}
+      "sameAs": [
+        {{ settings.social_x_link | json }},
+        {{ settings.social_facebook_link | json }},
+        {{ settings.social_pinterest_link | json }},
+        {{ settings.social_instagram_link | json }},
+        {{ settings.social_tiktok_link | json }},
+        {{ settings.social_tumblr_link | json }},
+        {{ settings.social_snapchat_link | json }},
+        {{ settings.social_youtube_link | json }},
+        {{ settings.social_vimeo_link | json }},
+        {{ settings.social_whatsapp_link | json }},
+        {{ settings.social_threads_link | json }},
+        {{ settings.social_linkedin_link | json }}
+      ]
+    }
+  </script>
+{%- endif -%}
+{%- if request.page_type == 'index' and settings.seo_schema_searchaction -%}
+  {%- assign potential_action_target = request.origin | append: routes.search_url | append: '?q={search_term_string}' -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": {{ shop.name | json }},
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {{ potential_action_target | json }},
+        "query-input": "required name=search_term_string"
+      },
+      "url": {{ request.origin | append: page.url | json }}
+    }
+  </script>
+{%- endif -%}
 
 {% style %}
   .pm-section-header{position:sticky;top:0;z-index:50}
