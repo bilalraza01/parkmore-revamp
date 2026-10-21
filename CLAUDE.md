@@ -7,3 +7,4 @@
 - Preview locally with `shopify theme dev --store 4c7ims-33`.
 - Ignite is on 2.3.0 in this repo (not 2.6.1 as the brief says); the update is deferred.
 - Images are always Shopify-hosted (image_picker settings or CDN URLs), never base64.
+- `pm-header` replaces Ignite's header (disabled in `sections/header-group.json`). Ignite's header also loaded site-wide assets (cart drawer/cart items/notification/search/menu-drawer CSS, `cart-drawer.js`) and homepage JSON-LD; `pm-header` must keep loading all of them. Before disabling any other Ignite section, check what assets and scripts it loads.
