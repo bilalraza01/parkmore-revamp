@@ -49,14 +49,9 @@
 .pm-blog__post:hover .pm-blog__rm span{transform:translateX(4px)}
 .pm-blog__empty{text-align:center;color:var(--stone);padding:40px 0}
 
-/* Pagination */
-.pm-blog__pages{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:64px;flex-wrap:wrap}
-.pm .pm-blog__page{min-width:44px;height:44px;padding:0 12px;border-radius:999px;display:inline-grid;place-items:center;border:1.5px solid var(--line);background:var(--white);font-weight:700;font-size:15px;transition:border-color .3s ease,background-color .3s ease,color .3s ease}
-.pm a.pm-blog__page:hover{border-color:var(--gold)}
-.pm .pm-blog__page[aria-current="page"]{background:var(--charcoal);border-color:var(--charcoal);color:var(--gold-hi)}
-.pm .pm-blog__page--gap{border-color:transparent;background:none}
-.pm .pm-blog__page--step{background:var(--charcoal);border-color:var(--charcoal);color:var(--gold-hi)}
-.pm .pm-blog__page--step:hover{background:var(--gold);border-color:var(--gold);color:var(--charcoal)}
+/* Show more (replaces numbered pages, like the Ignite blog) */
+.pm-blog__more{display:flex;justify-content:center;margin-top:64px}
+.pm .pm-blog__more .pm-btn.loading{opacity:.7;pointer-events:none}
 
 @media (max-width:900px){
   .pm-blog{padding-top:32px}

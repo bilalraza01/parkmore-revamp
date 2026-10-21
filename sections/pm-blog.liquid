@@ -5,6 +5,7 @@
   and the newest post as a dark feature card on page one.
 {%- endcomment -%}
 {{ 'pm-blog.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'pm-blog.js' | asset_url }}" defer="defer"></script>
 {%- liquid
   assign ss = section.settings
   assign active_tag = current_tags.first | handleize
@@ -62,24 +63,11 @@
         </div>
       {%- endif -%}
 
-      {%- if paginate.pages > 1 -%}
-        <nav class="pm-blog__pages" aria-label="Pagination">
-          {%- if paginate.previous -%}
-            <a class="pm-blog__page pm-blog__page--step" href="{{ paginate.previous.url }}" aria-label="Previous page"><span aria-hidden="true">&larr;</span></a>
-          {%- endif -%}
-          {%- for part in paginate.parts -%}
-            {%- if part.is_link -%}
-              <a class="pm-blog__page" href="{{ part.url }}" aria-label="Page {{ part.title }}">{{ part.title }}</a>
-            {%- elsif part.title == paginate.current_page -%}
-              <span class="pm-blog__page" aria-current="page">{{ part.title }}</span>
-            {%- else -%}
-              <span class="pm-blog__page pm-blog__page--gap">{{ part.title }}</span>
-            {%- endif -%}
-          {%- endfor -%}
-          {%- if paginate.next -%}
-            <a class="pm-blog__page pm-blog__page--step" href="{{ paginate.next.url }}" aria-label="Next page"><span aria-hidden="true">&rarr;</span></a>
-          {%- endif -%}
-        </nav>
+      {%- if paginate.next -%}
+        {%- comment -%} "Show more", as on the Ignite blog: appends the next page's posts without a reload (pm-blog.js). Works as a plain link without JavaScript. {%- endcomment -%}
+        <div class="pm-blog__more">
+          <a class="pm-btn pm-btn-gold" href="{{ paginate.next.url }}" data-pm-blog-more data-loading-text="{{ 'general.pagination.loading_text' | t | escape }}">{{ 'general.pagination.show_more' | t }}</a>
+        </div>
       {%- endif -%}
     {%- endpaginate -%}
   </div>
