@@ -54,14 +54,15 @@
 .pm-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:15px 26px;border-radius:999px;font-weight:700;font-size:15.5px;line-height:1.6;transition:background-color .3s ease,color .3s ease,border-color .3s ease,transform .3s ease;white-space:nowrap}
 .pm-btn .pm-ar{transition:transform .3s ease}
 .pm-btn:hover .pm-ar{transform:translateX(4px)}
-.pm-btn-gold{background:var(--gold);color:var(--charcoal)}
-.pm-btn-gold:hover{background:var(--gold-hi)}
-.pm-btn-dark{background:var(--charcoal);color:var(--ivory)}
-.pm-btn-dark:hover{background:var(--ink)}
-.pm-btn-line{border:1.5px solid currentColor}
-.pm-btn-line:hover{background:var(--charcoal);color:var(--ivory);border-color:var(--charcoal)}
-.pm-dark .pm-btn-line{color:var(--ivory)}
-.pm-dark .pm-btn-line:hover{background:var(--ivory);color:var(--charcoal);border-color:var(--ivory)}
+/* Prefixed with .pm so they beat ".pm a{color:inherit}" when the button is a link */
+.pm .pm-btn-gold{background:var(--gold);color:var(--charcoal)}
+.pm .pm-btn-gold:hover{background:var(--gold-hi);color:var(--charcoal)}
+.pm .pm-btn-dark{background:var(--charcoal);color:var(--ivory)}
+.pm .pm-btn-dark:hover{background:var(--ink);color:var(--ivory)}
+.pm .pm-btn-line{border:1.5px solid currentColor}
+.pm .pm-btn-line:hover{background:var(--charcoal);color:var(--ivory);border-color:var(--charcoal)}
+.pm-dark .pm-btn-line,.pm.pm-dark .pm-btn-line{color:var(--ivory)}
+.pm-dark .pm-btn-line:hover,.pm.pm-dark .pm-btn-line:hover{background:var(--ivory);color:var(--charcoal);border-color:var(--ivory)}
 
 /* Section heads and grids */
 .pm-shop-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:44px}
