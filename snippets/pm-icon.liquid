@@ -1,0 +1,20 @@
+{%- comment -%}
+  Parkmore inline icons, copied from the mockup. Colour comes from currentColor.
+  Usage: {% render 'pm-icon', icon: 'horse' %}  icon: horse | dog
+         weight: 'bold' (hero tags, review tags) or 'light' (finder cards, default)
+{%- endcomment -%}
+{%- liquid
+  if weight == 'bold'
+    assign sw = 14
+    assign r = 8
+  else
+    assign sw = 7
+    assign r = 5.5
+  endif
+-%}
+{%- case icon -%}
+  {%- when 'horse' -%}
+    <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="{{ sw }}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M50 30C26 66 22 114 38 148C52 176 76 188 100 188C124 188 148 176 162 148C178 114 174 66 150 30L124 40C140 72 144 104 136 130C128 154 114 164 100 164C86 164 72 154 64 130C56 104 60 72 76 40Z"/><circle cx="52" cy="78" r="{{ r }}" fill="currentColor" stroke="none"/><circle cx="46" cy="110" r="{{ r }}" fill="currentColor" stroke="none"/><circle cx="57" cy="140" r="{{ r }}" fill="currentColor" stroke="none"/><circle cx="148" cy="78" r="{{ r }}" fill="currentColor" stroke="none"/><circle cx="154" cy="110" r="{{ r }}" fill="currentColor" stroke="none"/><circle cx="143" cy="140" r="{{ r }}" fill="currentColor" stroke="none"/></svg>
+  {%- when 'dog' -%}
+    <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="{{ sw }}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M100 104C122 104 148 128 152 152C156 174 138 184 121 177C112 173 106 171 100 171C94 171 88 173 79 177C62 184 44 174 48 152C52 128 78 104 100 104Z"/><ellipse cx="44" cy="92" rx="15" ry="21" transform="rotate(-24 44 92)"/><ellipse cx="77" cy="50" rx="15.5" ry="23" transform="rotate(-9 77 50)"/><ellipse cx="123" cy="50" rx="15.5" ry="23" transform="rotate(9 123 50)"/><ellipse cx="156" cy="92" rx="15" ry="21" transform="rotate(24 156 92)"/></svg>
+{%- endcase -%}

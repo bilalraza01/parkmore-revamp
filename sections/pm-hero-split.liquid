@@ -1,0 +1,165 @@
+{%- comment -%}
+  Parkmore split hero (Mockup 3, section #top).
+  Horse and dog panes open from the centre, the hovered pane grows, the divider and medal follow it.
+  Each pane links to the finder and preselects the animal through data-pm-pick (handled by pm-finder).
+{%- endcomment -%}
+{{ 'pm-hero-split.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'pm-hero-split.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign ss = section.settings
+  assign line_1_words = ss.heading_line_1 | split: ' '
+  assign line_2_words = ss.heading_line_2 | split: ' '
+  assign emphasis_words = ss.heading_emphasis | split: ' '
+  assign delay = 0.55
+  assign medal_image = ss.medal_image | default: settings.logo
+  assign animals = 'horse,dog' | split: ','
+-%}
+
+<section class="pm pm-dark pm-hero" id="{{ ss.anchor_id | default: 'top' | handleize }}" data-dark aria-label="{{ ss.aria_label | escape }}">
+  <div class="pm-hero__top">
+    {%- if ss.eyebrow != blank -%}
+      <span class="pm-hero__eb"><i></i>{{ ss.eyebrow | escape }}</span>
+    {%- endif -%}
+    <h1 class="pm-hero__title">
+      {%- for word in line_1_words -%}
+        <span class="w"><span style="animation-delay:{{ delay | round: 2 }}s">{{ word | escape }}</span></span>{% unless forloop.last %} {% endunless %}
+        {%- assign delay = delay | plus: 0.08 -%}
+      {%- endfor -%}
+      {%- if ss.heading_line_2 != blank or ss.heading_emphasis != blank -%}<br>{%- endif -%}
+      {%- for word in line_2_words -%}
+        <span class="w"><span style="animation-delay:{{ delay | round: 2 }}s">{{ word | escape }}</span></span>{% unless forloop.last and emphasis_words.size == 0 %} {% endunless %}
+        {%- assign delay = delay | plus: 0.08 -%}
+      {%- endfor -%}
+      {%- if emphasis_words.size > 0 -%}
+        <span class="w"><span style="animation-delay:{{ delay | round: 2 }}s"><em>{{ ss.heading_emphasis | escape }}</em></span></span>
+      {%- endif -%}
+    </h1>
+  </div>
+
+  <div class="pm-hero__panes" data-pm-panes>
+    {%- for animal in animals -%}
+      {%- liquid
+        assign k_image = animal | append: '_image'
+        assign k_alt = animal | append: '_image_alt'
+        assign k_position = animal | append: '_image_position'
+        assign k_tag = animal | append: '_tag'
+        assign k_heading = animal | append: '_heading'
+        assign k_text = animal | append: '_text'
+        assign k_button = animal | append: '_button'
+        assign img = ss[k_image]
+        assign alt = ss[k_alt] | default: img.alt
+        assign position = ss[k_position]
+      -%}
+      <a class="pm-hero__pane pm-hero__pane--{{ animal }}" href="{{ ss.finder_link | default: '#finder' }}" data-pm-pick="{{ animal }}">
+        {%- if img != blank -%}
+          {{
+            img
+            | image_url: width: 2400
+            | image_tag:
+              widths: '600, 900, 1200, 1600, 2000, 2400',
+              sizes: '(min-width: 901px) 70vw, 100vw',
+              loading: 'eager',
+              fetchpriority: 'high',
+              alt: alt,
+              style: position
+          }}
+        {%- else -%}
+          <div class="pm-img-fallback">[{{ animal | capitalize }} hero photo: choose an image in the theme editor]</div>
+        {%- endif -%}
+        <div class="pm-hero__copy">
+          <span class="pm-hero__tag">{%- render 'pm-icon', icon: animal, weight: 'bold' -%}{{ ss[k_tag] | escape }}</span>
+          <h3>{{ ss[k_heading] | escape }}</h3>
+          <p>{{ ss[k_text] | escape }}</p>
+          <span class="pm-hero__go">{{ ss[k_button] | escape }} <span class="pm-ar" aria-hidden="true">&rarr;</span></span>
+        </div>
+      </a>
+    {%- endfor -%}
+  </div>
+
+  <span class="pm-hero__divider" data-pm-divider aria-hidden="true"></span>
+  <div class="pm-hero__medal" data-pm-medal aria-hidden="true">
+    <svg class="ring" viewBox="0 0 150 150">
+      <defs><path id="pm-mc-{{ section.id }}" d="M75 75 m-60 0 a60 60 0 1 1 120 0 a60 60 0 1 1 -120 0"/></defs>
+      <text><textPath href="#pm-mc-{{ section.id }}">{{ ss.medal_text | escape }}</textPath></text>
+    </svg>
+    <span class="core{% if ss.medal_crop_left %} core--crop{% endif %}">
+      {%- if medal_image != blank -%}
+        {{ medal_image | image_url: width: 400 | image_tag: alt: '', widths: '200, 400', sizes: '134px', loading: 'eager' }}
+      {%- endif -%}
+    </span>
+  </div>
+
+  {%- if section.blocks.size > 0 -%}
+    <div class="pm-hero__stats">
+      <div class="pm-wrap">
+        {%- for block in section.blocks -%}
+          <div class="hs" {{ block.shopify_attributes }}>
+            <strong data-pm-count>{{ block.settings.value | escape }}</strong>
+            <span>{{ block.settings.label | escape }}</span>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "PM hero split",
+  "tag": "div",
+  "class": "pm-section-hero",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor id", "default": "top" },
+    { "type": "text", "id": "aria_label", "label": "Accessible label", "default": "Introduction" },
+    { "type": "text", "id": "finder_link", "label": "Pane link", "default": "#finder", "info": "Both panes go here and preselect horse or dog in the formula finder." },
+    { "type": "header", "content": "Headline" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Founder-formulated for horses and dogs" },
+    { "type": "text", "id": "heading_line_1", "label": "Heading line 1", "default": "Nutrition from people" },
+    { "type": "text", "id": "heading_line_2", "label": "Heading line 2", "default": "who’ve" },
+    { "type": "text", "id": "heading_emphasis", "label": "Heading gold ending", "default": "lived it." },
+    { "type": "header", "content": "Horse pane" },
+    { "type": "image_picker", "id": "horse_image", "label": "Image" },
+    { "type": "text", "id": "horse_image_alt", "label": "Image description", "default": "A young rider on a chestnut horse at a show, talking with her trainer" },
+    { "type": "text", "id": "horse_image_position", "label": "Image focal point (CSS)", "default": "object-position:50% 0%" },
+    { "type": "text", "id": "horse_tag", "label": "Tag", "default": "For horses" },
+    { "type": "text", "id": "horse_heading", "label": "Heading", "default": "Built in the barn." },
+    { "type": "text", "id": "horse_text", "label": "Text", "default": "Gut, immune, coat, hoof and calm." },
+    { "type": "text", "id": "horse_button", "label": "Button label", "default": "Find my horse’s formula" },
+    { "type": "header", "content": "Dog pane" },
+    { "type": "image_picker", "id": "dog_image", "label": "Image" },
+    { "type": "text", "id": "dog_image_alt", "label": "Image description", "default": "Fred, Fleur’s dog, in a field" },
+    { "type": "text", "id": "dog_image_position", "label": "Image focal point (CSS)", "default": "object-position:50% 40%" },
+    { "type": "text", "id": "dog_tag", "label": "Tag", "default": "For dogs" },
+    { "type": "text", "id": "dog_heading", "label": "Heading", "default": "Loved on the couch." },
+    { "type": "text", "id": "dog_text", "label": "Text", "default": "Immune, digestion, skin and coat." },
+    { "type": "text", "id": "dog_button", "label": "Button label", "default": "Find my dog’s formula" },
+    { "type": "header", "content": "Medal" },
+    { "type": "text", "id": "medal_text", "label": "Ring text", "default": "Horses · Dogs · Since 2002 · Kentucky ·" },
+    { "type": "image_picker", "id": "medal_image", "label": "Centre monogram", "info": "Falls back to the store logo." },
+    { "type": "checkbox", "id": "medal_crop_left", "label": "Show only the left square of the image", "info": "Use when the image is the full logo, so only the P monogram shows.", "default": false }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        { "type": "text", "id": "value", "label": "Value", "default": "50+", "info": "Whole numbers like 50 or 80+ count up on load." },
+        { "type": "text", "id": "label", "label": "Label", "default": "Years with horses" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PM hero split",
+      "blocks": [
+        { "type": "stat", "settings": { "value": "50+", "label": "Years with horses" } },
+        { "type": "stat", "settings": { "value": "80+", "label": "Verified reviews" } },
+        { "type": "stat", "settings": { "value": "4.9 ★", "label": "Average rating" } },
+        { "type": "stat", "settings": { "value": "12pm ET", "label": "Same-day dispatch cut-off" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
