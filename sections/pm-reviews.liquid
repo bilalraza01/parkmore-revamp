@@ -1,6 +1,6 @@
 {%- comment -%}
   Parkmore reviews marquee (Mockup 3, section #proof). Two rows scrolling in opposite directions,
-  paused on hover. Each row is rendered twice (second copy hidden from screen readers) for a seamless loop.
+  paused on hover. Each row is rendered four times (copies hidden from screen readers) so the loop stays seamless on very wide screens.
 {%- endcomment -%}
 {{ 'pm-reviews.css' | asset_url | stylesheet_tag }}
 {%- assign ss = section.settings -%}
@@ -24,10 +24,10 @@
     {%- endif -%}
   </div>
   {%- if row_1 != blank -%}
-    <div class="pm-marquee"><div class="pm-mrow">{{ row_1 }}</div><div class="pm-mrow" aria-hidden="true">{{ row_1 }}</div></div>
+    <div class="pm-marquee"><div class="pm-mrow">{{ row_1 }}</div>{%- for i in (1..3) -%}<div class="pm-mrow" aria-hidden="true">{{ row_1 }}</div>{%- endfor -%}</div>
   {%- endif -%}
   {%- if row_2 != blank -%}
-    <div class="pm-marquee pm-marquee--rev"><div class="pm-mrow">{{ row_2 }}</div><div class="pm-mrow" aria-hidden="true">{{ row_2 }}</div></div>
+    <div class="pm-marquee pm-marquee--rev"><div class="pm-mrow">{{ row_2 }}</div>{%- for i in (1..3) -%}<div class="pm-mrow" aria-hidden="true">{{ row_2 }}</div>{%- endfor -%}</div>
   {%- endif -%}
 </section>
 

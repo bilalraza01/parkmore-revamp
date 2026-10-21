@@ -1,5 +1,5 @@
 /* PM hero split. Values from .context/parkmore-mockup-3.html (HERO). */
-.pm-hero{position:relative;height:min(880px,calc(100vh - var(--pm-hero-offset,105px)));min-height:640px;background:var(--ink);color:var(--ivory);overflow:hidden;isolation:isolate}
+.pm-hero{position:relative;height:min(max(880px,42vw),calc(100vh - var(--pm-hero-offset,105px)));min-height:640px;background:var(--ink);color:var(--ivory);overflow:hidden;isolation:isolate}
 
 .pm-hero__panes{position:absolute;inset:0;display:flex;clip-path:inset(0 50% 0 50%);animation:pm-hero-open 1.3s .1s cubic-bezier(.7,0,.2,1) forwards}
 @keyframes pm-hero-open{to{clip-path:inset(0 0 0 0)}}
@@ -52,6 +52,25 @@
 .pm-hero__stats .hs:nth-child(1){animation-delay:1.5s}.pm-hero__stats .hs:nth-child(2){animation-delay:1.6s}.pm-hero__stats .hs:nth-child(3){animation-delay:1.7s}.pm-hero__stats .hs:nth-child(4){animation-delay:1.8s}
 .pm-hero__stats .hs strong{display:block;font-family:var(--serif);font-weight:400;font-size:30px;line-height:1;color:var(--gold-hi)}
 .pm-hero__stats .hs span{font-size:12.5px;letter-spacing:.6px;text-transform:uppercase;color:#CFCBC2;font-weight:600}
+
+
+/* Large screens: move the pane copy in from the screen edges as the screen widens */
+@media (min-width:1600px){
+  /* Grows smoothly from 64px at 1600px, so there is no jump at the breakpoint */
+  .pm-hero__pane--horse .pm-hero__copy{padding-left:calc((100vw - 1600px) / 4 + 64px)}
+  .pm-hero__pane--dog .pm-hero__copy{padding-right:calc((100vw - 1600px) / 4 + 64px)}
+}
+/* Very large screens: scale the type up a little so it holds the bigger canvas */
+@media (min-width:2200px){
+  .pm-hero .pm-hero__title{font-size:clamp(84px,4vw,150px)}
+  .pm-hero__pane h3{font-size:clamp(50px,2.4vw,84px)}
+  .pm-hero__pane p{font-size:19px}
+  .pm-hero__copy{bottom:150px}
+  .pm-hero__top{padding-top:96px}
+  .pm-hero__medal{width:190px;height:190px}
+  .pm-hero__medal .core{inset:40px}
+  .pm-hero__medal .core img{width:64px;height:64px}
+}
 
 @media (max-width:900px){
   .pm-hero{height:auto;min-height:0;display:flex;flex-direction:column}
