@@ -16,7 +16,8 @@
         "color_scheme": "scheme-2",
         "line_separator": "",
         "visibility": ""
-      }
+      },
+      "disabled": true
     },
     "header": {
       "type": "page-header",
