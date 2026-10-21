@@ -2301,7 +2301,9 @@
       ],
       "settings": {
         "medal_image": "shopify://shop_images/Parkmore_WebGOLD-P.png",
-        "medal_crop_left": true
+        "medal_crop_left": true,
+        "horse_image": "shopify://shop_images/Fleur_Post.jpg",
+        "dog_image": "shopify://shop_images/FredInField.jpg"
       }
     }
   },
