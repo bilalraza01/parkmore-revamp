@@ -156,18 +156,10 @@ Content is edited in Settings → Policies, not the theme. The theme only contro
 
 ---
 
-## ⚠️ Draft theme is older than the live theme
+## Draft theme vs live theme
 
-The draft (`parkmore-revamp/main`) was copied from an **Ignite 2.3.0** theme. The live theme is **Ignite 2.6.1** and has newer files and content. Before the draft can be published:
+**Resolved 21 Oct 2026.** The draft was upgraded from Ignite 2.3.0 to **2.6.1**, the same version as the live theme, and the live-only templates were added (`page.help-center`, `page.general-help`, `page.icons`, `product.enquire`, `product.high-converting`, `product.context.parkmore-wholesale-test`, `collection.filters`). `page.faq-orders` and `collection` were copied from live.
 
-**Resolved 21 Oct 2026:** `page.faq-orders`, `page.help-center`, `page.general-help` and `collection` were copied from live. The Orders FAQ, Help, Subscriptions help and all four collection pages now show the same content on the draft as on live. Still different on collections: the product count after the title and the card order/"Quick view" buttons, which are Ignite 2.6.1 code (to be rebuilt in the collection revamp).
+Checked page by page against live after the upgrade: every product page, blog post, collection, content page, policy, cart, search and 404 shows the same content on the draft as on live. Only the homepage and blog index differ, because they are redesigned. Collection and search product order varies on live itself between loads.
 
-**Missing from the draft (live only):**
-- ~~`page.help-center`, `page.general-help`~~ (copied), `page.icons`, `product.enquire`, `product.high-converting`, `product.context.parkmore-wholesale-test`, `collection.filters`
-- Social video reel section and its assets/snippets
-
-**Content newer on live than on the draft:** `templates/product.json` (all 17 product pages), ~~`page.faq-orders.json`~~ (copied), `article.json` (all 25 posts), ~~`collection.json`~~ (copied), `blog.json` (replaced by the redesign), `cart.json`, `page.about-us.json`, `page.our-services.json`, `product.bulk-order.json`, `product.fashion.json`, `product.preorder.json`, `collection.fashion.json`, `sections/footer-group.json`, `sections/header-group.json`, `config/settings_data.json`.
-
-**Theme code** also differs in about 40 asset, block and layout files (2.3.0 vs 2.6.1).
-
-**Also:** `templates/index.context.us.json` (US-market homepage override) only overrides two old homepage sections that the new homepage removed. Harmless, but dead config to delete.
+Still to do: `templates/index.context.us.json` (US-market homepage override) only overrides two old homepage sections that the new homepage removed. Harmless dead config; delete it.
