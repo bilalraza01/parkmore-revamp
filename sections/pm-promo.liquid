@@ -1,0 +1,25 @@
+{%- comment -%} Parkmore promo bar (Mockup 3, above the header). Scrolls away; the header below stays. {%- endcomment -%}
+{%- if section.settings.text != blank -%}
+  <div class="pm-promo">{{ section.settings.text }}</div>
+{%- endif -%}
+
+{% style %}
+  .pm-promo{background:var(--ink);color:#E4DFD3;font-family:var(--sans);font-size:13px;line-height:1.5;text-align:center;padding:8px 16px}
+  .pm-promo b,.pm-promo strong{color:var(--gold-hi);font-weight:700}
+  .pm-promo a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+  .pm-promo p{margin:0}
+  @media (max-width:560px){.pm-promo{font-size:12px}}
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "PM promo bar",
+  "tag": "div",
+  "class": "pm-section-promo",
+  "enabled_on": { "groups": ["header"] },
+  "settings": [
+    { "type": "inline_richtext", "id": "text", "label": "Text", "info": "Bold text shows in gold.", "default": "Free US shipping on Parkmore protocol bundles · Orders before <strong>12pm ET</strong> usually ship same day" }
+  ],
+  "presets": [ { "name": "PM promo bar" } ]
+}
+{% endschema %}

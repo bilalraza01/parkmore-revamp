@@ -62,7 +62,8 @@
         "enable_language_selector": true,
         "text_padding": 0.8,
         "show_line_separator": true
-      }
+      },
+      "disabled": true
     },
     "header": {
       "type": "header",
@@ -278,7 +279,8 @@
         "enable_language_selector": true,
         "spacing": 1.6,
         "let_it_snow": false
-      }
+      },
+      "disabled": true
     },
     "scrolling_text_eQKHpq": {
       "type": "scrolling-text",
@@ -328,7 +330,8 @@
         "show_time_afternoon": true,
         "show_time_evening": true,
         "show_time_night": true
-      }
+      },
+      "disabled": true
     },
     "ribbon_banner_QaeMiC": {
       "type": "ribbon-banner",
@@ -398,9 +401,67 @@
         "show_time_evening": true,
         "show_time_night": true
       }
+    },
+    "pm_promo": {
+      "type": "pm-promo",
+      "settings": {
+        "text": "Free US shipping on Parkmore protocol bundles · Orders before <strong>12pm ET</strong> usually ship same day"
+      }
+    },
+    "pm_header": {
+      "type": "pm-header",
+      "blocks": {
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "label": "Find a formula",
+            "link": "/#finder"
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "label": "Horses",
+            "link": "/#horses"
+          }
+        },
+        "link_3": {
+          "type": "link",
+          "settings": {
+            "label": "Dogs",
+            "link": "/#dogs"
+          }
+        },
+        "link_4": {
+          "type": "link",
+          "settings": {
+            "label": "Our story",
+            "link": "/#story"
+          }
+        },
+        "link_5": {
+          "type": "link",
+          "settings": {
+            "label": "Journal",
+            "link": "/#journal"
+          }
+        }
+      },
+      "block_order": [
+        "link_1",
+        "link_2",
+        "link_3",
+        "link_4",
+        "link_5"
+      ],
+      "settings": {
+        "logo": "shopify://shop_images/Parkmore_WebGOLD-P.png"
+      }
     }
   },
   "order": [
+    "pm_promo",
+    "pm_header",
     "announcement-bar",
     "header",
     "scrolling_text_eQKHpq",

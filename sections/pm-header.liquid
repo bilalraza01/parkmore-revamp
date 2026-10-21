@@ -1,0 +1,157 @@
+{%- comment -%}
+  Parkmore header (Mockup 3). Sticky translucent charcoal bar: logo, nav links, search, cart,
+  gold "Text Fleur's team" pill, and a dropdown menu below 1100px.
+  The cart link keeps id="cart-icon-bubble" so Ignite's cart drawer opens from it and refreshes its count.
+{%- endcomment -%}
+{%- assign ss = section.settings -%}
+
+{%- comment -%} Cart drawer assets: Ignite loads these from its own header, which this section replaces. {%- endcomment -%}
+{%- if settings.cart_drawer_enabled -%}
+  {%- if request.design_mode -%}
+    {{ 'component-cart-drawer.css' | asset_url | stylesheet_tag }}
+    {{ 'component-cart.css' | asset_url | stylesheet_tag }}
+    {{ 'component-totals.css' | asset_url | stylesheet_tag }}
+    {{ 'component-discounts.css' | asset_url | stylesheet_tag }}
+  {%- else -%}
+    <link rel="stylesheet" href="{{ 'component-cart-drawer.css' | asset_url }}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{{ 'component-cart.css' | asset_url }}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{{ 'component-totals.css' | asset_url }}" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="{{ 'component-discounts.css' | asset_url }}" media="print" onload="this.media='all'">
+  {%- endif -%}
+  <link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
+  <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+<header class="pm pm-hdr" data-pm-header>
+  <div class="pm-hdr__wrap">
+    <a class="pm-hdr__logo" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }} home">
+      {%- if ss.logo != blank -%}
+        {{ ss.logo | image_url: width: 400 | image_tag: widths: '200, 300, 400', sizes: '130px', alt: shop.name, loading: 'eager' }}
+      {%- else -%}
+        <span class="pm-hdr__name">{{ shop.name | escape }}</span>
+      {%- endif -%}
+    </a>
+
+    <nav class="pm-hdr__nav" aria-label="Main">
+      {%- for block in section.blocks -%}
+        <a href="{{ block.settings.link }}" {{ block.shopify_attributes }}>{{ block.settings.label | escape }}</a>
+      {%- endfor -%}
+    </nav>
+
+    <div class="pm-hdr__r">
+      <a class="pm-hdr__icon" href="{{ routes.search_url }}" aria-label="Search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      </a>
+      <a class="pm-hdr__icon pm-hdr__cart" href="{{ routes.cart_url }}" id="cart-icon-bubble" data-no-instant>
+        {%- comment -%} Ignite's cart drawer replaces this content after each add; the bag icon is drawn in CSS so it survives. {%- endcomment -%}
+        <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
+        {%- if cart != empty -%}
+          <div class="cart-count-bubble font-bold">
+            <span aria-hidden="true">{{ cart.item_count }}</span>
+            <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
+          </div>
+        {%- endif -%}
+      </a>
+      {%- if ss.cta_label != blank -%}
+        <a class="pm-btn pm-btn-gold pm-hdr__cta" href="{{ ss.cta_link }}">{{ ss.cta_label | escape }}</a>
+      {%- endif -%}
+      <button class="pm-hdr__icon pm-hdr__menu" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="PmMobileNav" data-pm-menu>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <nav class="pm-hdr__mnav" id="PmMobileNav" aria-label="Mobile" data-pm-mnav>
+    {%- for block in section.blocks -%}
+      <a href="{{ block.settings.link }}">{{ block.settings.label | escape }}</a>
+    {%- endfor -%}
+    {%- if ss.cta_label != blank -%}<a href="{{ ss.cta_link }}">{{ ss.cta_label | escape }}</a>{%- endif -%}
+  </nav>
+</header>
+
+<script>
+  (function () {
+    var hdr = document.currentScript.previousElementSibling;
+    var btn = hdr.querySelector('[data-pm-menu]');
+    var nav = hdr.querySelector('[data-pm-mnav]');
+    function set(open) {
+      nav.classList.toggle('open', open);
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    }
+    btn.addEventListener('click', function () { set(!nav.classList.contains('open')); });
+    nav.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { set(false); }); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && nav.classList.contains('open')) { set(false); btn.focus(); } });
+
+    /* Ignite's sticky header used to publish this; other Ignite components (galleries, filters) read it. */
+    function publishHeight() { document.documentElement.style.setProperty('--header-height', hdr.offsetHeight + 'px'); }
+    publishHeight();
+    window.addEventListener('resize', publishHeight);
+  })();
+</script>
+
+{% style %}
+  .pm-section-header{position:sticky;top:0;z-index:50}
+  .pm-hdr{position:relative;background:rgba(42,44,44,.92);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid rgba(243,202,31,.14)}
+  .pm-hdr__wrap{display:flex;align-items:center;justify-content:space-between;height:72px;gap:20px;max-width:1320px;margin:0 auto;padding:0 24px}
+  .pm-hdr__logo{display:block;flex-shrink:0}
+  .pm-hdr__logo img{height:48px;width:auto}
+  .pm-hdr__name{font-family:var(--serif);font-size:22px;color:var(--gold-hi)}
+  .pm-hdr__nav{display:flex;gap:30px}
+  .pm-hdr__nav a{color:var(--ivory);font-weight:600;font-size:14.5px;position:relative}
+  .pm-hdr__nav a::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;background:var(--gold-hi);transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
+  .pm-hdr__nav a:hover::after,.pm-hdr__nav a:focus-visible::after{transform:scaleX(1)}
+  .pm-hdr__r{display:flex;align-items:center;gap:8px}
+  .pm .pm-hdr__icon{position:relative;width:40px;height:40px;display:grid;place-items:center;color:var(--ivory);border-radius:50%;transition:background-color .3s ease}
+  .pm .pm-hdr__icon:hover{background:rgba(250,247,240,.08)}
+  .pm-hdr__icon svg{width:20px;height:20px}
+  .pm-hdr__cart > svg{display:none}
+  .pm-hdr__cart::before{content:"";width:20px;height:20px;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 7h12l-1 13H7z'/%3E%3Cpath d='M9 7a3 3 0 0 1 6 0'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 7h12l-1 13H7z'/%3E%3Cpath d='M9 7a3 3 0 0 1 6 0'/%3E%3C/svg%3E") center/contain no-repeat}
+  .pm-hdr__cart .cart-count-bubble{position:absolute;inset:3px 2px auto auto;box-shadow:none;width:auto;display:block;min-width:17px;height:17px;padding:0 4px;border-radius:999px;background:var(--gold);color:var(--charcoal);font-size:10.5px;font-weight:700;line-height:17px;text-align:center}
+  .pm .pm-hdr__cta{padding:10px 18px;font-size:14px}
+  .pm .pm-hdr__menu{display:none}
+  .pm-hdr__mnav{display:none;position:absolute;left:0;right:0;top:100%;background:var(--charcoal);padding:12px 24px 24px;z-index:49}
+  .pm-hdr__mnav.open{display:block}
+  .pm-hdr__mnav a{display:block;color:var(--ivory);font-weight:600;padding:12px 0;border-bottom:1px solid #3d4040}
+  @media (max-width:1100px){.pm-hdr__nav{display:none}.pm .pm-hdr__menu{display:grid}}
+  @media (min-width:1101px){.pm-hdr__mnav.open{display:none}}
+  @media (max-width:900px){.pm .pm-hdr__cta{display:none}}
+  @media (max-width:560px){.pm-hdr__logo img{height:42px}}
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "PM header",
+  "tag": "div",
+  "class": "pm-section-header",
+  "enabled_on": { "groups": ["header"] },
+  "max_blocks": 8,
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Logo" },
+    { "type": "text", "id": "cta_label", "label": "Gold button label", "default": "Text Fleur’s team" },
+    { "type": "text", "id": "cta_link", "label": "Gold button link", "default": "sms:+15022658345" }
+  ],
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Nav link",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label" },
+        { "type": "text", "id": "link", "label": "Link", "info": "Homepage chapters: /#finder, /#horses, /#dogs, /#story, /#journal" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PM header",
+      "blocks": [
+        { "type": "link", "settings": { "label": "Find a formula", "link": "/#finder" } },
+        { "type": "link", "settings": { "label": "Horses", "link": "/#horses" } },
+        { "type": "link", "settings": { "label": "Dogs", "link": "/#dogs" } },
+        { "type": "link", "settings": { "label": "Our story", "link": "/#story" } },
+        { "type": "link", "settings": { "label": "Journal", "link": "/#journal" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
