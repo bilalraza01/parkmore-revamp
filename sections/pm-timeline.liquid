@@ -31,10 +31,24 @@
           {%- if bs.year != blank -%}<span class="pm-tl__yr">{{ bs.year | escape }}</span>{%- endif -%}
           <div class="pm-tl__ph">
             {%- if img != blank -%}
+              {%- liquid
+                # The card is 4:5 and crops with object-fit:cover. A wider image is shown wider than the card,
+                # so scale the sizes hint by that factor or the browser picks a file that is too small.
+                assign cover = img.aspect_ratio | divided_by: 0.8
+                if cover < 1
+                  assign cover = 1
+                endif
+                assign s_desk = 270 | times: cover | ceil
+                assign s_tab = 45 | times: cover | ceil
+                assign s_mob = 90 | times: cover | ceil
+                capture img_sizes
+                  echo '(min-width: 1101px) ' | append: s_desk | append: 'px, (min-width: 561px) ' | append: s_tab | append: 'vw, ' | append: s_mob | append: 'vw'
+                endcapture
+              -%}
               {{
                 img
-                | image_url: width: 900
-                | image_tag: widths: '300, 450, 600, 900', sizes: '(min-width: 1101px) 270px, (min-width: 561px) 45vw, 90vw', loading: 'lazy', alt: bs.image_alt, style: bs.image_position
+                | image_url: width: 2000
+                | image_tag: widths: '300, 450, 600, 900, 1200, 1600, 2000', sizes: img_sizes, loading: 'lazy', alt: bs.image_alt, style: bs.image_position
               }}
             {%- else -%}
               <div class="pm-img-fallback">[{{ bs.image_alt | default: bs.title | escape }}: choose an image]</div>

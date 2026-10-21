@@ -24,7 +24,19 @@
       {%- render 'pm-us-map', label: ss.map_label -%}
       <div class="pm-net__photo">
         {%- if photo != blank -%}
-          {{ photo | image_url: width: 500 | image_tag: widths: '200, 350, 500', sizes: '(min-width: 901px) 160px, 28vw', loading: 'lazy', alt: ss.photo_alt }}
+          {%- liquid
+            # Square frame with object-fit:cover: a landscape photo is shown wider than the frame.
+            assign cover = photo.aspect_ratio
+            if cover < 1
+              assign cover = 1
+            endif
+            assign s_desk = 160 | times: cover | ceil
+            assign s_mob = 28 | times: cover | ceil
+            capture photo_sizes
+              echo '(min-width: 901px) ' | append: s_desk | append: 'px, ' | append: s_mob | append: 'vw'
+            endcapture
+          -%}
+          {{ photo | image_url: width: 1000 | image_tag: widths: '200, 350, 500, 750, 1000', sizes: photo_sizes, loading: 'lazy', alt: ss.photo_alt }}
         {%- else -%}
           <div class="pm-img-fallback">[Affiliate photo]</div>
         {%- endif -%}
