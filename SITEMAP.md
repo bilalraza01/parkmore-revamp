@@ -3,7 +3,7 @@
 Every public URL on the live store, grouped by the theme template that renders it, with revamp status.
 Source: the store's `sitemap.xml`, plus links found in the live header and footer, crawled 21 Oct 2026.
 
-**Totals:** 1 homepage · 17 products · 4 collections · 9 pages · 1 blog + 25 articles · 5 policies · system pages (search, cart, 404, account).
+**Totals:** 1 homepage · 16 products · 4 collections · 9 pages · 1 blog + 25 articles · 5 policies · system pages (search, cart, 404, account).
 
 Status key: ✅ revamped on the draft · ⬜ not started · ⚠️ problem to fix
 
@@ -17,7 +17,7 @@ Shopify pages share templates. Revamping one template revamps every URL that use
 |---|---|---|---|
 | `index` | Homepage | 1 | ✅ Mockup 3 (formula finder still to build) |
 | `blog` | Blog index, tag pages | 1 + 6 tag views | ✅ |
-| `product` (default) | All products | 17 | ⬜ |
+| `product` (default) | All products | 16 | ⬜ |
 | `collection` (default) | All collections | 4 | ⬜ |
 | `article` (default) | All blog posts | 25 | ⬜ |
 | `page` (default) | Plain content pages | 4 | ⬜ |
@@ -48,7 +48,7 @@ Shopify pages share templates. Revamping one template revamps every URL that use
 | `/collections/all` | Products | Shopify's automatic "all" collection; linked from the live site |
 | `/collections/dog-immune-support` | (404) | ⚠️ Linked from the live header's "K9 Page". Does not exist. Point to `/collections/dog-products` |
 
-## Products (template: `product`, default, all 17)
+## Products (template: `product`, default, all 16)
 
 **Horse**
 
