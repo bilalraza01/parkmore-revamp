@@ -24,7 +24,9 @@
 .pm-finder__rec{position:relative}
 .pm-finder__result{position:relative;border-radius:22px;background:var(--sand);min-height:300px;overflow:hidden;outline:none}
 .pm-finder__result:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
-.pm-finder__track{display:flex;transition:transform .5s cubic-bezier(.65,0,.35,1)}
+/* The track's transform isolates its children from the card behind it, so it carries the sand colour itself:
+   product photos use mix-blend-mode:multiply, which turns their white backgrounds into this sand. */
+.pm-finder__track{display:flex;background:var(--sand);transition:transform .5s cubic-bezier(.65,0,.35,1)}
 .pm-finder__slide{flex:0 0 100%;min-width:0;padding:28px 34px 54px;display:grid;grid-template-columns:150px minmax(0,1fr);gap:22px;align-items:center}
 .pm-finder__result.single .pm-finder__slide{padding-bottom:28px}
 .pm-finder__dots{position:absolute;left:0;right:0;bottom:20px;display:flex;justify-content:center;gap:10px}
