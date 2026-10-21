@@ -1,0 +1,76 @@
+{%- comment -%}
+  Parkmore product card (mockup .pc). Price, image, rating and stock come from Shopify and Judge.me.
+  Params:
+    product      product object (required)
+    name         optional display name (defaults to the product title)
+    use          small gold line above the name, e.g. "Daily foundation"
+    badge        e.g. "Bestseller" or "New"
+    show_origin  true to show the origin line ("Made in America", or "Packaged in Kentucky" for GLF)
+    origin       optional text that replaces the automatic origin line
+    reveal       data-pm-reveal value (1 to 4)
+    attrs        extra attributes (block.shopify_attributes)
+{%- endcomment -%}
+{%- liquid
+  assign variant = product.selected_or_first_available_variant
+  assign display_name = name | default: product.title
+  assign rating = product.metafields.reviews.rating.value
+  assign rating_count = product.metafields.reviews.rating_count.value | default: 0
+  if origin == blank
+    if product.handle == 'glf-immune-support'
+      assign origin_text = 'Packaged in Kentucky'
+    else
+      assign origin_text = 'Made in America'
+    endif
+  else
+    assign origin_text = origin
+  endif
+-%}
+<article class="pm-pc" data-pm-reveal="{{ reveal | default: 1 }}" {{ attrs }}>
+  <a class="pm-pc__img" href="{{ product.url }}" tabindex="-1" aria-hidden="true">
+    {%- if badge != blank -%}<span class="pm-pc__badge">{{ badge | escape }}</span>{%- endif -%}
+    {%- if product.featured_image != blank -%}
+      {{
+        product.featured_image
+        | image_url: width: 900
+        | image_tag: widths: '300, 450, 600, 900', sizes: '(min-width: 1101px) 280px, (min-width: 561px) 45vw, 90vw', loading: 'lazy', alt: display_name
+      }}
+    {%- else -%}
+      <div class="pm-img-fallback">[{{ display_name | escape }} photo]</div>
+    {%- endif -%}
+  </a>
+  {%- if use != blank -%}<div class="pm-pc__use">{{ use | escape }}</div>{%- endif -%}
+  <h3><a href="{{ product.url }}">{{ display_name | escape }}</a></h3>
+  {%- if rating != blank and rating_count > 0 -%}
+    {%- liquid
+      assign r = rating.rating | times: 1.0
+      assign pct = r | divided_by: rating.scale_max | times: 100 | round: 1
+      assign r_label = r | round: 1 | append: ''
+      unless r_label contains '.'
+        assign r_label = r_label | append: '.0'
+      endunless
+    -%}
+    <div class="pm-pc__rt">
+      <span class="pm-rstars" style="--r:{{ pct }}%" role="img" aria-label="Rated {{ r_label }} out of {{ rating.scale_max }}"></span>
+      {{ r_label }} ({{ rating_count }})
+    </div>
+  {%- elsif badge == 'New' -%}
+    <div class="pm-pc__rt"><b class="pm-pc__new">New</b></div>
+  {%- endif -%}
+  {%- if show_origin -%}
+    <div class="pm-pc__org">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+      {{- origin_text | escape -}}
+    </div>
+  {%- endif -%}
+  <div class="pm-pc__row">
+    <span class="pm-pc__pr">
+      {%- if product.price_varies -%}<small>From </small>{%- endif -%}
+      {{- product.price_min | money_without_trailing_zeros -}}
+    </span>
+    {%- if product.available -%}
+      <button class="pm-add" type="button" data-pm-add="{{ variant.id }}" data-pm-name="{{ display_name | escape }}">Add to cart</button>
+    {%- else -%}
+      <button class="pm-add" type="button" disabled>Sold out</button>
+    {%- endif -%}
+  </div>
+</article>

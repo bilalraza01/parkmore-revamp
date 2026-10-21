@@ -1,0 +1,164 @@
+{%- comment -%}
+  Parkmore dogs section (Mockup 3, section #dogs). Arch photo + small photo with a floating quote,
+  ticked points, a button that preselects "dog" in the finder, dog product cards and the
+  Canine Support Teams banner.
+{%- endcomment -%}
+{{ 'pm-dogs.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign ss = section.settings
+  assign photo_1 = ss.photo_1
+  if photo_1 == blank and ss.photo_1_article != blank
+    assign photo_1 = ss.photo_1_article.image
+  endif
+  assign photo_2 = ss.photo_2
+  if photo_2 == blank and ss.photo_2_article != blank
+    assign photo_2 = ss.photo_2_article.image
+  endif
+  assign tick = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.7 2.7L16 9.8"/></svg>'
+-%}
+
+<section class="pm pm-dark pm-section pm-dogs" id="{{ ss.anchor_id | default: 'dogs' | handleize }}" data-dark aria-label="{{ ss.aria_label | escape }}">
+  <div class="pm-wrap">
+    <div class="pm-dogs__top">
+      <div class="pm-dogs__photos" data-pm-reveal>
+        <div class="p1">
+          {%- if photo_1 != blank -%}
+            {{ photo_1 | image_url: width: 1200 | image_tag: widths: '400, 600, 900, 1200', sizes: '(min-width: 901px) 40vw, 74vw', loading: 'lazy', alt: ss.photo_1_alt }}
+          {%- else -%}
+            <div class="pm-img-fallback">[{{ ss.photo_1_alt | default: 'Large dog photo' | escape }}: choose an image]</div>
+          {%- endif -%}
+        </div>
+        <div class="p2">
+          {%- if photo_2 != blank -%}
+            {{ photo_2 | image_url: width: 800 | image_tag: widths: '300, 500, 800', sizes: '(min-width: 901px) 26vw, 48vw', loading: 'lazy', alt: ss.photo_2_alt, style: 'object-position:50% 40%' }}
+          {%- else -%}
+            <div class="pm-img-fallback">[{{ ss.photo_2_alt | default: 'Small dog photo' | escape }}: choose an image]</div>
+          {%- endif -%}
+        </div>
+        {%- if ss.quote != blank -%}
+          <div class="pm-dogs__quote">
+            <div class="st" aria-hidden="true">★★★★★</div>
+            <p>{{ ss.quote | escape }}</p>
+            <small>{{ ss.quote_by | escape }}</small>
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="pm-dogs__copy" data-pm-reveal="2">
+        {%- render 'pm-heading', chap_num: ss.chap_num, chap_label: ss.chap_label, line: ss.heading, em: ss.heading_emphasis, em_break: true -%}
+        {%- if ss.text != blank -%}<p>{{ ss.text | escape }}</p>{%- endif -%}
+        {%- assign points = section.blocks | where: 'type', 'point' -%}
+        {%- if points.size > 0 -%}
+          <ul>
+            {%- for block in points -%}
+              <li {{ block.shopify_attributes }}>{{ tick }}<span><b>{{ block.settings.bold | escape }}</b> {{ block.settings.text | escape }}</span></li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+        {%- if ss.button_label != blank -%}
+          <a class="pm-btn pm-btn-gold" href="{{ ss.button_link | default: '#finder' }}" data-pm-pick="dog">{{ ss.button_label | escape }} <span class="pm-ar" aria-hidden="true">&rarr;</span></a>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- assign products = section.blocks | where: 'type', 'product' -%}
+    {%- if products.size > 0 -%}
+      <div class="pm-grid3">
+        {%- for block in products -%}
+          {%- if block.settings.product != blank -%}
+            {%- render 'pm-product-card',
+              product: block.settings.product,
+            name: block.settings.name,
+              use: block.settings.use,
+              badge: block.settings.badge,
+              show_origin: false,
+              reveal: forloop.index,
+              attrs: block.shopify_attributes
+            -%}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if ss.cst_title != blank -%}
+      <div class="pm-cst" data-pm-reveal>
+        <span class="pm-cst__ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.2a4.3 4.3 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20z"/></svg></span>
+        <div><h3>{{ ss.cst_title | escape }}</h3><div class="pm-cst__text">{{ ss.cst_text }}</div></div>
+        {%- if ss.cst_button != blank -%}
+          <a class="pm-btn pm-btn-dark" href="{{ ss.cst_link | default: '/blogs/news' }}">{{ ss.cst_button | escape }} <span class="pm-ar" aria-hidden="true">&rarr;</span></a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "PM dogs",
+  "tag": "div",
+  "class": "pm-section-dogs",
+  "max_blocks": 9,
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor id", "default": "dogs" },
+    { "type": "text", "id": "aria_label", "label": "Accessible label", "default": "For dogs" },
+    { "type": "header", "content": "Photos" },
+    { "type": "image_picker", "id": "photo_1", "label": "Large arch photo" },
+    { "type": "article", "id": "photo_1_article", "label": "Or use a blog post’s image" },
+    { "type": "text", "id": "photo_1_alt", "label": "Large photo description", "default": "Vickie Weber’s two Great Danes" },
+    { "type": "image_picker", "id": "photo_2", "label": "Small photo" },
+    { "type": "article", "id": "photo_2_article", "label": "Or use a blog post’s image" },
+    { "type": "text", "id": "photo_2_alt", "label": "Small photo description", "default": "Fred, Fleur’s dog" },
+    { "type": "header", "content": "Quote card" },
+    { "type": "textarea", "id": "quote", "label": "Quote", "default": "“After one month of my boy being on Parkmore, his shedding was down by half!”" },
+    { "type": "text", "id": "quote_by", "label": "Attribution", "default": "Vickie Weber · Great Dane owner" },
+    { "type": "header", "content": "Copy" },
+    { "type": "text", "id": "chap_num", "label": "Chapter number", "default": "04" },
+    { "type": "text", "id": "chap_label", "label": "Chapter label", "default": "For dogs" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Dogs are family." },
+    { "type": "text", "id": "heading_emphasis", "label": "Heading gold ending (new line)", "default": "Feed them like it." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "The same founder-formulated thinking behind our horse range, made for the dogs who share your barn, your truck and your couch." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Find my dog’s formula" },
+    { "type": "text", "id": "button_link", "label": "Button link", "default": "#finder", "info": "Preselects Dog in the formula finder." },
+    { "type": "header", "content": "Canine Support Teams banner" },
+    { "type": "text", "id": "cst_title", "label": "Title", "default": "Buy one, we donate one." },
+    { "type": "richtext", "id": "cst_text", "label": "Text", "default": "<p>Buy the K9 Detox and Immune Support bundle and Parkmore donates the same to <strong>Canine Support Teams</strong>, nourishing service dogs in training for veterans and people with disabilities.</p>" },
+    { "type": "text", "id": "cst_button", "label": "Button label", "default": "How it works" },
+    { "type": "url", "id": "cst_link", "label": "Button link" }
+  ],
+  "blocks": [
+    {
+      "type": "point",
+      "name": "Ticked point",
+      "limit": 4,
+      "settings": [
+        { "type": "text", "id": "bold", "label": "Bold start" },
+        { "type": "text", "id": "text", "label": "Rest of the line" }
+      ]
+    },
+    {
+      "type": "product",
+      "name": "Product",
+      "limit": 3,
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product" },
+        { "type": "text", "id": "name", "label": "Display name", "info": "Leave blank to use the product title." },
+        { "type": "text", "id": "use", "label": "Use line" },
+        { "type": "text", "id": "badge", "label": "Badge", "info": "e.g. Bestseller or New" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PM dogs",
+      "blocks": [
+        { "type": "point", "settings": { "bold": "Nucleotide immune support", "text": "for dogs who are growing, working, ageing or recovering." } },
+        { "type": "point", "settings": { "bold": "Steam-activated hardwood charcoal", "text": "for digestive balance, skin and coat." } },
+        { "type": "point", "settings": { "bold": "Daily coat care", "text": "between baths, without the full wash." } },
+        { "type": "product", "settings": { "use": "Immune support", "badge": "Bestseller" } },
+        { "type": "product", "settings": { "use": "Digestion, skin and coat" } },
+        { "type": "product", "settings": { "use": "Daily coat care", "badge": "New" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

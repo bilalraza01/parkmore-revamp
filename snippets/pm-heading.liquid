@@ -1,0 +1,14 @@
+{%- comment -%}
+  Chapter label + h2, as in the mockup: "01 START HERE" then a Lora heading with a gold ending.
+  Params: chap_num, chap_label, line (plain part), em (gold part), em_break (true = gold part on a new line)
+{%- endcomment -%}
+{%- if chap_label != blank -%}
+  <span class="pm-chap">{%- if chap_num != blank -%}<b>{{ chap_num | escape }}</b>{%- endif -%}{{ chap_label | escape }}</span>
+{%- endif -%}
+<h2>
+  {{- line | escape -}}
+  {%- if em != blank -%}
+    {%- if em_break -%}<br>{%- elsif line != blank -%}{{ ' ' }}{%- endif -%}
+    <em>{{ em | escape }}</em>
+  {%- endif -%}
+</h2>

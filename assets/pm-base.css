@@ -63,6 +63,41 @@
 .pm-dark .pm-btn-line{color:var(--ivory)}
 .pm-dark .pm-btn-line:hover{background:var(--ivory);color:var(--charcoal);border-color:var(--ivory)}
 
+/* Section heads and grids */
+.pm-shop-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:44px}
+.pm-grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
+.pm-grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+
+/* Product card (mockup .pc) */
+.pm-pc{background:var(--white);border-radius:22px;padding:16px 16px 22px;display:flex;flex-direction:column;border:1px solid var(--line);transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.pm-pc:hover{transform:translateY(-6px);box-shadow:0 24px 50px rgba(28,29,29,.12)}
+.pm-pc__img{position:relative;display:block;aspect-ratio:1/1;border-radius:16px;background:var(--sand);overflow:hidden;margin-bottom:16px}
+.pm-pc__img img,.pm-pc__img .pm-img-fallback{position:absolute;inset:14px;width:calc(100% - 28px);height:calc(100% - 28px);min-height:0;object-fit:contain;mix-blend-mode:multiply;transition:transform .5s var(--ease)}
+.pm-pc__img .pm-img-fallback{mix-blend-mode:normal;background:transparent}
+.pm-pc:hover .pm-pc__img img{transform:scale(1.05)}
+.pm-pc__badge{position:absolute;top:12px;left:12px;z-index:1;font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;background:var(--charcoal);color:var(--gold-hi);padding:5px 10px;border-radius:999px}
+.pm-pc__use{font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold-text);margin-bottom:6px}
+.pm .pm-pc h3{font-family:var(--sans);font-size:19px;font-weight:700;line-height:1.25;letter-spacing:0;margin-bottom:8px}
+.pm-pc__rt{display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--stone);margin-bottom:8px}
+.pm-pc__new{color:var(--gold-text)}
+.pm-rstars{position:relative;display:inline-block;font-size:15px;letter-spacing:1.5px;line-height:1;color:#DDD5C3}
+.pm-rstars::before{content:"\2605\2605\2605\2605\2605"}
+.pm-rstars::after{content:"\2605\2605\2605\2605\2605";position:absolute;left:0;top:0;width:var(--r);overflow:hidden;white-space:nowrap;color:var(--gold)}
+.pm-pc__org{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--stone);margin-bottom:14px}
+.pm-pc__org svg{width:14px;height:14px;color:var(--green)}
+.pm-pc__row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:auto}
+.pm-pc__pr{font-size:20px;font-weight:700}
+.pm-pc__pr small{font-size:12px;font-weight:500;color:var(--stone)}
+.pm .pm-add{background:var(--charcoal);color:var(--ivory);padding:10px 16px;border-radius:999px;font-weight:700;font-size:13.5px;line-height:1.4;transition:background-color .3s ease;white-space:nowrap}
+.pm .pm-add:hover{background:var(--gold);color:var(--charcoal)}
+.pm .pm-add.done{background:var(--green);color:var(--ivory)}
+.pm .pm-add[disabled]{opacity:.55;cursor:not-allowed;background:var(--stone);color:var(--ivory)}
+.pm .pm-add.loading{opacity:.7;pointer-events:none}
+
+/* Toast after add to cart (used when the theme has no cart drawer) */
+.pm-toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:var(--charcoal);color:var(--ivory);padding:12px 18px;border-radius:999px;font-family:var(--sans);font-weight:600;font-size:14px;opacity:0;visibility:hidden;transition:all .3s ease;z-index:9999;border:1px solid var(--gold)}
+.pm-toast.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+
 /* Labelled placeholder shown until a real photo is chosen in the theme editor */
 .pm-img-fallback{display:grid;place-items:center;text-align:center;padding:12px;background:var(--sand);color:var(--gold-text);font-size:12px;font-weight:700;width:100%;height:100%;min-height:80px}
 
@@ -71,8 +106,15 @@
 [data-pm-reveal].in{opacity:1;transform:none}
 [data-pm-reveal="2"]{transition-delay:.1s}[data-pm-reveal="3"]{transition-delay:.2s}[data-pm-reveal="4"]{transition-delay:.3s}
 
+@media (max-width:1100px){
+  .pm-grid4{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
 @media (max-width:900px){
   .pm-section{padding:80px 0}
+  .pm-grid3{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:560px){
+  .pm-grid4{grid-template-columns:minmax(0,1fr)}
 }
 
 @media (prefers-reduced-motion:reduce){

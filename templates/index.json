@@ -2305,10 +2305,179 @@
         "horse_image": "shopify://shop_images/Fleur_Post.jpg",
         "dog_image": "shopify://shop_images/FredInField.jpg"
       }
+    },
+    "pm_story": {
+      "type": "pm-timeline",
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "year": "50+ yrs",
+            "title": "Fleur Bryan",
+            "image_alt": "Fleur Bryan riding at Waredaca",
+            "text": "A lifetime of breeding, foaling, starting, training and competing horses, and coaching the riders on them."
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "year": "2002",
+            "title": "Parkmore Pride arrives",
+            "image_alt": "Parkmore Pride with his rider holding the Irish flag",
+            "text": "Fleur brings her Irish Draught stallion from Ireland to America. The company carries his name."
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "year": "20+ yrs",
+            "title": "Gordon “Beaker” Bryan",
+            "article": "news/the-mad-scientist-behind-parkmore",
+            "image_alt": "Gordon Bryan, the formulator behind Parkmore",
+            "text": "Fleur’s brother and the formulator. SVMS started as a supplement for his own horses in Ireland."
+          }
+        },
+        "card_4": {
+          "type": "card",
+          "settings": {
+            "year": "Today",
+            "title": "Horses and dogs",
+            "article": "news/parkmore-supplements-partners-with-canine-support-teams",
+            "image_alt": "A Canine Support Teams service dog in training",
+            "text": "Formulas for the horses and dogs in your life, recommended the same way Fleur always has: one owner at a time."
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3",
+        "card_4"
+      ],
+      "settings": {
+        "button_1_link": "/blogs/news/how-parkmore-came-to-be",
+        "button_2_link": "/blogs/news/the-mad-scientist-behind-parkmore"
+      }
+    },
+    "pm_horses": {
+      "type": "pm-products",
+      "blocks": {
+        "product_1": {
+          "type": "product",
+          "settings": {
+            "product": "parkmore-s-special-vitamin-mineral-supplement-10lb",
+            "use": "Daily foundation",
+            "badge": "Bestseller",
+            "name": "SVMS Vitamin and Mineral Supplement"
+          }
+        },
+        "product_2": {
+          "type": "product",
+          "settings": {
+            "product": "glf-immune-support",
+            "use": "Immune support",
+            "name": "GLF Immune Support"
+          }
+        },
+        "product_3": {
+          "type": "product",
+          "settings": {
+            "product": "eq9-parkmore-h-i-infusion-gut-formula",
+            "use": "Gut and digestion",
+            "name": "H.I. Gut Herbs"
+          }
+        },
+        "product_4": {
+          "type": "product",
+          "settings": {
+            "product": "devils-own-detox",
+            "use": "Periodic reset",
+            "name": "Devil’s Own Detox (Black Gold)"
+          }
+        }
+      },
+      "block_order": [
+        "product_1",
+        "product_2",
+        "product_3",
+        "product_4"
+      ],
+      "settings": {
+        "button_link": "/collections/horse-products",
+        "strip_link": "/products/parkmore-magnetic-crownpiece"
+      }
+    },
+    "pm_dogs": {
+      "type": "pm-dogs",
+      "blocks": {
+        "point_1": {
+          "type": "point",
+          "settings": {
+            "bold": "Nucleotide immune support",
+            "text": "for dogs who are growing, working, ageing or recovering."
+          }
+        },
+        "point_2": {
+          "type": "point",
+          "settings": {
+            "bold": "Steam-activated hardwood charcoal",
+            "text": "for digestive balance, skin and coat."
+          }
+        },
+        "point_3": {
+          "type": "point",
+          "settings": {
+            "bold": "Daily coat care",
+            "text": "between baths, without the full wash."
+          }
+        },
+        "product_4": {
+          "type": "product",
+          "settings": {
+            "product": "k9-parkmore-immune-support",
+            "use": "Immune support",
+            "badge": "Bestseller",
+            "name": "K9 Immune Support"
+          }
+        },
+        "product_5": {
+          "type": "product",
+          "settings": {
+            "product": "k9-devils-own-detox",
+            "use": "Digestion, skin and coat",
+            "name": "K9 Doggy Detox"
+          }
+        },
+        "product_6": {
+          "type": "product",
+          "settings": {
+            "product": "k9-daily-coat-spray",
+            "use": "Daily coat care",
+            "badge": "New",
+            "name": "K9 Daily Coat Spray"
+          }
+        }
+      },
+      "block_order": [
+        "point_1",
+        "point_2",
+        "point_3",
+        "product_4",
+        "product_5",
+        "product_6"
+      ],
+      "settings": {
+        "photo_1_article": "news/two-great-danes-one-parkmore-story",
+        "photo_2": "shopify://shop_images/FredInField.jpg",
+        "cst_link": "/blogs/news/parkmore-supplements-partners-with-canine-support-teams"
+      }
     }
   },
   "order": [
     "pm_hero",
+    "pm_story",
+    "pm_horses",
+    "pm_dogs",
     "icons_with_text_A8P3h4",
     "rich_text_EeaxFY",
     "product_list_VYxM8a",
