@@ -293,7 +293,7 @@
       ],
       "settings": {
         "intro": "<p>Stories, practical insight, customer experiences, and life behind Parkmore—for people who care deeply about their horses and dogs.</p>",
-        "per_page": 12,
+        "per_page": 13,
         "excerpt_words": 20,
         "show_date": true,
         "feature_first": true,
