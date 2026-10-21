@@ -22,10 +22,10 @@ Shopify pages share templates. Revamping one template revamps every URL that use
 | `article` (default) | All blog posts | 25 | ⬜ |
 | `page` (default) | Plain content pages | 4 | ⬜ |
 | `page.contact` | Contact | 1 | ⬜ |
-| `page.help-center` | Help | 1 | ⬜ ⚠️ missing from the draft, see below |
-| `page.faq-orders` | Orders FAQ | 1 | ⬜ ⚠️ live content is newer than the draft |
+| `page.help-center` | Help | 1 | ⬜ (copied from live) |
+| `page.faq-orders` | Orders FAQ | 1 | ⬜ (copied from live) |
 | `page.faq-products` | Products FAQ | 1 | ⬜ |
-| `page.general-help` | Subscriptions help | 1 | ⬜ ⚠️ missing from the draft |
+| `page.general-help` | Subscriptions help | 1 | ⬜ (copied from live) |
 | Policies (Shopify built-in) | 5 policy pages | 5 | ⬜ styled by the theme's base CSS only |
 | `search`, `cart`, `404` | System pages | 3 | ⬜ |
 | Header and footer | Every page | all | ✅ header · ⬜ footer |
@@ -85,10 +85,10 @@ Shopify pages share templates. Revamping one template revamps every URL that use
 
 | URL | Title | Template | Notes |
 |---|---|---|---|
-| `/pages/help` | Parkmore Help Center | `page.help-center` | ⚠️ Template missing from the draft |
-| `/pages/faq-orders` | Orders, Shipping & Returns | `page.faq-orders` | ⚠️ Live content newer than the draft. Brief: "Get in touch" links point to the homepage, should go to `/pages/contact` |
+| `/pages/help` | Parkmore Help Center | `page.help-center` | |
+| `/pages/faq-orders` | Orders, Shipping & Returns | `page.faq-orders` | Brief: "Get in touch" links point to the homepage, should go to `/pages/contact` |
 | `/pages/faq-products` | FAQ - Products | `page.faq-products` | Brief: GLF "Ask a Question" email subject says EQ9 Devil's Own Detox |
-| `/pages/faq-additional` | General Help & Subscriptions | `page.general-help` | ⚠️ Template missing from the draft. Brief: subscription help text is cut off mid-sentence |
+| `/pages/faq-additional` | General Help & Subscriptions | `page.general-help` | Brief: subscription help text is cut off mid-sentence |
 | `/pages/contact` | Contact | `page.contact` | |
 | `/pages/how-to-feed-eq9-detox` | How To Feed EQ9 Detox | `page` | |
 | `/pages/my-products` | my products | `page` | Brief: orphan page duplicating subscription help. Candidate to remove or redirect |
@@ -160,11 +160,13 @@ Content is edited in Settings → Policies, not the theme. The theme only contro
 
 The draft (`parkmore-revamp/main`) was copied from an **Ignite 2.3.0** theme. The live theme is **Ignite 2.6.1** and has newer files and content. Before the draft can be published:
 
+**Resolved 21 Oct 2026:** `page.faq-orders`, `page.help-center`, `page.general-help` and `collection` were copied from live. The Orders FAQ, Help, Subscriptions help and all four collection pages now show the same content on the draft as on live. Still different on collections: the product count after the title and the card order/"Quick view" buttons, which are Ignite 2.6.1 code (to be rebuilt in the collection revamp).
+
 **Missing from the draft (live only):**
-- Templates `page.help-center`, `page.general-help` (used by `/pages/help` and `/pages/faq-additional`; on the draft those pages fall back to the plain page template), `page.icons`, `product.enquire`, `product.high-converting`, `product.context.parkmore-wholesale-test`, `collection.filters`
+- ~~`page.help-center`, `page.general-help`~~ (copied), `page.icons`, `product.enquire`, `product.high-converting`, `product.context.parkmore-wholesale-test`, `collection.filters`
 - Social video reel section and its assets/snippets
 
-**Content newer on live than on the draft:** `templates/product.json` (all 17 product pages), `page.faq-orders.json`, `article.json` (all 25 posts), `collection.json`, `blog.json`, `cart.json`, `page.about-us.json`, `page.our-services.json`, `product.bulk-order.json`, `product.fashion.json`, `product.preorder.json`, `collection.fashion.json`, `sections/footer-group.json`, `sections/header-group.json`, `config/settings_data.json`.
+**Content newer on live than on the draft:** `templates/product.json` (all 17 product pages), ~~`page.faq-orders.json`~~ (copied), `article.json` (all 25 posts), ~~`collection.json`~~ (copied), `blog.json` (replaced by the redesign), `cart.json`, `page.about-us.json`, `page.our-services.json`, `product.bulk-order.json`, `product.fashion.json`, `product.preorder.json`, `collection.fashion.json`, `sections/footer-group.json`, `sections/header-group.json`, `config/settings_data.json`.
 
 **Theme code** also differs in about 40 asset, block and layout files (2.3.0 vs 2.6.1).
 
