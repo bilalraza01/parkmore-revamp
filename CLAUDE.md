@@ -1,4 +1,5 @@
 @.context/CLAUDE.md
+@.context/PROGRESS.md
 
 ## Repo workflow
 
