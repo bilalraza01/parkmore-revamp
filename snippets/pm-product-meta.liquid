@@ -2,7 +2,7 @@
   Finder data for a product, as one string: label§audience§name§why
   (Liquid snippets cannot return values, so callers capture this and split on "§".)
     label     first finder need that lists this product (needs sorted by position, horse before dog), or blank
-    audience  "For horses", "For dogs" or "For horses and dogs", from the AUDIENCE-* tags
+    audience  "For horses", "For dogs" or "For horses and dogs": from the finder needs that list it, else the AUDIENCE-* tags
     name      finder item's display name, or the product title
     why       finder item's one-line why, or blank
   Usage:
@@ -53,15 +53,31 @@
     endfor
   endfor
 
-  assign m_tags = product.tags | join: ',' | upcase
+  # Audience: the animals whose finder needs list this product; the AUDIENCE-* tags only as a fallback
   assign m_horse = false
   assign m_dog = false
-  if m_tags contains 'AUDIENCE-HORSE'
-    assign m_horse = true
-  endif
-  if m_tags contains 'AUDIENCE-DOG'
-    assign m_dog = true
-  endif
+  for nd in m_needs
+    assign nd_animal = nd.animal.value | json | remove: '"' | remove: '[' | remove: ']' | downcase | strip
+    for it in nd.items.value
+      assign it_p = it.product.value
+      if it_p.id == product.id
+        if nd_animal == 'horse'
+          assign m_horse = true
+        elsif nd_animal == 'dog'
+          assign m_dog = true
+        endif
+      endif
+    endfor
+  endfor
+  unless m_horse or m_dog
+    assign m_tags = product.tags | join: ',' | upcase
+    if m_tags contains 'AUDIENCE-HORSE'
+      assign m_horse = true
+    endif
+    if m_tags contains 'AUDIENCE-DOG'
+      assign m_dog = true
+    endif
+  endunless
   if m_horse and m_dog
     assign m_aud = 'For horses and dogs'
   elsif m_dog

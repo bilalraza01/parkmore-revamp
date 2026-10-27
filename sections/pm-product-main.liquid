@@ -91,7 +91,8 @@
         {%- if m_label != blank or m_aud != blank -%}
           <span class="pmp__use">
             {%- if m_aud == 'For dogs' -%}{%- render 'pm-icon', icon: 'dog', weight: 'bold' -%}{%- else -%}{%- render 'pm-icon', icon: 'horse', weight: 'bold' -%}{%- endif -%}
-            {{- m_label | escape -}}{%- if m_label != blank and m_aud != blank -%} · {% endif -%}{{- m_aud | escape -}}
+            {%- capture use_line -%}{{ m_label }}{% if m_label != blank and m_aud != blank %} · {% endif %}{{ m_aud }}{%- endcapture -%}
+            {{- use_line | escape -}}
           </span>
         {%- endif -%}
         <h1 class="pmp__title">{{ m_name | escape }}</h1>
@@ -208,7 +209,7 @@
             endif
             assign feats = feats | split: '¦'
           -%}
-          {%- if feats.size > 0 -%}
+          {%- if feats.size > 1 -%}
             <div class="pmp__keyf">
               <h2>{{ ss.key_features_title | escape }}</h2>
               <ul>
