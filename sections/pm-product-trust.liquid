@@ -1,0 +1,39 @@
+{%- comment -%} Parkmore product page trust strip: four claims on a sand band (product page mockup option A). {%- endcomment -%}
+{%- if section.blocks.size > 0 -%}
+  <section class="pm pmp-trust" aria-label="{{ section.settings.aria_label | escape }}">
+    <div class="pm-wrap">
+      {%- for block in section.blocks -%}
+        <div class="pmp-trust__item" {{ block.shopify_attributes }}>
+          <i>{%- render 'pm-product-icon', icon: block.settings.icon -%}</i>
+          <div><b>{{ block.settings.title | escape }}</b><span>{{ block.settings.text | escape }}</span></div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "PM product trust strip",
+  "tag": "div",
+  "class": "pm-section-ptrust",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "text", "id": "aria_label", "label": "Accessible label", "default": "Why buy from Parkmore" }
+  ],
+  "blocks": [
+    {
+      "type": "claim",
+      "name": "Claim",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icon", "default": "shield", "options": [
+          { "value": "shield", "label": "Shield" }, { "value": "truck", "label": "Truck" }, { "value": "chat", "label": "Chat" }, { "value": "tag", "label": "Tag" }, { "value": "lock", "label": "Lock" }, { "value": "star", "label": "Star" }, { "value": "clock", "label": "Clock" }
+        ] },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "text", "id": "text", "label": "Text" }
+      ]
+    }
+  ],
+  "presets": [ { "name": "PM product trust strip" } ]
+}
+{% endschema %}

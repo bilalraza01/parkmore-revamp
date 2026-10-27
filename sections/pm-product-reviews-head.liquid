@@ -1,0 +1,26 @@
+{%- comment -%}
+  Parkmore product reviews heading (product page mockup option A). The reviews themselves are the
+  Judge.me review widget (app block in the next section), restyled in pm-product.css.
+{%- endcomment -%}
+{%- assign ss = section.settings -%}
+<section class="pm pm-psec pmp-revhead" id="reviews" aria-label="{{ ss.chap_label | escape }}">
+  <div class="pm-wrap">
+    {%- render 'pm-heading', chap_num: ss.chap_num, chap_label: ss.chap_label, line: ss.heading, em: ss.heading_emphasis, em_break: false -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "PM reviews heading",
+  "tag": "div",
+  "class": "pm-section-prevhead",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "text", "id": "chap_num", "label": "Chapter number", "default": "04" },
+    { "type": "text", "id": "chap_label", "label": "Chapter label", "default": "Owner reviews" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What owners" },
+    { "type": "text", "id": "heading_emphasis", "label": "Heading gold ending", "default": "say." }
+  ],
+  "presets": [ { "name": "PM reviews heading" } ]
+}
+{% endschema %}

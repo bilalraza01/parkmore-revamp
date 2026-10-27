@@ -66,7 +66,11 @@
       if (note.init) note.init();
       sections = sections.concat(note.getSectionsToRender().map(function (s) { return s.id; }));
     }
-    var body = { items: [{ id: +id, quantity: 1 }] };
+    /* Optional: data-pm-qty (quantity), data-pm-plan (subscription selling plan id) */
+    var item = { id: +id, quantity: Math.max(1, +(btn.getAttribute('data-pm-qty') || 1)) };
+    var plan = btn.getAttribute('data-pm-plan');
+    if (plan) item.selling_plan = +plan;
+    var body = { items: [item] };
     if (sections.length) {
       body.sections = sections.filter(function (s, i) { return sections.indexOf(s) === i; }).join(',');
       body.sections_url = window.location.pathname;

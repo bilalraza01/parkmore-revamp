@@ -1,0 +1,323 @@
+{%- comment -%}
+  Parkmore product page, top section (product page mockup option A).
+  Gallery, label, title, stars, one-liner, origin, options, purchase cards (one-time / subscribe from the
+  product's selling plans), quantity + Add to cart, key features, trust line, vet line, sticky buy bar.
+  Content rules: PRODUCT-PAGE-AUDIT.md. Add to cart goes through pm-base.js (data-pm-add / -qty / -plan).
+  Seal Subscriptions renders into .sealsubs-target-element; it is kept hidden because these cards replace it.
+{%- endcomment -%}
+{{ 'pm-product.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'pm-product.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign ss = section.settings
+  assign variant = product.selected_or_first_available_variant
+
+  capture meta
+    render 'pm-product-meta', product: product
+  endcapture
+  assign meta = meta | split: '§'
+  assign m_label = meta[0]
+  assign m_aud = meta[1]
+  assign m_name = meta[2] | default: product.title
+  assign m_why = meta[3]
+
+  if product.handle == 'glf-immune-support'
+    assign origin = ss.origin_glf
+  else
+    assign origin = ss.origin_default
+  endif
+
+  assign rating = product.metafields.reviews.rating.value
+  assign rating_count = product.metafields.reviews.rating_count.value | default: 0
+
+  assign desc_words = product.description | strip_html | split: ' ' | size
+  assign short_desc = false
+  if desc_words < ss.long_description_words
+    assign short_desc = true
+  endif
+
+  assign is_supplement = false
+  if product.type contains 'Supplement'
+    assign is_supplement = true
+  endif
+
+  if m_aud == 'For dogs'
+    assign crumb_url = '/collections/dog-products'
+    assign crumb_label = 'Dogs'
+  elsif m_aud == 'For horses'
+    assign crumb_url = '/collections/horse-products'
+    assign crumb_label = 'Horses'
+  else
+    assign crumb_url = '/collections/all-products'
+    assign crumb_label = 'All products'
+  endif
+
+  assign images = product.media | where: 'media_type', 'image'
+  assign main_media = variant.featured_media | default: product.featured_media
+  assign has_plans = false
+  if product.selling_plan_groups.size > 0
+    assign has_plans = true
+  endif
+
+  assign kf = product.metafields.custom.key_benefits | metafield_tag | replace: '<br/>', '<br>' | replace: '<br />', '<br>'
+-%}
+
+<div class="pm pm-psec pmp" data-pm-product data-section="{{ section.id }}">
+  <div class="pm-wrap pmp__crumb"><a href="{{ crumb_url }}">{{ crumb_label }}</a> &nbsp;/&nbsp; {{ m_name | escape }}</div>
+
+  <section class="pmp__top" aria-label="{{ m_name | escape }}">
+    <div class="pm-wrap pmp__grid">
+      <div class="pmp__gallery">
+        <div class="pmp__main">
+          {%- if origin != blank -%}<span class="pmp__badge">{{ origin | escape }}</span>{%- endif -%}
+          {%- if main_media != blank -%}
+            {{ main_media.preview_image | image_url: width: 1400 | image_tag: widths: '500, 800, 1100, 1400', sizes: '(min-width: 901px) 52vw, 100vw', loading: 'eager', fetchpriority: 'high', alt: m_name, class: 'pmp__mainimg' }}
+          {%- else -%}
+            <div class="pm-img-fallback">[{{ m_name | escape }} photo]</div>
+          {%- endif -%}
+        </div>
+        {%- if images.size > 1 -%}
+          <div class="pmp__thumbs" data-pm-thumbs>
+            {%- for m in images -%}
+              <button type="button" aria-label="Photo {{ forloop.index }} of {{ images.size }}" aria-current="{% if m.id == main_media.id %}true{% else %}false{% endif %}" data-media-id="{{ m.id }}" data-src="{{ m.preview_image | image_url: width: 1400 }}" data-srcset="{{ m.preview_image | image_url: width: 800 }} 800w, {{ m.preview_image | image_url: width: 1400 }} 1400w">
+                {{ m.preview_image | image_url: width: 300 | image_tag: loading: 'lazy', alt: '', sizes: '120px', widths: '150, 300' }}
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="pmp__info">
+        {%- if m_label != blank or m_aud != blank -%}
+          <span class="pmp__use">
+            {%- if m_aud == 'For dogs' -%}{%- render 'pm-icon', icon: 'dog', weight: 'bold' -%}{%- else -%}{%- render 'pm-icon', icon: 'horse', weight: 'bold' -%}{%- endif -%}
+            {{- m_label | escape -}}{%- if m_label != blank and m_aud != blank -%} · {% endif -%}{{- m_aud | escape -}}
+          </span>
+        {%- endif -%}
+        <h1 class="pmp__title">{{ m_name | escape }}</h1>
+        {%- if rating != blank and rating_count > 0 -%}
+          {%- liquid
+            assign r = rating.rating | times: 1.0
+            assign pct = r | divided_by: rating.scale_max | times: 100 | round: 1
+            assign r_label = r | round: 1 | append: ''
+            unless r_label contains '.'
+              assign r_label = r_label | append: '.0'
+            endunless
+          -%}
+          <div class="pmp__rating"><span class="pm-rstars" style="--r:{{ pct }}%" role="img" aria-label="Rated {{ r_label }} out of {{ rating.scale_max }}"></span> {{ r_label }} · <a href="#reviews">{{ rating_count }} verified review{% if rating_count != 1 %}s{% endif %}</a></div>
+        {%- endif -%}
+        {%- if m_why != blank -%}<p class="pmp__why">{{ m_why | escape }}</p>{%- endif -%}
+        {%- if short_desc and product.description != blank -%}<div class="pmp__desc">{{ product.description }}</div>{%- endif -%}
+        {%- if origin != blank -%}
+          <span class="pmp__origin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>{{ origin | escape }}</span>
+        {%- endif -%}
+
+        {%- form 'product', product, id: 'PmProductForm', class: 'pmp__form', novalidate: 'novalidate' -%}
+          <input type="hidden" name="id" value="{{ variant.id }}" data-pm-variant-input>
+          <input type="hidden" name="selling_plan" value="" data-pm-plan-input>
+          {%- comment -%} Seal Subscriptions renders here; hidden because the purchase cards below replace its widget. {%- endcomment -%}
+          <div class="pmp__seal" hidden aria-hidden="true">
+            <div class="sealsubs-target-element" data-product="{{ product | json | escape }}" data-handle="{{ product.handle }}"></div>
+          </div>
+
+          {%- for option in product.options_with_values -%}
+            {%- if option.values.size > 1 -%}
+              <fieldset class="pmp__opt" data-pm-option="{{ forloop.index0 }}">
+                <legend>{{ option.name | escape }}: <b data-pm-option-value>{{ option.selected_value | escape }}</b></legend>
+                <div class="pmp__pills">
+                  {%- for value in option.values -%}
+                    <button type="button" class="pmp__pill" aria-pressed="{% if value == option.selected_value %}true{% else %}false{% endif %}" data-value="{{ value | escape }}">{{ value | escape }}</button>
+                  {%- endfor -%}
+                </div>
+              </fieldset>
+            {%- endif -%}
+          {%- endfor -%}
+
+          {%- if has_plans -%}
+            <div class="pmp__plans" role="radiogroup" aria-label="Purchase options" data-pm-plans>
+              <label class="pmp__plan on" data-pm-mode="once">
+                <input type="radio" name="pm_purchase" value="once" checked>
+                <span class="dot"></span>
+                <span><b>{{ ss.once_title | escape }}</b><small>{{ ss.once_text | escape }}</small></span>
+                <span class="op" data-pm-price-once>{{ variant.price | money_without_trailing_zeros }}</span>
+              </label>
+              <label class="pmp__plan" data-pm-mode="sub">
+                <input type="radio" name="pm_purchase" value="sub">
+                <span class="dot"></span>
+                <span>
+                  <b>{{ ss.sub_title | escape }}<span class="pmp__save" data-pm-save hidden></span></b>
+                  <small>{{ ss.sub_text | escape }}</small>
+                  <span class="pmp__every">{{ ss.every_label | escape }}
+                    <select aria-label="Delivery interval" data-pm-plan-select>
+                      {%- for group in product.selling_plan_groups -%}
+                        {%- if product.selling_plan_groups.size > 1 -%}<optgroup label="{{ group.name | escape }}">{%- endif -%}
+                        {%- for plan in group.selling_plans -%}
+                          <option value="{{ plan.id }}">{{ plan.name | strip | escape }}</option>
+                        {%- endfor -%}
+                        {%- if product.selling_plan_groups.size > 1 -%}</optgroup>{%- endif -%}
+                      {%- endfor -%}
+                    </select>
+                  </span>
+                </span>
+                <span class="op"><span data-pm-price-sub></span><s data-pm-price-compare></s></span>
+              </label>
+            </div>
+          {%- else -%}
+            <div class="pmp__price">
+              {%- if product.price_varies -%}<small>From</small>{%- endif -%}
+              <strong data-pm-price-once>{{ variant.price | money_without_trailing_zeros }}</strong>
+            </div>
+          {%- endif -%}
+
+          <div class="pmp__buy">
+            <div class="pmp__qty">
+              <button type="button" aria-label="Decrease quantity" data-pm-step="-1">−</button>
+              <input type="number" name="quantity" value="1" min="1" aria-label="Quantity" data-pm-qty-input>
+              <button type="button" aria-label="Increase quantity" data-pm-step="1">+</button>
+            </div>
+            <button type="submit" class="pm-btn pm-btn-gold pmp__atc" data-pm-atc data-pm-add="{{ variant.id }}" data-pm-name="{{ m_name | escape }}"{% unless variant.available %} disabled{% endunless %}>
+              <span data-pm-atc-label>{% if variant.available %}{{ ss.atc_label | escape }} · {% else %}{{ ss.soldout_label | escape }}{% endif %}</span><span data-pm-atc-price>{% if variant.available %}{{ variant.price | money_without_trailing_zeros }}{% endif %}</span>
+            </button>
+          </div>
+        {%- endform -%}
+
+        {%- if ss.ask_text != blank -%}<p class="pmp__ask">{{ ss.ask_text | escape }} <a href="{{ ss.ask_link }}">{{ ss.ask_link_label | escape }}</a></p>{%- endif -%}
+
+        {%- comment -%} Key features: first four Key Benefits titles (title + text blocks), headings, or list items {%- endcomment -%}
+        {%- if kf != blank and ss.key_features_title != blank -%}
+          {%- liquid
+            assign feats = ''
+            if kf contains '<li'
+              assign parts = kf | split: '<li'
+              for part in parts offset: 1 limit: 4
+                assign t = '<li' | append: part | strip_html | strip
+                assign feats = feats | append: t | append: '¦'
+              endfor
+            elsif kf contains '<h5>'
+              assign parts = kf | split: '<h5>'
+              for part in parts offset: 1 limit: 4
+                assign t = part | split: '</h5>' | first | strip_html | strip
+                assign feats = feats | append: t | append: '¦'
+              endfor
+            elsif kf contains '<strong>'
+              assign parts = kf | split: '<strong>'
+              for part in parts offset: 1 limit: 4
+                assign t = part | split: '</strong>' | first | strip_html | strip
+                assign feats = feats | append: t | append: '¦'
+              endfor
+            endif
+            assign feats = feats | split: '¦'
+          -%}
+          {%- if feats.size > 0 -%}
+            <div class="pmp__keyf">
+              <h2>{{ ss.key_features_title | escape }}</h2>
+              <ul>
+                {%- for f in feats -%}
+                  <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.7 2.7L16 9.8"/></svg>{{ f | escape }}</li>
+                {%- endfor -%}
+              </ul>
+              {%- if ss.key_features_link != blank -%}<a href="#inside" data-pm-open-first>{{ ss.key_features_link | escape }} <span aria-hidden="true">&darr;</span></a>{%- endif -%}
+            </div>
+          {%- endif -%}
+        {%- endif -%}
+
+        {%- assign trust_blocks = section.blocks | where: 'type', 'trust' -%}
+        {%- if trust_blocks.size > 0 -%}
+          <div class="pmp__mini">
+            {%- for block in trust_blocks -%}
+              <span {{ block.shopify_attributes }}>{%- render 'pm-product-icon', icon: block.settings.icon -%}{{ block.settings.text | escape }}</span>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        {%- if is_supplement and ss.vet_text != blank -%}
+          <div class="pmp__vet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 2 18a2 2 0 0 0 1.7 3h16.6a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg><div>{{ ss.vet_text }}</div></div>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} Sticky buy bar: appears once the main Add to cart scrolls out of view {%- endcomment -%}
+  <div class="pmp__sbar" data-pm-sbar aria-hidden="true">
+    <div class="pm-wrap">
+      {%- if product.featured_media != blank -%}{{ product.featured_media.preview_image | image_url: width: 120 | image_tag: alt: '', loading: 'lazy', width: 48, height: 48 }}{%- endif -%}
+      <div class="t"><b>{{ m_name | escape }}</b>{%- if rating_count > 0 -%}<span>{{ r_label }} ★{% if origin != blank %} · {{ origin | escape }}{% endif %}</span>{%- elsif origin != blank -%}<span>{{ origin | escape }}</span>{%- endif -%}</div>
+      <a class="pm-btn pm-btn-gold" href="#" data-pm-sbar-btn tabindex="-1"><span data-pm-sbar-label>{% if variant.available %}{{ ss.atc_label | escape }} · {% else %}{{ ss.soldout_label | escape }}{% endif %}</span><span data-pm-sbar-price>{% if variant.available %}{{ variant.price | money_without_trailing_zeros }}{% endif %}</span></a>
+    </div>
+  </div>
+
+  {%- comment -%} Variant and selling plan data for pm-product.js {%- endcomment -%}
+  <script type="application/json" data-pm-product-json>
+    {
+      "atc": {{ ss.atc_label | json }},
+      "soldout": {{ ss.soldout_label | json }},
+      "saveLabel": {{ ss.save_label | json }},
+      "variants": [
+        {%- for v in product.variants -%}
+          {
+            "id": {{ v.id }},
+            "options": {{ v.options | json }},
+            "available": {{ v.available | json }},
+            "price": {{ v.price }},
+            "media": {% if v.featured_media %}{"id": {{ v.featured_media.id }}, "src": {{ v.featured_media.preview_image | image_url: width: 1400 | json }}}{% else %}null{% endif %},
+            "plans": {
+              {%- for a in v.selling_plan_allocations -%}
+                "{{ a.selling_plan.id }}": {{ a.price }}{% unless forloop.last %},{% endunless %}
+              {%- endfor -%}
+            }
+          }{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      ]
+    }
+  </script>
+</div>
+
+{%- if settings.seo_schema_product != 'none' -%}
+  <script type="application/ld+json">{{ product | structured_data }}</script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "PM product",
+  "tag": "div",
+  "class": "pm-section-product",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "header", "content": "Origin line" },
+    { "type": "text", "id": "origin_default", "label": "All products", "default": "Made in America" },
+    { "type": "text", "id": "origin_glf", "label": "GLF Immune Support", "default": "Packaged in Kentucky" },
+    { "type": "header", "content": "Purchase options" },
+    { "type": "text", "id": "once_title", "label": "One-time title", "default": "One-time purchase" },
+    { "type": "text", "id": "once_text", "label": "One-time text", "default": "Ships once" },
+    { "type": "text", "id": "sub_title", "label": "Subscribe title", "default": "Subscribe" },
+    { "type": "text", "id": "sub_text", "label": "Subscribe text", "default": "Never run out. Pause, skip or cancel anytime." },
+    { "type": "text", "id": "every_label", "label": "Interval label", "default": "Deliver every" },
+    { "type": "text", "id": "save_label", "label": "Saving badge", "default": "Save [percent]%", "info": "[percent] is replaced by the plan's discount. Hidden when the plan has no discount." },
+    { "type": "text", "id": "atc_label", "label": "Add to cart label", "default": "Add to cart" },
+    { "type": "text", "id": "soldout_label", "label": "Sold out label", "default": "Sold out" },
+    { "type": "header", "content": "Under the button" },
+    { "type": "text", "id": "ask_text", "label": "Help line", "default": "Not sure it’s the right fit?" },
+    { "type": "text", "id": "ask_link_label", "label": "Help link label", "default": "Text Fleur’s team" },
+    { "type": "text", "id": "ask_link", "label": "Help link", "default": "sms:+15022658345" },
+    { "type": "text", "id": "key_features_title", "label": "Key features title", "default": "Key features", "info": "First four Key Benefits from the product's key_benefits metafield." },
+    { "type": "text", "id": "key_features_link", "label": "Key features link", "default": "See all benefits" },
+    { "type": "richtext", "id": "vet_text", "label": "Vet line (supplements only)", "default": "<p>Colic, choke, sudden lameness, or a horse or dog off food and water? <strong>Call your vet first.</strong> Parkmore products are nutritional support, not treatment.</p>" },
+    { "type": "header", "content": "Description" },
+    { "type": "range", "id": "long_description_words", "label": "Long description from (words)", "min": 50, "max": 300, "step": 10, "default": 120, "info": "Shorter descriptions show here under the title; longer ones go to the story section." }
+  ],
+  "blocks": [
+    {
+      "type": "trust",
+      "name": "Trust line item",
+      "limit": 6,
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icon", "default": "lock", "options": [
+          { "value": "lock", "label": "Lock" }, { "value": "shield", "label": "Shield" }, { "value": "star", "label": "Star" }, { "value": "clock", "label": "Clock" }, { "value": "truck", "label": "Truck" }, { "value": "chat", "label": "Chat" }, { "value": "tag", "label": "Tag" }
+        ] },
+        { "type": "text", "id": "text", "label": "Text" }
+      ]
+    }
+  ],
+  "presets": [ { "name": "PM product" } ]
+}
+{% endschema %}

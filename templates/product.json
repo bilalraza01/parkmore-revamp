@@ -16,7 +16,8 @@
         "color_scheme": "scheme-2",
         "line_separator": "border-bottom",
         "visibility": ""
-      }
+      },
+      "disabled": true
     },
     "main": {
       "type": "main-product",
@@ -389,7 +390,8 @@
         "image_replace_background": false,
         "top_padding": "pt-0",
         "bottom_padding": "pb-s"
-      }
+      },
+      "disabled": true
     },
     "custom_liquid_DKnX8i": {
       "type": "custom-liquid",
@@ -414,7 +416,8 @@
         "show_time_afternoon": true,
         "show_time_evening": true,
         "show_time_night": true
-      }
+      },
+      "disabled": true
     },
     "custom_liquid_pjFeP3": {
       "type": "custom-liquid",
@@ -432,96 +435,8 @@
         "show_time_afternoon": true,
         "show_time_evening": true,
         "show_time_night": true
-      }
-    },
-    "rich_text_rdMBqg": {
-      "type": "rich-text",
-      "blocks": {
-        "heading_tAAyic": {
-          "type": "heading",
-          "settings": {
-            "heading": "Talk about your brand",
-            "heading_italic_convert": "",
-            "heading_size": "h3",
-            "heading_size_custom": 2.4,
-            "heading_line_height_custom": 1.2,
-            "heading_tag": "h2"
-          }
-        },
-        "text_zcaBcx": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
-            "text_size": "t3"
-          }
-        },
-        "buttons_WF4qqq": {
-          "type": "buttons",
-          "settings": {
-            "button_text_size": "t3",
-            "button_label_1": "Button label",
-            "button_link_1": "/",
-            "button_style_1": "primary",
-            "button_style_1_show_arrow": false,
-            "button_style_1_show_gradient_border": false,
-            "button_1_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)",
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_2": "secondary",
-            "button_style_2_show_arrow": false,
-            "button_style_2_show_gradient_border": false,
-            "button_2_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)"
-          }
-        }
       },
-      "block_order": [
-        "heading_tAAyic",
-        "text_zcaBcx",
-        "buttons_WF4qqq"
-      ],
-      "disabled": true,
-      "name": "Rich text",
-      "settings": {
-        "desktop_content_position": "center",
-        "content_max_width": "m",
-        "desktop_content_alignment": "center",
-        "mobile_content_alignment": "left",
-        "section_color_scheme": "",
-        "container_color_scheme": "",
-        "show_content_shadow": false,
-        "line_separator": "",
-        "top_padding": "pt-s",
-        "bottom_padding": "pb-s",
-        "visibility": "",
-        "hide_when_empty": false,
-        "show_at_specific_time_of_day": false,
-        "show_time_morning": true,
-        "show_time_afternoon": true,
-        "show_time_evening": true,
-        "show_time_night": true
-      }
-    },
-    "quick_order_list_TJVHJp": {
-      "type": "quick-order-list",
-      "disabled": true,
-      "settings": {
-        "min_variants": 0,
-        "content_max_width": "m",
-        "desktop_heading_alignment": "left",
-        "mobile_heading_alignment": "left",
-        "title": "Bulk order",
-        "italic_convert": "",
-        "heading_size": "h2",
-        "line_separator": "border-top",
-        "top_padding": "pt-s",
-        "bottom_padding": "pb-s",
-        "visibility": "",
-        "show_at_specific_time_of_day": false,
-        "show_time_morning": true,
-        "show_time_afternoon": true,
-        "show_time_evening": true,
-        "show_time_night": true
-      }
+      "disabled": true
     },
     "17446599501668113a": {
       "type": "apps",
@@ -638,138 +553,8 @@
         "show_time_afternoon": true,
         "show_time_evening": true,
         "show_time_night": true
-      }
-    },
-    "testimonials_wGiqtd": {
-      "type": "testimonials",
-      "blocks": {
-        "column_standard_BKG4cg": {
-          "type": "column_standard",
-          "settings": {
-            "image_ratio": "adapt",
-            "image_width": 100,
-            "rating_stars": 5,
-            "title": "Testimonial",
-            "heading_tag": "h3",
-            "text": "<p>Include a review of the product or collection left by a customer. Or perhaps it's a review of your store as whole.</p>",
-            "author_name": "Jane Doe",
-            "author_caption": "Director, Company name",
-            "card_link": "",
-            "card_color_scheme": "scheme-2",
-            "color_scheme_bg_fix": false
-          }
-        },
-        "column_standard_bxfpHL": {
-          "type": "column_standard",
-          "settings": {
-            "image_ratio": "adapt",
-            "image_width": 100,
-            "rating_stars": 5,
-            "title": "Testimonial",
-            "heading_tag": "h3",
-            "text": "<p>Include a review of the product or collection left by a customer. Or perhaps it's a review of your store as whole.</p>",
-            "author_name": "Jane Doe",
-            "author_caption": "Director, Company name",
-            "card_link": "",
-            "card_color_scheme": "",
-            "color_scheme_bg_fix": false
-          }
-        },
-        "column_standard_DKwYDD": {
-          "type": "column_standard",
-          "settings": {
-            "image_ratio": "adapt",
-            "image_width": 100,
-            "rating_stars": 5,
-            "title": "Testimonial",
-            "heading_tag": "h3",
-            "text": "<p>Include a review of the product or collection left by a customer. Or perhaps it's a review of your store as whole.</p>",
-            "author_name": "Jane Doe",
-            "author_caption": "Director, Company name",
-            "card_link": "",
-            "card_color_scheme": "",
-            "color_scheme_bg_fix": false
-          }
-        }
       },
-      "block_order": [
-        "column_standard_BKG4cg",
-        "column_standard_bxfpHL",
-        "column_standard_DKwYDD"
-      ],
-      "disabled": true,
-      "settings": {
-        "review_style": "star",
-        "rating_size": 3,
-        "heading_style": "text-body",
-        "card_heading_size": "h5",
-        "card_text_size": "t3",
-        "author_line": true,
-        "desktop_section_height": 200,
-        "mobile_section_height": 200,
-        "column_alignment": "left",
-        "text_vertical_alignment": "justify-center",
-        "content_padding": 4,
-        "desktop_layout": "carousel",
-        "mobile_layout": "carousel",
-        "columns_desktop": "3",
-        "columns_desktop_scale": true,
-        "image_overlay_opacity": 0,
-        "content_max_width": "m",
-        "desktop_heading_alignment": "left",
-        "mobile_heading_alignment": "left",
-        "title": "Testimonials",
-        "italic_convert": "",
-        "heading_size": "h2",
-        "text": "",
-        "text_size": "t3",
-        "view_all_link": "",
-        "view_all_text": "",
-        "view_all_text_size": "t3",
-        "color_scheme": "",
-        "star_color": "#f5e121",
-        "card_shadow": true,
-        "line_separator": "border-bottom",
-        "top_padding": "pt-s",
-        "bottom_padding": "pb-s",
-        "visibility": "",
-        "hide_when_empty": true,
-        "show_at_specific_time_of_day": false,
-        "show_time_morning": true,
-        "show_time_afternoon": true,
-        "show_time_evening": true,
-        "show_time_night": true,
-        "heading_tag": "h2"
-      }
-    },
-    "related-products": {
-      "type": "related-products",
-      "disabled": true,
-      "settings": {
-        "products_to_show": 4,
-        "desktop_layout": "carousel",
-        "mobile_layout": "carousel",
-        "columns_desktop": "4",
-        "columns_mobile": "2",
-        "content_max_width": "m",
-        "desktop_heading_alignment": "left",
-        "mobile_heading_alignment": "left",
-        "title": "You may also like",
-        "italic_convert": "",
-        "heading_size": "h2",
-        "text": "",
-        "text_size": "t3",
-        "color_scheme": "scheme-1",
-        "line_separator": "border-top",
-        "top_padding": "pt-s",
-        "bottom_padding": "pb-s",
-        "visibility": "",
-        "show_at_specific_time_of_day": false,
-        "show_time_morning": true,
-        "show_time_afternoon": true,
-        "show_time_evening": true,
-        "show_time_night": true
-      }
+      "disabled": true
     },
     "spacer_9qJUFC": {
       "type": "spacer",
@@ -787,1085 +572,8 @@
         "show_time_afternoon": true,
         "show_time_evening": true,
         "show_time_night": true
-      }
-    },
-    "section_tabs_FyqqtV": {
-      "type": "section-tabs",
-      "disabled": true,
-      "settings": {
-        "section_tabs": "3",
-        "tab1": "Features",
-        "tab2": "Highlights",
-        "tab3": "Images",
-        "tab4": "",
-        "tab_style": "simple",
-        "tab_alignment": "center",
-        "tab_text_size": "t0",
-        "content_max_width": "m",
-        "desktop_heading_alignment": "center",
-        "mobile_heading_alignment": "center",
-        "title": "",
-        "italic_convert": "",
-        "heading_size": "h2",
-        "text": "",
-        "text_size": "t3",
-        "color_scheme": "scheme-2",
-        "top_padding": "pt-s",
-        "bottom_padding": "pb-0",
-        "heading_tag": "h2"
-      }
-    },
-    "multicolumn_a966z9": {
-      "type": "multicolumn",
-      "blocks": {
-        "column_standard_W3pqXg": {
-          "type": "column_standard",
-          "disabled": true,
-          "settings": {
-            "column_alignment": "left",
-            "text_vertical_alignment": "justify-center",
-            "content_padding": 6,
-            "image_ratio": "adapt",
-            "image_width": 100,
-            "image_position": "top",
-            "icon": "",
-            "icon_container": "rounded",
-            "icon_size": 3.8,
-            "icon_color": "#ffffff",
-            "icon_background_color": "#ededed",
-            "background_gradient": "linear-gradient(320deg, rgba(56, 78, 197, 1) 16%, rgba(203, 68, 194, 1) 52%, rgba(255, 201, 104, 1) 87%)",
-            "title": "Flexible columns",
-            "heading_tag": "h3",
-            "heading_size": "h2",
-            "heading_size_custom": 2.8,
-            "text": "<p>Each with it's own color scheme, icons and highly customizable layout options.</p>",
-            "text_size": "t1",
-            "button_text_size": "t2",
-            "button_label": "Learn more",
-            "button_link": "",
-            "button_style": "link",
-            "button_style_show_arrow": true,
-            "button_style_show_gradient_border": false,
-            "button_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)",
-            "card_link": "",
-            "card_color_scheme": "scheme-1",
-            "color_scheme_bg_fix": false
-          }
-        },
-        "column_background_hxqNXt": {
-          "type": "column_background",
-          "disabled": true,
-          "settings": {
-            "column_alignment": "left",
-            "text_vertical_alignment": "justify-center",
-            "content_padding": 3,
-            "image_overlay_opacity": 0,
-            "icon": "",
-            "icon_container": "none",
-            "icon_size": 3.4,
-            "icon_color": "",
-            "icon_background_color": "#ededed",
-            "background_gradient": "",
-            "title": "",
-            "heading_tag": "h3",
-            "heading_size": "h3",
-            "heading_size_custom": 2.4,
-            "text": "",
-            "text_size": "t3",
-            "button_text_size": "t3",
-            "button_label": "",
-            "button_link": "",
-            "button_style": "primary",
-            "button_style_show_arrow": false,
-            "button_style_show_gradient_border": false,
-            "button_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)",
-            "card_link": "",
-            "card_color_scheme": "scheme-3",
-            "color_scheme_bg_fix": false
-          }
-        },
-        "column_standard_zNrhpz": {
-          "type": "column_standard",
-          "disabled": true,
-          "settings": {
-            "column_alignment": "left",
-            "text_vertical_alignment": "justify-center",
-            "content_padding": 6,
-            "image_ratio": "adapt",
-            "image_width": 100,
-            "image_position": "top",
-            "icon": "",
-            "icon_container": "rounded",
-            "icon_size": 3.8,
-            "icon_color": "#ffffff",
-            "icon_background_color": "#ededed",
-            "background_gradient": "linear-gradient(320deg, rgba(56, 78, 197, 1) 16%, rgba(203, 68, 194, 1) 52%, rgba(255, 201, 104, 1) 87%)",
-            "title": "Animated gradient backgrounds",
-            "heading_tag": "h3",
-            "heading_size": "h2",
-            "heading_size_custom": 2.4,
-            "text": "<p>Check out how the color changes when scrolling left/right.</p>",
-            "text_size": "t1",
-            "button_text_size": "t3",
-            "button_label": "",
-            "button_link": "",
-            "button_style": "link",
-            "button_style_show_arrow": true,
-            "button_style_show_gradient_border": false,
-            "button_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)",
-            "card_link": "",
-            "card_color_scheme": "scheme-4",
-            "color_scheme_bg_fix": true
-          }
-        },
-        "column_background_fB6VLB": {
-          "type": "column_background",
-          "disabled": true,
-          "settings": {
-            "column_alignment": "left",
-            "text_vertical_alignment": "justify-center",
-            "content_padding": 3,
-            "image_overlay_opacity": 0,
-            "icon": "",
-            "icon_container": "none",
-            "icon_size": 3.4,
-            "icon_color": "",
-            "icon_background_color": "#ededed",
-            "background_gradient": "",
-            "title": "",
-            "heading_tag": "h3",
-            "heading_size": "h3",
-            "heading_size_custom": 2.4,
-            "text": "",
-            "text_size": "t3",
-            "button_text_size": "t3",
-            "button_label": "",
-            "button_link": "",
-            "button_style": "primary",
-            "button_style_show_arrow": false,
-            "button_style_show_gradient_border": false,
-            "button_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)",
-            "card_link": "",
-            "card_color_scheme": "scheme-3",
-            "color_scheme_bg_fix": false
-          }
-        },
-        "column_standard_7877Vh": {
-          "type": "column_standard",
-          "disabled": true,
-          "settings": {
-            "column_alignment": "left",
-            "text_vertical_alignment": "justify-center",
-            "content_padding": 6,
-            "image_ratio": "adapt",
-            "image_width": 100,
-            "image_position": "top",
-            "icon": "rocket",
-            "icon_container": "circle",
-            "icon_size": 3.6,
-            "icon_color": "#ffffff",
-            "icon_background_color": "#ededed",
-            "background_gradient": "linear-gradient(127deg, rgba(254, 217, 81, 1) 11%, rgba(255, 70, 199, 1) 81%)",
-            "title": "That's right. ++ It's an icon.",
-            "heading_tag": "h3",
-            "heading_size": "h2",
-            "heading_size_custom": 2.4,
-            "text": "<p>Plus this entire card is a link. <br/>Neat huh?</p>",
-            "text_size": "t1",
-            "button_text_size": "t3",
-            "button_label": "",
-            "button_link": "",
-            "button_style": "link",
-            "button_style_show_arrow": true,
-            "button_style_show_gradient_border": false,
-            "button_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)",
-            "card_link": "/",
-            "card_color_scheme": "scheme-2",
-            "color_scheme_bg_fix": false
-          }
-        },
-        "column_background_qMe963": {
-          "type": "column_background",
-          "disabled": true,
-          "settings": {
-            "column_alignment": "left",
-            "text_vertical_alignment": "justify-center",
-            "content_padding": 3,
-            "image_overlay_opacity": 0,
-            "icon": "",
-            "icon_container": "none",
-            "icon_size": 3.4,
-            "icon_color": "",
-            "icon_background_color": "#ededed",
-            "background_gradient": "",
-            "title": "",
-            "heading_tag": "h3",
-            "heading_size": "h3",
-            "heading_size_custom": 2.4,
-            "text": "",
-            "text_size": "t3",
-            "button_text_size": "t3",
-            "button_label": "",
-            "button_link": "",
-            "button_style": "primary",
-            "button_style_show_arrow": false,
-            "button_style_show_gradient_border": false,
-            "button_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)",
-            "card_link": "",
-            "card_color_scheme": "scheme-3",
-            "color_scheme_bg_fix": false
-          }
-        }
       },
-      "block_order": [
-        "column_standard_W3pqXg",
-        "column_background_hxqNXt",
-        "column_standard_zNrhpz",
-        "column_background_fB6VLB",
-        "column_standard_7877Vh",
-        "column_background_qMe963"
-      ],
-      "disabled": true,
-      "settings": {
-        "icon_bottom": false,
-        "desktop_section_height": 520,
-        "mobile_section_height": 200,
-        "desktop_layout": "carousel",
-        "mobile_layout": "carousel",
-        "columns_desktop": "3",
-        "columns_desktop_scale": true,
-        "columns_mobile": "1",
-        "image_overlay_opacity": 0,
-        "content_max_width": "m",
-        "desktop_heading_alignment": "left",
-        "mobile_heading_alignment": "left",
-        "title": "",
-        "italic_convert": "",
-        "heading_size": "h2",
-        "text": "",
-        "text_size": "t3",
-        "view_all_link": "",
-        "view_all_text": "",
-        "view_all_text_size": "t3",
-        "color_scheme": "scheme-2",
-        "card_shadow": false,
-        "line_separator": "",
-        "top_padding": "pt-s",
-        "bottom_padding": "pb-s",
-        "visibility": "",
-        "hide_when_empty": false,
-        "show_at_specific_time_of_day": false,
-        "show_time_morning": true,
-        "show_time_afternoon": true,
-        "show_time_evening": true,
-        "show_time_night": true,
-        "heading_tag": "h2"
-      }
-    },
-    "image_hotspots_3ghQf6": {
-      "type": "image-hotspots",
-      "blocks": {
-        "heading_q8KVzj": {
-          "type": "heading",
-          "settings": {
-            "heading": "Product features",
-            "heading_italic_convert": "",
-            "heading_size": "h3",
-            "heading_size_custom": 2.4,
-            "heading_line_height_custom": 1.2,
-            "heading_tag": "h2"
-          }
-        },
-        "text_JQi7kz": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Highlight product features with metafield-friendly image hotspots.</p>",
-            "text_size": "t1"
-          }
-        },
-        "hotspot_4LTNAh": {
-          "type": "hotspot",
-          "settings": {
-            "hotspot_horizontal_position_desktop": 18,
-            "hotspot_vertical_position_desktop": 16,
-            "hotspot_horizontal_position_override_desktop": "",
-            "hotspot_vertical_position_override_desktop": "",
-            "hotspot_position_mobile": false,
-            "hotspot_horizontal_position_mobile": 50,
-            "hotspot_vertical_position_mobile": 50,
-            "hotspot_horizontal_position_override_mobile": "",
-            "hotspot_vertical_position_override_mobile": "",
-            "popover_product": "",
-            "title": "Hotspot 1",
-            "popover_content": "<p>Hotspots can be shown on mobile, desktop or both - so you can have different content for different devices.</p>",
-            "popover_button_label": "",
-            "popover_button_link": "",
-            "popover_button_style": "link",
-            "popover_button_show_arrow": true,
-            "hotspot_style": "magnify",
-            "hotspot_size_desktop": 36,
-            "hotspot_size_mobile": 24,
-            "hotspot_pulse": true,
-            "popover_width_desktop": 335,
-            "popover_title_size": "t2",
-            "popover_content_size": "t4",
-            "popover_button_text_size": "t6",
-            "popover_color_scheme": "",
-            "hotspot_background_color": "#ffffff",
-            "hotspot_foreground_color": "#222222",
-            "hotspot_opacity": 95,
-            "hotspot_visibility": ""
-          }
-        },
-        "hotspot_hi4A7b": {
-          "type": "hotspot",
-          "settings": {
-            "hotspot_horizontal_position_desktop": 79,
-            "hotspot_vertical_position_desktop": 33,
-            "hotspot_horizontal_position_override_desktop": "",
-            "hotspot_vertical_position_override_desktop": "",
-            "hotspot_position_mobile": false,
-            "hotspot_horizontal_position_mobile": 50,
-            "hotspot_vertical_position_mobile": 50,
-            "hotspot_horizontal_position_override_mobile": "",
-            "hotspot_vertical_position_override_mobile": "",
-            "popover_product": "",
-            "title": "Hotspot 2",
-            "popover_content": "<p>Each hotspot can have a different icon, color or size.</p>",
-            "popover_button_label": "",
-            "popover_button_link": "",
-            "popover_button_style": "link",
-            "popover_button_show_arrow": true,
-            "hotspot_style": "info",
-            "hotspot_size_desktop": 36,
-            "hotspot_size_mobile": 24,
-            "hotspot_pulse": true,
-            "popover_width_desktop": 250,
-            "popover_title_size": "t2",
-            "popover_content_size": "t4",
-            "popover_button_text_size": "t6",
-            "popover_color_scheme": "",
-            "hotspot_background_color": "#ffffff",
-            "hotspot_foreground_color": "#222222",
-            "hotspot_opacity": 95,
-            "hotspot_visibility": ""
-          }
-        },
-        "hotspot_nicYwc": {
-          "type": "hotspot",
-          "settings": {
-            "hotspot_horizontal_position_desktop": 63,
-            "hotspot_vertical_position_desktop": 65,
-            "hotspot_horizontal_position_override_desktop": "",
-            "hotspot_vertical_position_override_desktop": "",
-            "hotspot_position_mobile": false,
-            "hotspot_horizontal_position_mobile": 50,
-            "hotspot_vertical_position_mobile": 50,
-            "hotspot_horizontal_position_override_mobile": "",
-            "hotspot_vertical_position_override_mobile": "",
-            "popover_product": "",
-            "title": "Hotspot 3",
-            "popover_content": "<p>If you're showcasing products, you can quickly set this section up by selecting a specific product for each hotspot and the theme will fill in the rest.</p>",
-            "popover_button_label": "View product",
-            "popover_button_link": "",
-            "popover_button_style": "secondary",
-            "popover_button_show_arrow": true,
-            "hotspot_style": "camera",
-            "hotspot_size_desktop": 36,
-            "hotspot_size_mobile": 24,
-            "hotspot_pulse": true,
-            "popover_width_desktop": 355,
-            "popover_title_size": "t2",
-            "popover_content_size": "t4",
-            "popover_button_text_size": "t6",
-            "popover_color_scheme": "",
-            "hotspot_background_color": "#ffffff",
-            "hotspot_foreground_color": "#222222",
-            "hotspot_opacity": 95,
-            "hotspot_visibility": ""
-          }
-        }
-      },
-      "block_order": [
-        "heading_q8KVzj",
-        "text_JQi7kz",
-        "hotspot_4LTNAh",
-        "hotspot_hi4A7b",
-        "hotspot_nicYwc"
-      ],
-      "disabled": true,
-      "settings": {
-        "image_overlay_opacity": 8,
-        "skew_images": false,
-        "image_ratio": "landscape_wider",
-        "full_width": true,
-        "desktop_content_position": "md:justify-start md:items-end",
-        "content_max_width": "xs",
-        "desktop_content_alignment": "left",
-        "mobile_content_alignment": "left",
-        "show_text_box": "always",
-        "color_scheme": "",
-        "container_color_scheme": "",
-        "line_separator": "",
-        "top_padding": "pt-s",
-        "bottom_padding": "pb-s",
-        "visibility": "",
-        "hide_when_empty": false,
-        "show_at_specific_time_of_day": false,
-        "show_time_morning": true,
-        "show_time_afternoon": true,
-        "show_time_evening": true,
-        "show_time_night": true
-      }
-    },
-    "rich_text_AqAAyx": {
-      "type": "rich-text",
-      "blocks": {
-        "heading_yVzDpd": {
-          "type": "heading",
-          "settings": {
-            "heading": "Highlight feature 1",
-            "heading_italic_convert": "",
-            "heading_size": "h3",
-            "heading_size_custom": 2.4,
-            "heading_line_height_custom": 1.2,
-            "heading_tag": "h2"
-          }
-        },
-        "text_dyL3R9": {
-          "type": "text",
-          "settings": {
-            "text": "<p>More about the first feature.</p>",
-            "text_size": "t3"
-          }
-        }
-      },
-      "block_order": [
-        "heading_yVzDpd",
-        "text_dyL3R9"
-      ],
-      "disabled": true,
-      "settings": {
-        "desktop_content_position": "center",
-        "content_max_width": "m",
-        "desktop_content_alignment": "center",
-        "mobile_content_alignment": "center",
-        "section_color_scheme": "scheme-2",
-        "container_color_scheme": "scheme-2",
-        "show_content_shadow": false,
-        "line_separator": "border-top",
-        "top_padding": "pt-s",
-        "bottom_padding": "pb-s",
-        "visibility": "",
-        "hide_when_empty": false,
-        "show_at_specific_time_of_day": false,
-        "show_time_morning": true,
-        "show_time_afternoon": true,
-        "show_time_evening": true,
-        "show_time_night": true
-      }
-    },
-    "image_banner_gwGM38": {
-      "type": "image-banner",
-      "disabled": true,
-      "settings": {
-        "image": "{{ product.featured_image }}",
-        "image_overlay_opacity": 0,
-        "image_link": "",
-        "fix_image": false,
-        "skew_images": false,
-        "stack_images_on_mobile": true,
-        "image_ratio": "adapt",
-        "desktop_section_height": 500,
-        "mobile_section_height": 400,
-        "full_width": false,
-        "full_width_animate": false,
-        "desktop_content_position": "md:justify-center md:items-center",
-        "mobile_content_position": "justify-center items-center",
-        "content_max_width": "m",
-        "desktop_content_alignment": "center",
-        "mobile_content_alignment": "center",
-        "show_text_box": "desktop",
-        "show_text_below": true,
-        "color_scheme": "scheme-2",
-        "container_color_scheme": "scheme-2",
-        "line_separator": "",
-        "top_padding": "pt-0",
-        "bottom_padding": "pb-s",
-        "visibility": "",
-        "hide_when_empty": false,
-        "show_at_specific_time_of_day": false,
-        "show_time_morning": true,
-        "show_time_afternoon": true,
-        "show_time_evening": true,
-        "show_time_night": true
-      }
-    },
-    "stats_bJWtWh": {
-      "type": "stats",
-      "blocks": {
-        "column_standard_iYMRFj": {
-          "type": "column_standard",
-          "settings": {
-            "stat_caption": "Over",
-            "stat_number": "250",
-            "title": "sold in six-weeks",
-            "heading_size": "h4",
-            "stat_color": "#f1b726",
-            "stat_text_gradient": "linear-gradient(276deg, rgba(255, 228, 49, 1), rgba(249, 149, 32, 1) 59%)",
-            "icon": "",
-            "icon_container": "none",
-            "icon_size": 3.4,
-            "icon_color": "",
-            "icon_background_color": "#ededed",
-            "background_gradient": "",
-            "text": "",
-            "text_size": "t3",
-            "image_ratio": "adapt",
-            "image_width": 100,
-            "image_position": "below_text",
-            "button_text_size": "t3",
-            "button_label": "",
-            "button_link": "",
-            "button_style": "primary",
-            "button_style_show_arrow": false,
-            "button_style_show_gradient_border": false,
-            "button_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)",
-            "card_link": "",
-            "card_color_scheme": "scheme-2",
-            "color_scheme_bg_fix": false
-          }
-        },
-        "column_standard_NBeTj7": {
-          "type": "column_standard",
-          "settings": {
-            "stat_caption": "With",
-            "stat_number": "97%",
-            "title": "positive reviews",
-            "heading_size": "h4",
-            "stat_color": "#e937d6",
-            "stat_text_gradient": "linear-gradient(238deg, rgba(249, 119, 255, 1) 8%, rgba(186, 54, 255, 1) 69%)",
-            "icon": "",
-            "icon_container": "none",
-            "icon_size": 3.4,
-            "icon_color": "",
-            "icon_background_color": "#ededed",
-            "background_gradient": "",
-            "text": "",
-            "text_size": "t3",
-            "image_ratio": "adapt",
-            "image_width": 100,
-            "image_position": "below_text",
-            "button_text_size": "t3",
-            "button_label": "",
-            "button_link": "",
-            "button_style": "primary",
-            "button_style_show_arrow": false,
-            "button_style_show_gradient_border": false,
-            "button_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)",
-            "card_link": "",
-            "card_color_scheme": "scheme-2",
-            "color_scheme_bg_fix": false
-          }
-        },
-        "column_standard_yypakD": {
-          "type": "column_standard",
-          "settings": {
-            "stat_caption": "Expanding",
-            "stat_number": "3 more",
-            "title": "markets in 2025",
-            "heading_size": "h4",
-            "stat_color": "#00ffff",
-            "stat_text_gradient": "linear-gradient(106deg, rgba(87, 247, 255, 1) 6%, rgba(33, 249, 239, 1) 68%)",
-            "icon": "",
-            "icon_container": "none",
-            "icon_size": 3.4,
-            "icon_color": "",
-            "icon_background_color": "#ededed",
-            "background_gradient": "",
-            "text": "",
-            "text_size": "t3",
-            "image_ratio": "adapt",
-            "image_width": 100,
-            "image_position": "below_text",
-            "button_text_size": "t3",
-            "button_label": "",
-            "button_link": "",
-            "button_style": "primary",
-            "button_style_show_arrow": false,
-            "button_style_show_gradient_border": false,
-            "button_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)",
-            "card_link": "",
-            "card_color_scheme": "scheme-2",
-            "color_scheme_bg_fix": false
-          }
-        }
-      },
-      "block_order": [
-        "column_standard_iYMRFj",
-        "column_standard_NBeTj7",
-        "column_standard_yypakD"
-      ],
-      "disabled": true,
-      "settings": {
-        "stat_animate": true,
-        "stat_caption_style": "caption-with-letter-spacing",
-        "stat_style": "text-body",
-        "heading_style": "text-body",
-        "stat_size": "custom",
-        "stat_size_custom": 6.2,
-        "desktop_section_height": 300,
-        "mobile_section_height": 0,
-        "column_alignment": "center",
-        "text_vertical_alignment": "justify-center",
-        "spacing_grid": 28,
-        "content_padding": 2,
-        "columns_desktop": 3,
-        "columns_desktop_scale": true,
-        "full_width_section": true,
-        "image_overlay_opacity": 0,
-        "content_max_width": "m",
-        "desktop_heading_alignment": "center",
-        "mobile_heading_alignment": "center",
-        "title": "",
-        "italic_convert": "light",
-        "heading_size": "h3",
-        "text": "",
-        "text_size": "t3",
-        "view_all_link": "",
-        "view_all_text": "",
-        "view_all_text_size": "t3",
-        "color_scheme": "scheme-2",
-        "card_shadow": false,
-        "line_separator": "",
-        "top_padding": "pt-0",
-        "bottom_padding": "pb-s",
-        "visibility": "",
-        "hide_when_empty": true,
-        "show_at_specific_time_of_day": false,
-        "show_time_morning": true,
-        "show_time_afternoon": true,
-        "show_time_evening": true,
-        "show_time_night": true,
-        "heading_tag": "h2"
-      }
-    },
-    "image_with_text_RX8tYq": {
-      "type": "image-with-text",
-      "blocks": {
-        "heading_jKH9Um": {
-          "type": "heading",
-          "settings": {
-            "heading": "Highlight feature 2",
-            "heading_italic_convert": "",
-            "heading_size": "h3",
-            "heading_size_custom": 2.4,
-            "heading_line_height_custom": 1.2,
-            "heading_tag": "h2"
-          }
-        },
-        "text_37XbVG": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Emphasize specific features of the product. For example, describe the premium materials used in the product's construction. Highlight its ability to withstand wear and tear or challenging conditions. </p><p>Emphasize the attention to detail and engineering that sets the product apart in terms of quality.</p>",
-            "text_size": "t3"
-          }
-        }
-      },
-      "block_order": [
-        "heading_jKH9Um",
-        "text_37XbVG"
-      ],
-      "disabled": true,
-      "settings": {
-        "desktop_section_height": 500,
-        "mobile_section_height": 400,
-        "desktop_media_width": 50,
-        "desktop_media_scale": 100,
-        "layout": "text_first",
-        "image_cover": true,
-        "desktop_content_alignment": "left",
-        "mobile_content_alignment": "left",
-        "text_max_width": "xs",
-        "content_layout": "no-overlap",
-        "section_color_scheme": "scheme-2",
-        "color_scheme": "scheme-2",
-        "show_content_shadow": false,
-        "line_separator": "border-top",
-        "top_padding": "pt-s",
-        "bottom_padding": "pb-0",
-        "visibility": "",
-        "hide_when_empty": false,
-        "show_at_specific_time_of_day": false,
-        "show_time_morning": true,
-        "show_time_afternoon": true,
-        "show_time_evening": true,
-        "show_time_night": true
-      }
-    },
-    "image_with_text_gmFpBQ": {
-      "type": "image-with-text",
-      "blocks": {
-        "heading_yxHimN": {
-          "type": "heading",
-          "settings": {
-            "heading": "Highlight feature 3",
-            "heading_italic_convert": "",
-            "heading_size": "h3",
-            "heading_size_custom": 2.4,
-            "heading_line_height_custom": 1.2,
-            "heading_tag": "h2"
-          }
-        },
-        "text_GPwHNF": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Explain how the product adapts to different use cases or environments. Show how the product seamlessly integrates into various aspects of the user’s life (work, leisure, etc.).</p><p>Highlight specific versatile features that make it useful in a wide range of scenarios.</p>",
-            "text_size": "t3"
-          }
-        }
-      },
-      "block_order": [
-        "heading_yxHimN",
-        "text_GPwHNF"
-      ],
-      "disabled": true,
-      "settings": {
-        "desktop_section_height": 500,
-        "mobile_section_height": 400,
-        "desktop_media_width": 50,
-        "desktop_media_scale": 100,
-        "layout": "media_first",
-        "image_cover": true,
-        "desktop_content_alignment": "left",
-        "mobile_content_alignment": "left",
-        "text_max_width": "xs",
-        "content_layout": "no-overlap",
-        "section_color_scheme": "scheme-2",
-        "color_scheme": "scheme-2",
-        "show_content_shadow": false,
-        "line_separator": "",
-        "top_padding": "pt-s",
-        "bottom_padding": "pb-0",
-        "visibility": "",
-        "hide_when_empty": false,
-        "show_at_specific_time_of_day": false,
-        "show_time_morning": true,
-        "show_time_afternoon": true,
-        "show_time_evening": true,
-        "show_time_night": true
-      }
-    },
-    "multicolumn_GPUXLe": {
-      "type": "multicolumn",
-      "blocks": {
-        "column_standard_QHJ7W3": {
-          "type": "column_standard",
-          "settings": {
-            "column_alignment": "center",
-            "text_vertical_alignment": "justify-start",
-            "content_padding": 2,
-            "image_ratio": "adapt",
-            "image_width": 60,
-            "image_position": "top",
-            "icon": "battery_half",
-            "icon_container": "rounded",
-            "icon_size": 5,
-            "icon_color": "#ffffff",
-            "icon_background_color": "#ededed",
-            "background_gradient": "linear-gradient(33deg, rgba(17, 16, 17, 1) 7%, rgba(82, 78, 88, 1) 94%)",
-            "title": "Item 1",
-            "heading_tag": "h3",
-            "heading_size": "custom",
-            "heading_size_custom": 1.2,
-            "text": "",
-            "text_size": "t3",
-            "button_text_size": "t3",
-            "button_label": "",
-            "button_link": "",
-            "button_style": "primary",
-            "button_style_show_arrow": false,
-            "button_style_show_gradient_border": false,
-            "button_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)",
-            "card_link": "",
-            "card_color_scheme": "scheme-1",
-            "color_scheme_bg_fix": false
-          }
-        },
-        "column_standard_LwATeP": {
-          "type": "column_standard",
-          "settings": {
-            "column_alignment": "center",
-            "text_vertical_alignment": "justify-start",
-            "content_padding": 2,
-            "image_ratio": "adapt",
-            "image_width": 60,
-            "image_position": "top",
-            "icon": "book",
-            "icon_container": "rounded",
-            "icon_size": 5,
-            "icon_color": "#ffffff",
-            "icon_background_color": "#ededed",
-            "background_gradient": "linear-gradient(33deg, rgba(17, 16, 17, 1) 7%, rgba(82, 78, 88, 1) 94%)",
-            "title": "Item 2",
-            "heading_tag": "h3",
-            "heading_size": "custom",
-            "heading_size_custom": 1.2,
-            "text": "",
-            "text_size": "t3",
-            "button_text_size": "t3",
-            "button_label": "",
-            "button_link": "",
-            "button_style": "primary",
-            "button_style_show_arrow": false,
-            "button_style_show_gradient_border": false,
-            "button_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)",
-            "card_link": "",
-            "card_color_scheme": "scheme-1",
-            "color_scheme_bg_fix": false
-          }
-        },
-        "column_standard_kFjQRi": {
-          "type": "column_standard",
-          "settings": {
-            "column_alignment": "center",
-            "text_vertical_alignment": "justify-start",
-            "content_padding": 2,
-            "image_ratio": "adapt",
-            "image_width": 60,
-            "image_position": "top",
-            "icon": "shield_checkmark",
-            "icon_container": "rounded",
-            "icon_size": 5,
-            "icon_color": "#ffffff",
-            "icon_background_color": "#ededed",
-            "background_gradient": "linear-gradient(33deg, rgba(17, 16, 17, 1) 7%, rgba(82, 78, 88, 1) 94%)",
-            "title": "Item 3",
-            "heading_tag": "h3",
-            "heading_size": "custom",
-            "heading_size_custom": 1.2,
-            "text": "",
-            "text_size": "t3",
-            "button_text_size": "t3",
-            "button_label": "",
-            "button_link": "",
-            "button_style": "primary",
-            "button_style_show_arrow": false,
-            "button_style_show_gradient_border": false,
-            "button_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)",
-            "card_link": "",
-            "card_color_scheme": "scheme-1",
-            "color_scheme_bg_fix": false
-          }
-        },
-        "column_standard_GGR3Uc": {
-          "type": "column_standard",
-          "settings": {
-            "column_alignment": "center",
-            "text_vertical_alignment": "justify-start",
-            "content_padding": 2,
-            "image_ratio": "adapt",
-            "image_width": 60,
-            "image_position": "top",
-            "icon": "plant",
-            "icon_container": "rounded",
-            "icon_size": 5,
-            "icon_color": "#ffffff",
-            "icon_background_color": "#ededed",
-            "background_gradient": "linear-gradient(33deg, rgba(17, 16, 17, 1) 7%, rgba(82, 78, 88, 1) 94%)",
-            "title": "Item 4",
-            "heading_tag": "h3",
-            "heading_size": "custom",
-            "heading_size_custom": 1.2,
-            "text": "",
-            "text_size": "t3",
-            "button_text_size": "t3",
-            "button_label": "",
-            "button_link": "",
-            "button_style": "primary",
-            "button_style_show_arrow": false,
-            "button_style_show_gradient_border": false,
-            "button_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)",
-            "card_link": "",
-            "card_color_scheme": "scheme-1",
-            "color_scheme_bg_fix": false
-          }
-        }
-      },
-      "block_order": [
-        "column_standard_QHJ7W3",
-        "column_standard_LwATeP",
-        "column_standard_kFjQRi",
-        "column_standard_GGR3Uc"
-      ],
-      "disabled": true,
-      "settings": {
-        "icon_bottom": false,
-        "desktop_section_height": 200,
-        "mobile_section_height": 200,
-        "desktop_layout": "grid",
-        "mobile_layout": "grid",
-        "columns_desktop": "4",
-        "columns_desktop_scale": true,
-        "columns_mobile": "2",
-        "image_overlay_opacity": 0,
-        "content_max_width": "m",
-        "desktop_heading_alignment": "center",
-        "mobile_heading_alignment": "center",
-        "title": "What's in the box?",
-        "italic_convert": "",
-        "heading_size": "h2",
-        "text": "",
-        "text_size": "t3",
-        "view_all_link": "",
-        "view_all_text": "",
-        "view_all_text_size": "t3",
-        "color_scheme": "scheme-1",
-        "card_shadow": false,
-        "line_separator": "border-top",
-        "top_padding": "pt-s",
-        "bottom_padding": "pb-s",
-        "visibility": "",
-        "hide_when_empty": false,
-        "show_at_specific_time_of_day": false,
-        "show_time_morning": true,
-        "show_time_afternoon": true,
-        "show_time_evening": true,
-        "show_time_night": true,
-        "heading_tag": "h2"
-      }
-    },
-    "collapsible_content_t3C4Tq": {
-      "type": "collapsible-content",
-      "blocks": {
-        "collapsible_row_UPgR8m": {
-          "type": "collapsible_row",
-          "settings": {
-            "row_open": true,
-            "heading": "Does it come with a warranty?",
-            "icon": "shield_checkmark",
-            "image_width": 20,
-            "row_heading_tag": "h3",
-            "row_content": "<p>Add your collapsible row content here. If it's set to open one row at a time, consider keeping the content in each row about the same length.</p>",
-            "page": "",
-            "content_embed": "",
-            "button_text_size": "t3",
-            "button_label_1": "",
-            "button_link_1": "/",
-            "button_style_1": "primary",
-            "button_style_1_show_arrow": false,
-            "button_style_1_show_gradient_border": false,
-            "button_1_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)"
-          }
-        },
-        "collapsible_row_wzzmgF": {
-          "type": "collapsible_row",
-          "settings": {
-            "row_open": false,
-            "heading": "What happens if I don't like it?",
-            "icon": "ban",
-            "image_width": 20,
-            "row_heading_tag": "h3",
-            "row_content": "<p>Add your collapsible row content here. If it's set to open one row at a time, consider keeping the content in each row about the same length.</p>",
-            "page": "",
-            "content_embed": "",
-            "button_text_size": "t3",
-            "button_label_1": "",
-            "button_link_1": "/",
-            "button_style_1": "primary",
-            "button_style_1_show_arrow": false,
-            "button_style_1_show_gradient_border": false,
-            "button_1_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)"
-          }
-        },
-        "collapsible_row_y93qxH": {
-          "type": "collapsible_row",
-          "settings": {
-            "row_open": false,
-            "heading": "How fast is shipping?",
-            "icon": "truck",
-            "image_width": 20,
-            "row_heading_tag": "h3",
-            "row_content": "<p>Add your collapsible row content here. If it's set to open one row at a time, consider keeping the content in each row about the same length.</p>",
-            "page": "",
-            "content_embed": "",
-            "button_text_size": "t3",
-            "button_label_1": "",
-            "button_link_1": "/",
-            "button_style_1": "primary",
-            "button_style_1_show_arrow": false,
-            "button_style_1_show_gradient_border": false,
-            "button_1_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)"
-          }
-        },
-        "collapsible_row_3zyzVG": {
-          "type": "collapsible_row",
-          "settings": {
-            "row_open": false,
-            "heading": "What's the returns policy?",
-            "icon": "return",
-            "image_width": 20,
-            "row_heading_tag": "h3",
-            "row_content": "<p>Add your collapsible row content here. If it's set to open one row at a time, consider keeping the content in each row about the same length.</p>",
-            "page": "",
-            "content_embed": "",
-            "button_text_size": "t3",
-            "button_label_1": "",
-            "button_link_1": "/",
-            "button_style_1": "primary",
-            "button_style_1_show_arrow": false,
-            "button_style_1_show_gradient_border": false,
-            "button_1_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)"
-          }
-        }
-      },
-      "block_order": [
-        "collapsible_row_UPgR8m",
-        "collapsible_row_wzzmgF",
-        "collapsible_row_y93qxH",
-        "collapsible_row_3zyzVG"
-      ],
-      "disabled": true,
-      "settings": {
-        "one_row_at_a_time": true,
-        "show_line_separator": true,
-        "row_heading_size": "t2",
-        "row_text_size": "t4",
-        "show_header_beside": true,
-        "desktop_media_width": 40,
-        "layout": "media_first",
-        "show_search_box": true,
-        "content_max_width": "l",
-        "desktop_heading_alignment": "left",
-        "mobile_heading_alignment": "left",
-        "title": "Any questions?",
-        "italic_convert": "",
-        "heading_size": "h2",
-        "text": "<p>Address frequently asked questions about this product to minimize any concerns or uncertainties that might deter a customer from making a purchase.</p>",
-        "text_size": "t3",
-        "button_label": "",
-        "button_link": "",
-        "button_style": "secondary",
-        "button_text_size": "t5",
-        "button_style_show_arrow": true,
-        "button_style_show_gradient_border": false,
-        "button_border_gradient": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)",
-        "section_color_scheme": "",
-        "color_scheme": "",
-        "show_content_shadow": true,
-        "line_separator": "",
-        "top_padding": "pt-s",
-        "bottom_padding": "pb-s",
-        "heading_tag": "h3",
-        "render_schema": true,
-        "visibility": "",
-        "hide_when_empty": true,
-        "show_at_specific_time_of_day": false,
-        "show_time_morning": true,
-        "show_time_afternoon": true,
-        "show_time_evening": true,
-        "show_time_night": true
-      }
+      "disabled": true
     },
     "recently_viewed_WRF76n": {
       "type": "recently-viewed",
@@ -1894,7 +602,8 @@
         "show_time_evening": true,
         "show_time_night": true,
         "heading_tag": "h2"
-      }
+      },
+      "disabled": true
     },
     "ribbon_banner_kAqDx9": {
       "type": "ribbon-banner",
@@ -1952,7 +661,8 @@
         "show_time_afternoon": true,
         "show_time_evening": true,
         "show_time_night": true
-      }
+      },
+      "disabled": true
     },
     "alert_DtAfgB": {
       "type": "alert",
@@ -2000,31 +710,138 @@
         "show_time_afternoon": true,
         "show_time_evening": true,
         "show_time_night": true
+      },
+      "disabled": true
+    },
+    "pm_product": {
+      "type": "pm-product-main",
+      "blocks": {
+        "trust_1": {
+          "type": "trust",
+          "settings": {
+            "icon": "lock",
+            "text": "Fully secure checkout"
+          }
+        },
+        "trust_2": {
+          "type": "trust",
+          "settings": {
+            "icon": "shield",
+            "text": "Trusted by thousands"
+          }
+        },
+        "trust_3": {
+          "type": "trust",
+          "settings": {
+            "icon": "star",
+            "text": "Rated and reviewed"
+          }
+        },
+        "trust_4": {
+          "type": "trust",
+          "settings": {
+            "icon": "clock",
+            "text": "Order by 12pm ET, ships today"
+          }
+        }
+      },
+      "block_order": [
+        "trust_1",
+        "trust_2",
+        "trust_3",
+        "trust_4"
+      ],
+      "settings": {}
+    },
+    "pm_trust": {
+      "type": "pm-product-trust",
+      "blocks": {
+        "claim_1": {
+          "type": "claim",
+          "settings": {
+            "icon": "shield",
+            "title": "Well trusted",
+            "text": "Over 10k customers"
+          }
+        },
+        "claim_2": {
+          "type": "claim",
+          "settings": {
+            "icon": "truck",
+            "title": "Reliable delivery",
+            "text": "via UPS"
+          }
+        },
+        "claim_3": {
+          "type": "claim",
+          "settings": {
+            "icon": "chat",
+            "title": "Expert help",
+            "text": "Seven days a week"
+          }
+        },
+        "claim_4": {
+          "type": "claim",
+          "settings": {
+            "icon": "tag",
+            "title": "Best prices",
+            "text": "Unbeatable value"
+          }
+        }
+      },
+      "block_order": [
+        "claim_1",
+        "claim_2",
+        "claim_3",
+        "claim_4"
+      ],
+      "settings": {}
+    },
+    "pm_inside": {
+      "type": "pm-product-inside",
+      "settings": {}
+    },
+    "pm_story": {
+      "type": "pm-product-story",
+      "settings": {}
+    },
+    "pm_recs": {
+      "type": "pm-product-recs",
+      "settings": {}
+    },
+    "pm_reviews_head": {
+      "type": "pm-product-reviews-head",
+      "settings": {}
+    },
+    "pm_more": {
+      "type": "pm-product-more",
+      "settings": {}
+    },
+    "pm_final": {
+      "type": "pm-final",
+      "settings": {
+        "chap_num": "06",
+        "photo": "shopify://shop_images/Pudge_02_39.jpg",
+        "signup_label": ""
       }
     }
   },
   "order": [
+    "pm_product",
+    "pm_trust",
+    "pm_inside",
+    "pm_story",
+    "pm_recs",
+    "pm_reviews_head",
+    "17446599501668113a",
+    "pm_more",
+    "pm_final",
     "breadcrumbs",
     "main",
     "custom_liquid_DKnX8i",
     "custom_liquid_pjFeP3",
-    "rich_text_rdMBqg",
-    "quick_order_list_TJVHJp",
-    "17446599501668113a",
     "icons_with_text_XRiz3T",
-    "testimonials_wGiqtd",
-    "related-products",
     "spacer_9qJUFC",
-    "section_tabs_FyqqtV",
-    "multicolumn_a966z9",
-    "image_hotspots_3ghQf6",
-    "rich_text_AqAAyx",
-    "image_banner_gwGM38",
-    "stats_bJWtWh",
-    "image_with_text_RX8tYq",
-    "image_with_text_gmFpBQ",
-    "multicolumn_GPUXLe",
-    "collapsible_content_t3C4Tq",
     "recently_viewed_WRF76n",
     "ribbon_banner_kAqDx9",
     "alert_DtAfgB"

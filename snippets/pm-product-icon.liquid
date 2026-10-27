@@ -1,0 +1,12 @@
+{%- comment -%} Small line icons for the product page trust line. Param: icon (lock, shield, star, clock, truck, chat, tag) {%- endcomment -%}
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+{%- case icon -%}
+  {%- when 'lock' -%}<rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/>
+  {%- when 'shield' -%}<path d="M12 3 5 6v5c0 4.5 3 8.3 7 10 4-1.7 7-5.5 7-10V6z"/><path d="m9 12 2 2 4-4"/>
+  {%- when 'star' -%}<path d="m12 3 2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z"/>
+  {%- when 'clock' -%}<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>
+  {%- when 'truck' -%}<path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/>
+  {%- when 'chat' -%}<path d="M4 5h16v10H9l-5 4z"/>
+  {%- when 'tag' -%}<path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.5"/>
+{%- endcase -%}
+</svg>

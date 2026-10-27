@@ -4,6 +4,7 @@
     product      product object (required)
     name         optional display name (defaults to the product title)
     use          small gold line above the name, e.g. "Daily foundation"
+    why          optional one-line description under the name (finder "why")
     badge        e.g. "Bestseller" or "New"
     show_origin  true to show the origin line ("Made in America", or "Packaged in Kentucky" for GLF)
     origin       optional text that replaces the automatic origin line
@@ -40,6 +41,7 @@
   </a>
   {%- if use != blank -%}<div class="pm-pc__use">{{ use | escape }}</div>{%- endif -%}
   <h3><a href="{{ product.url }}">{{ display_name | escape }}</a></h3>
+  {%- if why != blank -%}<p class="pm-pc__why">{{ why | escape }}</p>{%- endif -%}
   {%- if rating != blank and rating_count > 0 -%}
     {%- liquid
       assign r = rating.rating | times: 1.0

@@ -1,0 +1,128 @@
+{%- comment -%}
+  One "Inside the bag" panel, laid out from the content's shape. Params: key, product.
+    key_benefits / what_is_inside:  <p><strong>Title</strong><br>text</p> or <h5>Title</h5><p>text</p>  -> numbered cards
+                                    bullet list -> ticked tiles; anything else -> text card
+    guaranteed_analysis:            "Name — 45.0%", "Name, minimum: 4.5%", "Name (min) 46.0%" lines or list -> table
+    great_for:                      bullet list -> ticked tiles
+    how_to_use:                     list items "<strong>Label:</strong> 30g daily…" -> feeding cards, plus the other text
+    ingredients / more / recipe:    text card
+{%- endcomment -%}
+{%- liquid
+  assign html = product.metafields.custom[key] | metafield_tag
+  assign html = html | replace: '<br/>', '<br>' | replace: '<br />', '<br>'
+  assign tick = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.7 2.7L16 9.8"/></svg>'
+  assign layout = 'wide'
+  case key
+    when 'key_benefits', 'what_is_inside'
+      if html contains '<h5>'
+        assign layout = 'cards_h5'
+      elsif html contains '<strong>' and html contains '<br>'
+        assign layout = 'cards_strong'
+      elsif html contains '<li'
+        assign layout = 'ticks'
+      endif
+    when 'great_for'
+      if html contains '<li'
+        assign layout = 'ticks'
+      endif
+    when 'guaranteed_analysis'
+      assign layout = 'table'
+    when 'how_to_use'
+      assign layout = 'feed'
+  endcase
+-%}
+
+{%- case layout -%}
+  {%- when 'cards_strong' -%}
+    <div class="pmp-cards">
+      {%- assign parts = html | split: '<strong>' -%}
+      {%- for part in parts offset: 1 -%}
+        {%- assign t = part | split: '</strong>' | first | strip_html | strip -%}
+        {%- assign x = part | split: '</strong>' | last | split: '</p>' | first | strip_html | strip -%}
+        <div class="pmp-card"><span class="n">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span><h3>{{ t }}</h3>{%- if x != blank -%}<p>{{ x }}</p>{%- endif -%}</div>
+      {%- endfor -%}
+    </div>
+
+  {%- when 'cards_h5' -%}
+    <div class="pmp-cards">
+      {%- assign parts = html | split: '<h5>' -%}
+      {%- for part in parts offset: 1 -%}
+        {%- assign t = part | split: '</h5>' | first | strip_html | strip -%}
+        {%- assign x = part | split: '</h5>' | last | strip_html | strip -%}
+        <div class="pmp-card"><span class="n">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span><h3>{{ t }}</h3>{%- if x != blank -%}<p>{{ x }}</p>{%- endif -%}</div>
+      {%- endfor -%}
+    </div>
+
+  {%- when 'ticks' -%}
+    <ul class="pmp-ticks">
+      {%- assign parts = html | split: '<li' -%}
+      {%- for part in parts offset: 1 -%}
+        {%- assign t = '<li' | append: part | split: '</li>' | first | strip_html | strip -%}
+        {%- if t != blank -%}<li>{{ tick }}<span>{{ t }}</span></li>{%- endif -%}
+      {%- endfor -%}
+    </ul>
+    {%- assign after = html | split: '</ul>' | last | strip_html | strip -%}
+    {%- if html contains '</ul>' and after != blank -%}<div class="pmp-wide pmp-wide--after"><p>{{ after }}</p></div>{%- endif -%}
+
+  {%- when 'table' -%}
+    {%- liquid
+      if html contains '<li'
+        assign lines = html | replace: '</li>', '¦' | strip_html | split: '¦'
+      else
+        assign lines = html | replace: '<br>', '¦' | replace: '</p>', '¦' | strip_html | split: '¦'
+      endif
+    -%}
+    <div class="pmp-ga">
+      {%- for line in lines -%}
+        {%- assign line = line | strip -%}
+        {%- if line != blank -%}
+          {%- liquid
+            assign value = line | split: ' ' | last
+            assign name = line | remove_last: value | replace: '—', '' | replace: '–', '' | strip
+            assign last_char = name | slice: -1
+            if last_char == ':'
+              assign name = name | remove_last: ':' | strip
+            endif
+          -%}
+          <div><span>{{ name }}</span><b>{{ value }}</b></div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+  {%- when 'feed' -%}
+    {%- liquid
+      assign rate_html = ''
+      if html contains '<li'
+        assign items = html | split: '<li'
+        for part in items offset: 1
+          assign li = '<li' | append: part | split: '</li>' | first
+          if li contains '<strong>'
+            assign label = li | split: '</strong>' | first | strip_html | strip | remove_last: ':' | strip
+            assign rest = li | split: '</strong>' | last | strip_html | strip
+            assign first_word = rest | split: ' ' | first
+            assign first_char = first_word | slice: 0
+            if '0123456789' contains first_char and first_char != blank
+              assign text = rest | remove_first: first_word | strip
+              assign text_first = text | slice: 0 | upcase
+              assign text = text | slice: 1, 9999 | prepend: text_first
+              capture card
+                echo '<div class="pmp-card"><small>' | append: label | append: '</small><b>' | append: first_word | append: '</b><p>' | append: text | append: '</p></div>'
+              endcapture
+              assign rate_html = rate_html | append: card
+            endif
+          endif
+        endfor
+      endif
+    -%}
+    {%- if rate_html != blank -%}
+      <div class="pmp-feed">{{ rate_html }}</div>
+      {%- assign before = html | split: '<ul' | first | strip -%}
+      {%- assign after = html | split: '</ul>' | last | strip -%}
+      {%- if before != blank or after != blank -%}<div class="pmp-wide">{{ before }}{{ after }}</div>{%- endif -%}
+    {%- else -%}
+      <div class="pmp-wide">{{ html }}</div>
+    {%- endif -%}
+
+  {%- else -%}
+    <div class="pmp-wide">{{ html }}</div>
+{%- endcase -%}

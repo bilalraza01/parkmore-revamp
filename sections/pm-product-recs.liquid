@@ -1,0 +1,48 @@
+{%- comment -%}
+  Parkmore "Pairs well with" (product page mockup option A). Cards load from Shopify's product
+  recommendations: complementary products (Search & Discovery app) first, related products as fallback.
+  When Shopify renders this section for /recommendations/products, only the grid is output; pm-product.js
+  copies it in. The section hides itself if neither intent returns products.
+{%- endcomment -%}
+{%- assign ss = section.settings -%}
+{%- if recommendations.performed -%}
+  <div class="pm-grid3 pmp-recs__grid" data-pm-recs-grid>
+    {%- for p in recommendations.products limit: ss.limit -%}
+      {%- capture meta -%}{%- render 'pm-product-meta', product: p -%}{%- endcapture -%}
+      {%- assign meta = meta | split: '§' -%}
+      {%- render 'pm-product-card', product: p, name: meta[2], use: meta[0], why: meta[3], show_origin: false, reveal: forloop.index -%}
+    {%- endfor -%}
+  </div>
+{%- else -%}
+  {%- capture meta -%}{%- render 'pm-product-meta', product: product -%}{%- endcapture -%}
+  {%- assign meta = meta | split: '§' -%}
+  {%- assign em = ss.heading_emphasis | append: ' ' | append: meta[2] | append: '.' | strip -%}
+  <section class="pm pm-psec pm-section pmp-recs" aria-label="{{ ss.chap_label | escape }}" data-pm-recs
+    data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ ss.limit }}" hidden>
+    <div class="pm-wrap">
+      <div class="pm-shop-head">
+        <div>{%- render 'pm-heading', chap_num: ss.chap_num, chap_label: ss.chap_label, line: ss.heading, em: em, em_break: false -%}</div>
+        {%- if ss.subline != blank -%}<p class="pmp-recs__sub">{{ ss.subline | escape }}</p>{%- endif -%}
+      </div>
+      <div data-pm-recs-target></div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "PM pairs well with",
+  "tag": "div",
+  "class": "pm-section-precs",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "text", "id": "chap_num", "label": "Chapter number", "default": "03" },
+    { "type": "text", "id": "chap_label", "label": "Chapter label", "default": "Build the protocol" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Pairs well" },
+    { "type": "text", "id": "heading_emphasis", "label": "Heading gold ending", "default": "with", "info": "The product’s name is added after this." },
+    { "type": "text", "id": "subline", "label": "Line beside the heading", "default": "Fleur’s usual pairings." },
+    { "type": "range", "id": "limit", "label": "Products", "min": 2, "max": 4, "step": 1, "default": 3 }
+  ],
+  "presets": [ { "name": "PM pairs well with" } ]
+}
+{% endschema %}

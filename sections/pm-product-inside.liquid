@@ -1,0 +1,71 @@
+{%- comment -%}
+  Parkmore "Inside the bag" (product page mockup option A). Shows only the product's filled panels.
+  Desktop: horizontal tabs. Phones and tablets (900px and below): collapsible rows.
+  Each panel is laid out from its content shape by pm-product-panel (see PRODUCT-PAGE-AUDIT.md rule 8).
+  Panels come from product metafields custom.key_benefits, what_is_inside, ingredients,
+  guaranteed_analysis, great_for, how_to_use, more, recipe.
+{%- endcomment -%}
+{%- liquid
+  assign ss = section.settings
+  assign keys = 'key_benefits,what_is_inside,ingredients,guaranteed_analysis,great_for,how_to_use,more,recipe' | split: ','
+  assign filled = ''
+  for k in keys
+    if product.metafields.custom[k] != blank
+      assign filled = filled | append: k | append: ','
+    endif
+  endfor
+  assign filled = filled | split: ','
+-%}
+
+{%- if filled.size > 0 -%}
+  <section class="pm pm-psec pm-dark pmp-inside" id="inside" aria-label="{{ ss.chap_label | escape }}">
+    <div class="pm-wrap">
+      <div class="pmp-inside__head">
+        <div>{%- render 'pm-heading', chap_num: ss.chap_num, chap_label: ss.chap_label, line: ss.heading, em: ss.heading_emphasis, em_break: true -%}</div>
+        {%- if ss.intro != blank -%}<p>{{ ss.intro | escape }}</p>{%- endif -%}
+      </div>
+
+      <div class="pmp-tabs" role="tablist" aria-label="{{ ss.chap_label | escape }}">
+        {%- for k in filled -%}
+          {%- assign title_key = 'title_' | append: k -%}
+          <button role="tab" type="button" id="pmp-tab-{{ k }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="pmp-panel-{{ k }}" data-pm-tab>{{ ss[title_key] | escape }}</button>
+        {%- endfor -%}
+      </div>
+
+      {%- for k in filled -%}
+        {%- assign title_key = 'title_' | append: k -%}
+        <button class="pmp-acc" type="button" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="pmp-panel-{{ k }}" data-pm-acc>{{ ss[title_key] | escape }}</button>
+        <div class="pmp-panel{% if forloop.first %} on open{% endif %}" id="pmp-panel-{{ k }}" role="tabpanel" aria-labelledby="pmp-tab-{{ k }}">
+          {%- render 'pm-product-panel', key: k, product: product -%}
+        </div>
+      {%- endfor -%}
+      <div class="pmp-acc-end" aria-hidden="true"></div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "PM inside the bag",
+  "tag": "div",
+  "class": "pm-section-pinside",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "text", "id": "chap_num", "label": "Chapter number", "default": "01" },
+    { "type": "text", "id": "chap_label", "label": "Chapter label", "default": "Inside the bag" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What it does," },
+    { "type": "text", "id": "heading_emphasis", "label": "Heading gold ending (new line)", "default": "and what’s in it." },
+    { "type": "textarea", "id": "intro", "label": "Intro", "default": "Everything on the label, laid out plainly. Only the tabs a product has filled in are shown." },
+    { "type": "header", "content": "Tab titles" },
+    { "type": "text", "id": "title_key_benefits", "label": "Key benefits", "default": "Key benefits" },
+    { "type": "text", "id": "title_what_is_inside", "label": "What’s inside", "default": "What’s inside" },
+    { "type": "text", "id": "title_ingredients", "label": "Ingredients", "default": "Ingredients" },
+    { "type": "text", "id": "title_guaranteed_analysis", "label": "Guaranteed analysis", "default": "Guaranteed analysis" },
+    { "type": "text", "id": "title_great_for", "label": "Great for", "default": "Great for" },
+    { "type": "text", "id": "title_how_to_use", "label": "How to use", "default": "How to use" },
+    { "type": "text", "id": "title_more", "label": "Additional info", "default": "Additional info" },
+    { "type": "text", "id": "title_recipe", "label": "Recipe (K9)", "default": "Fred’s recipe" }
+  ],
+  "presets": [ { "name": "PM inside the bag" } ]
+}
+{% endschema %}
