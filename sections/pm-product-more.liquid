@@ -1,5 +1,5 @@
 {%- comment -%}
-  Parkmore "Owners also feed" (product page mockup option A): up to four other products from the
+  Parkmore "Owners also use" (product page mockup option A): up to four other products from the
   product's audience collection (horses, dogs, or all products for the shared skin range).
 {%- endcomment -%}
 {%- liquid
@@ -48,7 +48,7 @@
 
 {% schema %}
 {
-  "name": "PM owners also feed",
+  "name": "PM owners also use",
   "tag": "div",
   "class": "pm-section-pmore",
   "enabled_on": { "templates": ["product"] },
@@ -58,7 +58,7 @@
     { "type": "text", "id": "chap_dogs", "label": "Chapter label (dog products)", "default": "More for dogs" },
     { "type": "text", "id": "chap_all", "label": "Chapter label (horses and dogs)", "default": "More from Parkmore" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Owners" },
-    { "type": "text", "id": "heading_emphasis", "label": "Heading gold ending", "default": "also feed." },
+    { "type": "text", "id": "heading_emphasis", "label": "Heading gold ending", "default": "also use." },
     { "type": "text", "id": "button_label", "label": "Button", "default": "All [count] [animal] products", "info": "[count] and [animal] are filled in." },
     { "type": "text", "id": "word_horses", "label": "[animal] for horses", "default": "horse" },
     { "type": "text", "id": "word_dogs", "label": "[animal] for dogs", "default": "dog" },
@@ -66,6 +66,6 @@
     { "type": "text", "id": "dog_collection", "label": "Dog collection handle", "default": "dog-products" },
     { "type": "text", "id": "all_collection", "label": "All products collection handle", "default": "all-products" }
   ],
-  "presets": [ { "name": "PM owners also feed" } ]
+  "presets": [ { "name": "PM owners also use" } ]
 }
 {% endschema %}
