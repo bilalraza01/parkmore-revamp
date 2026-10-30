@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="{{ 'component-cart-notification.css' | asset_url }}" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
 {%- endif -%}
+<script src="{{ 'pm-header-search.js' | asset_url }}" defer="defer"></script>
 {%- if settings.cart_drawer_enabled -%}
   {%- if request.design_mode -%}
     {{ 'component-cart-drawer.css' | asset_url | stylesheet_tag }}
@@ -54,7 +55,8 @@
     </nav>
 
     <div class="pm-hdr__r">
-      <a class="pm-hdr__icon" href="{{ routes.search_url }}" aria-label="Search">
+      {%- comment -%} Opens the search bar under the header (pm-header-search.js); without JavaScript it is a plain link to the search page. {%- endcomment -%}
+      <a class="pm-hdr__icon" href="{{ routes.search_url }}" aria-label="{{ 'general.search.search_placeholder' | t | escape }}" aria-controls="PmSearchBar" aria-expanded="false" data-pm-search-open>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
       </a>
       <a class="pm-hdr__icon pm-hdr__cart" href="{{ routes.cart_url }}" id="cart-icon-bubble" data-no-instant>
@@ -76,6 +78,37 @@
     </div>
   </div>
 
+  {%- liquid
+    assign suggestions = settings.predictive_search_suggested_searches | newline_to_br | strip_newlines | split: '<br />'
+  -%}
+  <div class="pm-hdr__search" id="PmSearchBar" hidden data-pm-search data-currency="{{ cart.currency.symbol }}" data-search-url="{{ routes.search_url }}" data-suggest-url="{{ routes.predictive_search_url }}"
+    data-products-label="{{ 'templates.search.products' | t | escape }}" data-pages-label="Journal and pages"
+    data-empty-label="{{ 'templates.search.no_results' | t: terms: '[terms]' | escape }}" data-all-label="{{ 'templates.search.search_for' | t: terms: '[terms]' | escape }}">
+    <div class="pm-hdr__search-in">
+      <form action="{{ routes.search_url }}" method="get" role="search" class="pm-hdr__sform">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <label class="visually-hidden" for="PmSearchInput">{{ 'general.search.search' | t }}</label>
+        <input type="search" id="PmSearchInput" name="q" placeholder="{{ 'general.search.search' | t | escape }}" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" role="combobox" aria-expanded="false" aria-controls="PmSearchResults" aria-autocomplete="list" data-pm-search-input>
+        <input type="hidden" name="options[prefix]" value="last">
+        <button type="button" class="pm-hdr__sclose" aria-label="{{ 'accessibility.close' | t | escape }}" data-pm-search-close>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+      </form>
+      <div class="pm-hdr__sres" id="PmSearchResults" aria-live="polite" data-pm-search-results>
+        {%- if suggestions.size > 0 -%}
+          <div class="pm-hdr__spop" data-pm-search-pop>
+            <span>{{ 'templates.search.popular_searches' | t }}</span>
+            {%- for q in suggestions -%}
+              {%- assign q = q | strip -%}
+              {%- if q != blank -%}<a href="{{ routes.search_url }}?options%5Bprefix%5D=last&q={{ q | url_encode }}">{{ q | escape }}</a>{%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+        <div data-pm-search-list></div>
+      </div>
+    </div>
+  </div>
+
   <nav class="pm-hdr__mnav" id="PmMobileNav" aria-label="Mobile" data-pm-mnav>
     {%- for block in section.blocks -%}
       <a href="{{ block.settings.link }}">{{ block.settings.label | escape }}</a>
@@ -94,7 +127,11 @@
       btn.setAttribute('aria-expanded', open ? 'true' : 'false');
       btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
     }
-    btn.addEventListener('click', function () { set(!nav.classList.contains('open')); });
+    btn.addEventListener('click', function () {
+      set(!nav.classList.contains('open'));
+      if (nav.classList.contains('open')) document.dispatchEvent(new CustomEvent('pm:search-close'));
+    });
+    document.addEventListener('pm:search-open', function () { set(false); });
     nav.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { set(false); }); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && nav.classList.contains('open')) { set(false); btn.focus(); } });
 
@@ -173,6 +210,35 @@
   .pm-hdr__mnav{display:none;position:absolute;left:0;right:0;top:100%;background:var(--charcoal);padding:12px 24px 24px;z-index:49}
   .pm-hdr__mnav.open{display:block}
   .pm-hdr__mnav a{display:block;color:var(--ivory);font-weight:600;padding:12px 0;border-bottom:1px solid #3d4040}
+  /* Search bar under the header */
+  .pm-hdr__search{position:absolute;left:0;right:0;top:100%;z-index:48;background:var(--charcoal);border-bottom:1px solid rgba(243,202,31,.14);box-shadow:0 24px 50px rgba(0,0,0,.25)}
+  .pm-hdr__search[hidden]{display:none}
+  .pm-hdr__search-in{max-width:760px;margin:0 auto;padding:18px 24px 22px}
+  .pm-hdr__sform{position:relative;display:flex;align-items:center}
+  .pm-hdr__sform > svg{position:absolute;left:18px;width:20px;height:20px;color:var(--stone);pointer-events:none}
+  .pm .pm-hdr__sform input[type="search"]{width:100%;height:54px;border:1.5px solid transparent;border-radius:999px;background:var(--ivory);padding:0 56px 0 50px;font:500 16.5px var(--sans);color:var(--ink);box-shadow:none;-webkit-appearance:none;appearance:none;outline:none;transition:border-color .3s ease}
+  .pm .pm-hdr__sform input[type="search"]:focus{border-color:var(--gold)}
+  .pm-hdr__sform input::-webkit-search-cancel-button{-webkit-appearance:none}
+  .pm .pm-hdr__sclose{position:absolute;right:7px;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:var(--ink);transition:background-color .3s ease}
+  .pm .pm-hdr__sclose:hover{background:var(--sand)}
+  .pm-hdr__sclose svg{width:18px;height:18px}
+  .pm-hdr__sres{max-height:min(70vh,560px);overflow-y:auto;overflow-x:hidden;padding:0 10px;margin:0 -10px}
+  .pm-hdr__spop[hidden]{display:none}
+  .pm-hdr__spop{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:14px}
+  .pm-hdr__spop span{font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:#BDB9B0;margin-right:4px}
+  .pm .pm-hdr__spop a{padding:6px 12px;border-radius:999px;border:1.5px solid #4d5050;color:var(--ivory);font-weight:600;font-size:13.5px;transition:border-color .3s ease}
+  .pm .pm-hdr__spop a:hover{border-color:var(--gold-hi)}
+  .pm-hdr__sgroup{margin-top:16px}
+  .pm-hdr__sgroup > p{font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:#BDB9B0;margin:0 0 6px}
+  .pm .pm-hdr__sitem{display:flex;align-items:center;gap:14px;padding:8px 10px;margin:0 -10px;border-radius:14px;color:var(--ivory);transition:background-color .2s ease}
+  .pm .pm-hdr__sitem:hover,.pm .pm-hdr__sitem[aria-selected="true"]{background:var(--charcoal-2)}
+  .pm-hdr__sitem img,.pm-hdr__sitem .ph{width:52px;height:52px;flex-shrink:0;border-radius:10px;background:var(--sand);object-fit:contain;padding:4px}
+  .pm-hdr__sitem b{display:block;font-weight:600;font-size:15px;line-height:1.3}
+  .pm-hdr__sitem small{font-size:13.5px;color:var(--gold-hi)}
+  .pm .pm-hdr__sall{display:inline-flex;align-items:center;gap:8px;margin-top:14px;font-weight:700;font-size:14.5px;color:var(--gold-hi)}
+  .pm-hdr__sempty{margin:16px 0 0;color:#CFCBC2;font-size:15px}
+  @media (max-width:560px){.pm-hdr__search-in{padding:14px 16px 18px}.pm-hdr__sres{max-height:calc(100vh - 170px)}}
+
   @media (max-width:1100px){.pm-hdr__nav{display:none}.pm .pm-hdr__menu{display:grid}}
   @media (min-width:1101px){.pm-hdr__mnav.open{display:none}}
   @media (max-width:900px){.pm .pm-hdr__cta{display:none}}
