@@ -48,12 +48,24 @@
         "line_separator": "border-top",
         "hide_when_empty": false,
         "heading_tag": "h2"
+      },
+      "disabled": true
+    },
+    "pm_featured": {
+      "type": "pm-featured",
+      "settings": {
+        "title": "Featured collection",
+        "gold_title": true,
+        "collection": "all",
+        "products_to_show": 4,
+        "view_all_text": ""
       }
     }
   },
   "order": [
     "breadcrumbs",
     "cart",
-    "featured-collection"
+    "featured-collection",
+    "pm_featured"
   ]
 }

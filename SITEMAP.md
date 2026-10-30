@@ -18,17 +18,18 @@ Shopify pages share templates. Revamping one template revamps every URL that use
 | `index` | Homepage | 1 | ✅ Mockup 3 (journey rail still to build) |
 | `blog` | Blog index, tag pages | 1 + 6 tag views | ✅ |
 | `product` (default) | All products | 16 | ✅ Product page option A |
-| `collection` (default) | All collections | 4 | ⬜ |
-| `article` (default) | All blog posts | 25 | ⬜ |
-| `page` (default) | Plain content pages | 4 | ⬜ |
-| `page.contact` | Contact | 1 | ⬜ |
-| `page.help-center` | Help | 1 | ⬜ (copied from live) |
-| `page.faq-orders` | Orders FAQ | 1 | ⬜ (copied from live) |
-| `page.faq-products` | Products FAQ | 1 | ⬜ |
-| `page.general-help` | Subscriptions help | 1 | ⬜ (copied from live) |
-| Policies (Shopify built-in) | 5 policy pages | 5 | ⬜ styled by the theme's base CSS only |
-| `search`, `cart`, `404` | System pages | 3 | ⬜ |
-| Header and footer | Every page | all | ✅ header · ⬜ footer |
+| `collection` (default) | All collections | 4 | ✅ PM collection (photo banner, product cards, photo link cards, trust strip) |
+| `article` (default) | All blog posts | 25 | ✅ PM blog post + "Stories from the barn." (3 newest posts) |
+| `page` (default) | Plain content pages | 4 | ✅ PM page + PM FAQ (subscription help, as on live) |
+| `page.contact` | Contact | 1 | ✅ PM page + PM contact form + trust strip |
+| `page.help-center` | Help | 1 | ✅ PM page, help cards (one per h3 in the page content) |
+| `page.faq-orders` | Orders FAQ | 1 | ✅ PM page + PM FAQ + call to action |
+| `page.faq-products` | Products FAQ | 1 | ✅ PM page + PM FAQ + call to action |
+| `page.general-help` | Subscriptions help | 1 | ✅ PM page + PM FAQ |
+| Policies (Shopify built-in) | 5 policy pages | 5 | ✅ styled by pm-pages.css (content is in Settings → Policies) |
+| `search`, `cart`, `404` | System pages | 3 | ✅ PM search, Ignite cart restyled + PM featured collection, PM 404 |
+| `list-collections` | `/collections` (not linked from the site) | 1 | ✅ PM collections list |
+| Header and footer | Every page | all | ✅ header · ✅ footer (PM footer, Mockup 3) |
 
 ---
 

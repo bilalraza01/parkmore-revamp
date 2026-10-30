@@ -71,10 +71,60 @@
         "color_scheme_bottom": "",
         "color_scheme_bottom_light": true,
         "let_it_snow": false
+      },
+      "disabled": true
+    },
+    "pm_footer": {
+      "type": "pm-footer",
+      "blocks": {
+        "brand": {
+          "type": "brand",
+          "settings": {
+            "logo": "shopify://shop_images/Parkmore_WebGOLD-P.png",
+            "heading": "PARKMORE SUPPLEMENTS",
+            "text": "<p>1191 Hieatt Lane, Smithfield, KY 40068<br/><a href=\"mailto:parkmoresupplements@gmail.com\" title=\"mailto:parkmoresupplements@gmail.com\">parkmoresupplements@gmail.com</a> <br/>tel: +1 (502) 265-8345<br/></p>"
+          }
+        },
+        "menu_shop": {
+          "type": "menu",
+          "settings": {
+            "heading": "Shop and Explore",
+            "menu": "main-menu"
+          }
+        },
+        "menu_care": {
+          "type": "menu",
+          "settings": {
+            "heading": "Customer Care",
+            "menu": "customer-account-main-menu"
+          }
+        },
+        "help": {
+          "type": "text",
+          "settings": {
+            "heading": "Expert Help",
+            "text": "<p>Need any advice before you buy? We're here to help.</p><p><a href=\"https://wa.me/15022658345\" target=\"_blank\" title=\"https://wa.me/15022658345\">Contact Us</a></p>"
+          }
+        }
+      },
+      "block_order": [
+        "brand",
+        "menu_shop",
+        "menu_care",
+        "help"
+      ],
+      "settings": {
+        "bottom_menu": "footer",
+        "show_social": true,
+        "payment_enable": true,
+        "enable_follow_on_shop": true,
+        "show_powered_by": true,
+        "disclaimer": ""
       }
     }
   },
   "order": [
-    "footer"
+    "footer",
+    "pm_footer"
   ]
 }

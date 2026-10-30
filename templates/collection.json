@@ -74,7 +74,7 @@
         "heading_BR98Vn": {
           "type": "heading",
           "settings": {
-            "heading": "FREE SHIPPING  on ALL Bundles @ checkout",
+            "heading": "",
             "heading_italic_convert": "",
             "heading_size": "h3",
             "heading_size_custom": 2.4,
@@ -143,7 +143,8 @@
         "color_scheme": "scheme-2",
         "line_separator": "",
         "visibility": ""
-      }
+      },
+      "disabled": true
     },
     "banner": {
       "type": "main-collection-banner",
@@ -221,7 +222,8 @@
         "line_separator": "",
         "top_padding": "pt-s",
         "bottom_padding": "pb-s"
-      }
+      },
+      "disabled": true
     },
     "banner-split": {
       "type": "main-collection-split-banner",
@@ -390,7 +392,8 @@
         "card_shadow": true,
         "top_padding": "pt-s05",
         "bottom_padding": "pb-s"
-      }
+      },
+      "disabled": true
     },
     "spacer_KDamdW": {
       "type": "spacer",
@@ -408,7 +411,8 @@
         "show_time_afternoon": true,
         "show_time_evening": true,
         "show_time_night": true
-      }
+      },
+      "disabled": true
     },
     "gallery_gx8rmi": {
       "type": "gallery",
@@ -547,7 +551,8 @@
         "show_time_afternoon": true,
         "show_time_evening": true,
         "show_time_night": true
-      }
+      },
+      "disabled": true
     },
     "icons_with_text_74BKWK": {
       "type": "icons-with-text",
@@ -634,7 +639,8 @@
         "show_time_afternoon": true,
         "show_time_evening": true,
         "show_time_night": true
-      }
+      },
+      "disabled": true
     },
     "spacer_imhhye": {
       "type": "spacer",
@@ -652,6 +658,97 @@
         "show_time_afternoon": true,
         "show_time_evening": true,
         "show_time_night": true
+      },
+      "disabled": true
+    },
+    "pm_collection": {
+      "type": "pm-collection",
+      "settings": {
+        "show_crumbs": true,
+        "show_image": true,
+        "image_focus": 35,
+        "gold_title": true,
+        "show_count": true,
+        "per_page": 24
+      }
+    },
+    "pm_link_cards": {
+      "type": "pm-link-cards",
+      "blocks": {
+        "gallery_item_Vzih9W": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/EQ9HoofGrowth_e20e818e-c74a-4992-b809-a162a3022ebd.jpg",
+            "title": "Horse Products",
+            "icon": "horse",
+            "button_label": "Shop now",
+            "link": "shopify://collections/horse-products"
+          }
+        },
+        "gallery_item_8LgWPC": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/K9Products_9e077d3c-1b90-405d-847c-a2417184e6a7.jpg",
+            "title": "Dog Products",
+            "icon": "dog",
+            "button_label": "Shop now",
+            "link": "shopify://collections/dog-products"
+          }
+        }
+      },
+      "block_order": [
+        "gallery_item_Vzih9W",
+        "gallery_item_8LgWPC"
+      ],
+      "settings": {
+        "aria_label": "Shop by animal"
+      }
+    },
+    "pm_trust": {
+      "type": "pm-trust",
+      "blocks": {
+        "icon_with_text_jbidNc": {
+          "type": "claim",
+          "settings": {
+            "icon": "shield",
+            "title": "WELL TRUSTED",
+            "text": "Over 10k local customers"
+          }
+        },
+        "icon_with_text_M6Uyt6": {
+          "type": "claim",
+          "settings": {
+            "icon": "truck",
+            "title": "RELIABLE DELIVERY",
+            "text": "With UPS"
+          }
+        },
+        "icon_with_text_UMWN7X": {
+          "type": "claim",
+          "settings": {
+            "icon": "chat",
+            "title": "EXPERT HELP",
+            "text": "At Your Service",
+            "link": "https://wa.me/15022658345"
+          }
+        },
+        "icon_with_text_GGDDDP": {
+          "type": "claim",
+          "settings": {
+            "icon": "tag",
+            "title": "BEST VALUE",
+            "text": "Unbeatable results"
+          }
+        }
+      },
+      "block_order": [
+        "icon_with_text_jbidNc",
+        "icon_with_text_M6Uyt6",
+        "icon_with_text_UMWN7X",
+        "icon_with_text_GGDDDP"
+      ],
+      "settings": {
+        "aria_label": "Why buy from Parkmore"
       }
     }
   },
@@ -661,11 +758,14 @@
     "breadcrumbs",
     "banner",
     "banner-split",
+    "pm_collection",
     "rich_text_FHTw9M",
     "product-grid",
     "spacer_KDamdW",
     "gallery_gx8rmi",
+    "pm_link_cards",
     "icons_with_text_74BKWK",
+    "pm_trust",
     "spacer_imhhye"
   ]
 }

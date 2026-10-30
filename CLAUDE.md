@@ -8,4 +8,5 @@
 - Preview locally with `shopify theme dev --store 4c7ims-33`.
 - Ignite is on 2.6.1 (same as the live theme), upgraded in git on 21 Oct 2026; revert point is tag `pre-ignite-2.6.1`. To upgrade again: replace Ignite's code dirs with the new version, keep `pm-*` files, templates, `settings_data.json` and section groups, re-apply `PM-CHANGES.md`, then validate templates against the new section schemas.
 - Images are always Shopify-hosted (image_picker settings or CDN URLs), never base64.
+- `pm-footer` replaces Ignite's footer (disabled in `sections/footer-group.json`). Ignite's footer loaded only its own CSS and accordion script, nothing site-wide.
 - `pm-header` replaces Ignite's header (disabled in `sections/header-group.json`). Ignite's header also loaded site-wide assets (cart drawer/cart items/notification/search/menu-drawer CSS, `cart-drawer.js`) and homepage JSON-LD; `pm-header` must keep loading all of them. Before disabling any other Ignite section, check what assets and scripts it loads.

@@ -1,0 +1,106 @@
+{%- comment -%}
+  Parkmore collection page: breadcrumb, the collection photo as a rounded banner with the title and
+  product count (plain header when the collection has no photo), the description, then the products
+  as the same cards used on the homepage. Replaces Ignite's collection banner and product grid.
+  Structured data: CollectionPage with an ItemList of the products (theme setting "Collection schema").
+{%- endcomment -%}
+{{ 'pm-pages.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign ss = section.settings
+  assign img = collection.image
+  assign count_label = 'products.facets.product_count_simple' | t: count: collection.products_count
+-%}
+
+<section class="pm pm-coll" aria-labelledby="PmCollTitle-{{ section.id }}">
+  <div class="pm-wrap">
+    {%- if ss.show_crumbs -%}{%- render 'pm-crumbs' -%}{%- endif -%}
+
+    {%- if img != blank and ss.show_image -%}
+      <header class="pm-coll__banner pm-dark" data-pm-reveal>
+        {%- liquid
+          # The focal point set on the photo in Shopify wins; otherwise the section's vertical focus
+          assign focal = img.presentation.focal_point
+          if focal == blank
+            assign focal = '50% ' | append: ss.image_focus | append: '%'
+          endif
+          assign img_style = 'object-position: ' | append: focal
+          assign img_alt = img.alt | default: collection.title
+        -%}
+        {{ img | image_url: width: 2400 | image_tag: widths: '600, 900, 1200, 1600, 2000, 2400', sizes: '(min-width: 1248px) 1200px, calc(100vw - 48px)', loading: 'eager', fetchpriority: 'high', alt: img_alt, style: img_style }}
+        <div class="pm-coll__banner-tx">
+          <h1 class="pm-pg__title" id="PmCollTitle-{{ section.id }}">{%- render 'pm-title', title: collection.title, gold: ss.gold_title -%}</h1>
+          {%- if ss.show_count -%}<span class="pm-coll__count">{{ count_label }}</span>{%- endif -%}
+        </div>
+      </header>
+    {%- else -%}
+      <header class="pm-pg__head pm-coll__head" data-pm-reveal>
+        <h1 class="pm-pg__title" id="PmCollTitle-{{ section.id }}">{%- render 'pm-title', title: collection.title, gold: ss.gold_title -%}</h1>
+        {%- if ss.show_count -%}<span class="pm-coll__count">{{ count_label }}</span>{%- endif -%}
+      </header>
+    {%- endif -%}
+
+    {%- if collection.description != blank -%}
+      <div class="pm-coll__desc pm-rte" data-pm-reveal>{{ collection.description }}</div>
+    {%- endif -%}
+
+    {%- paginate collection.products by ss.per_page -%}
+      {%- if collection.products.size > 0 -%}
+        <div class="pm-grid4 pm-coll__grid">
+          {%- for product in collection.products -%}
+            {%- assign reveal = forloop.index | modulo: 4 -%}{%- if reveal == 0 -%}{%- assign reveal = 4 -%}{%- endif -%}
+            {%- render 'pm-grid-card', product: product, reveal: reveal -%}
+          {%- endfor -%}
+        </div>
+      {%- else -%}
+        <p class="pm-coll__empty">{{ 'sections.collection_template.empty' | t }}</p>
+      {%- endif -%}
+      {%- render 'pm-pagination', paginate: paginate -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{%- if settings.seo_schema_collection == 'theme' -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": {{ collection.title | json }},
+      "url": {{ shop.url | append: collection.url | json }},
+      {%- if collection.description != blank -%}"description": {{ collection.description | strip_html | strip | json }},{%- endif -%}
+      {%- if img != blank -%}"image": {{ img | image_url: width: 1200 | prepend: 'https:' | json }},{%- endif -%}
+      "mainEntity": {
+        "@type": "ItemList",
+        "numberOfItems": {{ collection.products_count }},
+        "itemListElement": [
+          {%- for product in collection.products limit: 50 -%}
+            {
+              "@type": "ListItem",
+              "position": {{ forloop.index }},
+              "url": {{ shop.url | append: product.url | json }},
+              "name": {{ product.title | json }}
+              {%- if product.featured_image -%}, "image": {{ product.featured_image | image_url: width: 800 | prepend: 'https:' | json }}{%- endif %}
+            }{% unless forloop.last %},{% endunless %}
+          {%- endfor -%}
+        ]
+      }
+    }
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "PM collection",
+  "tag": "div",
+  "class": "pm-section-collection",
+  "enabled_on": { "templates": ["collection"] },
+  "settings": [
+    { "type": "checkbox", "id": "show_crumbs", "label": "Show breadcrumb", "default": true },
+    { "type": "checkbox", "id": "show_image", "label": "Show the collection photo as a banner", "default": true },
+    { "type": "range", "id": "image_focus", "label": "Banner photo vertical focus", "min": 0, "max": 100, "step": 5, "unit": "%", "default": 35, "info": "0% shows the top of the photo, 100% the bottom. A focal point set on the photo in Shopify takes priority." },
+    { "type": "checkbox", "id": "gold_title", "label": "Last word of the title in gold", "default": true },
+    { "type": "checkbox", "id": "show_count", "label": "Show product count", "default": true },
+    { "type": "range", "id": "per_page", "label": "Products per page", "min": 8, "max": 48, "step": 4, "default": 24 }
+  ],
+  "presets": [ { "name": "PM collection" } ]
+}
+{% endschema %}

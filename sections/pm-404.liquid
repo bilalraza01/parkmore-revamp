@@ -1,0 +1,26 @@
+{%- comment -%}
+  Parkmore 404 page: the same text as Ignite's ("404", "Page not found", "Continue shopping"),
+  centred on the ivory page with the horseshoe mark and a gold button.
+{%- endcomment -%}
+{{ 'pm-pages.css' | asset_url | stylesheet_tag }}
+<section class="pm pm-404" aria-labelledby="Pm404Title">
+  <div class="pm-wrap">
+    <div class="pm-404__card" data-pm-reveal>
+      <span class="pm-404__icon">{%- render 'pm-icon', icon: 'horse' -%}</span>
+      <p class="pm-404__code">{{ 'templates.404.subtext' | t }}</p>
+      <h1 id="Pm404Title">{{ 'templates.404.title' | t }}</h1>
+      <a class="pm-btn pm-btn-gold" href="{{ routes.all_products_collection_url }}">{{ 'general.continue_shopping' | t }} <span class="pm-ar" aria-hidden="true">&rarr;</span></a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "PM 404",
+  "tag": "div",
+  "class": "pm-section-404",
+  "enabled_on": { "templates": ["404"] },
+  "settings": [],
+  "presets": [ { "name": "PM 404" } ]
+}
+{% endschema %}

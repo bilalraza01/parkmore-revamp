@@ -16,7 +16,8 @@
         "color_scheme": "",
         "line_separator": "",
         "visibility": ""
-      }
+      },
+      "disabled": true
     },
     "main": {
       "type": "main-search",
@@ -52,7 +53,8 @@
         "card_shadow": true,
         "top_padding": "pt-s05",
         "bottom_padding": "pb-s"
-      }
+      },
+      "disabled": true
     },
     "1759889542833562ae": {
       "type": "apps",
@@ -73,11 +75,20 @@
         "bottom_padding": "pb-0",
         "visibility": ""
       }
+    },
+    "pm_search": {
+      "type": "pm-search",
+      "settings": {
+        "title": "Search",
+        "show_crumbs": true,
+        "per_page": 16
+      }
     }
   },
   "order": [
     "breadcrumbs",
     "main",
+    "pm_search",
     "1759889542833562ae"
   ]
 }

@@ -1,0 +1,28 @@
+{%- comment -%}
+  Product card for collection and search grids: the shared pm-product-card with the same text as the
+  Ignite cards it replaces (vendor line, product title) and Ignite's "Up to X% off" sale badge.
+  Params: product, reveal (1 to 4)
+{%- endcomment -%}
+{%- liquid
+  assign badge = ''
+  if settings.badge_sale_show
+    assign largest_discount = 0
+    for v in product.variants
+      if v.price > 0 and v.compare_at_price > v.price
+        assign div_discount = 1.0 | times: v.price | divided_by: v.compare_at_price
+        assign v_discount = 1.0 | minus: div_discount | times: 100.0 | round
+        if v_discount > largest_discount
+          assign largest_discount = v_discount
+        endif
+      endif
+    endfor
+    if largest_discount > 0
+      if settings.badge_sale_type == 'text'
+        assign badge = 'products.product.on_sale' | t
+      else
+        assign badge = 'products.product.on_sale_percent' | t: discount: largest_discount
+      endif
+    endif
+  endif
+-%}
+{%- render 'pm-product-card', product: product, use: product.vendor, badge: badge, show_origin: false, reveal: reveal -%}

@@ -1,0 +1,49 @@
+{%- comment -%}
+  Parkmore trust strip for collection and content pages: four claims on a sand band, the same design as
+  the product page strip, with an optional link per claim (Ignite's icons-with-text card links).
+{%- endcomment -%}
+{{ 'pm-pages.css' | asset_url | stylesheet_tag }}
+{%- if section.blocks.size > 0 -%}
+  <section class="pm pm-trust" aria-label="{{ section.settings.aria_label | escape }}">
+    <div class="pm-wrap">
+      {%- for block in section.blocks -%}
+        {%- if block.settings.link != blank -%}
+          <a class="pm-trust__item" href="{{ block.settings.link }}" {{ block.shopify_attributes }}>
+        {%- else -%}
+          <div class="pm-trust__item" {{ block.shopify_attributes }}>
+        {%- endif -%}
+          <i>{%- render 'pm-product-icon', icon: block.settings.icon -%}</i>
+          <span><b>{{ block.settings.title | escape }}</b><span>{{ block.settings.text | escape }}</span></span>
+        {%- if block.settings.link != blank -%}</a>{%- else -%}</div>{%- endif -%}
+      {%- endfor -%}
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "PM trust strip",
+  "tag": "div",
+  "class": "pm-section-trust",
+  "max_blocks": 4,
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "text", "id": "aria_label", "label": "Accessible label", "default": "Why buy from Parkmore" }
+  ],
+  "blocks": [
+    {
+      "type": "claim",
+      "name": "Claim",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Icon", "default": "shield", "options": [
+          { "value": "shield", "label": "Shield" }, { "value": "truck", "label": "Truck" }, { "value": "chat", "label": "Chat" }, { "value": "tag", "label": "Tag" }, { "value": "lock", "label": "Lock" }, { "value": "star", "label": "Star" }, { "value": "clock", "label": "Clock" }
+        ] },
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "text", "id": "text", "label": "Text" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [ { "name": "PM trust strip", "blocks": [ { "type": "claim" }, { "type": "claim" }, { "type": "claim" }, { "type": "claim" } ] } ]
+}
+{% endschema %}

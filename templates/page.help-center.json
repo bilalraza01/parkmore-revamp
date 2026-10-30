@@ -34,7 +34,8 @@
         "view_all_text_size": "t3",
         "color_scheme": "",
         "heading_tag": "h1"
-      }
+      },
+      "disabled": true
     },
     "collapsible_content_cy4TQQ": {
       "type": "collapsible-content",
@@ -171,11 +172,22 @@
         "show_time_evening": true,
         "show_time_night": true
       }
+    },
+    "pm_page": {
+      "type": "pm-page",
+      "settings": {
+        "layout": "help",
+        "title": "",
+        "gold_title": true,
+        "show_crumbs": false,
+        "dark_last": true
+      }
     }
   },
   "order": [
     "breadcrumbs",
     "main",
+    "pm_page",
     "collapsible_content_cy4TQQ"
   ]
 }

@@ -1,0 +1,158 @@
+{%- comment -%}
+  Parkmore blog post. Same content as the Ignite article it replaces: breadcrumb, title, excerpt,
+  author, date and reading time, featured photo, the post itself and "Share this story" links.
+  Laid out as a reading column in the homepage type (Lora headings, gold accents).
+  Structured data: BlogPosting (theme setting "Article schema"; "Shopify" uses Shopify's own output).
+{%- endcomment -%}
+{{ 'pm-pages.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign ss = section.settings
+  assign read_estimate = article.content | strip_html | split: ' ' | size | times: 1.0 | divided_by: 250 | ceil
+  assign share_link = shop.url | append: article.url
+  assign img = article.image
+  assign img_alt = img.alt | default: article.title
+-%}
+
+<article class="pm pm-art" aria-labelledby="PmArtTitle-{{ section.id }}">
+  <header class="pm-wrap pm-art__head" data-pm-reveal>
+    {%- if ss.show_crumbs -%}{%- render 'pm-crumbs' -%}{%- endif -%}
+    <h1 class="pm-art__title" id="PmArtTitle-{{ section.id }}">{{ article.title | escape }}</h1>
+    {%- if ss.show_excerpt and article.excerpt != blank -%}<div class="pm-art__lead">{{ article.excerpt }}</div>{%- endif -%}
+    {%- if ss.show_author or ss.show_date or ss.show_read -%}
+      <p class="pm-art__meta">
+        {%- if ss.show_author and article.author != blank -%}<span class="pm-art__by">{{ 'blogs.article.author' | t: author: article.author | escape }}</span>{%- endif -%}
+        {%- if ss.show_date -%}<span>{{ article.published_at | time_tag: format: 'date' }}</span>{%- endif -%}
+        {%- if ss.show_read -%}<span>{{ 'blogs.article.read_estimate' | t: minutes: read_estimate }}</span>{%- endif -%}
+      </p>
+    {%- endif -%}
+  </header>
+
+  {%- if ss.show_image and img != blank -%}
+    <figure class="pm-wrap pm-art__hero" data-pm-reveal="2">
+      {{ img | image_url: width: 2400 | image_tag: widths: '600, 900, 1200, 1600, 2000, 2400', sizes: '(min-width: 1248px) 1200px, calc(100vw - 48px)', loading: 'eager', fetchpriority: 'high', alt: img_alt }}
+    </figure>
+  {%- endif -%}
+
+  <div class="pm-wrap">
+    <div class="pm-art__body pm-rte">{{ article.content }}</div>
+
+    {%- liquid
+      assign shares = ''
+      if settings.social_share_facebook != 'off'
+        assign shares = shares | append: 'facebook,'
+      endif
+      if settings.social_share_twitter != 'off'
+        assign shares = shares | append: 'twitter,'
+      endif
+      if settings.social_share_pinterest != 'off' and img != blank
+        assign shares = shares | append: 'pinterest,'
+      endif
+      if settings.social_share_whatsapp != 'off'
+        assign shares = shares | append: 'whatsapp,'
+      endif
+      if settings.social_share_linkedin != 'off'
+        assign shares = shares | append: 'linkedin,'
+      endif
+      assign shares = shares | split: ','
+    -%}
+    {%- if ss.show_share and shares.size > 0 -%}
+      {%- assign title_esc = article.title | url_param_escape -%}
+      <div class="pm-art__share">
+        {%- if ss.share_caption != blank -%}<p>{{ ss.share_caption | escape }}</p>{%- endif -%}
+        <ul role="list">
+          {%- for s in shares -%}
+            {%- liquid
+              case s
+                when 'facebook'
+                  assign vis = settings.social_share_facebook
+                  assign href = '//www.facebook.com/sharer.php?u=' | append: share_link
+                  assign label = 'general.social.alt_text.share_on_facebook' | t
+                when 'twitter'
+                  assign vis = settings.social_share_twitter
+                  assign href = '//twitter.com/intent/tweet?text=' | append: title_esc | append: '&url=' | append: share_link
+                  assign label = 'general.social.alt_text.share_on_twitter' | t
+                when 'pinterest'
+                  assign vis = settings.social_share_pinterest
+                  assign pin_img = img | image_url: width: 1000
+                  assign href = '//pinterest.com/pin/create/button/?url=' | append: share_link | append: '&media=' | append: pin_img | append: '&description=' | append: title_esc
+                  assign label = 'general.social.alt_text.share_on_pinterest' | t
+                when 'whatsapp'
+                  assign vis = settings.social_share_whatsapp
+                  assign href = 'https://wa.me/?text=' | append: title_esc | append: '%20' | append: share_link
+                  assign label = 'general.social.alt_text.share_on_whatsapp' | t
+                when 'linkedin'
+                  assign vis = settings.social_share_linkedin
+                  assign href = 'https://www.linkedin.com/sharing/share-offsite/?url=' | append: share_link
+                  assign label = 'general.social.alt_text.share_on_linkedin' | t
+              endcase
+            -%}
+            <li class="{% if vis == 'visible-xs' %}pm-only-mobile{% elsif vis == 'hidden-xs' %}pm-hide-mobile{% endif %}">
+              <a href="{{ href }}" target="_blank" rel="noopener" title="{{ label | escape }}" aria-label="{{ label | escape }}">
+                {%- render 'pm-social-icon', icon: s -%}
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+  </div>
+</article>
+
+{%- if settings.seo_schema_article == 'shopify' -%}
+  <script type="application/ld+json">
+    {{ article | structured_data }}
+  </script>
+{%- elsif settings.seo_schema_article != 'none' -%}
+  {%- liquid
+    assign desc = article.excerpt | strip_html | strip
+    if desc == blank
+      assign desc = article.content | strip_html | strip | truncatewords: 40
+    endif
+  -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "mainEntityOfPage": { "@type": "WebPage", "@id": {{ share_link | json }} },
+      "url": {{ share_link | json }},
+      "headline": {{ article.title | json }},
+      {%- if desc != blank -%}"description": {{ desc | json }},{%- endif -%}
+      {%- if img != blank -%}"image": [ {{ img | image_url: width: 1920 | prepend: 'https:' | json }} ],{%- endif -%}
+      "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }},
+      "dateModified": {{ article.updated_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }},
+      {%- if article.tags.size > 0 -%}"keywords": {{ article.tags | join: ', ' | json }},{%- endif -%}
+      "articleSection": {{ blog.title | json }},
+      "wordCount": {{ article.content | strip_html | split: ' ' | size }},
+      "author": { "@type": "Person", "name": {{ article.author | json }} },
+      "publisher": {
+        "@type": "Organization",
+        "name": {{ shop.name | json }},
+        {%- if ss.publisher_logo != blank -%}"logo": { "@type": "ImageObject", "url": {{ ss.publisher_logo | image_url: width: 600 | prepend: 'https:' | json }} },{%- endif -%}
+        "url": {{ shop.url | json }}
+      }
+    }
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "PM blog post",
+  "tag": "div",
+  "class": "pm-section-article",
+  "enabled_on": { "templates": ["article"] },
+  "settings": [
+    { "type": "checkbox", "id": "show_crumbs", "label": "Show breadcrumb", "default": true },
+    { "type": "checkbox", "id": "show_excerpt", "label": "Show excerpt under the title", "default": true },
+    { "type": "checkbox", "id": "show_author", "label": "Show author", "default": true },
+    { "type": "checkbox", "id": "show_date", "label": "Show date", "default": true },
+    { "type": "checkbox", "id": "show_read", "label": "Show reading time", "default": true },
+    { "type": "checkbox", "id": "show_image", "label": "Show featured image", "default": true },
+    { "type": "header", "content": "Sharing" },
+    { "type": "checkbox", "id": "show_share", "label": "Show share links", "default": true, "info": "Which networks show is set in Theme settings > Social media." },
+    { "type": "text", "id": "share_caption", "label": "Share caption", "default": "Share this story" },
+    { "type": "header", "content": "Search engines" },
+    { "type": "image_picker", "id": "publisher_logo", "label": "Publisher logo", "info": "Used in the article's structured data." }
+  ],
+  "presets": [ { "name": "PM blog post" } ]
+}
+{% endschema %}

@@ -1,0 +1,58 @@
+{%- comment -%}
+  Parkmore photo link cards, styled like the homepage hero panes: a photo with a dark fade, a Lora title
+  and a pill button, the whole card clickable. Replaces Ignite's gallery ("Horse Products / Dog Products")
+  under the collection grid.
+{%- endcomment -%}
+{{ 'pm-pages.css' | asset_url | stylesheet_tag }}
+{%- assign cards = section.blocks | where: 'type', 'card' -%}
+{%- if cards.size > 0 -%}
+  <section class="pm pm-lcards" aria-label="{{ section.settings.aria_label | escape }}">
+    <div class="pm-wrap pm-lcards__grid pm-lcards__grid--{{ cards.size | at_most: 3 }}">
+      {%- for block in cards -%}
+        {%- assign bs = block.settings -%}
+        <a class="pm-lcard pm-dark" href="{{ bs.link | default: '#' }}" data-pm-reveal="{{ forloop.index | at_most: 4 }}" {{ block.shopify_attributes }}>
+          {%- if bs.image != blank -%}
+            {%- assign card_alt = bs.image.alt | default: '' -%}
+            {{ bs.image | image_url: width: 1400 | image_tag: widths: '500, 700, 900, 1100, 1400', sizes: '(min-width: 901px) 600px, 100vw', loading: 'lazy', alt: card_alt }}
+          {%- else -%}
+            <span class="pm-img-fallback">[{{ bs.title | escape }}: choose a photo]</span>
+          {%- endif -%}
+          <span class="pm-lcard__tx">
+            {%- if bs.icon != 'none' -%}<span class="pm-lcard__icon">{%- render 'pm-icon', icon: bs.icon, weight: 'bold' -%}</span>{%- endif -%}
+            <span class="pm-lcard__t">{{ bs.title | escape }}</span>
+            {%- if bs.button_label != blank -%}<span class="pm-lcard__go">{{ bs.button_label | escape }} <span class="pm-ar" aria-hidden="true">&rarr;</span></span>{%- endif -%}
+          </span>
+        </a>
+      {%- endfor -%}
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "PM photo link cards",
+  "tag": "div",
+  "class": "pm-section-lcards",
+  "max_blocks": 3,
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "text", "id": "aria_label", "label": "Accessible label", "default": "Shop by animal" }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Photo" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Horse Products" },
+        { "type": "select", "id": "icon", "label": "Icon", "default": "none", "options": [
+          { "value": "none", "label": "None" }, { "value": "horse", "label": "Horseshoe" }, { "value": "dog", "label": "Paw" }
+        ] },
+        { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop now" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "presets": [ { "name": "PM photo link cards", "blocks": [ { "type": "card" }, { "type": "card" } ] } ]
+}
+{% endschema %}

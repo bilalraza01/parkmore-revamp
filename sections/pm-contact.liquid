@@ -1,0 +1,135 @@
+{%- comment -%}
+  Parkmore contact form: photo on the left, the form on the right in a rounded card (homepage final card
+  layout, light). Same fields as the Ignite contact form it replaces; field names are kept, so the
+  emails Shopify sends look the same (contact[First name], contact[Enquiry], contact[email], ...).
+{%- endcomment -%}
+{{ 'pm-pages.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign ss = section.settings
+  assign form_id = 'PmContact-' | append: section.id
+-%}
+
+<section class="pm pm-contact" aria-label="{{ ss.heading | default: 'Contact form' | escape }}">
+  <div class="pm-wrap">
+    <div class="pm-contact__card{% unless ss.image != blank %} pm-contact__card--noimg{% endunless %}" data-pm-reveal>
+      {%- if ss.image != blank -%}
+        <div class="pm-contact__ph">
+          {%- assign photo_alt = ss.image.alt | default: '' -%}
+          {{ ss.image | image_url: width: 1400 | image_tag: widths: '500, 800, 1100, 1400', sizes: '(min-width: 901px) 560px, 100vw', loading: 'lazy', alt: photo_alt }}
+        </div>
+      {%- endif -%}
+      <div class="pm-contact__tx">
+        {%- if ss.heading != blank -%}<h2>{{ ss.heading | escape }}</h2>{%- endif -%}
+        {%- if ss.text != blank -%}<div class="pm-contact__p pm-rte">{{ ss.text }}</div>{%- endif -%}
+
+        {%- form 'contact', id: form_id, class: 'pm-form' -%}
+          {%- if form.posted_successfully? -%}
+            <p class="pm-form__msg ok" role="status" tabindex="-1" autofocus>{{ 'templates.contact.form.post_success' | t }}</p>
+          {%- elsif form.errors -%}
+            <div class="pm-form__msg err" role="alert" tabindex="-1" autofocus>
+              <p>{{ 'templates.contact.form.error_heading' | t }}</p>
+              <a href="#{{ form_id }}-email">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</a>
+            </div>
+          {%- endif -%}
+
+          <div class="pm-form__grid">
+            {%- for block in section.blocks -%}
+              {%- liquid
+                assign field_name = block.settings.title | escape
+                assign field_id = form_id | append: '-' | append: block.id
+                assign req = block.settings.required
+                if block.type == 'email'
+                  assign req = true
+                  assign field_id = form_id | append: '-email'
+                endif
+              -%}
+              <div class="pm-form__f{% if block.settings.half %} pm-form__f--half{% endif %}" {{ block.shopify_attributes }}>
+                <label for="{{ field_id }}">{{ field_name }}{% if req %} <span aria-hidden="true">*</span>{% endif %}</label>
+                {%- case block.type -%}
+                  {%- when 'email' -%}
+                    <input type="email" id="{{ field_id }}" name="contact[email]" autocomplete="email" autocapitalize="off" spellcheck="false" required aria-required="true" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"{% if form.errors contains 'email' %} aria-invalid="true" aria-describedby="{{ form_id }}-email-error"{% endif %}>
+                  {%- when 'textarea' -%}
+                    <textarea id="{{ field_id }}" name="contact[{{ field_name }}]" rows="5"{% if req %} required aria-required="true"{% endif %}>{{ form[field_name] }}</textarea>
+                  {%- when 'dropdown' -%}
+                    {%- assign options = block.settings.options | newline_to_br | strip_newlines | split: '<br />' -%}
+                    <select id="{{ field_id }}" name="contact[{{ field_name }}]"{% if req %} required aria-required="true"{% endif %}>
+                      <option value="">{{ field_name }}{% if req %} *{% endif %}</option>
+                      {%- for option in options -%}
+                        <option value="{{ option | escape }}"{% if option == form[field_name] %} selected{% endif %}>{{ option | escape }}</option>
+                      {%- endfor -%}
+                    </select>
+                  {%- else -%}
+                    <input type="text" id="{{ field_id }}" name="contact[{{ field_name }}]" value="{{ form[field_name] }}"{% if req %} required aria-required="true"{% endif %}{% if field_name == 'First name' %} autocomplete="given-name"{% elsif field_name == 'Last name' %} autocomplete="family-name"{% endif %}>
+                {%- endcase -%}
+              </div>
+            {%- endfor -%}
+          </div>
+
+          {%- if ss.note != blank -%}<div class="pm-form__note pm-rte">{{ ss.note }}</div>{%- endif -%}
+          {%- liquid
+            assign send_label = ss.button_label
+            if send_label == blank
+              assign send_label = 'templates.contact.form.send' | t
+            endif
+          -%}
+          <button class="pm-btn pm-btn-gold" type="submit">{{ send_label | escape }} <span class="pm-ar" aria-hidden="true">&rarr;</span></button>
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "PM contact form",
+  "tag": "div",
+  "class": "pm-section-contact",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Photo" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Get in touch" },
+    { "type": "richtext", "id": "text", "label": "Text" },
+    { "type": "richtext", "id": "note", "label": "Note under the form" },
+    { "type": "text", "id": "button_label", "label": "Button label", "info": "Leave blank for \"Send\"." }
+  ],
+  "blocks": [
+    {
+      "type": "text_field",
+      "name": "Text field",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Label", "default": "Name" },
+        { "type": "checkbox", "id": "required", "label": "Required", "default": false },
+        { "type": "checkbox", "id": "half", "label": "Half width on desktop", "default": false }
+      ]
+    },
+    {
+      "type": "dropdown",
+      "name": "Dropdown",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Label", "default": "Enquiry" },
+        { "type": "textarea", "id": "options", "label": "Options", "info": "One option per line." },
+        { "type": "checkbox", "id": "required", "label": "Required", "default": false },
+        { "type": "checkbox", "id": "half", "label": "Half width on desktop", "default": false }
+      ]
+    },
+    {
+      "type": "email",
+      "name": "Email",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "title", "label": "Label", "default": "Email" },
+        { "type": "checkbox", "id": "half", "label": "Half width on desktop", "default": false }
+      ]
+    },
+    {
+      "type": "textarea",
+      "name": "Message",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Label", "default": "Message" },
+        { "type": "checkbox", "id": "required", "label": "Required", "default": false }
+      ]
+    }
+  ],
+  "presets": [ { "name": "PM contact form", "blocks": [ { "type": "email" }, { "type": "textarea" } ] } ]
+}
+{% endschema %}

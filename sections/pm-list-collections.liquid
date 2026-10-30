@@ -1,0 +1,67 @@
+{%- comment -%}
+  Parkmore collections list (/collections): breadcrumb, title and intro, then one card per collection
+  in the product card style (photo on a sand well, Lora title, product count).
+  Replaces Ignite's page header and collection list on the list-collections template.
+{%- endcomment -%}
+{{ 'pm-pages.css' | asset_url | stylesheet_tag }}
+{%- assign ss = section.settings -%}
+
+<section class="pm pm-pg pm-lcoll" aria-labelledby="PmLcollTitle-{{ section.id }}">
+  <div class="pm-wrap">
+    {%- if ss.show_crumbs -%}{%- render 'pm-crumbs' -%}{%- endif -%}
+    <header class="pm-pg__head{% if ss.text != blank %} pm-pg__head--split{% endif %}" data-pm-reveal>
+      <h1 class="pm-pg__title" id="PmLcollTitle-{{ section.id }}">{%- render 'pm-title', title: ss.title, gold: ss.gold_title -%}</h1>
+      {%- if ss.text != blank -%}<div class="pm-pg__intro pm-rte">{{ ss.text }}</div>{%- endif -%}
+    </header>
+
+    <div class="pm-grid3 pm-lcoll__grid">
+      {%- for c in collections -%}
+        {%- liquid
+          assign reveal = forloop.index | modulo: 3
+          if reveal == 0
+            assign reveal = 3
+          endif
+          if ss.use_product_image
+            assign c_img = c.products.first.featured_image | default: c.image
+            assign well = true
+          else
+            assign c_img = c.image | default: c.products.first.featured_image
+            assign well = false
+            if c.image == blank
+              assign well = true
+            endif
+          endif
+          assign c_count = 'products.facets.product_count_simple' | t: count: c.products_count
+        -%}
+        <a class="pm-lcoll__card" href="{{ c.url }}" data-pm-reveal="{{ reveal }}">
+          <span class="pm-lcoll__img{% if well %} pm-lcoll__img--well{% endif %}">
+            {%- if c_img != blank -%}
+              {{ c_img | image_url: width: 900 | image_tag: widths: '300, 450, 600, 900', sizes: '(min-width: 901px) 380px, 90vw', loading: 'lazy', alt: c.title }}
+            {%- else -%}
+              <span class="pm-img-fallback">[{{ c.title | escape }}]</span>
+            {%- endif -%}
+          </span>
+          <h2>{{ c.title | escape }}</h2>
+          <span class="pm-lcoll__meta">{{ c_count }} <span class="pm-ar" aria-hidden="true">&rarr;</span></span>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "PM collections list",
+  "tag": "div",
+  "class": "pm-section-lcoll",
+  "enabled_on": { "templates": ["list-collections"] },
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "Collections" },
+    { "type": "checkbox", "id": "gold_title", "label": "Last word of the title in gold", "default": true },
+    { "type": "richtext", "id": "text", "label": "Intro" },
+    { "type": "checkbox", "id": "show_crumbs", "label": "Show breadcrumb", "default": true },
+    { "type": "checkbox", "id": "use_product_image", "label": "Show the first product photo on each card", "default": true }
+  ],
+  "presets": [ { "name": "PM collections list" } ]
+}
+{% endschema %}

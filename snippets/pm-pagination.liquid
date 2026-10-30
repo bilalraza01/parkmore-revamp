@@ -1,0 +1,23 @@
+{%- comment -%}
+  Numbered pagination as pill buttons (collection and search pages). Plain links, so every page is
+  crawlable. Param: paginate (the paginate object)
+{%- endcomment -%}
+{%- if paginate.pages > 1 -%}
+  <nav class="pm-pagination" aria-label="{{ 'general.pagination.label' | t | escape }}">
+    {%- if paginate.previous -%}
+      <a class="pm-pagination__arrow" href="{{ paginate.previous.url }}" aria-label="{{ 'general.pagination.previous' | t | escape }}"><span aria-hidden="true">&larr;</span></a>
+    {%- endif -%}
+    {%- for part in paginate.parts -%}
+      {%- if part.is_link -%}
+        <a href="{{ part.url }}" aria-label="{{ 'general.pagination.page' | t: number: part.title | escape }}">{{ part.title }}</a>
+      {%- elsif part.title == paginate.current_page -%}
+        <span aria-current="page">{{ part.title }}</span>
+      {%- else -%}
+        <span class="pm-pagination__gap">{{ part.title }}</span>
+      {%- endif -%}
+    {%- endfor -%}
+    {%- if paginate.next -%}
+      <a class="pm-pagination__arrow" href="{{ paginate.next.url }}" aria-label="{{ 'general.pagination.next' | t | escape }}"><span aria-hidden="true">&rarr;</span></a>
+    {%- endif -%}
+  </nav>
+{%- endif -%}

@@ -16,7 +16,8 @@
         "color_scheme": "scheme-2",
         "line_separator": "",
         "visibility": ""
-      }
+      },
+      "disabled": true
     },
     "main": {
       "type": "main-contact",
@@ -38,7 +39,8 @@
         "view_all_text_size": "t3",
         "color_scheme": "scheme-2",
         "heading_tag": "h1"
-      }
+      },
+      "disabled": true
     },
     "multicolumn_YGQgDi": {
       "type": "multicolumn",
@@ -293,7 +295,8 @@
         "bottom_padding": "pb-s",
         "visibility": "",
         "heading_tag": "h3"
-      }
+      },
+      "disabled": true
     },
     "spacer_3fgGzE": {
       "type": "spacer",
@@ -306,7 +309,8 @@
         "color_scheme": "",
         "line_color": "",
         "visibility": ""
-      }
+      },
+      "disabled": true
     },
     "image_with_collapsible_content_cRgcML": {
       "type": "image-with-collapsible-content",
@@ -412,7 +416,8 @@
         "color_scheme": "",
         "line_color": "",
         "visibility": ""
-      }
+      },
+      "disabled": true
     },
     "gallery_zLLKp8": {
       "type": "gallery",
@@ -620,18 +625,137 @@
         "line_separator": "",
         "visibility": "",
         "hide_when_empty": false
+      },
+      "disabled": true
+    },
+    "pm_page": {
+      "type": "pm-page",
+      "settings": {
+        "layout": "intro",
+        "title": "Contact us",
+        "gold_title": true,
+        "show_crumbs": true,
+        "dark_last": true
+      }
+    },
+    "pm_contact": {
+      "type": "pm-contact",
+      "blocks": {
+        "custom_text_jwjaKd": {
+          "type": "text_field",
+          "settings": {
+            "title": "First name",
+            "required": false,
+            "half": true
+          }
+        },
+        "custom_text_JRhyfF": {
+          "type": "text_field",
+          "settings": {
+            "title": "Last name",
+            "required": false,
+            "half": true
+          }
+        },
+        "dropdown_P4adDJ": {
+          "type": "dropdown",
+          "settings": {
+            "title": "Enquiry",
+            "options": "I want a refund\nWhere's my order?\nHelp\nQuestion\nOther",
+            "required": true,
+            "half": false
+          }
+        },
+        "email_FtqGFF": {
+          "type": "email",
+          "settings": {
+            "title": "Email",
+            "half": false
+          }
+        },
+        "textarea_jpK9X7": {
+          "type": "textarea",
+          "settings": {
+            "title": "Message",
+            "required": true
+          }
+        }
+      },
+      "block_order": [
+        "custom_text_jwjaKd",
+        "custom_text_JRhyfF",
+        "dropdown_P4adDJ",
+        "email_FtqGFF",
+        "textarea_jpK9X7"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/EQ9Stuff3_844d17ce-6a96-4e1c-871c-96ed2f719064.jpg",
+        "heading": "Get in touch",
+        "text": "<p>We're available 24/7 to assist. Just let us know what we can help you with and we'll do our best.</p>",
+        "note": "<p>We'll aim to get back to you within 24 hours.</p>",
+        "button_label": ""
+      }
+    },
+    "pm_trust": {
+      "type": "pm-trust",
+      "blocks": {
+        "icon_with_text_6LQzK4": {
+          "type": "claim",
+          "settings": {
+            "icon": "shield",
+            "title": "WELL TRUSTED",
+            "text": "Over 10k customers"
+          }
+        },
+        "icon_with_text_4ef7CA": {
+          "type": "claim",
+          "settings": {
+            "icon": "truck",
+            "title": "RELIABLE DELIVERY",
+            "text": "via UPS"
+          }
+        },
+        "icon_with_text_nGzfRe": {
+          "type": "claim",
+          "settings": {
+            "icon": "chat",
+            "title": "EXPERT HELP",
+            "text": "Seven days a week",
+            "link": "mailto:parkmoresupplements@gmail.com"
+          }
+        },
+        "icon_with_text_xn8Win": {
+          "type": "claim",
+          "settings": {
+            "icon": "tag",
+            "title": "BEST PRICES",
+            "text": "Unbeatable value"
+          }
+        }
+      },
+      "block_order": [
+        "icon_with_text_6LQzK4",
+        "icon_with_text_4ef7CA",
+        "icon_with_text_nGzfRe",
+        "icon_with_text_xn8Win"
+      ],
+      "settings": {
+        "aria_label": "Why buy from Parkmore"
       }
     }
   },
   "order": [
     "breadcrumbs",
     "main",
+    "pm_page",
     "multicolumn_YGQgDi",
     "contact_form_QkxQTX",
+    "pm_contact",
     "spacer_3fgGzE",
     "image_with_collapsible_content_cRgcML",
     "spacer_qWBT7U",
     "gallery_zLLKp8",
-    "icons_with_text_Wqxckf"
+    "icons_with_text_Wqxckf",
+    "pm_trust"
   ]
 }

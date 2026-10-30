@@ -1,0 +1,60 @@
+{%- comment -%}
+  Breadcrumb trail for inner pages ("Home / Horse Products"), styled like the product page crumb,
+  with the same items as Ignite's breadcrumbs and its BreadcrumbList structured data
+  (theme setting "Breadcrumb schema"; not output on search, as in Ignite).
+  Params: current (optional label for the last item, e.g. "Contact")
+{%- endcomment -%}
+{%- liquid
+  assign home = 'breadcrumbs.home' | t
+  assign mid_title = ''
+  assign mid_url = ''
+  case request.page_type
+    when 'collection'
+      assign cur = collection.title
+      assign cur_url = collection.url
+    when 'article'
+      assign mid_title = blog.title
+      assign mid_url = blog.url
+      assign cur = article.title
+      assign cur_url = article.url
+    when 'page'
+      assign cur = page.title
+      assign cur_url = page.url
+    when 'search'
+      assign cur = 'breadcrumbs.search' | t
+      assign cur_url = routes.search_url
+    when 'list-collections'
+      assign cur = 'breadcrumbs.collections' | t
+      assign cur_url = routes.collections_url
+    else
+      assign cur = page_title
+      assign cur_url = request.path
+  endcase
+  if current != blank
+    assign cur = current
+  endif
+-%}
+<nav class="pm-crumbs" aria-label="{{ 'breadcrumbs.title' | t | escape }}">
+  <ol>
+    <li><a href="{{ routes.root_url }}">{{ home | escape }}</a></li>
+    {%- if mid_title != blank -%}<li><a href="{{ mid_url }}">{{ mid_title | escape }}</a></li>{%- endif -%}
+    <li><span aria-current="page">{{ cur | escape }}</span></li>
+  </ol>
+</nav>
+{%- if settings.seo_schema_breadcrumb and request.page_type != 'search' -%}
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": {{ home | json }}, "item": {{ shop.url | append: routes.root_url | json }} },
+        {%- if mid_title != blank -%}
+          { "@type": "ListItem", "position": 2, "name": {{ mid_title | json }}, "item": {{ shop.url | append: mid_url | json }} },
+          { "@type": "ListItem", "position": 3, "name": {{ cur | json }}, "item": {{ shop.url | append: cur_url | json }} }
+        {%- else -%}
+          { "@type": "ListItem", "position": 2, "name": {{ cur | json }}, "item": {{ shop.url | append: cur_url | json }} }
+        {%- endif -%}
+      ]
+    }
+  </script>
+{%- endif -%}

@@ -93,7 +93,8 @@
         "view_all_text_size": "t3",
         "color_scheme": "",
         "heading_tag": "h1"
-      }
+      },
+      "disabled": true
     },
     "collapsible_content_t3C4Tq": {
       "type": "collapsible-content",
@@ -414,7 +415,8 @@
         "show_time_afternoon": true,
         "show_time_evening": true,
         "show_time_night": true
-      }
+      },
+      "disabled": true
     },
     "spacer_jCKFkK": {
       "type": "spacer",
@@ -432,7 +434,8 @@
         "show_time_afternoon": true,
         "show_time_evening": true,
         "show_time_night": true
-      }
+      },
+      "disabled": true
     },
     "image_banner_w6Hndw": {
       "type": "image-banner",
@@ -568,6 +571,161 @@
         "show_time_afternoon": true,
         "show_time_evening": true,
         "show_time_night": true
+      },
+      "disabled": true
+    },
+    "pm_page": {
+      "type": "pm-page",
+      "settings": {
+        "layout": "intro",
+        "title": "",
+        "gold_title": true,
+        "show_crumbs": false,
+        "dark_last": true
+      }
+    },
+    "pm_faq": {
+      "type": "pm-faq",
+      "blocks": {
+        "heading_ztecAF": {
+          "type": "group",
+          "settings": {
+            "heading": "Orders"
+          }
+        },
+        "collapsible_row_UPgR8m": {
+          "type": "row",
+          "settings": {
+            "question": "What payment methods do you accept?",
+            "answer": "<p>Parkmore accepts the secure payment options displayed at checkout, including major credit and debit cards. Available payment methods may vary depending on your location and device.</p>",
+            "open": true
+          }
+        },
+        "collapsible_row_y93qxH": {
+          "type": "row",
+          "settings": {
+            "question": "What is your return policy?",
+            "answer": "<p>For safety and product-integrity reasons, <strong>Parkmore nutritional supplements are non-returnable once shipped, whether opened or unopened</strong>. Because we cannot verify how supplements have been stored or handled after they leave our control, they cannot be restocked or resold.</p><p><strong>Non-supplement products</strong>, such as washes and topical creams, may be eligible for return within <strong>10 days of delivery</strong> if they are <strong>unused, unopened, and in their original packaging</strong>.</p><p><strong>Parkmore Magnetic Crowns are final sale and cannot be returned or refunded.</strong></p><p>If your order arrives <strong>damaged, incorrect, or defective</strong>, please contact us within <strong>7 days of delivery</strong> so we can make it right.</p>",
+            "open": false
+          }
+        },
+        "collapsible_row_ttnbiT": {
+          "type": "row",
+          "settings": {
+            "question": "Do you offer refunds?",
+            "answer": "<p>Yes, in certain circumstances.</p><p><strong>Parkmore nutritional supplements are non-returnable and non-refundable once shipped</strong>, whether opened or unopened.</p><p>Unused, unopened <strong>non-supplement products</strong>, such as washes and topical creams, may be eligible for return within <strong>10 days of delivery</strong>. Once an approved return is received and inspected, any applicable refund will be issued.</p><p><strong>Parkmore Magnetic Crowns are final sale and cannot be returned or refunded.</strong></p><p>If your order arrives <strong>damaged, incorrect, or defective</strong>, please contact us within <strong>7 days of delivery</strong>. We’ll review the issue and make it right with a replacement or refund when appropriate.</p>",
+            "open": false
+          }
+        },
+        "collapsible_row_i3Pjqc": {
+          "type": "row",
+          "settings": {
+            "question": "Can I change or cancel my order?",
+            "answer": "<p>Contact us <strong>as soon as possible</strong> after placing your order.</p><p>We process orders quickly, but we will gladly help with changes or cancellations <strong>as long as the order has not yet shipped</strong>.</p><p>Once an order has shipped, it can no longer be changed or canceled.</p><p>Please include your <strong>name and order number</strong> so we can locate your order quickly.</p>",
+            "open": false
+          }
+        },
+        "collapsible_row_ejrwHK": {
+          "type": "row",
+          "settings": {
+            "question": "What if my order arrives damaged, incorrect, or missing an item?",
+            "answer": "<p>Please contact us within <strong>7 days of delivery</strong>.</p><p>Include your <strong>name, order number, and a description of the problem</strong>. For damaged shipments, please also send clear photos of the packaging, shipping label, damaged product, and any product loss so we can document the issue properly.</p><p>For incorrect or incomplete shipments, photos of what you received may also be requested.</p><p>Once the issue is verified, we’ll work quickly to correct it with a replacement or refund when appropriate.</p>",
+            "open": false
+          }
+        },
+        "collapsible_row_JGGTJF": {
+          "type": "row",
+          "settings": {
+            "question": "How do I start a return?",
+            "answer": "<p>Please contact Parkmore <strong>before sending anything back</strong>.</p><p>Eligible non-supplement products, such as unopened washes or topical creams, may be returned within <strong>10 days of delivery</strong> if they are unused, unopened, and in their original packaging.</p><p><strong>Nutritional supplements and Magnetic Crowns are not eligible for return.</strong></p><p>Once a return is approved, we’ll provide the appropriate return instructions.</p>",
+            "open": false
+          }
+        },
+        "heading_WEpLJf": {
+          "type": "group",
+          "settings": {
+            "heading": "Shipping"
+          }
+        },
+        "collapsible_row_atEQfc": {
+          "type": "row",
+          "settings": {
+            "question": "When will my order ship?",
+            "answer": "<p>Orders placed before <strong>12:00 PM Eastern Time</strong> usually ship the same business day.</p><p>Orders placed after noon will typically ship the next business day.</p><p>We work hard to get orders out quickly because itchy horses and scratchy dogs shouldn’t have to wait.</p>",
+            "open": false
+          }
+        },
+        "collapsible_row_6V4RbQ": {
+          "type": "row",
+          "settings": {
+            "question": "Do you offer rush shipping?",
+            "answer": "<p>Rush shipping may be available by special request.</p><p>If you need your order quickly, contact us <strong>before placing your order</strong> and we’ll let you know what options are available.</p><p>Additional shipping charges may apply.</p>",
+            "open": false
+          }
+        },
+        "collapsible_row_Afixyp": {
+          "type": "row",
+          "settings": {
+            "question": "Do you ship internationally?",
+            "answer": "<p><strong>International availability is expanding.</strong> Parkmore now has representation in <strong>Canada</strong>, and customers in <strong>Europe</strong> are served through our separate company in Ireland.</p><p>Shipping options and product availability may vary by country, so please <strong>contact us before ordering outside the United States</strong> and we’ll help determine the best way to get Parkmore products to you.</p>",
+            "open": false
+          }
+        },
+        "collapsible_row_wzzmgF": {
+          "type": "row",
+          "settings": {
+            "question": "How can I track my order?",
+            "answer": "<p>Parkmore orders are shipped via <strong>UPS</strong>.</p><p>Once your order has shipped, you’ll receive an email with your <strong>UPS tracking number</strong> so you can follow the shipment through delivery.</p><p>If you don’t see the tracking email, check your spam or junk folder first. If it’s still missing, contact us and we’ll help locate your shipment.</p>",
+            "open": false
+          }
+        },
+        "collapsible_row_KQVyBD": {
+          "type": "row",
+          "settings": {
+            "question": "What if UPS says my package was delivered, but I can’t find it?",
+            "answer": "<p>First, check around your property, including porches, side doors, garages, gates, barns, and other common delivery locations. It’s also worth checking with household members or nearby neighbors.</p><p>UPS may occasionally scan a package as delivered shortly before it is actually dropped off, so allow a little time for it to appear.</p><p>If you still cannot locate the package, contact us with your <strong>name, order number, and tracking number</strong> and we’ll help you determine the next step.</p>",
+            "open": false
+          }
+        },
+        "text_PCJRbe": {
+          "type": "text",
+          "settings": {
+            "text": "<p><em>Still can't see it? </em><a href=\"/\" title=\"Contact\"><em>Get in touch.</em></a></p>"
+          }
+        }
+      },
+      "block_order": [
+        "heading_ztecAF",
+        "collapsible_row_UPgR8m",
+        "collapsible_row_y93qxH",
+        "collapsible_row_ttnbiT",
+        "collapsible_row_i3Pjqc",
+        "collapsible_row_ejrwHK",
+        "collapsible_row_JGGTJF",
+        "heading_WEpLJf",
+        "collapsible_row_atEQfc",
+        "collapsible_row_6V4RbQ",
+        "collapsible_row_Afixyp",
+        "collapsible_row_wzzmgF",
+        "collapsible_row_KQVyBD",
+        "text_PCJRbe"
+      ],
+      "settings": {
+        "title": "Search",
+        "title_tag": "p",
+        "text": "<p>Can't see it? Try searching.</p>",
+        "show_search": true,
+        "one_at_a_time": true,
+        "render_schema": true
+      }
+    },
+    "pm_cta": {
+      "type": "pm-cta",
+      "settings": {
+        "heading": "Still got questions?",
+        "heading_emphasis": "Don't be a stranger.",
+        "button_label": "Get in touch",
+        "button_link": "/"
       }
     }
   },
@@ -575,9 +733,12 @@
     "breadcrumbs",
     "image_banner_jp6nVT",
     "main",
+    "pm_page",
     "collapsible_content_t3C4Tq",
+    "pm_faq",
     "spacer_jCKFkK",
     "image_banner_w6Hndw",
-    "ribbon_banner_CzhgQT"
+    "ribbon_banner_CzhgQT",
+    "pm_cta"
   ]
 }

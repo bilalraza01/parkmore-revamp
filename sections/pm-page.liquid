@@ -1,0 +1,76 @@
+{%- comment -%}
+  Parkmore content page: optional breadcrumb, the page title with a gold last word, and the page's own
+  content from the Shopify admin (Online Store > Pages), output unchanged.
+  Layouts:
+    standard  title, then the content in a reading column
+    intro     title left, content right (the short intros above the FAQs and the contact form)
+    help      title, the content before the first h3, then one card per h3 (Help Center)
+{%- endcomment -%}
+{{ 'pm-pages.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign ss = section.settings
+  assign title = ss.title | default: page.title
+  assign content = page.content
+  assign title_id = 'PmPageTitle-' | append: section.id
+-%}
+
+<section class="pm pm-pg pm-pg--{{ ss.layout }}" aria-labelledby="{{ title_id }}">
+  <div class="pm-wrap">
+    {%- if ss.show_crumbs -%}{%- render 'pm-crumbs' -%}{%- endif -%}
+
+    {%- case ss.layout -%}
+      {%- when 'intro' -%}
+        <header class="pm-pg__head pm-pg__head--split" data-pm-reveal>
+          <h1 class="pm-pg__title" id="{{ title_id }}">{%- render 'pm-title', title: title, gold: ss.gold_title -%}</h1>
+          {%- if content != blank -%}<div class="pm-pg__intro pm-rte">{{ content }}</div>{%- endif -%}
+        </header>
+
+      {%- when 'help' -%}
+        <header class="pm-pg__head" data-pm-reveal>
+          <h1 class="pm-pg__title" id="{{ title_id }}">{%- render 'pm-title', title: title, gold: ss.gold_title -%}</h1>
+        </header>
+        {%- if content contains '<h3' -%}
+          {%- assign parts = content | split: '<h3' -%}
+          {%- if parts.first != blank -%}<div class="pm-help__intro pm-rte" data-pm-reveal>{{ parts.first }}</div>{%- endif -%}
+          <div class="pm-help__grid">
+            {%- for part in parts offset: 1 -%}
+              {%- assign reveal = forloop.index | modulo: 4 -%}{%- if reveal == 0 -%}{%- assign reveal = 4 -%}{%- endif -%}
+              <div class="pm-help__card pm-rte{% if forloop.last and ss.dark_last %} pm-help__card--dark pm-dark{% endif %}" data-pm-reveal="{{ reveal }}">
+                <span class="pm-help__n" aria-hidden="true">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+                {{ '<h3' | append: part }}
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- elsif content != blank -%}
+          <div class="pm-pg__body pm-rte">{{ content }}</div>
+        {%- endif -%}
+
+      {%- else -%}
+        <header class="pm-pg__head" data-pm-reveal>
+          <h1 class="pm-pg__title" id="{{ title_id }}">{%- render 'pm-title', title: title, gold: ss.gold_title -%}</h1>
+        </header>
+        {%- if content != blank -%}<div class="pm-pg__body pm-rte" data-pm-reveal>{{ content }}</div>{%- endif -%}
+    {%- endcase -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "PM page",
+  "tag": "div",
+  "class": "pm-section-page",
+  "enabled_on": { "templates": ["page"] },
+  "settings": [
+    { "type": "select", "id": "layout", "label": "Layout", "default": "standard", "options": [
+      { "value": "standard", "label": "Title, then the page content" },
+      { "value": "intro", "label": "Title with the content beside it (short intros)" },
+      { "value": "help", "label": "Help cards (one card per h3 heading)" }
+    ] },
+    { "type": "text", "id": "title", "label": "Title", "info": "Leave blank to use the page title." },
+    { "type": "checkbox", "id": "gold_title", "label": "Last word of the title in gold", "default": true },
+    { "type": "checkbox", "id": "show_crumbs", "label": "Show breadcrumb", "default": false },
+    { "type": "checkbox", "id": "dark_last", "label": "Help cards: last card dark", "default": true }
+  ],
+  "presets": [ { "name": "PM page" } ]
+}
+{% endschema %}

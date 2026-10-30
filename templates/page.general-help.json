@@ -34,7 +34,8 @@
         "view_all_text_size": "t3",
         "color_scheme": "",
         "heading_tag": "h1"
-      }
+      },
+      "disabled": true
     },
     "collapsible_content_cy4TQQ": {
       "type": "collapsible-content",
@@ -169,12 +170,51 @@
         "show_time_afternoon": true,
         "show_time_evening": true,
         "show_time_night": true
+      },
+      "disabled": true
+    },
+    "pm_page": {
+      "type": "pm-page",
+      "settings": {
+        "layout": "intro",
+        "title": "",
+        "gold_title": true,
+        "show_crumbs": false,
+        "dark_last": true
+      }
+    },
+    "pm_faq": {
+      "type": "pm-faq",
+      "blocks": {
+        "collapsible_row_aiAnwm": {
+          "type": "row",
+          "settings": {
+            "question": "How to Access My Subscription to Make UPDATES",
+            "answer": "<p>Go to <strong>ParkmoreSupplements.com</strong></p><p>From the Home Page, <strong>select “Account” </strong>from the top right-hand corner of the page.</p><p><strong>Sign In:</strong> You may receive a link on your phone with a code to make sure you made the request to log in (security feature).</p><p><strong>Select “Customer Portal\"</strong> Page: The next screen will show your basic subscription information.</p><p><strong>Select: </strong>\"Edit Subscription” button to have access to make changes to your order detail, subscription length,  </p><p><strong>From this page you may:</strong> Pause or cancel your subscription; Update your subscription interval; Update your customer, shipping, and billing details; Edit your products; Place a new order; Reschedule your current subscription date(s), or, skip a produce schedule/payment; Update your payment method through “Shop.</p>",
+            "open": true,
+            "button_label_1": "Download Step-by-step PDF",
+            "button_link_1": "https://drive.google.com/file/d/1vzngM-OWWkXjCjXQfeWHjVMDJUpPmejN/view?usp=sharing"
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_aiAnwm"
+      ],
+      "settings": {
+        "title": "Subscription Customers HELP",
+        "title_tag": "h2",
+        "text": "<p>Subscription Customers: How To Documents to assist our subscription customers in maneuvering their information</p>",
+        "show_search": true,
+        "one_at_a_time": true,
+        "render_schema": true
       }
     }
   },
   "order": [
     "breadcrumbs",
     "main",
-    "collapsible_content_cy4TQQ"
+    "pm_page",
+    "collapsible_content_cy4TQQ",
+    "pm_faq"
   ]
 }

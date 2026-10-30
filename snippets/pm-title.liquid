@@ -1,0 +1,14 @@
+{%- comment -%}
+  Page title with the last word in gold, like the homepage headings ("Horse <em>Products</em>").
+  Params: title (plain text), gold (true = last word gold; one-word titles stay plain)
+{%- endcomment -%}
+{%- liquid
+  assign t = title | strip
+  assign words = t | split: ' '
+-%}
+{%- if gold and words.size > 1 -%}
+  {%- assign last = words | last -%}
+  {{- t | remove_last: last | strip | escape }} <em>{{ last | escape }}</em>
+{%- else -%}
+  {{- t | escape -}}
+{%- endif -%}

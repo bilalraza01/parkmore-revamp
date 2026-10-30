@@ -1,0 +1,43 @@
+/* Parkmore footer. Values from the Mockup 3 footer (.context/parkmore-mockup-3.html). */
+.pm.pm-ft{background:var(--ink);color:#BDB9B0;padding:64px 0 30px;font-size:14.5px;line-height:1.6}
+.pm-ft__top{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr));gap:30px;padding-bottom:34px;border-bottom:1px solid #3a3c3c}
+.pm-ft__logo{display:inline-block;margin-bottom:16px}
+.pm-ft__logo img{height:52px;width:auto}
+.pm .pm-ft__h{font-family:var(--sans);font-weight:700;color:var(--ivory);font-size:14px;line-height:1.4;letter-spacing:.6px;text-transform:uppercase;margin:0 0 14px}
+.pm-ft ul{list-style:none;margin:0;padding:0}
+.pm-ft__top li{margin-bottom:9px}
+.pm .pm-ft a{transition:color .3s ease}
+.pm .pm-ft a:hover{color:var(--gold-hi)}
+.pm-ft__text{font-size:14px;max-width:300px}
+.pm .pm-ft__text p{margin:0 0 10px}
+.pm .pm-ft__text p:last-child{margin-bottom:0}
+.pm .pm-ft__text a{color:var(--gold-hi);font-weight:600}
+.pm .pm-ft__text a:hover{color:var(--ivory)}
+
+/* Bottom bar */
+.pm-ft__bottom{display:flex;justify-content:space-between;align-items:center;gap:18px 32px;padding-top:24px;font-size:12.5px;flex-wrap:wrap}
+.pm-ft__legal{display:flex;flex-direction:column;gap:6px;min-width:0}
+.pm-ft__disc{max-width:720px;line-height:1.55}
+.pm .pm-ft__disc p{margin:0}
+.pm-ft__copy span{display:inline}
+.pm-ft__mini{display:flex;flex-wrap:wrap;gap:4px 18px}
+.pm-ft__side{display:flex;align-items:center;gap:14px 20px;flex-wrap:wrap}
+
+/* Ignite's social-icons snippet */
+.pm-ft__social{display:flex;gap:6px;list-style:none;margin:0;padding:0}
+.pm-ft__social .list-social__item{margin:0}
+.pm .pm-ft__social a{width:38px;height:38px;border-radius:50%;border:1px solid #3a3c3c;display:grid;place-items:center;color:var(--ivory);padding:0;transition:border-color .3s ease,color .3s ease}
+.pm .pm-ft__social a:hover{border-color:var(--gold-hi);color:var(--gold-hi)}
+.pm-ft__social svg{width:17px;height:17px;fill:currentColor}
+
+.pm-ft__pay ul{display:flex;flex-wrap:wrap;gap:6px}
+.pm-ft__pay svg{display:block;width:38px;height:24px}
+
+@media (max-width:1100px){
+  .pm-ft__top{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:560px){
+  .pm.pm-ft{padding-top:52px}
+  .pm-ft__top{grid-template-columns:minmax(0,1fr)}
+  .pm-ft__bottom{flex-direction:column;align-items:flex-start}
+}

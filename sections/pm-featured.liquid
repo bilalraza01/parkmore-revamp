@@ -1,0 +1,47 @@
+{%- comment -%}
+  Parkmore featured collection: a heading and the first products of a collection as the homepage
+  product cards. Replaces Ignite's "Featured collection" slider on the cart page.
+{%- endcomment -%}
+{{ 'pm-pages.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign ss = section.settings
+  assign coll = ss.collection
+  if coll == blank
+    assign coll = collections.all
+  endif
+-%}
+{%- if coll.products_count > 0 -%}
+  <section class="pm pm-section pm-feat" aria-labelledby="PmFeatTitle-{{ section.id }}">
+    <div class="pm-wrap">
+      <div class="pm-shop-head">
+        <h2 id="PmFeatTitle-{{ section.id }}" data-pm-reveal>{%- render 'pm-title', title: ss.title, gold: ss.gold_title -%}</h2>
+        {%- if ss.view_all_text != blank -%}
+          <a class="pm-btn pm-btn-line" data-pm-reveal="2" href="{{ coll.url }}">{{ ss.view_all_text | escape }} <span class="pm-ar" aria-hidden="true">&rarr;</span></a>
+        {%- endif -%}
+      </div>
+      <div class="pm-grid4">
+        {%- for product in coll.products limit: ss.products_to_show -%}
+          {%- assign reveal = forloop.index | modulo: 4 -%}{%- if reveal == 0 -%}{%- assign reveal = 4 -%}{%- endif -%}
+          {%- render 'pm-grid-card', product: product, reveal: reveal -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "PM featured collection",
+  "tag": "div",
+  "class": "pm-section-featured",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "text", "id": "title", "label": "Heading", "default": "Featured collection" },
+    { "type": "checkbox", "id": "gold_title", "label": "Last word of the heading in gold", "default": true },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "products_to_show", "label": "Products", "min": 2, "max": 12, "step": 1, "default": 4 },
+    { "type": "text", "id": "view_all_text", "label": "\"View all\" button label", "info": "Leave blank to hide." }
+  ],
+  "presets": [ { "name": "PM featured collection" } ]
+}
+{% endschema %}

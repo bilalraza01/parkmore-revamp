@@ -16,7 +16,8 @@
         "color_scheme": "",
         "line_separator": "",
         "visibility": ""
-      }
+      },
+      "disabled": true
     },
     "header": {
       "type": "page-header",
@@ -40,7 +41,8 @@
         "enable_top_padding": true,
         "enable_bottom_padding": true,
         "heading_tag": "h1"
-      }
+      },
+      "disabled": true
     },
     "main": {
       "type": "main-list-collections",
@@ -53,12 +55,24 @@
         "line_separator": "",
         "top_padding": "pt-0",
         "bottom_padding": "pb-s"
+      },
+      "disabled": true
+    },
+    "pm_list_collections": {
+      "type": "pm-list-collections",
+      "settings": {
+        "title": "Collections",
+        "gold_title": true,
+        "text": "<p>Review our COLLECTIONS (Bundles) for some ideal configurations.</p>",
+        "show_crumbs": true,
+        "use_product_image": true
       }
     }
   },
   "order": [
     "breadcrumbs",
     "header",
-    "main"
+    "main",
+    "pm_list_collections"
   ]
 }

@@ -1,0 +1,150 @@
+{%- comment -%}
+  Parkmore search page: breadcrumb, title, search box, the store's "Popular searches", then the results
+  with the same filters and sort as the Ignite search it replaces (Shopify search filters), products as
+  the homepage product cards and posts or pages as simple cards. Filters are a plain GET form;
+  pm-pages.js submits it on change.
+{%- endcomment -%}
+{{ 'pm-pages.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'pm-pages.js' | asset_url }}" defer="defer"></script>
+{%- liquid
+  assign ss = section.settings
+  assign title = ss.title
+  if title == blank
+    assign title = 'templates.search.title' | t
+  endif
+  assign sort_by = search.sort_by | default: search.default_sort_by
+-%}
+
+<section class="pm pm-pg pm-search" aria-labelledby="PmSearchTitle-{{ section.id }}">
+  <div class="pm-wrap">
+    {%- if ss.show_crumbs -%}{%- render 'pm-crumbs' -%}{%- endif -%}
+    <header class="pm-pg__head" data-pm-reveal>
+      <h1 class="pm-pg__title" id="PmSearchTitle-{{ section.id }}">{{ title | escape }}</h1>
+    </header>
+
+    <form class="pm-search__form" action="{{ routes.search_url }}" method="get" role="search" data-pm-reveal="2">
+      <label class="pm-sr-only" for="PmSearchQ-{{ section.id }}">{{ 'general.search.search' | t }}</label>
+      <input type="search" id="PmSearchQ-{{ section.id }}" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.search_placeholder' | t | escape }}" autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false">
+      <input type="hidden" name="options[prefix]" value="last">
+      <button type="submit" aria-label="{{ 'general.search.search_placeholder' | t | escape }}">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
+      </button>
+    </form>
+
+    {%- if settings.predictive_search_suggested_searches != blank -%}
+      {%- assign suggestions = settings.predictive_search_suggested_searches | newline_to_br | strip_newlines | split: '<br />' -%}
+      <div class="pm-search__pop" data-pm-reveal="2">
+        <span>{{ 'templates.search.popular_searches' | t }}</span>
+        {%- for s in suggestions -%}
+          {%- assign s = s | strip -%}
+          {%- if s != blank -%}<a class="pm-chip" href="{{ routes.search_url }}?options%5Bprefix%5D=last&q={{ s | url_encode }}">{{ s | escape }}</a>{%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if search.performed -%}
+      {%- paginate search.results by ss.per_page -%}
+        <div class="pm-search__bar">
+          <p class="pm-search__count" role="status">
+            {%- if search.results_count > 0 -%}
+              {{ 'templates.search.results_with_count_and_term' | t: terms: search.terms, count: search.results_count }}
+            {%- elsif search.filters != empty -%}
+              {{ 'templates.search.no_results_short' | t }}
+            {%- else -%}
+              {{ 'templates.search.no_results' | t: terms: search.terms }}
+            {%- endif -%}
+          </p>
+
+          {%- if search.filters != empty or search.results_count > 1 -%}
+            <form class="pm-filters" action="{{ routes.search_url }}" method="get" data-pm-filters>
+              <input type="hidden" name="q" value="{{ search.terms | escape }}">
+              <input type="hidden" name="options[prefix]" value="last">
+              {%- for filter in search.filters -%}
+                {%- case filter.type -%}
+                  {%- when 'list', 'boolean' -%}
+                    <fieldset class="pm-filters__g">
+                      <legend>{{ filter.label | escape }}</legend>
+                      {%- for value in filter.values -%}
+                        <label class="pm-chip pm-chip--check{% if value.count == 0 and value.active == false %} is-off{% endif %}">
+                          <input type="checkbox" name="{{ value.param_name }}" value="{{ value.value }}"{% if value.active %} checked{% endif %}{% if value.count == 0 and value.active == false %} disabled{% endif %}>
+                          {{ value.label | escape }} <small>({{ value.count }})</small>
+                        </label>
+                      {%- endfor -%}
+                    </fieldset>
+                  {%- when 'price_range' -%}
+                    <fieldset class="pm-filters__g pm-filters__price">
+                      <legend>{{ filter.label | escape }}</legend>
+                      <label><span class="pm-sr-only">{{ 'products.facets.from' | t }}</span>{{ cart.currency.symbol }}
+                        <input type="number" inputmode="decimal" min="0" name="{{ filter.min_value.param_name }}" placeholder="{{ 'products.facets.from' | t | escape }}" value="{% if filter.min_value.value %}{{ filter.min_value.value | money_without_currency | replace: ',', '' }}{% endif %}">
+                      </label>
+                      <span aria-hidden="true">-</span>
+                      <label><span class="pm-sr-only">{{ 'products.facets.to' | t }}</span>{{ cart.currency.symbol }}
+                        <input type="number" inputmode="decimal" min="0" name="{{ filter.max_value.param_name }}" placeholder="{{ 'products.facets.to' | t | escape }}" value="{% if filter.max_value.value %}{{ filter.max_value.value | money_without_currency | replace: ',', '' }}{% endif %}">
+                      </label>
+                    </fieldset>
+                {%- endcase -%}
+              {%- endfor -%}
+              <div class="pm-filters__g pm-filters__sort">
+                <label for="PmSortBy-{{ section.id }}">{{ 'products.facets.sort_by_label' | t }}</label>
+                <select id="PmSortBy-{{ section.id }}" name="sort_by">
+                  {%- for option in search.sort_options -%}
+                    <option value="{{ option.value | escape }}"{% if option.value == sort_by %} selected{% endif %}>{{ option.name | escape }}</option>
+                  {%- endfor -%}
+                </select>
+              </div>
+              {%- liquid
+                assign any_active = false
+                for filter in search.filters
+                  if filter.active_values.size > 0 or filter.min_value.value != nil or filter.max_value.value != nil
+                    assign any_active = true
+                  endif
+                endfor
+              -%}
+              {%- if any_active -%}
+                <a class="pm-filters__clear" href="{{ routes.search_url }}?q={{ search.terms | url_encode }}&options%5Bprefix%5D=last">{{ 'products.facets.clear_all' | t }}</a>
+              {%- endif -%}
+              <noscript><button class="pm-btn pm-btn-dark pm-btn-sm" type="submit">{{ 'products.facets.apply' | t }}</button></noscript>
+            </form>
+          {%- endif -%}
+        </div>
+
+        {%- if search.results.size > 0 -%}
+          <div class="pm-grid4 pm-search__grid">
+            {%- for item in search.results -%}
+              {%- assign reveal = forloop.index | modulo: 4 -%}{%- if reveal == 0 -%}{%- assign reveal = 4 -%}{%- endif -%}
+              {%- case item.object_type -%}
+                {%- when 'product' -%}
+                  {%- render 'pm-grid-card', product: item, reveal: reveal -%}
+                {%- else -%}
+                  <a class="pm-rcard" href="{{ item.url }}" data-pm-reveal="{{ reveal }}">
+                    {%- if item.object_type == 'article' and item.image != blank -%}
+                      <span class="pm-rcard__img">{{ item.image | image_url: width: 700 | image_tag: widths: '300, 450, 700', sizes: '(min-width: 1101px) 280px, (min-width: 561px) 45vw, 90vw', loading: 'lazy', alt: item.title }}</span>
+                    {%- endif -%}
+                    {%- if item.object_type == 'article' -%}<span class="pm-rcard__type">{{ item.published_at | time_tag: format: 'date' }}</span>{%- endif -%}
+                    <h3>{{ item.title | escape }}</h3>
+                    <span class="pm-rcard__go" aria-hidden="true">&rarr;</span>
+                  </a>
+              {%- endcase -%}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+        {%- render 'pm-pagination', paginate: paginate -%}
+      {%- endpaginate -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "PM search",
+  "tag": "div",
+  "class": "pm-section-search",
+  "enabled_on": { "templates": ["search"] },
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "Search" },
+    { "type": "checkbox", "id": "show_crumbs", "label": "Show breadcrumb", "default": true },
+    { "type": "range", "id": "per_page", "label": "Results per page", "min": 8, "max": 48, "step": 4, "default": 16 }
+  ],
+  "presets": [ { "name": "PM search" } ]
+}
+{% endschema %}

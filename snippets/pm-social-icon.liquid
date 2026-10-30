@@ -1,0 +1,11 @@
+{%- comment -%}
+  Social network icon, from Ignite's icon snippets. Param: icon (facebook | twitter | pinterest | whatsapp | linkedin | instagram)
+{%- endcomment -%}
+{%- case icon -%}
+  {%- when 'facebook' -%}{%- render 'icon-facebook' -%}
+  {%- when 'twitter' -%}{%- render 'icon-twitter' -%}
+  {%- when 'pinterest' -%}{%- render 'icon-pinterest' -%}
+  {%- when 'whatsapp' -%}{%- render 'icon-whatsapp' -%}
+  {%- when 'linkedin' -%}{%- render 'icon-linkedin' -%}
+  {%- when 'instagram' -%}{%- render 'icon-instagram' -%}
+{%- endcase -%}

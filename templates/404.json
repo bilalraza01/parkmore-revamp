@@ -11,10 +11,16 @@
   "sections": {
     "main": {
       "type": "main-404",
+      "settings": {},
+      "disabled": true
+    },
+    "pm_404": {
+      "type": "pm-404",
       "settings": {}
     }
   },
   "order": [
-    "main"
+    "main",
+    "pm_404"
   ]
 }
