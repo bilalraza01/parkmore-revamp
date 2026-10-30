@@ -15,7 +15,7 @@ Shopify pages share templates. Revamping one template revamps every URL that use
 
 | Template | Used by | URLs | Status |
 |---|---|---|---|
-| `index` | Homepage | 1 | ✅ Mockup 3 (formula finder still to build) |
+| `index` | Homepage | 1 | ✅ Mockup 3 (journey rail still to build) |
 | `blog` | Blog index, tag pages | 1 + 6 tag views | ✅ |
 | `product` (default) | All products | 16 | ✅ Product page option A |
 | `collection` (default) | All collections | 4 | ⬜ |
